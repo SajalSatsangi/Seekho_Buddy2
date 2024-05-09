@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:seekhobuddy/sign_up.dart';
 
 class LogInScreen extends StatelessWidget {
   final TextEditingController _usernameController = TextEditingController();
@@ -15,7 +16,7 @@ class LogInScreen extends StatelessWidget {
           children: [
             CircleAvatar(
               radius: 80,
-              backgroundImage: AssetImage('assets/login_background.png'), // Replace 'assets/login_background.png' with your image path
+              backgroundImage: AssetImage('assets/Login_background.png'), // Replace 'assets/login_background.png' with your image path
             ),
             const SizedBox(height: 20),
             const Text(
@@ -124,7 +125,10 @@ class LogInScreen extends StatelessWidget {
             ),
             TextButton(
               onPressed: () {
-                // Navigate to create account screen
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => SignUpScreen()),
+                  );
               },
               child: Text(
                 'Create an account',
