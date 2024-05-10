@@ -16,7 +16,8 @@ class LogInScreen extends StatelessWidget {
           children: [
             CircleAvatar(
               radius: 80,
-              backgroundImage: AssetImage('assets/Login_background.png'), // Replace 'assets/login_background.png' with your image path
+              backgroundImage: AssetImage(
+                  'assets/Login_background.png'), // Replace 'assets/login_background.png' with your image path
             ),
             const SizedBox(height: 20),
             const Text(
@@ -39,7 +40,8 @@ class LogInScreen extends StatelessWidget {
             Container(
               decoration: BoxDecoration(
                 border: Border.all(color: Colors.black), // Add border property
-                borderRadius: BorderRadius.circular(5), // Add borderRadius property
+                borderRadius:
+                    BorderRadius.circular(5), // Add borderRadius property
               ),
               child: TextField(
                 controller: _usernameController,
@@ -48,8 +50,11 @@ class LogInScreen extends StatelessWidget {
                 },
                 decoration: InputDecoration(
                   labelText: 'Username',
-                  labelStyle: TextStyle(fontFamily: 'RobotoMono'), // Apply fontFamily to the label
-                  border: OutlineInputBorder(), // Add border line for the input field
+                  labelStyle: TextStyle(
+                      fontFamily:
+                          'RobotoMono'), // Apply fontFamily to the label
+                  border:
+                      OutlineInputBorder(), // Add border line for the input field
                 ),
               ),
             ),
@@ -57,14 +62,18 @@ class LogInScreen extends StatelessWidget {
             Container(
               decoration: BoxDecoration(
                 border: Border.all(color: Colors.black), // Add border property
-                borderRadius: BorderRadius.circular(5), // Add borderRadius property
+                borderRadius:
+                    BorderRadius.circular(5), // Add borderRadius property
               ),
               child: TextField(
                 obscureText: true,
                 decoration: InputDecoration(
                   labelText: 'Password',
-                  labelStyle: TextStyle(fontFamily: 'RobotoMono'), // Apply fontFamily to the label
-                  border: OutlineInputBorder(), // Add border line for the input field
+                  labelStyle: TextStyle(
+                      fontFamily:
+                          'RobotoMono'), // Apply fontFamily to the label
+                  border:
+                      OutlineInputBorder(), // Add border line for the input field
                 ),
               ),
             ),
@@ -78,7 +87,8 @@ class LogInScreen extends StatelessWidget {
                 ),
                 const Text(
                   'Remember me',
-                  style: TextStyle(fontFamily: 'RobotoMono', fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                      fontFamily: 'RobotoMono', fontWeight: FontWeight.bold),
                 ),
                 Spacer(), // Add a spacer to push Forget Password button to the right
                 TextButton(
@@ -87,7 +97,8 @@ class LogInScreen extends StatelessWidget {
                   },
                   child: const Text(
                     'Forget Password',
-                    style: TextStyle(fontFamily: 'RobotoMono', fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                        fontFamily: 'RobotoMono', fontWeight: FontWeight.bold),
                   ),
                 ),
               ],
@@ -98,7 +109,8 @@ class LogInScreen extends StatelessWidget {
               decoration: BoxDecoration(
                 color: Colors.purpleAccent, // Change color to white
                 border: Border.all(color: Colors.black), // Add border property
-                borderRadius: BorderRadius.circular(10), // Add borderRadius property
+                borderRadius:
+                    BorderRadius.circular(10), // Add borderRadius property
                 boxShadow: [
                   BoxShadow(
                     color: Color.fromARGB(255, 0, 0, 0).withOpacity(1),
@@ -119,20 +131,22 @@ class LogInScreen extends StatelessWidget {
                 },
                 child: Text(
                   'LOG IN',
-                  style: TextStyle(fontFamily: 'RobotoMono', fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                      fontFamily: 'RobotoMono', fontWeight: FontWeight.bold),
                 ),
               ),
             ),
             TextButton(
               onPressed: () {
                 Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => SignUpScreen()),
-                  );
+                  context,
+                  MaterialPageRoute(builder: (context) => SignUpScreen()),
+                );
               },
               child: Text(
                 'Create an account',
-                style: TextStyle(fontFamily: 'RobotoMono', fontWeight: FontWeight.bold),
+                style: TextStyle(
+                    fontFamily: 'RobotoMono', fontWeight: FontWeight.bold),
               ),
             ),
           ],
