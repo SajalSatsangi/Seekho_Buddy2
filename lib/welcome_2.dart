@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:seekhobuddy/Sign_UP.dart'; // Import the SignUpScreen widget;
+import 'package:seekhobuddy/sign_up.dart'; // Import the SignUpScreen widget;
 import 'package:seekhobuddy/Log_IN.dart'; // Import the Log_IN screen widget;
 
 class Welcome extends StatelessWidget {
