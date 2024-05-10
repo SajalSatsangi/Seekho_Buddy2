@@ -9,59 +9,73 @@ class SignUpScreen extends StatefulWidget {
 
 class _SignUpScreenState extends State<SignUpScreen> {
   final TextEditingController _emailController = TextEditingController();
-
   final TextEditingController _passwordController = TextEditingController();
-
   final TextEditingController _nameController = TextEditingController();
-
   final TextEditingController _studentIdController = TextEditingController();
-
   final TextEditingController _majorController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage(
-                'assets/SignupBGg.png'), // Replace 'assets/background_image.jpg' with your image path
-            fit: BoxFit.cover,
-          ),
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        body: Stack(
           children: [
-            Padding(
-              padding: const EdgeInsets.all(20),
+            Container(
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage('assets/SignupBGg.png'),
+                  fit: BoxFit.cover,
+                ),
+              ),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Image.asset(
-                    'assets/Splashlogo-removebg-preview.png', // Replace 'assets/logo.png' with your image path
-                    width: 100,
-                    height: 100,
-                    // Adjust width and height as needed
+                  Padding(
+                    padding: const EdgeInsets.all(20),
+                    child: Column(
+                      children: [
+                        Image.asset(
+                          'assets/Splashlogo-removebg-preview.png',
+                          width: 100,
+                          height: 100,
+                        ),
+                        Center(
+                          child: Text(
+                            'SeekhoBuddy',
+                            style: TextStyle(
+                              fontSize: 32,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                              fontFamily: 'RobotoMono',
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                  Center(
-                    child: Text(
-                      'SeekhoBuddy',
-                      style: TextStyle(
-                        fontSize: 32,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                        fontFamily: 'RobotoMono',
-                      ),
+                  Expanded(
+                    child: SlidingUpPanel(
+                      minHeight: 120, // Adjust as needed
+                      maxHeight: MediaQuery.of(context).size.height *
+                          0.8, // Adjust as needed
+                      panelBuilder: (ScrollController sc) => _buildPanel(sc),
                     ),
                   ),
                 ],
               ),
             ),
-            Expanded(
-              child: SlidingUpPanel(
-                minHeight: 120, // Adjust as needed
-                maxHeight: MediaQuery.of(context).size.height *
-                    0.8, // Adjust as needed
-                panelBuilder: (ScrollController sc) => _buildPanel(sc),
+            Positioned(
+              top: 20,
+              left: 20,
+              child: IconButton(
+                icon: Icon(
+                  Icons.arrow_back,
+                  color: Colors.white,
+                ),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
               ),
             ),
           ],
