@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:seekhobuddy/Log_IN.dart';
+import 'package:seekhobuddy/Profile.dart';
 
 class SignUpScreen extends StatefulWidget {
   @override
@@ -11,8 +15,24 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _nameController = TextEditingController();
-  final TextEditingController _studentIdController = TextEditingController();
-  final TextEditingController _majorController = TextEditingController();
+
+  String? _selectedFaculty;
+  String? _selectedSubfaculty;
+  String? _selectedSemester;
+  String? _selectedSubbranch;
+
+  final List<String> _faculties = ['Faculty 1', 'Faculty 2'];
+  final Map<String, List<String>> _subfaculties = {
+    'Faculty 1': ['Subfaculty 1', 'Subfaculty 2'],
+    'Faculty 2': ['Subfaculty 3', 'Subfaculty 4'],
+  };
+  final List<String> _semesters = ['Semester 1', 'Semester 2'];
+  final Map<String, List<String>> _subbranches = {
+    'Semester 1': ['Subbranch 1', 'Subbranch 2'],
+    'Semester 2': ['Subbranch 3', 'Subbranch 4'],
+  };
+
+  final FirebaseAuth _auth = FirebaseAuth.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -56,9 +76,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ),
                   Expanded(
                     child: SlidingUpPanel(
-                      minHeight: 120, // Adjust as needed
-                      maxHeight: MediaQuery.of(context).size.height *
-                          0.8, // Adjust as needed
+                      minHeight: 120,
+                      maxHeight: MediaQuery.of(context).size.height * 0.8,
                       panelBuilder: (ScrollController sc) => _buildPanel(sc),
                     ),
                   ),
@@ -92,18 +111,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
         children: [
           Container(
             margin: EdgeInsets.symmetric(vertical: 0, horizontal: 140),
-            height: 3, // Set height for the divider
-            color: const Color.fromARGB(
-                255, 133, 130, 130), // Color of the divider
+            height: 3,
+            color: const Color.fromARGB(255, 133, 130, 130),
           ),
           const SizedBox(height: 5),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Padding(
-                padding: const EdgeInsets.only(
-                    left:
-                        10), // Adjust only the left padding for "Student" text
+                padding: const EdgeInsets.only(left: 10),
                 child: const Text(
                   'Sign Up',
                   style: TextStyle(
@@ -186,33 +202,91 @@ class _SignUpScreenState extends State<SignUpScreen> {
             ),
           ),
           SizedBox(height: 14),
-          Container(
-            decoration: BoxDecoration(
-              border: Border.all(color: Colors.black),
-              borderRadius: BorderRadius.circular(5),
-            ),
-            child: TextField(
-              controller: _studentIdController,
-              decoration: InputDecoration(
-                labelText: 'Student ID',
-                labelStyle: TextStyle(fontFamily: 'RobotoMono'),
-                border: OutlineInputBorder(),
-              ),
+          DropdownButtonFormField<String>(
+            value: _selectedFaculty,
+            onChanged: (String? newValue) {
+              setState(() {
+                _selectedFaculty = newValue;
+                _selectedSubfaculty = null;
+                _selectedSemester = null;
+                _selectedSubbranch = null;
+              });
+            },
+            items: _faculties.map((String value) {
+              return DropdownMenuItem<String>(
+                value: value,
+                child: Text(value),
+              );
+            }).toList(),
+            decoration: InputDecoration(
+              labelText: 'Faculty',
+              labelStyle: TextStyle(fontFamily: 'RobotoMono'),
+              border: OutlineInputBorder(),
             ),
           ),
           SizedBox(height: 14),
-          Container(
-            decoration: BoxDecoration(
-              border: Border.all(color: Colors.black),
-              borderRadius: BorderRadius.circular(5),
+          DropdownButtonFormField<String>(
+            value: _selectedSubfaculty,
+            onChanged: (String? newValue) {
+              setState(() {
+                _selectedSubfaculty = newValue;
+                _selectedSemester = null;
+                _selectedSubbranch = null;
+              });
+            },
+            items: _subfaculties[_selectedFaculty]?.map((String value) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(value),
+                  );
+                }).toList() ??
+                [],
+            decoration: InputDecoration(
+              labelText: 'Subfaculty',
+              labelStyle: TextStyle(fontFamily: 'RobotoMono'),
+              border: OutlineInputBorder(),
             ),
-            child: TextField(
-              controller: _majorController,
-              decoration: InputDecoration(
-                labelText: 'Major',
-                labelStyle: TextStyle(fontFamily: 'RobotoMono'),
-                border: OutlineInputBorder(),
-              ),
+          ),
+          SizedBox(height: 14),
+          DropdownButtonFormField<String>(
+            value: _selectedSemester,
+            onChanged: (String? newValue) {
+              setState(() {
+                _selectedSemester = newValue;
+                _selectedSubbranch = null;
+              });
+            },
+            items: _semesters.map((String value) {
+              return DropdownMenuItem<String>(
+                value: value,
+                child: Text(value),
+              );
+            }).toList(),
+            decoration: InputDecoration(
+              labelText: 'Semester',
+              labelStyle: TextStyle(fontFamily: 'RobotoMono'),
+              border: OutlineInputBorder(),
+            ),
+          ),
+          SizedBox(height: 14),
+          DropdownButtonFormField<String>(
+            value: _selectedSubbranch,
+            onChanged: (String? newValue) {
+              setState(() {
+                _selectedSubbranch = newValue;
+              });
+            },
+            items: _subbranches[_selectedSemester]?.map((String value) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(value),
+                  );
+                }).toList() ??
+                [],
+            decoration: InputDecoration(
+              labelText: 'Subbranch',
+              labelStyle: TextStyle(fontFamily: 'RobotoMono'),
+              border: OutlineInputBorder(),
             ),
           ),
           SizedBox(height: 14),
@@ -233,9 +307,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               style: TextButton.styleFrom(
                 foregroundColor: Colors.black,
               ),
-              onPressed: () {
-                // Implement functionality for Join button
-              },
+              onPressed: _handleSignUp,
               child: Text(
                 'JOIN',
                 style: TextStyle(
@@ -248,11 +320,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                Text(
-                  'Already have an account ?',
-                  style: TextStyle(
-                    fontFamily: 'RobotoMono',
-                    fontWeight: FontWeight.bold,
+                Expanded(
+                  child: Text(
+                    'Already have an account ?',
+                    style: TextStyle(
+                      fontFamily: 'RobotoMono',
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
                 TextButton(
@@ -278,4 +352,45 @@ class _SignUpScreenState extends State<SignUpScreen> {
       ),
     );
   }
+
+  Future<void> _handleSignUp() async {
+    try {
+      final UserCredential userCredential = await _auth.createUserWithEmailAndPassword(
+        email: _emailController.text,
+        password: _passwordController.text,
+      );
+
+      await _storeUserData(userCredential.user?.uid);
+
+      Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => StudentProfileScreen()), // Replace HomeScreen with your actual home screen widget
+    );
+    } catch (e) {
+      print('Error signing up: $e');
+    }
+  }
+
+  Future<void> _storeUserData(String? userId) async {
+  if (userId != null) {
+    try {
+      final FirebaseFirestore firestore = FirebaseFirestore.instance;
+      final DocumentReference userRef = firestore.collection('users').doc(_nameController.text);
+
+      Map<String, dynamic> userData = {
+        'email': _emailController.text,
+        'name': _nameController.text,
+        'faculty': _selectedFaculty,
+        'subfaculty': _selectedSubfaculty,
+        'semester': _selectedSemester,
+        'subbranch': _selectedSubbranch,
+      };
+
+      await userRef.set(userData);
+    } catch (e) {
+      print('Error storing user data: $e');
+    }
+  }
 }
+}
+
