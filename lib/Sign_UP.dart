@@ -25,7 +25,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
         decoration: BoxDecoration(
           image: DecorationImage(
             image: AssetImage(
-                'assets/signupbg.png'), // Replace 'assets/background_image.jpg' with your image path
+                'assets/SignupBGg.png'), // Replace 'assets/background_image.jpg' with your image path
             fit: BoxFit.cover,
           ),
         ),
