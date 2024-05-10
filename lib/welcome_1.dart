@@ -4,6 +4,7 @@ import 'package:seekhobuddy/welcome_2.dart';
 void main() {
   runApp(WelcomePage1());
 }
+
 class WelcomePage1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -19,7 +20,7 @@ class WelcomePage1 extends StatelessWidget {
             ),
             SizedBox(height: 20),
             Text(
-              'ResourceHub',
+              'SeekhoBuddy',
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
