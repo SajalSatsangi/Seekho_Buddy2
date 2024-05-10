@@ -21,16 +21,164 @@ class _SignUpScreenState extends State<SignUpScreen> {
   String? _selectedSemester;
   String? _selectedSubbranch;
 
-  final List<String> _faculties = ['Faculty 1', 'Faculty 2'];
+  final List<String> _faculties = [
+    'Faculty of Engineering',
+    'Faculty of Science',
+    'Faculty of Arts',
+    'Faculty of Commerece',
+    'Faculty of Education',
+    'Faculty of Architecture',
+    'DEI Technical College'
+  ];
   final Map<String, List<String>> _subfaculties = {
-    'Faculty 1': ['Subfaculty 1', 'Subfaculty 2'],
-    'Faculty 2': ['Subfaculty 3', 'Subfaculty 4'],
+    'Faculty of Engineering': [
+      "Fulltime-Electrical",
+      "Fulltime-Mechanical",
+      "Fulltime-Civil",
+      "Fulltime-Footwear",
+      "Fulltime-Agriclture",
+      "Parttime-Electrical",
+      "BVoc-RE",
+      "BVoc-WS",
+      "BVoc-AI",
+      "BVoc-WM",
+      "BVoc-Automobile",
+      "BVoc-DM"
+    ],
+    'Faculty of Science': ['Subfaculty 3', 'Subfaculty 4'],
+    'Faculty of Arts': ['Subfaculty 5', 'Subfaculty 6'],
+    'Faculty of Commerece': ['Subfaculty 7', 'Subfaculty 8'],
+    'Faculty of Education': ['Subfaculty 9', 'Subfaculty 10'],
+    'Faculty of Architecture': ['Subfaculty 11', 'Subfaculty 12'],
+    'DEI Technical College': ['Subfaculty 13', 'Subfaculty 14'],
   };
-  final List<String> _semesters = ['Semester 1', 'Semester 2'];
-  final Map<String, List<String>> _subbranches = {
-    'Semester 1': ['Subbranch 1', 'Subbranch 2'],
-    'Semester 2': ['Subbranch 3', 'Subbranch 4'],
+  final Map<String, List<String>> _semesters = {
+    'Fulltime-Electrical': [
+      'Semester 1',
+      'Semester 2',
+      'Semester 3',
+      'Semester 4',
+      'Semester 5',
+      'Semester 6',
+      'Semester 7'
+      
+    ],
+    'Fulltime-Mechanical': [
+      'Semester 1',
+      'Semester 2',
+      'Semester 3',
+      'Semester 4',
+      'Semester 5',
+      'Semester 6',
+      'Semester 7',
+      'Semester 8'
+    ],
+    'Fulltime-Civil': [
+      'Semester 1',
+      'Semester 2',
+      'Semester 3',
+      'Semester 4',
+      'Semester 5',
+      'Semester 6',
+      'Semester 7',
+      'Semester 8'
+    ],
+    'Fulltime-Footwear': [
+      'Semester 1',
+      'Semester 2',
+      'Semester 3',
+      'Semester 4',
+      'Semester 5',
+      'Semester 6',
+      'Semester 7',
+      'Semester 8'
+    ],
+    'Fulltime-Agriclture': [
+      'Semester 1',
+      'Semester 2',
+      'Semester 3',
+      'Semester 4',
+      'Semester 5',
+      'Semester 6',
+      'Semester 7',
+      'Semester 8'
+    ],
+    'Parttime-Electrical': [
+      'Semester 1',
+      'Semester 2',
+      'Semester 3',
+      'Semester 4',
+      'Semester 5',
+      'Semester 6'
+    ],
+    'BVoc-RE': [
+      'Semester 1',
+      'Semester 2',
+      'Semester 3',
+      'Semester 4',
+      'Semester 5',
+      'Semester 6'
+    ],
+    'BVoc-WS': [
+      'Semester 1',
+      'Semester 2',
+      'Semester 3',
+      'Semester 4',
+      'Semester 5',
+      'Semester 6'
+    ],
+    'BVoc-AI': [
+      'Semester 1',
+      'Semester 2',
+      'Semester 3',
+      'Semester 4',
+      'Semester 5',
+      'Semester 6'
+    ],
+    'BVoc-WM': [
+      'Semester 1',
+      'Semester 2',
+      'Semester 3',
+      'Semester 4',
+      'Semester 5',
+      'Semester 6'
+    ],
+    'BVoc-Automobile': [
+      'Semester 1',
+      'Semester 2',
+      'Semester 3',
+      'Semester 4',
+      'Semester 5',
+      'Semester 6'
+    ],
+    'BVoc-DM': [
+      'Semester 1',
+      'Semester 2',
+      'Semester 3',
+      'Semester 4',
+      'Semester 5',
+      'Semester 6'
+    ],
+    'Subfaculty 3': ['Semester 1', 'Semester 2', 'Semester 3'],
+    'Subfaculty 4': ['Semester 1', 'Semester 2', 'Semester 3'],
+    'Subfaculty 5': ['Semester 1', 'Semester 2', 'Semester 3'],
+    'Subfaculty 6': ['Semester 1', 'Semester 2', 'Semester 3'],
+    'Subfaculty 7': ['Semester 1', 'Semester 2', 'Semester 3'],
+    'Subfaculty 8': ['Semester 1', 'Semester 2', 'Semester 3'],
+    'Subfaculty 9': ['Semester 1', 'Semester 2', 'Semester 3'],
+    'Subfaculty 10': ['Semester 1', 'Semester 2', 'Semester 3'],
+    'Subfaculty 11': ['Semester 1', 'Semester 2', 'Semester 3'],
+    'Subfaculty 12': ['Semester 1', 'Semester 2', 'Semester 3'],
+    'Subfaculty 13': ['Semester 1', 'Semester 2', 'Semester 3'],
+    'Subfaculty 14': ['Semester 1', 'Semester 2', 'Semester 3'],
   };
+final Map<String, List<String>> _subbranches = {
+    'Faculty of Engineering_Fulltime-Electrical_Semester 5': ['Subbranch 9', 'Subbranch 10'],
+    'Faculty of Engineering_Fulltime-Electrical_Semester 6': ['Subbranch 11', 'Subbranch 12'],
+    'Faculty of Engineering_Fulltime-Electrical_Semester 7': ['Subbranch 13', 'Subbranch 14'],
+    'Faculty of Engineering_Fulltime-Mechanical_Semester 5': ['Subbranch 17', 'Subbranch 18'],
+    // Add more key-value pairs for other combinations of faculty, subfaculty, and semester
+};
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
@@ -256,12 +404,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 _selectedSubbranch = null;
               });
             },
-            items: _semesters.map((String value) {
-              return DropdownMenuItem<String>(
-                value: value,
-                child: Text(value),
-              );
-            }).toList(),
+            items: _semesters[_selectedSubfaculty]?.map((String value) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(value),
+                  );
+                }).toList() ??
+                [],
             decoration: InputDecoration(
               labelText: 'Semester',
               labelStyle: TextStyle(fontFamily: 'RobotoMono'),
@@ -270,25 +419,27 @@ class _SignUpScreenState extends State<SignUpScreen> {
           ),
           SizedBox(height: 14),
           DropdownButtonFormField<String>(
-            value: _selectedSubbranch,
-            onChanged: (String? newValue) {
-              setState(() {
-                _selectedSubbranch = newValue;
-              });
-            },
-            items: _subbranches[_selectedSemester]?.map((String value) {
-                  return DropdownMenuItem<String>(
-                    value: value,
-                    child: Text(value),
-                  );
-                }).toList() ??
-                [],
-            decoration: InputDecoration(
-              labelText: 'Subbranch',
-              labelStyle: TextStyle(fontFamily: 'RobotoMono'),
-              border: OutlineInputBorder(),
-            ),
-          ),
+  value: _selectedSubbranch,
+  onChanged: (String? newValue) {
+    setState(() {
+      _selectedSubbranch = newValue;
+    });
+  },
+  items: _subbranches[
+          '${_selectedFaculty}_${_selectedSubfaculty}_${_selectedSemester}']
+      ?.map((String value) {
+    return DropdownMenuItem<String>(
+      value: value,
+      child: Text(value),
+    );
+  }).toList() ??
+      [],
+  decoration: InputDecoration(
+    labelText: 'Subbranch',
+    labelStyle: TextStyle(fontFamily: 'RobotoMono'),
+    border: OutlineInputBorder(),
+  ),
+),
           SizedBox(height: 14),
           Container(
             width: 300,
@@ -355,7 +506,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   Future<void> _handleSignUp() async {
     try {
-      final UserCredential userCredential = await _auth.createUserWithEmailAndPassword(
+      final UserCredential userCredential =
+          await _auth.createUserWithEmailAndPassword(
         email: _emailController.text,
         password: _passwordController.text,
       );
@@ -363,34 +515,36 @@ class _SignUpScreenState extends State<SignUpScreen> {
       await _storeUserData(userCredential.user?.uid);
 
       Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(builder: (context) => StudentProfileScreen()), // Replace HomeScreen with your actual home screen widget
-    );
+        context,
+        MaterialPageRoute(
+            builder: (context) =>
+                StudentProfileScreen()), // Replace HomeScreen with your actual home screen widget
+      );
     } catch (e) {
       print('Error signing up: $e');
     }
   }
 
   Future<void> _storeUserData(String? userId) async {
-  if (userId != null) {
-    try {
-      final FirebaseFirestore firestore = FirebaseFirestore.instance;
-      final DocumentReference userRef = firestore.collection('users').doc(_nameController.text);
+    if (userId != null) {
+      try {
+        final FirebaseFirestore firestore = FirebaseFirestore.instance;
+        final DocumentReference userRef =
+            firestore.collection('users').doc(_nameController.text);
 
-      Map<String, dynamic> userData = {
-        'email': _emailController.text,
-        'name': _nameController.text,
-        'faculty': _selectedFaculty,
-        'subfaculty': _selectedSubfaculty,
-        'semester': _selectedSemester,
-        'subbranch': _selectedSubbranch,
-      };
+        Map<String, dynamic> userData = {
+          'email': _emailController.text,
+          'name': _nameController.text,
+          'faculty': _selectedFaculty,
+          'subfaculty': _selectedSubfaculty,
+          'semester': _selectedSemester,
+          'subbranch': _selectedSubbranch,
+        };
 
-      await userRef.set(userData);
-    } catch (e) {
-      print('Error storing user data: $e');
+        await userRef.set(userData);
+      } catch (e) {
+        print('Error storing user data: $e');
+      }
     }
   }
 }
-}
-
