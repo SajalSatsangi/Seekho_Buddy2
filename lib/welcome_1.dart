@@ -61,7 +61,7 @@ class WelcomePage1 extends StatelessWidget {
                   );
                 },
                 child: Text(
-                  'TextButton',
+                  'Get Started',
                   style: TextStyle(fontFamily: 'RobotoMono'),
                 ),
               ),
