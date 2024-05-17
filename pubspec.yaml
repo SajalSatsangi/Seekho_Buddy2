@@ -24,6 +24,6 @@ flutter:
   assets:
     - assets/
   fonts:
-    - family: RobotoMono
+    - family: SourceSans
       fonts:
-        - asset: fonts/RobotoMono-VariableFont_wght.ttf
+        - asset: fonts/SourceSans3-VariableFont_wght.ttf
