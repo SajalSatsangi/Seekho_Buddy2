@@ -14,34 +14,12 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: AnimatedSplashScreen(
-        splash: Scaffold(
-          backgroundColor: const Color.fromRGBO(16, 16, 16, 1),
-          body: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Image.asset(
-                  'assets/Splashlogo.png',
-                  height: 150,
-                ),
-                const SizedBox(height: 20),
-                const Text(
-                  'SEEKHO BUDDY',
-                  style: TextStyle(
-                    fontFamily: 'PoetsenOne',
-                    color: Colors.white,
-                    fontSize: 45,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
+        splash: "assets/SplashAnimation.gif",
+        splashIconSize: 3000,
         nextScreen: LandingPage(),
         duration: 3100,
         splashTransition: SplashTransition.fadeTransition,
-        backgroundColor: const Color.fromRGBO(16, 16, 16, 1),
+        backgroundColor: Color.fromARGB(255, 0, 0, 0),
       ),
     );
   }
