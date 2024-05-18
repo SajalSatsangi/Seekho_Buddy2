@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(SignUpPage());
 }
 
-class MyApp extends StatelessWidget {
+class SignUpPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

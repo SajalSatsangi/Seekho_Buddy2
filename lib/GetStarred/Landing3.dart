@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:seekhobuddy/SignPage.dart';
 
 void main() {
   runApp(LandingPage3());
@@ -54,7 +55,14 @@ class MembershipPage extends StatelessWidget {
                 backgroundColor: Colors.grey[800], // background
                 foregroundColor: Colors.white, // foreground
               ),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => SignUpPage(),
+                  ),
+                );
+              },
               child: Padding(
                 padding: const EdgeInsets.symmetric(
                     vertical: 16.0, horizontal: 32.0),
@@ -91,7 +99,8 @@ class MembershipPage extends StatelessWidget {
           ),
           child: Text(
             label,
-            style: TextStyle(color: Color.fromARGB(179, 255, 255, 255), fontSize: 14),
+            style: TextStyle(
+                color: Color.fromARGB(179, 255, 255, 255), fontSize: 14),
             textAlign: TextAlign.center,
           ),
         ),
