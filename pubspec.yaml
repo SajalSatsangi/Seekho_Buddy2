@@ -27,9 +27,6 @@ flutter:
     - family: SourceSans
       fonts:
         - asset: fonts/SourceSans3-VariableFont_wght.ttf
-    - family: Jacquard
-      fonts:
-        - asset: fonts/Jacquard12-Regular.ttf
     - family: PoetsenOne-Regular
       fonts:
         - asset: PoetsenOne-Regular.ttf
