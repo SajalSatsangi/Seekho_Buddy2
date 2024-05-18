@@ -1,5 +1,5 @@
 name: seekhobuddy
-description: "A new Flutter project."
+description: A new Flutter project.
 publish_to: 'none'
 version: 0.1.0
 
@@ -27,3 +27,9 @@ flutter:
     - family: SourceSans
       fonts:
         - asset: fonts/SourceSans3-VariableFont_wght.ttf
+    - family: Jacquard
+      fonts:
+        - asset: fonts/Jacquard12-Regular.ttf
+    - family: PoetsenOne-Regular
+      fonts:
+        - asset: PoetsenOne-Regular.ttf

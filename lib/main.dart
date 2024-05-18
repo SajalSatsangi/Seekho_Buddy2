@@ -16,16 +16,16 @@ class MyApp extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Image.asset(
-                'assets/splashLogo.png',
+                'assets/Splashlogo.png',
                 height: 100,
               ),
               SizedBox(height: 20),
               Text(
                 'SEEKHO BUDDY',
                 style: TextStyle(
-                  fontFamily: 'SourceSans',
+                  fontFamily: 'PoetsenOne-Regular',
                   color: Colors.white,
-                  fontSize: 25,
+                  fontSize: 32,
                   fontWeight: FontWeight.bold,
                 ),
               ),
