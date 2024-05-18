@@ -1,5 +1,6 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:seekhobuddy/GetStarred/Landing.dart';
 
 void main() {
   runApp(const MyApp());
@@ -37,26 +38,10 @@ class MyApp extends StatelessWidget {
             ),
           ),
         ),
-        nextScreen: const LandingPage(),
+        nextScreen: LandingPage(),
         duration: 3100,
         splashTransition: SplashTransition.fadeTransition,
         backgroundColor: const Color.fromRGBO(16, 16, 16, 1),
-      ),
-    );
-  }
-}
-
-class LandingPage extends StatelessWidget {
-  const LandingPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Landing Page'),
-      ),
-      body: const Center(
-        child: Text('Welcome to SeekhoBuddy!'),
       ),
     );
   }
