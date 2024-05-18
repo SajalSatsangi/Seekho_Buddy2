@@ -35,17 +35,11 @@ class StudyHubScreen extends StatelessWidget {
       backgroundColor: Color(0xFF161616),
       appBar: AppBar(
         title: Text(
-          'Study Hub Access',
+          'Seekho Buddy',
           style: appBarTextStyle,
         ),
-        backgroundColor: Color.fromRGBO(16, 16, 16, 1),
+        backgroundColor: Color(0xFF161616),
         centerTitle: true, // Center the title horizontally
-        leading: IconButton(
-          icon: Icon(Icons.menu),
-          onPressed: () {
-            // Handle menu button press
-          },
-        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
