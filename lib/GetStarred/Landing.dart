@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:seekhobuddy/GetStarred/Landing2.dart';
 
 void main() {
   runApp(LandingPage());
@@ -76,7 +77,11 @@ class StudyHubScreen extends StatelessWidget {
             SizedBox(height: 20), // Adjusted gap to fit the design better
             ElevatedButton(
               onPressed: () {
-                // Handle button press
+                // Navigate to LandingPage2
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => LandingPage2()),
+                );
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.white, // background (button) color
