@@ -12,8 +12,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
         textTheme: TextTheme(
-          bodyText1: TextStyle(color: Colors.white),
-          bodyText2: TextStyle(color: Colors.white),
+          bodyText1: TextStyle(color: Colors.white), // Set text color to white
+          bodyText2: TextStyle(color: Colors.white), // Set text color to white
         ),
       ),
       home: StudyHubScreen(),
@@ -38,10 +38,12 @@ class StudyHubScreen extends StatelessWidget {
           style: appBarTextStyle,
         ),
         backgroundColor: Color.fromRGBO(16, 16, 16, 1),
-        centerTitle: true,
+        centerTitle: true, // Center the title horizontally
         leading: IconButton(
           icon: Icon(Icons.menu),
-          onPressed: () {},
+          onPressed: () {
+            // Handle menu button press
+          },
         ),
       ),
       body: Padding(
@@ -50,9 +52,9 @@ class StudyHubScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
             Image.asset(
-              'assets/Get_Start.png',
-              width: 450,
-              height: 450,
+              'assets/Get_Start.png', // Ensure this path is correct
+              width: 450, // Increased width
+              height: 450, // Increased height
             ),
             SizedBox(height: 0),
             Text(
@@ -63,7 +65,7 @@ class StudyHubScreen extends StatelessWidget {
               ),
               textAlign: TextAlign.center,
             ),
-            SizedBox(height: 10),
+            SizedBox(height: 10), // Decreased gap
             Text(
               'Discover a world of knowledge at your fingertips. Connect with peers, access study materials, and join study groups for collaborative learning experiences.',
               style: TextStyle(
@@ -71,14 +73,14 @@ class StudyHubScreen extends StatelessWidget {
               ),
               textAlign: TextAlign.center,
             ),
-            SizedBox(height: 20),
+            SizedBox(height: 20), // Adjusted gap to fit the design better
             ElevatedButton(
               onPressed: () {
                 // Handle button press
               },
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.white,
-                foregroundColor: Colors.black,
+                backgroundColor: Colors.white, // background (button) color
+                foregroundColor: Colors.black, // foreground (text) color
               ),
               child: Text('Start learning'),
             ),
