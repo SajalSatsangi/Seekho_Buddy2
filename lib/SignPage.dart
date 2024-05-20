@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:sliding_up_panel/sliding_up_panel.dart';
+import 'package:flutter/widgets.dart';
+import 'package:seekhobuddy/LoginPage.dart';
 
 void main() {
   runApp(SignUpPage());
@@ -9,22 +10,26 @@ class SignUpPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Join Study',
+      title: 'StudyHub',
       theme: ThemeData(
-        primarySwatch: Colors.grey,
         brightness: Brightness.dark,
+        primaryColor: Colors.black,
+        hintColor: Colors.white,
       ),
-      home: SignUpScreen(),
+      home: StudyHubLoginScreen(),
     );
   }
 }
 
-class SignUpScreen extends StatefulWidget {
+class StudyHubLoginScreen extends StatefulWidget {
   @override
-  _SignUpScreenState createState() => _SignUpScreenState();
+  _StudyHubLoginScreenState createState() => _StudyHubLoginScreenState();
 }
 
-class _SignUpScreenState extends State<SignUpScreen> {
+class _StudyHubLoginScreenState extends State<StudyHubLoginScreen> {
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
   final _formKey = GlobalKey<FormState>();
 
   String? _selectedFaculty;
@@ -99,238 +104,127 @@ class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SlidingUpPanel(
-        minHeight: 70,
-        maxHeight: MediaQuery.of(context).size.height * 0.819,
-        panelBuilder: (ScrollController sc) => _buildPanel(sc),
-        body: Stack(
-          children: [
-            Container(
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: NetworkImage(
-                      'https://assets.api.uizard.io/api/cdn/stream/377b3c2e-be73-409a-836f-c232f13423fb.png'), // Replace with your image URL
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildPanel(ScrollController sc) {
-    return MediaQuery.removePadding(
-      context: context,
-      removeTop: true,
-      child: SingleChildScrollView(
-        child: Container(
-          color: Colors.black,
+      backgroundColor: Color(0xFF161616),
+      body: SafeArea(
+        child: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.all(16.0),
             child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        children: [
-                          // Add Member Icon
-                          SizedBox(width: 8.0),
-                          Text(
-                            'Sign Up', // Sign Up Text
-                            style: TextStyle(
-                              fontSize: 24.0,
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ],
-                      ),
-                      Icon(Icons.person_add,
-                          color: Colors.white), // Add Member Icon
-                    ],
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Image.asset(
+                  'assets/loginPage.png',
+                  height: 250,
+                ),
+                SizedBox(height: 20),
+                Text(
+                  'Seekho Buddy',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
                   ),
-                  SizedBox(height: 20.0),
-                  Form(
-                    key: _formKey,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        TextFormField(
-                          style: TextStyle(color: Colors.white),
-                          decoration: InputDecoration(
-                            labelText: 'Email',
-                            labelStyle: TextStyle(color: Colors.white70),
-                            filled: true,
-                            fillColor: Colors.grey.shade800,
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(8.0),
-                              borderSide: BorderSide.none,
-                            ),
-                          ),
-                          validator: (value) {
-                            if (value?.isEmpty ?? true) {
-                              return 'Please enter your email';
-                            }
-                            return null;
-                          },
-                        ),
-                        SizedBox(height: 16.0),
-                        TextFormField(
-                          obscureText: true,
-                          style: TextStyle(color: Colors.white),
-                          decoration: InputDecoration(
-                            labelText: 'Password',
-                            labelStyle: TextStyle(color: Colors.white70),
-                            filled: true,
-                            fillColor: Colors.grey.shade800,
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(8.0),
-                              borderSide: BorderSide.none,
-                            ),
-                          ),
-                          validator: (value) {
-                            if (value?.isEmpty ?? true) {
-                              return 'Please enter a password';
-                            }
-                            return null;
-                          },
-                        ),
-                        SizedBox(height: 16.0),
-                        TextFormField(
-                          style: TextStyle(color: Colors.white),
-                          decoration: InputDecoration(
-                            labelText: 'Name',
-                            labelStyle: TextStyle(color: Colors.white70),
-                            filled: true,
-                            fillColor: Colors.grey.shade800,
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(8.0),
-                              borderSide: BorderSide.none,
-                            ),
-                          ),
-                          validator: (value) {
-                            if (value?.isEmpty ?? true) {
-                              return 'Please enter your name';
-                            }
-                            return null;
-                          },
-                        ),
-                        SizedBox(height: 16.0),
-                        DropdownButtonFormField<String>(
-                          value: _selectedFaculty,
-                          onChanged: (String? newValue) {
-                            setState(() {
-                              _selectedFaculty = newValue;
-                              _selectedSubfaculty = null;
-                              _selectedSemester = null;
-                              _selectedSubbranch = null;
-                            });
-                          },
-                          items: _faculties.map((String value) {
-                            return DropdownMenuItem<String>(
-                              value: value,
-                              child: Text(value),
-                            );
-                          }).toList(),
-                          decoration: InputDecoration(
-                            labelText: 'Faculty',
-                            labelStyle: TextStyle(color: Colors.white70),
-                            filled: true,
-                            fillColor: Colors.grey.shade800,
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(8.0),
-                              borderSide: BorderSide.none,
-                            ),
-                          ),
-                        ),
-                        SizedBox(height: 16.0),
-                        DropdownButtonFormField<String>(
-                          value: _selectedSubfaculty,
-                          onChanged: (String? newValue) {
-                            setState(() {
-                              _selectedSubfaculty = newValue;
-                              _selectedSemester = null;
-                              _selectedSubbranch = null;
-                            });
-                          },
-                          items: _subfaculties[_selectedFaculty]
-                              ?.map((String value) {
-                            return DropdownMenuItem<String>(
-                              value: value,
-                              child: Text(value),
-                            );
-                          }).toList(),
-                          decoration: InputDecoration(
-                            labelText: 'Subfaculty',
-                            labelStyle: TextStyle(color: Colors.white70),
-                            filled: true,
-                            fillColor: Colors.grey.shade800,
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(8.0),
-                              borderSide: BorderSide.none,
-                            ),
-                          ),
-                        ),
-                        SizedBox(height: 16.0),
-                        DropdownButtonFormField<String>(
-                          value: _selectedSemester,
-                          onChanged: (String? newValue) {
-                            setState(() {
-                              _selectedSemester = newValue;
-                              _selectedSubbranch = null;
-                            });
-                          },
-                          items: _semesters[_selectedSubfaculty]
-                              ?.map((String value) {
-                            return DropdownMenuItem<String>(
-                              value: value,
-                              child: Text(value),
-                            );
-                          }).toList(),
-                          decoration: InputDecoration(
-                            labelText: 'Semester',
-                            labelStyle: TextStyle(color: Colors.white70),
-                            filled: true,
-                            fillColor: Colors.grey.shade800,
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(8.0),
-                              borderSide: BorderSide.none,
-                            ),
-                          ),
-                        ),
-                        SizedBox(height: 16.0),
-                        DropdownButtonFormField<String>(
-                          value: _selectedSubbranch,
-                          onChanged: (String? newValue) {
-                            setState(() {
-                              _selectedSubbranch = newValue;
-                            });
-                          },
-                          items: _subbranches[
-                                  '${_selectedFaculty}${_selectedSubfaculty}${_selectedSemester}']
-                              ?.map((String value) {
-                            return DropdownMenuItem<String>(
-                              value: value,
-                              child: Text(value),
-                            );
-                          }).toList(),
-                          decoration: InputDecoration(
-                            labelText: 'Subbranch',
-                            labelStyle: TextStyle(color: Colors.white70),
-                            filled: true,
-                            fillColor: Colors.grey.shade800,
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(8.0),
-                              borderSide: BorderSide.none,
-                            ),
-                          ),
-                        ),
-                        SizedBox(height: 32.0),
-                        ElevatedButton(
+                  textAlign: TextAlign.center,
+                ),
+                SizedBox(height: 10),
+                Text(
+                  'Access study materials efficiently',
+                  style: TextStyle(
+                    color: Colors.white70,
+                    fontSize: 16,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                SizedBox(height: 30),
+                Form(
+                  key: _formKey,
+                  child: Column(
+                    children: [
+                      _buildTextField(
+                        controller: _emailController,
+                        hintText: 'Email',
+                        icon: Icons.menu_book_sharp,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter your email';
+                          }
+                          return null;
+                        },
+                      ),
+                      SizedBox(height: 20),
+                      _buildTextField(
+                        controller: _passwordController,
+                        hintText: 'Password',
+                        icon: Icons.search,
+                        obscureText: true,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter your password';
+                          }
+                          return null;
+                        },
+                      ),
+                      SizedBox(height: 20),
+                      _buildDropdown(
+                        value: _selectedFaculty,
+                        items: _faculties,
+                        hintText: 'Faculty',
+                        icon: Icons.school,
+                        onChanged: (value) {
+                          setState(() {
+                            _selectedFaculty = value;
+                            _selectedSubfaculty = null;
+                            _selectedSemester = null;
+                            _selectedSubbranch = null;
+                          });
+                        },
+                      ),
+                      SizedBox(height: 20),
+                      _buildDropdown(
+                        value: _selectedSubfaculty,
+                        items: _subfaculties[_selectedFaculty] ?? [],
+                        hintText: 'Subfaculty',
+                        icon: Icons.new_label,
+                        onChanged: (value) {
+                          setState(() {
+                            _selectedSubfaculty = value;
+                            _selectedSemester = null;
+                            _selectedSubbranch = null;
+                          });
+                        },
+                      ),
+                      SizedBox(height: 20),
+                      _buildDropdown(
+                        value: _selectedSemester,
+                        items: _semesters[_selectedSubfaculty] ?? [],
+                        hintText: 'Semester',
+                        icon: Icons.calendar_month,
+                        onChanged: (value) {
+                          setState(() {
+                            _selectedSemester = value;
+                            _selectedSubbranch = null;
+                          });
+                        },
+                      ),
+                      SizedBox(height: 20),
+                      _buildDropdown(
+                        value: _selectedSubbranch,
+                        items: _subbranches[
+                                '${_selectedFaculty}_${_selectedSubfaculty}_${_selectedSemester}'] ??
+                            [],
+                        hintText: 'Subbranch',
+                        icon: Icons.branding_watermark,
+                        onChanged: (value) {
+                          setState(() {
+                            _selectedSubbranch = value;
+                          });
+                        },
+                      ),
+                      SizedBox(height: 32),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 30),
+                        child: ElevatedButton(
                           onPressed: () {
                             if (_formKey.currentState!.validate()) {
                               ScaffoldMessenger.of(context).showSnackBar(
@@ -338,13 +232,183 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               );
                             }
                           },
+                          style: ElevatedButton.styleFrom(
+                            foregroundColor: Colors.white,
+                            backgroundColor: Colors.grey.shade800,
+                            minimumSize: Size(double.infinity, 50),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(50),
+                            ),
+                          ),
                           child: Text('Sign Up'),
                         ),
-                      ],
-                    ),
+                      ),
+                      SizedBox(height: 40),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Divider(
+                              color: Colors.grey.shade800,
+                              thickness: 1,
+                              indent: 30,
+                              endIndent: 10,
+                            ),
+                          ),
+                          Text(
+                            'WELCOME BACK',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 16,
+                            ),
+                          ),
+                          Expanded(
+                            child: Divider(
+                              color: Colors.grey.shade800,
+                              thickness: 1,
+                              indent: 10,
+                              endIndent: 30,
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 25),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          TextButton(
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => LoginPage()),
+                              );
+                            },
+                            child: Text(
+                              'Already have an account',
+                              style: TextStyle(
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                          SizedBox(width: 10),
+                          TextButton(
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => LoginPage()),
+                              );
+                            },
+                            child: Text(
+                              'Sign In',
+                              style: TextStyle(
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
-                ]),
+                ),
+              ],
+            ),
           ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildTextField({
+    required TextEditingController controller,
+    required String hintText,
+    required IconData icon,
+    bool obscureText = false,
+    String? Function(String?)? validator,
+  }) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 30),
+      child: Row(
+        children: [
+          Icon(
+            icon,
+            color: Colors.white,
+            size: 25,
+          ),
+          SizedBox(width: 10),
+          Expanded(
+            child: TextFormField(
+              controller: controller,
+              obscureText: obscureText,
+              style: TextStyle(color: Colors.white),
+              decoration: InputDecoration(
+                hintText: hintText,
+                hintStyle: TextStyle(color: Colors.white70),
+                filled: true,
+                fillColor: Colors.grey.shade800,
+                contentPadding: EdgeInsets.symmetric(vertical: 10).copyWith(
+                  left: 20,
+                ),
+                // Adjust this value to decrease/increase height and add left padding
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(50),
+                  borderSide: BorderSide.none,
+                ),
+              ),
+              validator: validator,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildDropdown({
+    required String? value,
+    required List<String> items,
+    required String hintText,
+    required IconData icon,
+    required void Function(String?) onChanged,
+  }) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 30),
+      child: Container(
+        height: 50, // Adjust the height here
+        child: Row(
+          children: [
+            Icon(
+              icon,
+              color: Colors.white,
+              size: 25,
+            ),
+            SizedBox(width: 10),
+            Expanded(
+              child: DropdownButtonFormField<String>(
+                value: value,
+                onChanged: onChanged,
+                items: items.map((String value) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(value),
+                  );
+                }).toList(),
+                decoration: InputDecoration(
+                  hintText: hintText,
+                  hintStyle: TextStyle(color: Colors.white70),
+                  filled: true,
+                  fillColor: Colors.grey.shade800,
+                  contentPadding: EdgeInsets.symmetric(
+                      vertical: 0,
+                      horizontal: 20), // Adjust horizontal padding here
+                  // isDense: true, // This will align the text vertically centered
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(50.0),
+                    borderSide: BorderSide.none,
+                  ),
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );
