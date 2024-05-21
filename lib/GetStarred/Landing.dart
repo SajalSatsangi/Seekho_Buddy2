@@ -9,7 +9,7 @@ class LandingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Study Hub Access',
+      title: 'Seekho Buddy',
       theme: ThemeData(
         primarySwatch: Colors.blue,
         textTheme: TextTheme(
@@ -71,10 +71,27 @@ class StudyHubScreen extends StatelessWidget {
             SizedBox(height: 20), // Adjusted gap to fit the design better
             ElevatedButton(
               onPressed: () {
-                // Navigate to LandingPage2
+                // Navigate to LandingPage2 with slide animation
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => LandingPage2()),
+                  PageRouteBuilder(
+                    pageBuilder: (context, animation, secondaryAnimation) =>
+                        LandingPage2(),
+                    transitionsBuilder:
+                        (context, animation, secondaryAnimation, child) {
+                      const begin = Offset(1.0, 0.0);
+                      const end = Offset.zero;
+                      const curve = Curves.ease;
+
+                      var tween = Tween(begin: begin, end: end)
+                          .chain(CurveTween(curve: curve));
+
+                      return SlideTransition(
+                        position: animation.drive(tween),
+                        child: child,
+                      );
+                    },
+                  ),
                 );
               },
               style: ElevatedButton.styleFrom(
