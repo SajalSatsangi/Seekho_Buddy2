@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:seekhobuddy/Chat/ChatPage.dart';
 
-class HomePage extends StatelessWidget {
+class ChatHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ChatPage(),
+      body: Container(
+        child: ChatPage(), // Keep the ChatPage as the body
+      ),
       bottomNavigationBar: BottomNavigationBar(
         selectedItemColor: Colors.red,
         unselectedItemColor: Colors.grey.shade600,

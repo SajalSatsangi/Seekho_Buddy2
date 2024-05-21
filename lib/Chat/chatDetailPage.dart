@@ -24,7 +24,7 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
       appBar: AppBar(
         elevation: 0,
         automaticallyImplyLeading: false,
-        backgroundColor: Colors.white,
+        backgroundColor: Color(0xFF323232),
         flexibleSpace: SafeArea(
           child: Container(
             padding: EdgeInsets.only(right: 16),
@@ -36,7 +36,7 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
                   },
                   icon: Icon(
                     Icons.arrow_back,
-                    color: Colors.black,
+                    color: Colors.white,
                   ),
                 ),
                 SizedBox(
@@ -44,7 +44,7 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
                 ),
                 CircleAvatar(
                   backgroundImage: NetworkImage(
-                      "<https://randomuser.me/api/portraits/men/5.jpg>"),
+                      "https://images.unsplash.com/photo-1567515004624-219c11d31f2e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwyMDUzMDJ8MHwxfHNlYXJjaHw1MXx8bWFufGVufDF8fHx8MTY2Njc4NzAwOA&ixlib=rb-4.0.3&q=80&w=1080"),
                   maxRadius: 20,
                 ),
                 SizedBox(
@@ -58,112 +58,123 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
                       Text(
                         "Kriss Benwat",
                         style: TextStyle(
-                            fontSize: 16, fontWeight: FontWeight.w600),
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.white),
                       ),
                       SizedBox(
                         height: 6,
                       ),
                       Text(
                         "Online",
-                        style: TextStyle(
-                            color: Colors.grey.shade600, fontSize: 13),
+                        style: TextStyle(color: Colors.white70, fontSize: 13),
                       ),
                     ],
                   ),
                 ),
                 Icon(
-                  Icons.settings,
-                  color: Colors.black54,
+                  Icons.search,
+                  color: Colors.white,
                 ),
               ],
             ),
           ),
         ),
       ),
-      body: Stack(
-        children: <Widget>[
-          ListView.builder(
-            itemCount: messages.length,
-            shrinkWrap: true,
-            padding: EdgeInsets.only(top: 10, bottom: 10),
-            physics: NeverScrollableScrollPhysics(),
-            itemBuilder: (context, index) {
-              return Container(
-                padding:
-                    EdgeInsets.only(left: 14, right: 14, top: 10, bottom: 10),
-                child: Align(
-                  alignment: (messages[index].messageType == "receiver"
-                      ? Alignment.topLeft
-                      : Alignment.topRight),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      color: (messages[index].messageType == "receiver"
-                          ? Colors.grey.shade200
-                          : Colors.blue[200]),
-                    ),
-                    padding: EdgeInsets.all(16),
-                    child: Text(messages[index].messageContent,
-                        style: TextStyle(fontSize: 15)),
-                  ),
-                ),
-              );
-            },
-          ),
-          Align(
-            alignment: Alignment.bottomLeft,
-            child: Container(
-              padding: EdgeInsets.only(left: 10, bottom: 10, top: 10),
-              height: 60,
-              width: double.infinity,
-              color: Colors.white,
-              child: Row(
-                children: <Widget>[
-                  GestureDetector(
-                    onTap: () {},
+      body: Container(
+        color: Color(0xFF161616), // Set background color
+        child: Stack(
+          children: <Widget>[
+            ListView.builder(
+              itemCount: messages.length,
+              shrinkWrap: true,
+              padding: EdgeInsets.only(top: 10, bottom: 10),
+              physics: NeverScrollableScrollPhysics(),
+              itemBuilder: (context, index) {
+                return Container(
+                  padding:
+                      EdgeInsets.only(left: 14, right: 14, top: 10, bottom: 10),
+                  child: Align(
+                    alignment: (messages[index].messageType == "receiver"
+                        ? Alignment.topLeft
+                        : Alignment.topRight),
                     child: Container(
-                      height: 30,
-                      width: 30,
                       decoration: BoxDecoration(
-                        color: Colors.lightBlue,
-                        borderRadius: BorderRadius.circular(30),
+                        borderRadius: BorderRadius.circular(20),
+                        color: (messages[index].messageType == "receiver"
+                            ? Color(0xFF323232) // Change receiver bg color
+                            : Color(0xFF323232)), // Change sender bg color
                       ),
+                      padding: EdgeInsets.all(16),
+                      child: Text(
+                        messages[index].messageContent,
+                        style: TextStyle(
+                          fontSize: 15,
+                          color: (messages[index].messageType == "receiver"
+                              ? Colors.white // Change receiver text color
+                              : Colors.white), // Change sender text color
+                        ),
+                      ),
+                    ),
+                  ),
+                );
+              },
+            ),
+            Align(
+              alignment: Alignment.bottomLeft,
+              child: Container(
+                padding: EdgeInsets.only(left: 10, bottom: 10, top: 10),
+                height: 60,
+                width: double.infinity,
+                color: Color(0xFF323232),
+                child: Row(
+                  children: <Widget>[
+                    GestureDetector(
+                      onTap: () {},
+                      child: Container(
+                        height: 30,
+                        width: 30,
+                        decoration: BoxDecoration(
+                          color: Color(0xFF161616),
+                          borderRadius: BorderRadius.circular(30),
+                        ),
+                        child: Icon(
+                          Icons.add,
+                          color: Colors.white70,
+                          size: 20,
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      width: 15,
+                    ),
+                    Expanded(
+                      child: TextField(
+                        decoration: InputDecoration(
+                            hintText: "Write message...",
+                            hintStyle: TextStyle(color: Colors.white70),
+                            border: InputBorder.none),
+                      ),
+                    ),
+                    SizedBox(
+                      width: 15,
+                    ),
+                    FloatingActionButton(
+                      onPressed: () {},
                       child: Icon(
-                        Icons.add,
-                        color: Colors.white,
-                        size: 20,
+                        Icons.send,
+                        color: Colors.white70,
+                        size: 18,
                       ),
+                      backgroundColor: Color(0xFF161616),
+                      elevation: 0,
                     ),
-                  ),
-                  SizedBox(
-                    width: 15,
-                  ),
-                  Expanded(
-                    child: TextField(
-                      decoration: InputDecoration(
-                          hintText: "Write message...",
-                          hintStyle: TextStyle(color: Colors.black54),
-                          border: InputBorder.none),
-                    ),
-                  ),
-                  SizedBox(
-                    width: 15,
-                  ),
-                  FloatingActionButton(
-                    onPressed: () {},
-                    child: Icon(
-                      Icons.send,
-                      color: Colors.white,
-                      size: 18,
-                    ),
-                    backgroundColor: Colors.blue,
-                    elevation: 0,
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

@@ -27,6 +27,7 @@ class _ConversationListState extends State<ConversationList> {
         }));
       },
       child: Container(
+        color: Color(0xFF161616), // Set background color to #161616
         padding: EdgeInsets.only(left: 16, right: 16, top: 10, bottom: 10),
         child: Row(
           children: <Widget>[
@@ -48,7 +49,7 @@ class _ConversationListState extends State<ConversationList> {
                         children: <Widget>[
                           Text(
                             widget.name,
-                            style: TextStyle(fontSize: 16),
+                            style: TextStyle(fontSize: 16, color: Colors.white),
                           ),
                           SizedBox(
                             height: 6,
@@ -57,7 +58,7 @@ class _ConversationListState extends State<ConversationList> {
                             widget.messageText,
                             style: TextStyle(
                                 fontSize: 13,
-                                color: Colors.grey.shade600,
+                                color: Colors.white,
                                 fontWeight: widget.isMessageRead
                                     ? FontWeight.bold
                                     : FontWeight.normal),
@@ -72,7 +73,9 @@ class _ConversationListState extends State<ConversationList> {
             Text(
               widget.time,
               style: TextStyle(
+                  fontFamily: 'PoetsenOne',
                   fontSize: 12,
+                  color: Colors.white,
                   fontWeight: widget.isMessageRead
                       ? FontWeight.bold
                       : FontWeight.normal),
