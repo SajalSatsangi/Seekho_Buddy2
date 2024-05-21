@@ -39,6 +39,7 @@ class _LandingPageState extends State<LandingPage> {
           icon: Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () {
             // Handle back button press
+            Navigator.pop(context);
           },
         ),
       ),
@@ -63,7 +64,6 @@ class _LandingPageState extends State<LandingPage> {
                       child: Image.asset(
                         'assets/Landing2_BackGroud.png',
                         fit: BoxFit.fitHeight,
-                        
                       ),
                     ),
                   ),
@@ -127,11 +127,28 @@ class _LandingPageState extends State<LandingPage> {
                             SizedBox(height: 20),
                             ElevatedButton(
                               onPressed: () {
-                                // Handle button press
-                                 Navigator.push(
+                                // Navigate to LandingPage3 with slide animation
+                                Navigator.push(
                                   context,
-                                  MaterialPageRoute(
-                                      builder: (context) => LandingPage3()),
+                                  PageRouteBuilder(
+                                    pageBuilder: (context, animation,
+                                            secondaryAnimation) =>
+                                        LandingPage3(),
+                                    transitionsBuilder: (context, animation,
+                                        secondaryAnimation, child) {
+                                      const begin = Offset(1.0, 0.0);
+                                      const end = Offset.zero;
+                                      const curve = Curves.ease;
+
+                                      var tween = Tween(begin: begin, end: end)
+                                          .chain(CurveTween(curve: curve));
+
+                                      return SlideTransition(
+                                        position: animation.drive(tween),
+                                        child: child,
+                                      );
+                                    },
+                                  ),
                                 );
                               },
                               style: ElevatedButton.styleFrom(
@@ -158,10 +175,9 @@ class _LandingPageState extends State<LandingPage> {
       ),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Colors.black, // Set background color to black
-        selectedItemColor:
-            const Color.fromARGB(255, 0, 0, 0), // Set selected item color
+        selectedItemColor: Colors.black, // Set selected item color to white
         unselectedItemColor:
-            const Color.fromARGB(255, 0, 0, 0), // Set unselected item color
+            Color.fromARGB(255, 0, 0, 0), // Set unselected item color to grey
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
         items: [
