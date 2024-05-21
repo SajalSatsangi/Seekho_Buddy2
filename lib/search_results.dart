@@ -21,13 +21,27 @@ class StudyMaterialsScreen extends StatefulWidget {
 }
 
 class _StudyMaterialsScreenState extends State<StudyMaterialsScreen> {
+  int _selectedIndex = 0;
+  int _selectedTopIndex = 1;
+
+  void _onBottomNavItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
+  void _onTopNavItemTapped(int index) {
+    setState(() {
+      _selectedTopIndex = index;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Container(
-          width: MediaQuery.of(context).size.width *
-              0.8, // Reduce the length of the search bar
+          width: MediaQuery.of(context).size.width * 0.9,
           child: TextField(
             decoration: InputDecoration(
               hintText: 'Search for study materials',
@@ -45,25 +59,23 @@ class _StudyMaterialsScreenState extends State<StudyMaterialsScreen> {
       ),
       body: Column(
         children: [
-          // Options below the header
           Container(
             color: Colors.black,
             padding: EdgeInsets.symmetric(vertical: 10.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                buildOption('Top'),
-                buildOption('Subjects', isSelected: true),
-                buildOption('Exams'),
-                buildOption('Resources'),
-                buildOption('Library'),
+                buildOption('Top', 0),
+                buildOption('Subjects', 1),
+                buildOption('Exams', 2),
+                buildOption('Resources', 3),
+                buildOption('Library', 4),
               ],
             ),
           ),
           Expanded(
             child: Padding(
-              padding:
-                  const EdgeInsets.only(top: 10.0), // Space below the header
+              padding: const EdgeInsets.only(top: 10.0),
               child: ListView(
                 children: [
                   buildListTile('Study Buddy', 'Connect with peers'),
@@ -82,60 +94,68 @@ class _StudyMaterialsScreenState extends State<StudyMaterialsScreen> {
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.grey, // Set the color of the bottom bar to gray
-        items: [
+        items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.home, color: Colors.white),
+            icon: Icon(Icons.home),
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.message,
-                color: Colors.white), // Set the message icon color
-            label: '',
+            icon: Icon(Icons.chat),
+            label: 'Chat',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.add_circle, color: Colors.white),
-            label: '',
+            icon: Icon(Icons.add),
+            label: 'Add',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.account_circle, color: Colors.white),
-            label: '',
+            icon: Icon(Icons.person),
+            label: 'Profile',
           ),
         ],
-        currentIndex: 1, // Set the current index to match the selected tab
-        onTap: (index) {
-          // Handle navigation logic here
-        },
+        currentIndex: _selectedIndex,
+        selectedItemColor: Colors.white,
+        unselectedItemColor: Colors.grey,
+        backgroundColor: Colors.black,
+        onTap: _onBottomNavItemTapped,
+        type: BottomNavigationBarType.fixed,
       ),
     );
   }
 
-  Widget buildOption(String text, {bool isSelected = false}) {
-    return Column(
-      children: [
-        Text(
-          text,
-          style: TextStyle(
-            color: isSelected ? Colors.white : Colors.grey,
-            fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+  Widget buildOption(String text, int index) {
+    bool isSelected = _selectedTopIndex == index;
+    return GestureDetector(
+      onTap: () => _onTopNavItemTapped(index),
+      child: Column(
+        children: [
+          Text(
+            text,
+            style: TextStyle(
+              color: isSelected ? Colors.white : Colors.grey,
+              fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+            ),
           ),
-        ),
-        if (isSelected)
-          Container(
+          AnimatedContainer(
+            duration: Duration(milliseconds: 300),
             margin: EdgeInsets.only(top: 4.0),
-            height: 2.0,
-            width: 20.0,
+            height: isSelected ? 2.0 : 0.0,
+            width: isSelected ? 20.0 : 0.0,
             color: Colors.white,
           ),
-      ],
+        ],
+      ),
     );
   }
 
   Widget buildListTile(String title, String subtitle) {
     return ListTile(
       leading: ClipOval(
-        child: Image.asset('assets/search_result.png',
-            width: 55, height: 70, fit: BoxFit.fill), // Circular image
+        child: Image.asset(
+          'assets/search_result.png',
+          width: 55,
+          height: 70,
+          fit: BoxFit.fill,
+        ),
       ),
       title: Text(title),
       subtitle: Text(subtitle),
@@ -144,13 +164,12 @@ class _StudyMaterialsScreenState extends State<StudyMaterialsScreen> {
 
   Widget buildDividerWithPadding() {
     return Padding(
-      padding: const EdgeInsets.symmetric(
-          vertical: 8.0), // Padding between the ListTile and Divider
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: Divider(
-        color: Colors.grey, // Color of the divider
-        thickness: 1.0, // Thickness of the divider
-        indent: 30.0, // Left padding of the divider
-        endIndent: 20.0, // Right padding of the divider
+        color: Colors.grey,
+        thickness: 1.0,
+        indent: 30.0,
+        endIndent: 20.0,
       ),
     );
   }
