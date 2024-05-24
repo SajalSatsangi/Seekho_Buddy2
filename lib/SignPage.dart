@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:seekhobuddy/LoginPage.dart';
+import 'package:seekhobuddy/home.dart';
 
 void main() {
   runApp(SignUpPage());
@@ -13,7 +14,7 @@ class SignUpPage extends StatelessWidget {
       title: 'StudyHub',
       theme: ThemeData(
         brightness: Brightness.dark,
-        primaryColor: Colors.black,
+        primaryColor: const Color.fromRGBO(0, 0, 0, 1),
         hintColor: Colors.white,
       ),
       home: StudyHubLoginScreen(),
@@ -234,7 +235,7 @@ class _StudyHubLoginScreenState extends State<StudyHubLoginScreen> {
                           },
                           style: ElevatedButton.styleFrom(
                             foregroundColor: Colors.white,
-                            backgroundColor: Colors.grey.shade800,
+                            backgroundColor: const Color.fromRGBO(66, 66, 66, 1),
                             minimumSize: Size(double.infinity, 50),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(50),
@@ -296,7 +297,7 @@ class _StudyHubLoginScreenState extends State<StudyHubLoginScreen> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => LoginPage()),
+                                    builder: (context) => Home()),
                               );
                             },
                             child: Text(

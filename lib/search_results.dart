@@ -74,7 +74,7 @@ class _StudyMaterialsScreenState extends State<StudyMaterialsScreen> {
             ),
           ),
           Expanded(
-            child: Padding(
+            child: Padding( 
               padding: const EdgeInsets.only(top: 10.0),
               child: ListView(
                 children: [

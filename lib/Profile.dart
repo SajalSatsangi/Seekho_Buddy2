@@ -1,116 +1,16 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(ProfileP());
+  runApp(ProfilePage());
 }
 
-class ProfileP extends StatelessWidget {
+class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Study Materials',
       theme: ThemeData.dark(),
-      home: StudyMaterialsScreen(),
-    );
-  }
-}
-
-class StudyMaterialsScreen extends StatefulWidget {
-  @override
-  _StudyMaterialsScreenState createState() => _StudyMaterialsScreenState();
-}
-
-class _StudyMaterialsScreenState extends State<StudyMaterialsScreen> {
-  int _selectedIndex = 0;
-
-  final List<Widget> _pages = [
-    HomeScreen(),
-    ChatScreen(),
-    AddScreen(),
-    ProfileScreen(),
-  ];
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: _selectedIndex == 3 ? ProfileScreen() : _pages[_selectedIndex],
-      bottomNavigationBar: _selectedIndex != 3
-          ? BottomNavigationBar(
-              items: const <BottomNavigationBarItem>[
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.home),
-                  label: 'Home',
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.search),
-                  label: 'Search',
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.add),
-                  label: 'Add',
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.chat),
-                  label: 'Chat',
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.person),
-                  label: 'Profile',
-                ),
-              ],
-              currentIndex: _selectedIndex,
-              selectedItemColor: Colors.white,
-              unselectedItemColor: Colors.grey,
-              backgroundColor: Colors.black,
-              onTap: _onItemTapped,
-              type: BottomNavigationBarType.fixed,
-            )
-          : null,
-    );
-  }
-}
-
-class HomeScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Home'),
-        backgroundColor: Colors.black,
-      ),
-      body: Center(child: Text('Home Screen')),
-    );
-  }
-}
-
-class ChatScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Chat'),
-        backgroundColor: Colors.black,
-      ),
-      body: Center(child: Text('Chat Screen')),
-    );
-  }
-}
-
-class AddScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Add'),
-        backgroundColor: Colors.black,
-      ),
-      body: Center(child: Text('Add Screen')),
+      home: ProfileScreen(),
     );
   }
 }
@@ -119,85 +19,86 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Profile'),
-        backgroundColor: Colors.black,
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: <Widget>[
-            SizedBox(height: 20),
-            CircleAvatar(
-              radius: 50,
-              backgroundImage:
-                  AssetImage('assets/search_result.png'), // Changed image path
-            ),
-            SizedBox(height: 10),
-            Text(
-              'StudyHub User',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-            ),
-            SizedBox(height: 5),
-            Text(
-              'Access study materials and connect with others.',
-              style: TextStyle(fontSize: 14, color: Colors.grey),
-            ),
-            SizedBox(height: 20),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                Column(
-                  children: <Widget>[
-                    Text(
-                      '42',
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                    ),
-                    Text('Notes'),
-                  ],
-                ),
-                Column(
-                  children: <Widget>[
-                    Text(
-                      '87',
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                    ),
-                    Text('Connections'),
-                  ],
-                ),
-                Column(
-                  children: <Widget>[
-                    Text(
-                      '24',
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                    ),
-                    Text('Resources'),
-                  ],
-                ),
-              ],
-            ),
-            SizedBox(height: 20),
-            Expanded(
-              child: GridView.count(
-                crossAxisCount: 3,
-                children: List.generate(6, (index) {
-                  return Padding(
-                    padding: const EdgeInsets.all(4.0),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(8.0),
-                      child: Image.asset(
-                        'assets/search_result.png', // Changed image path
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  );
-                }),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding:
+              const EdgeInsets.only(top: 180.0), // Add spacing from the top
+          child: Column(
+            children: [
+              CircleAvatar(
+                radius: 50,
+                backgroundImage: AssetImage(
+                    'assets/search_result.png'), // Replace with your local asset
               ),
-            ),
-          ],
+              SizedBox(height: 10),
+              Text(
+                'StudyHub User',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
+              SizedBox(height: 5),
+              Text(
+                'Access study materials and connect with others.',
+                style: TextStyle(fontSize: 14, color: Colors.grey),
+                textAlign: TextAlign.center,
+              ),
+              SizedBox(height: 20),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Column(
+                      children: [
+                        Text('42',
+                            style: TextStyle(
+                                fontSize: 18, fontWeight: FontWeight.bold)),
+                        Text('Notes', style: TextStyle(color: Colors.grey)),
+                      ],
+                    ),
+                    Column(
+                      children: [
+                        Text('87',
+                            style: TextStyle(
+                                fontSize: 18, fontWeight: FontWeight.bold)),
+                        Text('Connection',
+                            style: TextStyle(color: Colors.grey)),
+                      ],
+                    ),
+                    Column(
+                      children: [
+                        Text('24',
+                            style: TextStyle(
+                                fontSize: 18, fontWeight: FontWeight.bold)),
+                        Text('Resource', style: TextStyle(color: Colors.grey)),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(height: 20),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: GridView.count(
+                  shrinkWrap: true,
+                  crossAxisCount: 3,
+                  crossAxisSpacing: 10,
+                  mainAxisSpacing: 10,
+                  children: List.generate(6, (index) {
+                    return Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        image: DecorationImage(
+                          image: AssetImage(
+                              'assets/search_result.png'), // Replace with your local asset
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    );
+                  }),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
