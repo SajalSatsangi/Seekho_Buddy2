@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:seekhobuddy/SignPage.dart';
+import 'package:seekhobuddy/LoginPage.dart';
 
 void main() {
   runApp(LandingPage3());
@@ -59,7 +59,7 @@ class MembershipPage extends StatelessWidget {
                   context,
                   PageRouteBuilder(
                     pageBuilder: (context, animation, secondaryAnimation) =>
-                        SignUpPage(),
+                        LoginPage(),
                     transitionsBuilder:
                         (context, animation, secondaryAnimation, child) {
                       const begin =
