@@ -195,29 +195,25 @@ class _HomeState extends State<Home> {
                         ),
                       ),
                       SizedBox(height: 12),
-                      GridView.count(
+                      ListView.builder(
                         shrinkWrap: true,
-                        crossAxisCount: 2,
-                        childAspectRatio: 1.5,
-                        physics: NeverScrollableScrollPhysics(),
-                        children: [
-                          CategoryTile(
-                            label: 'Resource',
-                            assetPath: 'assets/resource.png',
-                          ),
-                          CategoryTile(
-                            label: 'Job',
-                            assetPath: 'assets/job.png',
-                          ),
-                          CategoryTile(
-                            label: 'Professional',
-                            assetPath: 'assets/professional.png',
-                          ),
-                          CategoryTile(
-                            label: 'Networking',
-                            assetPath: 'assets/networking.png',
-                          ),
-                        ],
+                        itemCount: 4, // Number of items in the list
+                        itemBuilder: (context, index) {
+                          return CategoryTile(
+                            label: [
+                              'Resource',
+                              'Job',
+                              'Professional',
+                              'Networking'
+                            ][index],
+                            assetPath: [
+                              'assets/resource.png',
+                              'assets/job.png',
+                              'assets/professional.png',
+                              'assets/networking.png'
+                            ][index],
+                          );
+                        },
                       ),
                     ],
                   ),
