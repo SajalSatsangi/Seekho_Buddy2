@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:seekhobuddy/LoginPage.dart';
+import 'package:seekhobuddy/home.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(SignUpPage());
 }
 
@@ -29,6 +34,8 @@ class StudyHubLoginScreen extends StatefulWidget {
 class _StudyHubLoginScreenState extends State<StudyHubLoginScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _rollnoController = TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
 
@@ -78,7 +85,8 @@ class _StudyHubLoginScreenState extends State<StudyHubLoginScreen> {
       'Semester 4',
       'Semester 5',
       'Semester 6',
-      'Semester 7'
+      'Semester 7',
+      'Semester 8'
     ],
     'Fulltime-Mechanical': [
       'Semester 1',
@@ -97,6 +105,34 @@ class _StudyHubLoginScreenState extends State<StudyHubLoginScreen> {
     'Faculty of Engineering_Fulltime-Electrical_Semester 5': [
       'Subbranch 9',
       'Subbranch 10'
+    ],
+    'Faculty of Engineering_Fulltime-Electrical_Semester 6': [
+      'Computer Science',
+      'Subbranch 12'
+    ],
+    'Faculty of Engineering_Fulltime-Electrical_Semester 7': [
+      'Subbranch 13',
+      'Subbranch 14'
+    ],
+    'Faculty of Engineering_Fulltime-Electrical_Semester 8': [
+      'Subbranch 15',
+      'Subbranch 16'
+    ],
+    'Faculty of Engineering_Fulltime-Mechanical_Semester 5': [
+      'Subbranch 13',
+      'Subbranch 14'
+    ],
+    'Faculty of Engineering_Fulltime-Mechanical_Semester 6': [
+      'Computer Science',
+      'Subbranch 16'
+    ],
+    'Faculty of Engineering_Fulltime-Mechanical_Semester 7': [
+      'Subbranch 17',
+      'Subbranch 18'
+    ],
+    'Faculty of Engineering_Fulltime-Mechanical_Semester 8': [
+      'Subbranch 19',
+      'Subbranch 20'
     ],
     // Add other combinations of faculty, subfaculty, and semester here
   };
@@ -144,7 +180,7 @@ class _StudyHubLoginScreenState extends State<StudyHubLoginScreen> {
                       _buildTextField(
                         controller: _emailController,
                         hintText: 'Email',
-                        icon: Icons.menu_book_sharp,
+                        icon: Icons.email,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return 'Please enter your email';
@@ -156,11 +192,37 @@ class _StudyHubLoginScreenState extends State<StudyHubLoginScreen> {
                       _buildTextField(
                         controller: _passwordController,
                         hintText: 'Password',
-                        icon: Icons.search,
+                        icon: Icons.password,
                         obscureText: true,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return 'Please enter your password';
+                          }
+                          return null;
+                        },
+                      ),
+                      SizedBox(height: 20),
+                      _buildTextField(
+                        controller: _nameController,
+                        hintText: 'Name',
+                        icon: Icons.person,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter your name';
+                          }
+                          return null;
+                        },
+                      ),
+                      SizedBox(height: 20),
+                      _buildTextField(
+                        controller: _rollnoController,
+                        hintText: 'Roll-No',
+                        icon: Icons.numbers,
+                        keyboardType: TextInputType
+                            .number, // Set keyboard type to accept only numbers
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter your roll Number';
                           }
                           return null;
                         },
@@ -225,13 +287,7 @@ class _StudyHubLoginScreenState extends State<StudyHubLoginScreen> {
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 30),
                         child: ElevatedButton(
-                          onPressed: () {
-                            if (_formKey.currentState!.validate()) {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(content: Text('Processing Data')),
-                              );
-                            }
-                          },
+                          onPressed: _signUp,
                           style: ElevatedButton.styleFrom(
                             foregroundColor: Colors.white,
                             backgroundColor:
@@ -320,11 +376,47 @@ class _StudyHubLoginScreenState extends State<StudyHubLoginScreen> {
     );
   }
 
+  Future<void> _signUp() async {
+    if (_formKey.currentState!.validate()) {
+      try {
+        await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: _emailController.text,
+          password: _passwordController.text,
+        );
+        await FirebaseFirestore.instance
+            .collection('users')
+            .doc(_nameController.text) // Set document ID to the user's name
+            .set({
+          'email': _emailController.text,
+          'name': _nameController.text,
+          'faculty': _selectedFaculty,
+          'subfaculty': _selectedSubfaculty,
+          'semester': _selectedSemester,
+          'subbranch': _selectedSubbranch,
+          'rollno': _rollnoController.text,
+        });
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Signup Successful')),
+        );
+        // Navigate to another screen or perform other actions
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => Home()),
+        );
+      } on FirebaseAuthException catch (e) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Failed to sign up: ${e.message}')),
+        );
+      }
+    }
+  }
+
   Widget _buildTextField({
     required TextEditingController controller,
     required String hintText,
     required IconData icon,
     bool obscureText = false,
+    TextInputType keyboardType = TextInputType.text, // Define keyboardType parameter
     String? Function(String?)? validator,
   }) {
     return Padding(
@@ -341,6 +433,7 @@ class _StudyHubLoginScreenState extends State<StudyHubLoginScreen> {
             child: TextFormField(
               controller: controller,
               obscureText: obscureText,
+              keyboardType: keyboardType, // Use keyboardType parameter here
               style: TextStyle(color: Colors.white),
               decoration: InputDecoration(
                 hintText: hintText,

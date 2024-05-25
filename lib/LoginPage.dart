@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:seekhobuddy/SignPage.dart';
 import 'package:seekhobuddy/home.dart';
 
@@ -27,8 +29,78 @@ class StudyHubLoginScreen extends StatefulWidget {
 }
 
 class _StudyHubLoginScreenState extends State<StudyHubLoginScreen> {
-  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _rollNumberController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
+  Future<void> _signInWithRollNumber() async {
+    try {
+      final rollNumber = _rollNumberController.text.trim();
+
+      // Query Firestore to get user document based on roll number
+      final QuerySnapshot querySnapshot = await _firestore
+          .collection('users')
+          .where('rollno', isEqualTo: rollNumber)
+          .limit(1)
+          .get();
+
+      if (querySnapshot.docs.isNotEmpty) {
+        // Get the first document
+        final userDoc = querySnapshot.docs.first;
+
+        // Get the user data
+        final userData = userDoc.data();
+
+        // Check if userData is not null and contains email field
+        if (userData != null && (userData as Map<String, dynamic>)['email'] != null) {
+          // Sign in with email and password
+          final email = (userData as Map<String, dynamic>)['email'] as String;
+          final password = _passwordController.text.trim();
+          final UserCredential userCredential =
+              await _auth.signInWithEmailAndPassword(
+            email: email,
+            password: password,
+          );
+
+          // If login successful, navigate to Home screen
+          if (userCredential.user != null) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => Home()),
+            );
+          }
+        } else {
+          throw 'User data or email is null';
+        }
+      } else {
+        // Roll number not found
+        throw 'Invalid roll number';
+      }
+    } catch (e) {
+      // Handle login errors
+      print("Failed to sign in with roll number: $e");
+      // Show error dialog or message
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text("Error"),
+            content: Text(
+                "Failed to sign in. Please check your roll number and password."),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text("OK"),
+              ),
+            ],
+          );
+        },
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -72,16 +144,18 @@ class _StudyHubLoginScreenState extends State<StudyHubLoginScreen> {
                   SizedBox(width: 10),
                   Expanded(
                     child: TextField(
-                      controller: _emailController,
+                      controller: _rollNumberController,
                       style: TextStyle(color: Colors.white),
                       decoration: InputDecoration(
-                        hintText: 'Email',
+                        hintText: 'Roll Number',
                         hintStyle: TextStyle(color: Colors.white70),
                         filled: true,
                         fillColor: Colors.grey.shade800,
-                        contentPadding: EdgeInsets.symmetric(vertical: 14).copyWith(
-                            left:
-                                20), // Adjust this value to decrease/increase height and add left padding
+                        contentPadding:
+                            EdgeInsets.symmetric(vertical: 14).copyWith(
+                          left:
+                              20, // Adjust this value to decrease/increase height and add left padding
+                        ),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(50),
                           borderSide: BorderSide.none,
@@ -113,9 +187,11 @@ class _StudyHubLoginScreenState extends State<StudyHubLoginScreen> {
                         hintStyle: TextStyle(color: Colors.white70),
                         filled: true,
                         fillColor: Colors.grey.shade800,
-                        contentPadding: EdgeInsets.symmetric(vertical: 14).copyWith(
-                            left:
-                                20), // Adjust this value to decrease/increase height and add left padding
+                        contentPadding:
+                            EdgeInsets.symmetric(vertical: 14).copyWith(
+                          left:
+                              20, // Adjust this value to decrease/increase height and add left padding
+                        ),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(50),
                           borderSide: BorderSide.none,
@@ -144,12 +220,7 @@ class _StudyHubLoginScreenState extends State<StudyHubLoginScreen> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 30),
               child: ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => Home()),
-                  );
-                },
+                onPressed: _signInWithRollNumber,
                 child: Text('Sign In'),
                 style: ElevatedButton.styleFrom(
                   foregroundColor: Colors.white,
