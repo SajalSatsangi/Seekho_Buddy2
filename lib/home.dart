@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'footer.dart';
 import 'Chat/ChatPage-home.dart';
 import 'Profile.dart';
-import 'subject.dart';
+import 'MateiralSection.dart';
 
 void main() {
   runApp(MaterialApp(

@@ -41,13 +41,26 @@ class _Home1State extends State<Home1> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                    Text(
-                      "Home",
-                      style: TextStyle(
-                        fontSize: 28,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white, // Text color
-                      ),
+                    Row(
+                      children: [
+                        IconButton(
+                          icon: Icon(Icons.arrow_back, color: Colors.white),
+                          onPressed: () {
+                            Navigator.of(context).pop(); // Navigate back
+                          },
+                        ),
+                        SizedBox(
+                          width: 10.0,
+                        ),
+                        Text(
+                          "Notes",
+                          style: TextStyle(
+                            fontSize: 28,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white, // Text color
+                          ),
+                        ),
+                      ],
                     ),
                     Container(
                       padding:
@@ -66,7 +79,7 @@ class _Home1State extends State<Home1> {
                           ),
                         ],
                       ),
-                    )
+                    ),
                   ],
                 ),
               ),
