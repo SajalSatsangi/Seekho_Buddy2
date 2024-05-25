@@ -88,166 +88,56 @@ class _HomeState extends State<Home> {
             ),
             Expanded(
               child: Padding(
-                padding: const EdgeInsets.all(40.0),
+                padding: const EdgeInsets.all(25.0),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    GestureDetector(
+                    _buildBox(
+                      icon: Icons.notes_rounded,
+                      title: 'Math',
                       onTap: () {
                         // Add functionality for the button in Box 1
                       },
-                      child: Container(
-                        width: 350,
-                        height: 150,
-                        decoration: BoxDecoration(
-                          color: Color.fromRGBO(50, 50, 50, 1),
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: Stack(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.all(25.0),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    'Notes',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 18.0,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                  SizedBox(height: 7),
-                                  Text(
-                                    'Some additional information here',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 12.0,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Positioned(
-                              bottom: 15,
-                              right: 37,
-                              child: ElevatedButton(
-                                onPressed: () {
-                                  // Add functionality for the button in Box 1
-                                },
-                                style: ButtonStyle(
-                                  backgroundColor:
-                                      MaterialStateProperty.all<Color>(
-                                    Colors.black,
-                                  ),
-                                ),
-                                child: SizedBox(
-                                  width: 190,
-                                  child: Text(
-                                    'View',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Positioned(
-                              top: 29,
-                              right: 37,
-                              child: Row(
-                                children: [
-                                  Icon(
-                                    Icons.notes_rounded,
-                                    color: Colors.white,
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
                     ),
-                    SizedBox(height: 40),
-                    GestureDetector(
+                    SizedBox(height: 20),
+                    _buildBox(
+                      icon: Icons.book_outlined,
+                      title: 'Science',
                       onTap: () {
                         // Add functionality for the button in Box 2
                       },
-                      child: Container(
-                        width: 350,
-                        height: 150,
-                        decoration: BoxDecoration(
-                          color: Color.fromRGBO(50, 50, 50, 1),
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: Stack(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.all(25.0),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    'Previous Year Papers',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 17.0,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                  SizedBox(height: 5),
-                                  Text(
-                                    'Some additional information here',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 10.0,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Positioned(
-                              bottom: 15,
-                              right: 37,
-                              child: ElevatedButton(
-                                onPressed: () {
-                                  // Add functionality for the button in Box 2
-                                },
-                                style: ButtonStyle(
-                                  backgroundColor:
-                                      MaterialStateProperty.all<Color>(
-                                    Colors.black,
-                                  ),
-                                ),
-                                child: SizedBox(
-                                  width: 190,
-                                  child: Text(
-                                    'View',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Positioned(
-                              top: 29,
-                              right: 37,
-                              child: Row(
-                                children: [
-                                  Icon(
-                                    Icons.book_outlined,
-                                    color: Colors.white,
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
+                    ),
+                    SizedBox(height: 20),
+                    _buildBox(
+                      icon: Icons.history_edu,
+                      title: 'History',
+                      onTap: () {
+                        // Add functionality for the button in Box 3
+                      },
+                    ),
+                    SizedBox(height: 20),
+                    _buildBox(
+                      icon: Icons.public,
+                      title: 'Geography',
+                      onTap: () {
+                        // Add functionality for the button in Box 4
+                      },
+                    ),
+                    SizedBox(height: 20),
+                    _buildBox(
+                      icon: Icons.biotech,
+                      title: 'Biology',
+                      onTap: () {
+                        // Add functionality for the button in Box 5
+                      },
+                    ),
+                    SizedBox(height: 20),
+                    _buildBox(
+                      icon: Icons.calculate,
+                      title: 'Physics',
+                      onTap: () {
+                        // Add functionality for the button in Box 6
+                      },
                     ),
                   ],
                 ),
@@ -262,6 +152,63 @@ class _HomeState extends State<Home> {
       default:
         return Center(child: Text('Unknown page'));
     }
+  }
+
+  Widget _buildBox(
+      {required IconData icon,
+      required String title,
+      required VoidCallback onTap}) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        width: 350,
+        height: 80,
+        decoration: BoxDecoration(
+          color: Color.fromRGBO(50, 50, 50, 1),
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                children: [
+                  Icon(
+                    icon,
+                    color: Colors.white,
+                  ),
+                  SizedBox(width: 8),
+                  Text(
+                    title,
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 17.0,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
+              ElevatedButton(
+                onPressed: onTap,
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all<Color>(
+                    Colors.black,
+                  ),
+                ),
+                child: Text(
+                  'View',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 
   @override
