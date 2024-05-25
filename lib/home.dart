@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'footer.dart';
 import 'Chat/ChatPage-home.dart';
 import 'Profile.dart';
+import 'subject.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -190,7 +191,12 @@ class _HomeState extends State<Home> {
                 ],
               ),
               ElevatedButton(
-                onPressed: onTap,
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Home1()),
+                  );
+                },
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all<Color>(
                     Colors.black,
