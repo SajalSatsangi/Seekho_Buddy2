@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'Chat/ChatPage-home.dart';
 import 'Profile.dart';
 import 'MateiralSection.dart';
@@ -16,6 +18,57 @@ class SubjectsPage extends StatefulWidget {
 
 class _HomeState extends State<SubjectsPage> {
   int _selectedIndex = 0;
+  List<String> subjects = [];
+  DocumentSnapshot? userData;
+
+  @override
+  void initState() {
+    super.initState();
+    fetchUserData();
+  }
+
+  Future<void> fetchUserData() async {
+    User? user = FirebaseAuth.instance.currentUser;
+
+    if (user != null) {
+      // Query the 'users' collection to find the document with the matching 'uid' field
+      var querySnapshot = await FirebaseFirestore.instance
+          .collection('users')
+          .where('uid', isEqualTo: user.uid)
+          .get();
+
+      if (querySnapshot.docs.isNotEmpty) {
+        setState(() {
+          userData = querySnapshot.docs.first; // Get the first matching document
+        });
+
+        fetchSubjects();
+      }
+    }
+  }
+
+  void fetchSubjects() async {
+    if (userData != null) {
+      // Extract the required fields from userData
+      String faculty = userData!['faculty'];
+      String subfaculty = userData!['subfaculty'];
+      String semester = userData!['semester'];
+     
+
+      // Fetch subjects based on user data
+      final snapshot = await FirebaseFirestore.instance
+          .collection('Material DB')
+          .doc(faculty)
+          .collection(subfaculty)
+          .doc(semester)
+          .collection('Subjects')
+          .get();
+
+      setState(() {
+        subjects = snapshot.docs.map((doc) => doc.id).toList();
+      });
+    }
+  }
 
   void _onItemTapped(int index) {
     setState(() {
@@ -56,6 +109,24 @@ class _HomeState extends State<SubjectsPage> {
                         ),
                       ],
                     ),
+                    Container(
+                      padding:
+                          EdgeInsets.only(left: 8, right: 8, top: 2, bottom: 2),
+                      height: 30,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(30),
+                        color: Color(0xFF323232),
+                      ),
+                      child: Row(
+                        children: <Widget>[
+                          Icon(
+                            Icons.notification_add,
+                            color: Colors.white,
+                            size: 20,
+                          ),
+                        ],
+                      ),
+                    )
                   ],
                 ),
               ),
@@ -84,57 +155,20 @@ class _HomeState extends State<SubjectsPage> {
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.all(25.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    _buildBox(
-                      icon: Icons.notes_rounded,
-                      title: 'Math',
-                      onTap: () {
-                        // Add functionality for the button in Box 1
-                      },
-                    ),
-                    SizedBox(height: 20),
-                    _buildBox(
-                      icon: Icons.book_outlined,
-                      title: 'Science',
-                      onTap: () {
-                        // Add functionality for the button in Box 2
-                      },
-                    ),
-                    SizedBox(height: 20),
-                    _buildBox(
-                      icon: Icons.history_edu,
-                      title: 'History',
-                      onTap: () {
-                        // Add functionality for the button in Box 3
-                      },
-                    ),
-                    SizedBox(height: 20),
-                    _buildBox(
-                      icon: Icons.public,
-                      title: 'Geography',
-                      onTap: () {
-                        // Add functionality for the button in Box 4
-                      },
-                    ),
-                    SizedBox(height: 20),
-                    _buildBox(
-                      icon: Icons.biotech,
-                      title: 'Biology',
-                      onTap: () {
-                        // Add functionality for the button in Box 5
-                      },
-                    ),
-                    SizedBox(height: 20),
-                    _buildBox(
-                      icon: Icons.calculate,
-                      title: 'Physics',
-                      onTap: () {
-                        // Add functionality for the button in Box 6
-                      },
-                    ),
-                  ],
+                child: ListView.builder(
+                  itemCount: subjects.length,
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding: const EdgeInsets.only(bottom: 20.0),
+                      child: _buildBox(
+                        icon: Icons.notes_rounded,
+                        title: subjects[index],
+                        onTap: () {
+                          // Add functionality for the button in each Box
+                        },
+                      ),
+                    );
+                  },
                 ),
               ),
             ),
@@ -219,3 +253,4 @@ class _HomeState extends State<SubjectsPage> {
     );
   }
 }
+

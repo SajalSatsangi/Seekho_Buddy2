@@ -40,28 +40,39 @@ class _HomeState extends State<ResourcesPage> {
                         IconButton(
                           icon: Icon(Icons.arrow_back_ios, color: Colors.white),
                           onPressed: () {
-                            Navigator.of(context).pop(); // Navigate back
+                            Navigator.of(context).pop();
                           },
                         ),
-                        SizedBox(
-                          width: 10.0,
-                        ),
+                        SizedBox(width: 10.0),
                         Text(
                           "Courses",
                           style: TextStyle(
                             fontSize: 28,
                             fontWeight: FontWeight.bold,
-                            color: Colors.white, // Text color
+                            color: Colors.white,
                           ),
                         ),
                       ],
+                    ),
+                    Container(
+                      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                      height: 30,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(30),
+                        color: Color(0xFF323232),
+                      ),
+                      child: Icon(
+                        Icons.notification_add,
+                        color: Colors.white,
+                        size: 20,
+                      ),
                     ),
                   ],
                 ),
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(top: 14, left: 14, right: 14),
+              padding: EdgeInsets.symmetric(horizontal: 14, vertical: 14),
               child: TextField(
                 decoration: InputDecoration(
                   hintText: "Search...",
@@ -91,15 +102,18 @@ class _HomeState extends State<ResourcesPage> {
                       icon: Icons.notes_rounded,
                       title: 'Your Courses',
                       onTap: () {
-                        // Add functionality for the button in Box 1
-                      },
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => SubjectsPage()),
+                  );
+                },
                     ),
                     SizedBox(height: 20),
                     _buildBox(
                       icon: Icons.book_outlined,
                       title: 'Other Courses',
                       onTap: () {
-                        // Add functionality for the button in Box 2
+                        // Add functionality for Other Courses
                       },
                     ),
                   ],
@@ -109,18 +123,15 @@ class _HomeState extends State<ResourcesPage> {
           ],
         );
       case 1:
-        return ChatHomePage(); // Replace with your ChatPage implementation
+        return ChatHomePage();
       case 2:
-        return ProfileScreen(); // Replace with your ProfileScreen implementation
+        return ProfileScreen();
       default:
         return Center(child: Text('Unknown page'));
     }
   }
 
-  Widget _buildBox(
-      {required IconData icon,
-      required String title,
-      required VoidCallback onTap}) {
+  Widget _buildBox({required IconData icon, required String title, required VoidCallback onTap}) {
     return GestureDetector(
       onTap: onTap,
       child: Container(
@@ -160,16 +171,12 @@ class _HomeState extends State<ResourcesPage> {
                   );
                 },
                 style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all<Color>(
-                    Colors.black,
-                  ),
+                  backgroundColor: MaterialStateProperty.all<Color>(Colors.black),
                 ),
                 child: Text(
                   'View',
                   textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Colors.white,
-                  ),
+                  style: TextStyle(color: Colors.white),
                 ),
               ),
             ],
@@ -187,3 +194,4 @@ class _HomeState extends State<ResourcesPage> {
     );
   }
 }
+
