@@ -1,129 +1,102 @@
 import 'package:flutter/material.dart';
-import 'home.dart'; // Ensure these imports point to your actual file locations
-import 'Chat/ChatPage-home.dart'; // Ensure these imports point to your actual file locations
 
 void main() {
-  runApp(MaterialApp(
-    home: ProfileScreen(),
-  ));
+  runApp(ProfileScreen());
 }
 
-class ProfileScreen extends StatefulWidget {
-  @override
-  _ProfilePageState createState() => _ProfilePageState();
-}
-
-class _ProfilePageState extends State<ProfileScreen> {
-  int _selectedIndex = 2; // Set the initial selected index to Profile
-
-  void _onItemTapped(int index) {
-    // Handle navigation based on the selected index
-    setState(() {
-      _selectedIndex = index;
-    });
-
-    // Navigate to different pages based on the selected index
-    switch (index) {
-      case 0:
-        // Navigate to HomeScreen
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => Home()),
-        );
-        break;
-      case 1:
-        // Navigate to ChatScreen
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => ChatHomePage()),
-        );
-        break;
-      case 2:
-        // Already on ProfileScreen
-        break;
-    }
-  }
-
+class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SingleChildScrollView(
-        child: Padding(
-          padding:
-              const EdgeInsets.only(top: 180.0), // Add spacing from the top
+    return MaterialApp(
+      title: 'StudyHub',
+      theme: ThemeData(
+        scaffoldBackgroundColor: Colors.black,
+        appBarTheme: AppBarTheme(
+          backgroundColor: Colors.black,
+        ),
+        textTheme: TextTheme(
+          bodyText1: TextStyle(color: Colors.white),
+          bodyText2: TextStyle(color: Colors.white),
+        ),
+      ),
+      home: Scaffold(
+        appBar: AppBar(
+          title: Padding(
+            padding: EdgeInsets.only(left: 17, right: 16, top: 11),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Text(
+                  "Profile",
+                  style: TextStyle(
+                    fontSize: 28,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
+                Container(
+                  padding:
+                      EdgeInsets.only(left: 8, right: 8, top: 2, bottom: 2),
+                  height: 30,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(30),
+                    color: Color(0xFF323232),
+                  ),
+                  child: Row(
+                    children: <Widget>[
+                      Icon(
+                        Icons.edit,
+                        color: Colors.white,
+                        size: 20,
+                      ),
+                    ],
+                  ),
+                )
+              ],
+            ),
+          ),
+        ),
+        body: Center(
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               CircleAvatar(
                 radius: 50,
-                backgroundImage: AssetImage(
-                    'assets/search_result.png'), // Replace with your local asset
+                backgroundImage: AssetImage('assets/john_doe.jpg'),
               ),
-              SizedBox(height: 10),
+              SizedBox(height: 16),
               Text(
-                'StudyHub User',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-              ),
-              SizedBox(height: 5),
-              Text(
-                'Access study materials and connect with others.',
-                style: TextStyle(fontSize: 14, color: Colors.grey),
-                textAlign: TextAlign.center,
-              ),
-              SizedBox(height: 20),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Column(
-                      children: [
-                        Text('42',
-                            style: TextStyle(
-                                fontSize: 18, fontWeight: FontWeight.bold)),
-                        Text('Notes', style: TextStyle(color: Colors.grey)),
-                      ],
-                    ),
-                    Column(
-                      children: [
-                        Text('87',
-                            style: TextStyle(
-                                fontSize: 18, fontWeight: FontWeight.bold)),
-                        Text('Connections',
-                            style: TextStyle(color: Colors.grey)),
-                      ],
-                    ),
-                    Column(
-                      children: [
-                        Text('24',
-                            style: TextStyle(
-                                fontSize: 18, fontWeight: FontWeight.bold)),
-                        Text('Resources', style: TextStyle(color: Colors.grey)),
-                      ],
-                    ),
-                  ],
+                'John Doe',
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
-              SizedBox(height: 20),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: GridView.count(
-                  shrinkWrap: true,
-                  crossAxisCount: 3,
-                  crossAxisSpacing: 10,
-                  mainAxisSpacing: 10,
-                  children: List.generate(6, (index) {
-                    return Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        image: DecorationImage(
-                          image: AssetImage(
-                              'assets/search_result.png'), // Replace with your local asset
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    );
-                  }),
+              SizedBox(height: 8),
+              Text(
+                'john.doe@example.com',
+                style: TextStyle(
+                  fontSize: 16,
+                  color: Colors.grey,
                 ),
+              ),
+              SizedBox(height: 32),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Academic Information',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  SizedBox(height: 8),
+                  Text('University: Dayalbagh Educational Institute'),
+                  Text('Faculty: Engineering'),
+                  Text('Branch: Mechanical (Computer Science)'),
+                  Text('Semester: 6'),
+                ],
               ),
             ],
           ),
