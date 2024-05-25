@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'footer.dart';
-import 'Chat/ChatPage-home.dart'; // Ensure these imports point to your actual file locations
-import 'Profile.dart'; // Ensure these imports point to your actual file locations
+import 'Chat/ChatPage-home.dart';
+import 'Profile.dart';
 
 void main() {
   runApp(MaterialApp(
