@@ -284,36 +284,6 @@ class _HomeState extends State<Home> {
                 ),
               ],
             ),
-            Positioned(
-              bottom: 80,
-              right: 20,
-              child: Material(
-                color: Colors.transparent,
-                child: InkWell(
-                  onTap: () {
-                    // Add functionality for the add button here
-                  },
-                  borderRadius: BorderRadius.circular(
-                      20), // Ensure the ripple effect follows the rounded corners
-                  child: Ink(
-                    width: 60,
-                    height: 60,
-                    decoration: BoxDecoration(
-                      color: Color.fromRGBO(50, 50, 50, 1), // Box color
-                      borderRadius:
-                          BorderRadius.circular(20), // Rounded corners
-                    ),
-                    child: Center(
-                      child: Icon(
-                        Icons.add,
-                        color: Colors.white,
-                        size: 30.0, // Adjust the size of the icon as needed
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ),
           ],
         ),
         bottomNavigationBar: CustomFooter(
