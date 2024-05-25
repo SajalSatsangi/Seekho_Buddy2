@@ -35,6 +35,7 @@ class _StudyHubLoginScreenState extends State<StudyHubLoginScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _rollnoController = TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
 
@@ -179,7 +180,7 @@ class _StudyHubLoginScreenState extends State<StudyHubLoginScreen> {
                       _buildTextField(
                         controller: _emailController,
                         hintText: 'Email',
-                        icon: Icons.menu_book_sharp,
+                        icon: Icons.email,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return 'Please enter your email';
@@ -191,7 +192,7 @@ class _StudyHubLoginScreenState extends State<StudyHubLoginScreen> {
                       _buildTextField(
                         controller: _passwordController,
                         hintText: 'Password',
-                        icon: Icons.search,
+                        icon: Icons.password,
                         obscureText: true,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
@@ -208,6 +209,20 @@ class _StudyHubLoginScreenState extends State<StudyHubLoginScreen> {
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return 'Please enter your name';
+                          }
+                          return null;
+                        },
+                      ),
+                      SizedBox(height: 20),
+                      _buildTextField(
+                        controller: _rollnoController,
+                        hintText: 'Roll-No',
+                        icon: Icons.numbers,
+                        keyboardType: TextInputType
+                            .number, // Set keyboard type to accept only numbers
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter your roll Number';
                           }
                           return null;
                         },
@@ -378,6 +393,7 @@ class _StudyHubLoginScreenState extends State<StudyHubLoginScreen> {
           'subfaculty': _selectedSubfaculty,
           'semester': _selectedSemester,
           'subbranch': _selectedSubbranch,
+          'rollno': _rollnoController.text,
         });
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('Signup Successful')),
@@ -400,6 +416,7 @@ class _StudyHubLoginScreenState extends State<StudyHubLoginScreen> {
     required String hintText,
     required IconData icon,
     bool obscureText = false,
+    TextInputType keyboardType = TextInputType.text, // Define keyboardType parameter
     String? Function(String?)? validator,
   }) {
     return Padding(
@@ -416,6 +433,7 @@ class _StudyHubLoginScreenState extends State<StudyHubLoginScreen> {
             child: TextFormField(
               controller: controller,
               obscureText: obscureText,
+              keyboardType: keyboardType, // Use keyboardType parameter here
               style: TextStyle(color: Colors.white),
               decoration: InputDecoration(
                 hintText: hintText,
