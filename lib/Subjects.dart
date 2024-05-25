@@ -1,21 +1,20 @@
 import 'package:flutter/material.dart';
-import 'footer.dart';
 import 'Chat/ChatPage-home.dart';
 import 'Profile.dart';
-import 'subject.dart';
+import 'MateiralSection.dart';
 
 void main() {
   runApp(MaterialApp(
-    home: Home(),
+    home: SubjectsPage(),
   ));
 }
 
-class Home extends StatefulWidget {
+class SubjectsPage extends StatefulWidget {
   @override
   _HomeState createState() => _HomeState();
 }
 
-class _HomeState extends State<Home> {
+class _HomeState extends State<SubjectsPage> {
   int _selectedIndex = 0;
 
   void _onItemTapped(int index) {
@@ -36,13 +35,26 @@ class _HomeState extends State<Home> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                    Text(
-                      "Home",
-                      style: TextStyle(
-                        fontSize: 28,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white, // Text color
-                      ),
+                    Row(
+                      children: [
+                        IconButton(
+                          icon: Icon(Icons.arrow_back_ios, color: Colors.white),
+                          onPressed: () {
+                            Navigator.of(context).pop(); // Navigate back
+                          },
+                        ),
+                        SizedBox(
+                          width: 10.0,
+                        ),
+                        Text(
+                          "Subjects",
+                          style: TextStyle(
+                            fontSize: 28,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white, // Text color
+                          ),
+                        ),
+                      ],
                     ),
                     Container(
                       padding:
@@ -222,10 +234,6 @@ class _HomeState extends State<Home> {
     return Scaffold(
       backgroundColor: Colors.black,
       body: _buildContent(),
-      bottomNavigationBar: CustomFooter(
-        selectedIndex: _selectedIndex,
-        onItemTapped: _onItemTapped,
-      ),
     );
   }
 }

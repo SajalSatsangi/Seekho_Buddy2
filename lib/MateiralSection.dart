@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'footer.dart';
 import 'Chat/ChatPage-home.dart';
 import 'Profile.dart';
 import 'home.dart';
@@ -53,7 +52,7 @@ class _Home1State extends State<Home1> {
                           width: 10.0,
                         ),
                         Text(
-                          "Notes",
+                          "Resources",
                           style: TextStyle(
                             fontSize: 28,
                             fontWeight: FontWeight.bold,
@@ -276,10 +275,6 @@ class _Home1State extends State<Home1> {
     return Scaffold(
       backgroundColor: Colors.black,
       body: _buildContent(),
-      bottomNavigationBar: CustomFooter(
-        selectedIndex: _selectedIndex,
-        onItemTapped: _onItemTapped,
-      ),
     );
   }
 }
