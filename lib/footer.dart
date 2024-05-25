@@ -20,14 +20,6 @@ class _CustomFooterState extends State<CustomFooter> {
           label: 'Home',
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.search),
-          label: 'Search',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.add),
-          label: 'Add',
-        ),
-        BottomNavigationBarItem(
           icon: Icon(Icons.chat),
           label: 'Chat',
         ),
