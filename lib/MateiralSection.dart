@@ -61,24 +61,6 @@ class _Home1State extends State<Home1> {
                         ),
                       ],
                     ),
-                    Container(
-                      padding:
-                          EdgeInsets.only(left: 8, right: 8, top: 2, bottom: 2),
-                      height: 30,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(30),
-                        color: Color(0xFF323232),
-                      ),
-                      child: Row(
-                        children: <Widget>[
-                          Icon(
-                            Icons.notification_add,
-                            color: Colors.white,
-                            size: 20,
-                          ),
-                        ],
-                      ),
-                    ),
                   ],
                 ),
               ),

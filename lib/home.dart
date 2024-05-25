@@ -15,7 +15,6 @@ class MyApp extends StatelessWidget {
       title: 'Explorer App',
       theme: ThemeData(
         brightness: Brightness.dark,
-        primarySwatch: Colors.purple,
         scaffoldBackgroundColor: Color(0xFF161616),
         textTheme: TextTheme(
           bodyText1: TextStyle(color: Colors.white),
@@ -47,9 +46,32 @@ class _HomeState extends State<Home> {
         return Scaffold(
           appBar: AppBar(
             automaticallyImplyLeading: false,
-            title: Text(
-              'Seekho Buddy',
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 28),
+            title: Row(
+              children: [
+                Text(
+                  'Seekho Buddy',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 28),
+                ),
+                Spacer(),
+                Container(
+                  padding:
+                      EdgeInsets.only(left: 8, right: 8, top: 2, bottom: 2),
+                  height: 30,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(30),
+                    color: Color(0xFF323232),
+                  ),
+                  child: Row(
+                    children: <Widget>[
+                      Icon(
+                        Icons.notification_add,
+                        color: Colors.white,
+                        size: 20,
+                      ),
+                    ],
+                  ),
+                ),
+              ],
             ),
             backgroundColor: Color(0xFF161616),
           ),
@@ -59,7 +81,7 @@ class _HomeState extends State<Home> {
               children: [
                 Container(
                   color: Colors.grey.shade800,
-                  padding: EdgeInsets.all(16),
+                  padding: EdgeInsets.all(10),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -262,7 +284,7 @@ class CategoryTile extends StatelessWidget {
                   fit: BoxFit.cover,
                 ),
               ),
-              SizedBox(height: 4),
+              SizedBox(height: 8),
               Text(
                 label,
                 style: TextStyle(
