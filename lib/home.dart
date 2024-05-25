@@ -1,10 +1,61 @@
 import 'package:flutter/material.dart';
+import 'footer.dart';
+import 'package:seekhobuddy/Profile.dart'; // Import the footer widget
 
 void main() {
   runApp(Home());
 }
 
-class Home extends StatelessWidget {
+class Home extends StatefulWidget {
+  @override
+  _HomeState createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  int _selectedIndex = 0;
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+
+    // Handle navigation based on the selected index
+    switch (index) {
+      case 0:
+        // Navigate to HomeScreen
+        // You can add navigation logic here if necessary
+        break;
+      case 1:
+        // Navigate to SearchScreen
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => SearchScreen()),
+        );
+        break;
+      case 2:
+        // Navigate to AddScreen
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => AddScreen()),
+        );
+        break;
+      case 3:
+        // Navigate to ChatScreen
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => ChatScreen()),
+        );
+        break;
+      case 4:
+        // Navigate to ProfileScreen
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => ProfileScreen()),
+        );
+        break;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -231,19 +282,6 @@ class Home extends StatelessWidget {
                     ),
                   ),
                 ),
-                Container(
-                  color: Color.fromRGBO(25, 25, 25, 1), // Footer color
-                  height: 50, // Footer height
-                  child: Center(
-                    child: Text(
-                      'Footer',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 18.0,
-                      ),
-                    ),
-                  ),
-                ),
               ],
             ),
             Positioned(
@@ -278,7 +316,51 @@ class Home extends StatelessWidget {
             ),
           ],
         ),
+        bottomNavigationBar: CustomFooter(
+          selectedIndex: _selectedIndex,
+          onItemTapped: _onItemTapped,
+        ),
       ),
+    );
+  }
+}
+
+// Dummy Screens for Navigation
+class SearchScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Search'),
+        backgroundColor: Colors.black,
+      ),
+      body: Center(child: Text('Search Screen')),
+    );
+  }
+}
+
+class AddScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Add'),
+        backgroundColor: Colors.black,
+      ),
+      body: Center(child: Text('Add Screen')),
+    );
+  }
+}
+
+class ChatScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Chat'),
+        backgroundColor: Colors.black,
+      ),
+      body: Center(child: Text('Chat Screen')),
     );
   }
 }

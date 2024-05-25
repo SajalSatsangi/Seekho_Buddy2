@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
-import 'footer.dart'; // Import the footer widget
+import 'footer.dart';
+import 'package:seekhobuddy/home.dart'; // Import the footer widget
 
 void main() {
-  runApp(ProfilePage());
+  runApp(ProfileScreen());
 }
 
-class ProfilePage extends StatefulWidget {
+class ProfileScreen extends StatefulWidget {
   @override
   _ProfilePageState createState() => _ProfilePageState();
 }
 
-class _ProfilePageState extends State<ProfilePage> {
+class _ProfilePageState extends State<ProfileScreen> {
   int _selectedIndex = 4; // Set the initial selected index to Profile
 
   void _onItemTapped(int index) {
@@ -25,7 +26,7 @@ class _ProfilePageState extends State<ProfilePage> {
         // Navigate to HomeScreen
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => HomeScreen()),
+          MaterialPageRoute(builder: (context) => Home()),
         );
         break;
       case 1:
@@ -149,20 +150,6 @@ class _ProfilePageState extends State<ProfilePage> {
           onItemTapped: _onItemTapped,
         ),
       ),
-    );
-  }
-}
-
-// Dummy Screens for Navigation
-class HomeScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Home'),
-        backgroundColor: Colors.black,
-      ),
-      body: Center(child: Text('Home Screen')),
     );
   }
 }
