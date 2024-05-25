@@ -379,14 +379,19 @@ class _StudyHubLoginScreenState extends State<StudyHubLoginScreen> {
   Future<void> _signUp() async {
     if (_formKey.currentState!.validate()) {
       try {
-        await FirebaseAuth.instance.createUserWithEmailAndPassword(
+         UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
           email: _emailController.text,
           password: _passwordController.text,
         );
+
+        String uid = userCredential.user!.uid;
+
+
         await FirebaseFirestore.instance
             .collection('users')
             .doc(_nameController.text) // Set document ID to the user's name
             .set({
+          'uid': uid,
           'email': _emailController.text,
           'name': _nameController.text,
           'faculty': _selectedFaculty,
