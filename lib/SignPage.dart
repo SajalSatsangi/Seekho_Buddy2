@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:seekhobuddy/LoginPage.dart';
-import 'package:seekhobuddy/home.dart';
 
 void main() {
   runApp(SignUpPage());
@@ -235,7 +234,8 @@ class _StudyHubLoginScreenState extends State<StudyHubLoginScreen> {
                           },
                           style: ElevatedButton.styleFrom(
                             foregroundColor: Colors.white,
-                            backgroundColor: const Color.fromRGBO(66, 66, 66, 1),
+                            backgroundColor:
+                                const Color.fromRGBO(66, 66, 66, 1),
                             minimumSize: Size(double.infinity, 50),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(50),
@@ -297,7 +297,7 @@ class _StudyHubLoginScreenState extends State<StudyHubLoginScreen> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => Home()),
+                                    builder: (context) => LoginPage()),
                               );
                             },
                             child: Text(

@@ -142,12 +142,17 @@ class _LandingPageState extends State<LandingPage> {
 
                                       var tween = Tween(begin: begin, end: end)
                                           .chain(CurveTween(curve: curve));
+                                      var offsetAnimation =
+                                          animation.drive(tween);
 
                                       return SlideTransition(
-                                        position: animation.drive(tween),
+                                        position: offsetAnimation,
                                         child: child,
                                       );
                                     },
+                                    transitionDuration: Duration(
+                                        milliseconds:
+                                            500), // Set transition duration to 500ms
                                   ),
                                 );
                               },

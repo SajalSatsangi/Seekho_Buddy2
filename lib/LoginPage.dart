@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:seekhobuddy/SignPage.dart';
+import 'package:seekhobuddy/home.dart';
 
 void main() {
   runApp(LoginPage());
@@ -144,7 +145,10 @@ class _StudyHubLoginScreenState extends State<StudyHubLoginScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 30),
               child: ElevatedButton(
                 onPressed: () {
-                  // Handle sign-in logic
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Home()),
+                  );
                 },
                 child: Text('Sign In'),
                 style: ElevatedButton.styleFrom(

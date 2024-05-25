@@ -91,6 +91,7 @@ class StudyHubScreen extends StatelessWidget {
                         child: child,
                       );
                     },
+                    transitionDuration: Duration(milliseconds: 500),
                   ),
                 );
               },
