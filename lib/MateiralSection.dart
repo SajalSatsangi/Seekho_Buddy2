@@ -1,25 +1,52 @@
 import 'package:flutter/material.dart';
 import 'Chat/ChatPage-home.dart';
 import 'Profile.dart';
-import 'home.dart';
-
-void main() {
-  runApp(MaterialApp(
-    home: Home(),
-  ));
-}
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Home1 extends StatefulWidget {
+  final DocumentSnapshot? userData;
+  final String subject;
+
+  Home1({required this.userData, required this.subject});
+
   @override
   _Home1State createState() => _Home1State();
 }
 
 class _Home1State extends State<Home1> {
   int _selectedIndex = 0;
+  List<String> subjects = []; // Store fetched subjects here
+
+  @override
+  void initState() {
+    super.initState();
+    fetchSubjects(); // Call fetchSubjects function when the widget is initialized
+  }
+
+  void fetchSubjects() async {
+    if (widget.userData != null) {
+      String faculty = widget.userData!['faculty'];
+      String subfaculty = widget.userData!['subfaculty'];
+      String semester = widget.userData!['semester'];
+
+      final snapshot = await FirebaseFirestore.instance
+          .collection('Material DB')
+          .doc(faculty)
+          .collection(subfaculty)
+          .doc(semester)
+          .collection('Subjects')
+          .doc(widget.subject) // Use the subject parameter here
+          .collection(widget.subject) // Use the subject parameter here
+          .get();
+
+      setState(() {
+        subjects = snapshot.docs.map((doc) => doc.id).toList();
+      });
+    }
+  }
 
   void _onItemTapped(int index) {
     if (_selectedIndex == 0 && index == 0) {
-      // Refresh home page if already on the home page
       setState(() {});
     } else {
       setState(() {
@@ -52,7 +79,7 @@ class _Home1State extends State<Home1> {
                           width: 10.0,
                         ),
                         Text(
-                          "Resources",
+                          widget.subject, // Update this line
                           style: TextStyle(
                             fontSize: 28,
                             fontWeight: FontWeight.bold,
@@ -89,37 +116,34 @@ class _Home1State extends State<Home1> {
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(30.0, 5.0, 30.0, 30.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    SizedBox(height: 30),
-                    GestureDetector(
+                child: ListView.builder(
+                  itemCount: subjects.length,
+                  itemBuilder: (context, index) {
+                    String subjectName = subjects[index];
+                    return GestureDetector(
                       onTap: () {
-                        // Add functionality for the button in Box 1
+                        // Add functionality for the button in each box
                       },
                       child: Container(
                         width: 350,
                         height: 150,
                         decoration: BoxDecoration(
-                          color: Color.fromRGBO(50, 50, 50, 1), // Box 1 color
-                          borderRadius:
-                              BorderRadius.circular(20), // Rounded corners
+                          color: Color.fromRGBO(50, 50, 50, 1),
+                          borderRadius: BorderRadius.circular(20),
                         ),
                         child: Stack(
                           children: [
                             Padding(
-                              padding: const EdgeInsets.all(
-                                  35.0), // Padding around the text
+                              padding: const EdgeInsets.all(35.0),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    'Notes',
+                                    subjectName,
                                     style: TextStyle(
                                       color: Colors.white,
                                       fontSize: 18.0,
-                                      fontWeight:
-                                          FontWeight.bold, // Make text bold
+                                      fontWeight: FontWeight.bold,
                                     ),
                                   ),
                                   SizedBox(height: 7),
@@ -134,131 +158,35 @@ class _Home1State extends State<Home1> {
                               ),
                             ),
                             Positioned(
-                              bottom: 15, // Adjust button position from bottom
-                              right: 40, // Adjust button position from right
-                              child: ElevatedButton(
-                                onPressed: () {
-                                  // Add functionality for the button in Box 1
-                                },
-                                style: ButtonStyle(
-                                  backgroundColor:
-                                      MaterialStateProperty.all<Color>(
-                                    Colors.black, // Set button background color
-                                  ),
-                                ),
-                                child: SizedBox(
-                                  width: 190, // Set button width
-                                  child: Text(
-                                    'View',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      color:
-                                          Colors.white, // Set button text color
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Positioned(
-                              top: 29,
-                              right: 37,
-                              child: Row(
-                                children: [
-                                  Icon(
-                                    Icons.notes_rounded,
-                                    color: Colors.white,
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    SizedBox(height: 40), // Adding space between boxes
-                    GestureDetector(
-                      onTap: () {
-                        // Add functionality for the button in Box 2
-                      },
-                      child: Container(
-                        width: 350,
-                        height: 150,
-                        decoration: BoxDecoration(
-                          color: Color.fromRGBO(50, 50, 50, 1), // Box 2 color
-                          borderRadius:
-                              BorderRadius.circular(20), // Rounded corners
-                        ),
-                        child: Stack(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.all(
-                                  35.0), // Padding around the text
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    'Previous Year Papers',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 17.0,
-                                      fontWeight:
-                                          FontWeight.bold, // Make text bold
-                                    ),
-                                  ),
-                                  SizedBox(height: 5),
-                                  Text(
-                                    '',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 10.0,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Positioned(
-                              bottom: 15, // Adjust button position from bottom
-                              right: 40, // Adjust button position from right
-                              child: ElevatedButton(
-                                onPressed: () {
-                                  // Add functionality for the button in Box 2
-                                },
-                                style: ButtonStyle(
-                                  backgroundColor:
-                                      MaterialStateProperty.all<Color>(
-                                    Colors.black, // Set button background color
-                                  ),
-                                ),
-                                child: SizedBox(
-                                  width: 190, // Set button width
-                                  child: Text(
-                                    'View',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      color:
-                                          Colors.white, // Set button text color
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Positioned(
-                              top: 29,
+                              bottom: 15,
                               right: 40,
-                              child: Row(
-                                children: [
-                                  Icon(
-                                    Icons.book_outlined,
-                                    color: Colors.white,
+                              child: ElevatedButton(
+                                onPressed: () {
+                                  // Add functionality for the button in each box
+                                },
+                                style: ButtonStyle(
+                                  backgroundColor:
+                                      MaterialStateProperty.all<Color>(
+                                    Colors.black,
                                   ),
-                                ],
+                                ),
+                                child: SizedBox(
+                                  width: 190,
+                                  child: Text(
+                                    'View',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ),
                               ),
                             ),
                           ],
                         ),
                       ),
-                    ),
-                  ],
+                    );
+                  },
                 ),
               ),
             ),
