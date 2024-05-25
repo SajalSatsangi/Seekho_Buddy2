@@ -80,7 +80,7 @@ class _ChatPageState extends State<ChatPage> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
                       Text(
-                        "Seekho Buddy",
+                        "Chats",
                         style: TextStyle(
                           fontSize: 28,
                           fontWeight: FontWeight.bold,

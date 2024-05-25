@@ -27,36 +27,63 @@ class _HomeState extends State<Home> {
     switch (_selectedIndex) {
       case 0:
         return Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Container(
-              color: Color.fromRGBO(25, 25, 25, 1), // Top bar color
-              height: 70, // Increased height for the top bar
-              padding: EdgeInsets.only(
-                left: 25.0,
-                top: 25.0,
-                right: 25.0,
-              ), // Adjusted padding
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'Home',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18.0,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            SafeArea(
+              child: Padding(
+                padding: EdgeInsets.only(left: 16, right: 16, top: 10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Text(
+                      "Home",
+                      style: TextStyle(
+                        fontSize: 28,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white, // Text color
+                      ),
                     ),
+                    Container(
+                      padding:
+                          EdgeInsets.only(left: 8, right: 8, top: 2, bottom: 2),
+                      height: 30,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(30),
+                        color: Color(0xFF323232),
+                      ),
+                      child: Row(
+                        children: <Widget>[
+                          Icon(
+                            Icons.notification_add,
+                            color: Colors.white,
+                            size: 20,
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(top: 14, left: 14, right: 14),
+              child: TextField(
+                decoration: InputDecoration(
+                  hintText: "Search...",
+                  hintStyle: TextStyle(color: Colors.white),
+                  prefixIcon: Icon(
+                    Icons.search,
+                    color: Colors.white,
+                    size: 20,
                   ),
-                  IconButton(
-                    icon: Icon(
-                      Icons.notifications,
-                      color: Colors.white,
-                    ),
-                    onPressed: () {
-                      // Add your notification icon onPressed functionality here
-                    },
+                  filled: true,
+                  fillColor: Color(0xFF323232),
+                  contentPadding: EdgeInsets.all(8),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(20),
+                    borderSide: BorderSide(color: Color(0xFF323232)),
                   ),
-                ],
+                ),
               ),
             ),
             Expanded(
@@ -73,15 +100,13 @@ class _HomeState extends State<Home> {
                         width: 350,
                         height: 150,
                         decoration: BoxDecoration(
-                          color: Color.fromRGBO(50, 50, 50, 1), // Box 1 color
-                          borderRadius:
-                              BorderRadius.circular(20), // Rounded corners
+                          color: Color.fromRGBO(50, 50, 50, 1),
+                          borderRadius: BorderRadius.circular(20),
                         ),
                         child: Stack(
                           children: [
                             Padding(
-                              padding: const EdgeInsets.all(
-                                  25.0), // Padding around the text
+                              padding: const EdgeInsets.all(25.0),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -90,8 +115,7 @@ class _HomeState extends State<Home> {
                                     style: TextStyle(
                                       color: Colors.white,
                                       fontSize: 18.0,
-                                      fontWeight:
-                                          FontWeight.bold, // Make text bold
+                                      fontWeight: FontWeight.bold,
                                     ),
                                   ),
                                   SizedBox(height: 7),
@@ -106,8 +130,8 @@ class _HomeState extends State<Home> {
                               ),
                             ),
                             Positioned(
-                              bottom: 15, // Adjust button position from bottom
-                              right: 37, // Adjust button position from right
+                              bottom: 15,
+                              right: 37,
                               child: ElevatedButton(
                                 onPressed: () {
                                   // Add functionality for the button in Box 1
@@ -115,17 +139,16 @@ class _HomeState extends State<Home> {
                                 style: ButtonStyle(
                                   backgroundColor:
                                       MaterialStateProperty.all<Color>(
-                                    Colors.black, // Set button background color
+                                    Colors.black,
                                   ),
                                 ),
                                 child: SizedBox(
-                                  width: 190, // Set button width
+                                  width: 190,
                                   child: Text(
                                     'View',
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
-                                      color:
-                                          Colors.white, // Set button text color
+                                      color: Colors.white,
                                     ),
                                   ),
                                 ),
@@ -147,7 +170,7 @@ class _HomeState extends State<Home> {
                         ),
                       ),
                     ),
-                    SizedBox(height: 40), // Adding space between boxes
+                    SizedBox(height: 40),
                     GestureDetector(
                       onTap: () {
                         // Add functionality for the button in Box 2
@@ -156,15 +179,13 @@ class _HomeState extends State<Home> {
                         width: 350,
                         height: 150,
                         decoration: BoxDecoration(
-                          color: Color.fromRGBO(50, 50, 50, 1), // Box 2 color
-                          borderRadius:
-                              BorderRadius.circular(20), // Rounded corners
+                          color: Color.fromRGBO(50, 50, 50, 1),
+                          borderRadius: BorderRadius.circular(20),
                         ),
                         child: Stack(
                           children: [
                             Padding(
-                              padding: const EdgeInsets.all(
-                                  25.0), // Padding around the text
+                              padding: const EdgeInsets.all(25.0),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -173,8 +194,7 @@ class _HomeState extends State<Home> {
                                     style: TextStyle(
                                       color: Colors.white,
                                       fontSize: 17.0,
-                                      fontWeight:
-                                          FontWeight.bold, // Make text bold
+                                      fontWeight: FontWeight.bold,
                                     ),
                                   ),
                                   SizedBox(height: 5),
@@ -189,8 +209,8 @@ class _HomeState extends State<Home> {
                               ),
                             ),
                             Positioned(
-                              bottom: 15, // Adjust button position from bottom
-                              right: 37, // Adjust button position from right
+                              bottom: 15,
+                              right: 37,
                               child: ElevatedButton(
                                 onPressed: () {
                                   // Add functionality for the button in Box 2
@@ -198,17 +218,16 @@ class _HomeState extends State<Home> {
                                 style: ButtonStyle(
                                   backgroundColor:
                                       MaterialStateProperty.all<Color>(
-                                    Colors.black, // Set button background color
+                                    Colors.black,
                                   ),
                                 ),
                                 child: SizedBox(
-                                  width: 190, // Set button width
+                                  width: 190,
                                   child: Text(
                                     'View',
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
-                                      color:
-                                          Colors.white, // Set button text color
+                                      color: Colors.white,
                                     ),
                                   ),
                                 ),
