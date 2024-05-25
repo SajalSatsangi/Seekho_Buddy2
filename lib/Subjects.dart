@@ -13,10 +13,10 @@ void main() {
 
 class SubjectsPage extends StatefulWidget {
   @override
-  _HomeState createState() => _HomeState();
+  _SubjectsPageState createState() => _SubjectsPageState();
 }
 
-class _HomeState extends State<SubjectsPage> {
+class _SubjectsPageState extends State<SubjectsPage> {
   int _selectedIndex = 0;
   List<String> subjects = [];
   DocumentSnapshot? userData;
@@ -53,7 +53,6 @@ class _HomeState extends State<SubjectsPage> {
       String faculty = userData!['faculty'];
       String subfaculty = userData!['subfaculty'];
       String semester = userData!['semester'];
-     
 
       // Fetch subjects based on user data
       final snapshot = await FirebaseFirestore.instance
@@ -164,7 +163,15 @@ class _HomeState extends State<SubjectsPage> {
                         icon: Icons.notes_rounded,
                         title: subjects[index],
                         onTap: () {
-                          // Add functionality for the button in each Box
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => Home1(
+                                userData: userData,
+                                subject: subjects[index],
+                              ),
+                            ),
+                          );
                         },
                       ),
                     );
@@ -183,10 +190,11 @@ class _HomeState extends State<SubjectsPage> {
     }
   }
 
-  Widget _buildBox(
-      {required IconData icon,
-      required String title,
-      required VoidCallback onTap}) {
+  Widget _buildBox({
+    required IconData icon,
+    required String title,
+    required VoidCallback onTap,
+  }) {
     return GestureDetector(
       onTap: onTap,
       child: Container(
@@ -219,12 +227,7 @@ class _HomeState extends State<SubjectsPage> {
                 ],
               ),
               ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => Home1()),
-                  );
-                },
+                onPressed: onTap,
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all<Color>(
                     Colors.black,
@@ -253,4 +256,3 @@ class _HomeState extends State<SubjectsPage> {
     );
   }
 }
-

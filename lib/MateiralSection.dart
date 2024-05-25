@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'Chat/ChatPage-home.dart';
 import 'Profile.dart';
-import 'home.dart';
-
-void main() {
-  runApp(MaterialApp(
-    home: Home(),
-  ));
-}
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Home1 extends StatefulWidget {
+  final DocumentSnapshot? userData;
+  final String subject;
+
+  Home1({required this.userData, required this.subject});
+
   @override
   _Home1State createState() => _Home1State();
 }
@@ -52,7 +51,7 @@ class _Home1State extends State<Home1> {
                           width: 10.0,
                         ),
                         Text(
-                          "Resources",
+                          widget.subject, // Update this line
                           style: TextStyle(
                             fontSize: 28,
                             fontWeight: FontWeight.bold,
