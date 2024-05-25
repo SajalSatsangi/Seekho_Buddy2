@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'footer.dart';
 import 'Chat/ChatPage-home.dart';
 import 'Profile.dart';
+import 'Courses.dart';
 
 void main() {
   runApp(MyApp());
@@ -13,15 +14,12 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Explorer App',
       theme: ThemeData(
-        brightness: Brightness.dark, // Set the brightness to dark
+        brightness: Brightness.dark,
         primarySwatch: Colors.purple,
-        scaffoldBackgroundColor:
-            Color(0xFF161616), // Set scaffold background color to grey.shade800
+        scaffoldBackgroundColor: Color(0xFF161616),
         textTheme: TextTheme(
-          bodyText1:
-              TextStyle(color: Colors.white), // Set default text color to white
-          bodyText2:
-              TextStyle(color: Colors.white), // Set default text color to white
+          bodyText1: TextStyle(color: Colors.white),
+          bodyText2: TextStyle(color: Colors.white),
         ),
       ),
       home: Home(),
@@ -48,13 +46,12 @@ class _HomeState extends State<Home> {
       case 0:
         return Scaffold(
           appBar: AppBar(
-            automaticallyImplyLeading: false, // Remove the back button
+            automaticallyImplyLeading: false,
             title: Text(
               'Seekho Buddy',
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 28),
             ),
-            backgroundColor: Color(
-                0xFF161616), // Set AppBar background color to grey.shade800
+            backgroundColor: Color(0xFF161616),
           ),
           body: SingleChildScrollView(
             child: Column(
@@ -71,17 +68,25 @@ class _HomeState extends State<Home> {
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
-                          color: Colors.white, // Set text color to white
+                          color: Colors.white,
                         ),
                       ),
                       Row(
                         children: [
-                          Text(
-                            'Discover Resources',
-                            style: TextStyle(
-                                color: Colors.white), // Set text color to white
+                          TextButton(
+                            onPressed: () {
+                              // Add your onPressed logic here
+                            },
+                            child: Row(
+                              children: [
+                                Text(
+                                  'Discover Resources',
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                                Icon(Icons.insights, color: Colors.white),
+                              ],
+                            ),
                           ),
-                          Icon(Icons.insights, color: Colors.white),
                         ],
                       ),
                     ],
@@ -98,7 +103,7 @@ class _HomeState extends State<Home> {
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
-                          color: Colors.white, // Set text color to white
+                          color: Colors.white,
                         ),
                       ),
                       SizedBox(height: 8),
@@ -114,8 +119,7 @@ class _HomeState extends State<Home> {
                             Row(
                               children: [
                                 Column(
-                                  crossAxisAlignment: CrossAxisAlignment
-                                      .start, // Align text to the left
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
                                       'Career',
@@ -131,21 +135,28 @@ class _HomeState extends State<Home> {
                                         color: Colors.white,
                                       ),
                                     ),
-                                    Text(
-                                      'View',
-                                      style: TextStyle(
-                                        color: Colors.white,
+                                    TextButton(
+                                      // Changed from Text to TextButton
+                                      onPressed: () {
+                                        // Add your onPressed logic here
+                                      },
+                                      style: ButtonStyle(
+                                          backgroundColor: MaterialStateProperty
+                                              .all<Color>(const Color(
+                                                  0xFF161616)) // Change background color to red
+                                          ),
+                                      child: Text(
+                                        'View', // Changed to a TextButton
+                                        style: TextStyle(color: Colors.white),
                                       ),
                                     ),
                                   ],
                                 ),
-                                SizedBox(
-                                    width:
-                                        42), // Add some space between text and image
+                                SizedBox(width: 42),
                                 Image.asset(
-                                  'assets/career.png', // Replace 'your_image.png' with your image asset path
-                                  height: 100, // Adjust height as needed
-                                  width: 100, // Adjust width as needed
+                                  'assets/career.png',
+                                  height: 100,
+                                  width: 100,
                                 ),
                               ],
                             ),
@@ -158,7 +169,7 @@ class _HomeState extends State<Home> {
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
-                          color: Colors.white, // Set text color to white
+                          color: Colors.white,
                         ),
                       ),
                       SizedBox(height: 12),
@@ -194,9 +205,9 @@ class _HomeState extends State<Home> {
           ),
         );
       case 1:
-        return ChatHomePage(); // Replace with your ChatPage implementation
+        return ChatHomePage();
       case 2:
-        return ProfileScreen(); // Replace with your ProfileScreen implementation
+        return ProfileScreen();
       default:
         return Center(child: Text('Unknown page'));
     }
@@ -205,8 +216,7 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(
-          0xFF161616), // Set scaffold background color to Color(0xFF161616)
+      backgroundColor: Color(0xFF161616),
       body: _buildContent(),
       bottomNavigationBar: CustomFooter(
         selectedIndex: _selectedIndex,
@@ -227,29 +237,43 @@ class CategoryTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(8),
-      child: Column(
-        children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(8),
-            child: Image.asset(
-              assetPath,
-              height: 80,
-              width: 120,
-              fit: BoxFit.cover,
-            ),
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => ResourcesPage()),
+        );
+      },
+      child: Card(
+        color: Colors.grey.shade800,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8.0),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(8),
+                child: Image.asset(
+                  assetPath,
+                  height: 70,
+                  width: 120,
+                  fit: BoxFit.cover,
+                ),
+              ),
+              SizedBox(height: 4),
+              Text(
+                label,
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
+              ),
+            ],
           ),
-          SizedBox(height: 4),
-          Text(
-            label,
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-              color: Colors.white, // Set text color to white
-            ),
-          ),
-        ],
+        ),
       ),
     );
   }
