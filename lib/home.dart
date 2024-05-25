@@ -2,12 +2,31 @@ import 'package:flutter/material.dart';
 import 'footer.dart';
 import 'Chat/ChatPage-home.dart';
 import 'Profile.dart';
-import 'MateiralSection.dart';
 
 void main() {
-  runApp(MaterialApp(
-    home: Home(),
-  ));
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Explorer App',
+      theme: ThemeData(
+        brightness: Brightness.dark, // Set the brightness to dark
+        primarySwatch: Colors.purple,
+        scaffoldBackgroundColor:
+            Color(0xFF161616), // Set scaffold background color to grey.shade800
+        textTheme: TextTheme(
+          bodyText1:
+              TextStyle(color: Colors.white), // Set default text color to white
+          bodyText2:
+              TextStyle(color: Colors.white), // Set default text color to white
+        ),
+      ),
+      home: Home(),
+    );
+  }
 }
 
 class Home extends StatefulWidget {
@@ -27,92 +46,152 @@ class _HomeState extends State<Home> {
   Widget _buildContent() {
     switch (_selectedIndex) {
       case 0:
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            SafeArea(
-              child: Padding(
-                padding: EdgeInsets.only(left: 16, right: 16, top: 10),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Text(
-                      "Home",
-                      style: TextStyle(
-                        fontSize: 28,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white, // Text color
+        return Scaffold(
+          appBar: AppBar(
+            automaticallyImplyLeading: false, // Remove the back button
+            title: Text(
+              'Seekho Buddy',
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 28),
+            ),
+            backgroundColor: Color(
+                0xFF161616), // Set AppBar background color to grey.shade800
+          ),
+          body: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  color: Colors.grey.shade800,
+                  padding: EdgeInsets.all(16),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Explore now!',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white, // Set text color to white
+                        ),
                       ),
-                    ),
-                    Container(
-                      padding:
-                          EdgeInsets.only(left: 8, right: 8, top: 2, bottom: 2),
-                      height: 30,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(30),
-                        color: Color(0xFF323232),
+                      Row(
+                        children: [
+                          Text(
+                            'Discover Resources',
+                            style: TextStyle(
+                                color: Colors.white), // Set text color to white
+                          ),
+                          Icon(Icons.insights, color: Colors.white),
+                        ],
                       ),
-                      child: Row(
-                        children: <Widget>[
-                          Icon(
-                            Icons.notification_add,
-                            color: Colors.white,
-                            size: 20,
+                    ],
+                  ),
+                ),
+                SizedBox(height: 16),
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 16),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Event highlights',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white, // Set text color to white
+                        ),
+                      ),
+                      SizedBox(height: 8),
+                      Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8),
+                          color: Colors.grey.shade800,
+                        ),
+                        padding: EdgeInsets.all(16),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              children: [
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment
+                                      .start, // Align text to the left
+                                  children: [
+                                    Text(
+                                      'Career',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 28,
+                                      ),
+                                    ),
+                                    Text(
+                                      'Connect with professionals',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                    Text(
+                                      'View',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
+                                    width:
+                                        42), // Add some space between text and image
+                                Image.asset(
+                                  'assets/career.png', // Replace 'your_image.png' with your image asset path
+                                  height: 100, // Adjust height as needed
+                                  width: 100, // Adjust width as needed
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(height: 22),
+                      Text(
+                        'Browse categories',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white, // Set text color to white
+                        ),
+                      ),
+                      SizedBox(height: 12),
+                      GridView.count(
+                        shrinkWrap: true,
+                        crossAxisCount: 2,
+                        childAspectRatio: 1.5,
+                        physics: NeverScrollableScrollPhysics(),
+                        children: [
+                          CategoryTile(
+                            label: 'Resource',
+                            assetPath: 'assets/resource.png',
+                          ),
+                          CategoryTile(
+                            label: 'Job',
+                            assetPath: 'assets/job.png',
+                          ),
+                          CategoryTile(
+                            label: 'Professional',
+                            assetPath: 'assets/professional.png',
+                          ),
+                          CategoryTile(
+                            label: 'Networking',
+                            assetPath: 'assets/networking.png',
                           ),
                         ],
                       ),
-                    )
-                  ],
-                ),
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(top: 14, left: 14, right: 14),
-              child: TextField(
-                decoration: InputDecoration(
-                  hintText: "Search...",
-                  hintStyle: TextStyle(color: Colors.white),
-                  prefixIcon: Icon(
-                    Icons.search,
-                    color: Colors.white,
-                    size: 20,
-                  ),
-                  filled: true,
-                  fillColor: Color(0xFF323232),
-                  contentPadding: EdgeInsets.all(8),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(20),
-                    borderSide: BorderSide(color: Color(0xFF323232)),
+                    ],
                   ),
                 ),
-              ),
+              ],
             ),
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.all(25.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    _buildBox(
-                      icon: Icons.notes_rounded,
-                      title: 'Your Courses',
-                      onTap: () {
-                        // Add functionality for the button in Box 1
-                      },
-                    ),
-                    SizedBox(height: 20),
-                    _buildBox(
-                      icon: Icons.book_outlined,
-                      title: 'Other Courses',
-                      onTap: () {
-                        // Add functionality for the button in Box 2
-                      },
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ],
+          ),
         );
       case 1:
         return ChatHomePage(); // Replace with your ChatPage implementation
@@ -123,76 +202,54 @@ class _HomeState extends State<Home> {
     }
   }
 
-  Widget _buildBox(
-      {required IconData icon,
-      required String title,
-      required VoidCallback onTap}) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        width: 350,
-        height: 80,
-        decoration: BoxDecoration(
-          color: Color.fromRGBO(50, 50, 50, 1),
-          borderRadius: BorderRadius.circular(20),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Row(
-                children: [
-                  Icon(
-                    icon,
-                    color: Colors.white,
-                  ),
-                  SizedBox(width: 8),
-                  Text(
-                    title,
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 17.0,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ],
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => Home1()),
-                  );
-                },
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all<Color>(
-                    Colors.black,
-                  ),
-                ),
-                child: Text(
-                  'View',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Color(
+          0xFF161616), // Set scaffold background color to Color(0xFF161616)
       body: _buildContent(),
       bottomNavigationBar: CustomFooter(
         selectedIndex: _selectedIndex,
         onItemTapped: _onItemTapped,
+      ),
+    );
+  }
+}
+
+class CategoryTile extends StatelessWidget {
+  final String label;
+  final String assetPath;
+
+  CategoryTile({
+    required this.label,
+    required this.assetPath,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.all(8),
+      child: Column(
+        children: [
+          ClipRRect(
+            borderRadius: BorderRadius.circular(8),
+            child: Image.asset(
+              assetPath,
+              height: 80,
+              width: 120,
+              fit: BoxFit.cover,
+            ),
+          ),
+          SizedBox(height: 4),
+          Text(
+            label,
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+              color: Colors.white, // Set text color to white
+            ),
+          ),
+        ],
       ),
     );
   }
