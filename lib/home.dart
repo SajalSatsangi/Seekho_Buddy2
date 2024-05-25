@@ -31,7 +31,7 @@ class _HomeState extends State<Home> {
           children: <Widget>[
             SafeArea(
               child: Padding(
-                padding: EdgeInsets.only(left: 16, right: 16, top: 10),
+                padding: EdgeInsets.only(left: 17, right: 16, top: 11),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
@@ -267,7 +267,7 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Color(0xFF161616), // Set background color to #161616
       body: _buildContent(),
       bottomNavigationBar: CustomFooter(
         selectedIndex: _selectedIndex,
