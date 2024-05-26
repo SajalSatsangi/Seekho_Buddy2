@@ -101,17 +101,20 @@ class _HomeState extends State<ResourcesPage> {
                     _buildBox(
                       icon: Icons.notes_rounded,
                       title: 'Your Courses',
+                      buttonColor: Color.fromRGBO(182, 166, 246, 1),
                       onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => SubjectsPage()),
-                  );
-                },
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => SubjectsPage()),
+                        );
+                      },
                     ),
                     SizedBox(height: 20),
                     _buildBox(
                       icon: Icons.book_outlined,
                       title: 'Other Courses',
+                      buttonColor: Color.fromRGBO(154, 218, 204, 1),
                       onTap: () {
                         // Add functionality for Other Courses
                       },
@@ -131,7 +134,12 @@ class _HomeState extends State<ResourcesPage> {
     }
   }
 
-  Widget _buildBox({required IconData icon, required String title, required VoidCallback onTap}) {
+  Widget _buildBox({
+    required IconData icon,
+    required String title,
+    required Color buttonColor,
+    required VoidCallback onTap,
+  }) {
     return GestureDetector(
       onTap: onTap,
       child: Container(
@@ -171,12 +179,13 @@ class _HomeState extends State<ResourcesPage> {
                   );
                 },
                 style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all<Color>(Colors.black),
+                  backgroundColor:
+                      MaterialStateProperty.all<Color>(buttonColor),
                 ),
                 child: Text(
                   'View',
                   textAlign: TextAlign.center,
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(color: Colors.black),
                 ),
               ),
             ],
@@ -194,4 +203,3 @@ class _HomeState extends State<ResourcesPage> {
     );
   }
 }
-
