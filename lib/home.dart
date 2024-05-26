@@ -45,6 +45,7 @@ class _HomeState extends State<Home> {
     switch (_selectedIndex) {
       case 0:
         return Scaffold(
+          backgroundColor: Colors.black,
           appBar: AppBar(
             automaticallyImplyLeading: false,
             title: Row(
