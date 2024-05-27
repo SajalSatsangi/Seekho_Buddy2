@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart'; // Add this import for SvgPicture
 import 'footer.dart';
 import 'Chat/ChatPage-home.dart';
@@ -51,7 +53,7 @@ class _HomeState extends State<Home> {
             title: Row(
               children: [
                 Text(
-                  'Seekho Buddy',
+                  'Explore & Connect',
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 28),
                 ),
                 Spacer(),
@@ -85,24 +87,12 @@ class _HomeState extends State<Home> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     SizedBox(height: 8),
-                    Text(
-                      'Explore now!',
-                      style:
-                          TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-                    ),
-                    SizedBox(height: 16),
-                    Text(
-                      'Event highlights',
-                      style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                    ),
-                    SizedBox(height: 8),
                     Center(
                       child: Container(
                         width: 350,
-                        height: 139,
+                        height: 129,
                         decoration: BoxDecoration(
-                          color: Color.fromRGBO(110, 68, 254, 1),
+                          color: Color(0xFF323232),
                           borderRadius: BorderRadius.circular(
                               20), // Adjust the value to change the roundness
                         ),
@@ -115,7 +105,7 @@ class _HomeState extends State<Home> {
                                   padding: const EdgeInsets.only(
                                       left: 15.0, top: 20),
                                   child: Text(
-                                    'Career',
+                                    'Latest study updates',
                                     style: TextStyle(
                                       color: Colors.white,
                                       fontSize: 19,
@@ -124,15 +114,25 @@ class _HomeState extends State<Home> {
                                   ),
                                 ),
                                 SizedBox(height: 5),
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 15.0),
-                                  child: Text(
-                                    'Connect with professionals',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 13,
+                                Row(
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                          left: 15.0, right: 10.0),
+                                      child: CircleAvatar(
+                                        backgroundImage:
+                                            AssetImage('assets/Image.png'),
+                                        radius: 10,
+                                      ),
                                     ),
-                                  ),
+                                    Text(
+                                      'join study groups for success',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 13,
+                                      ),
+                                    ),
+                                  ],
                                 ),
                                 SizedBox(height: 10),
                                 Align(
@@ -142,29 +142,6 @@ class _HomeState extends State<Home> {
                                     child: SizedBox(
                                       width: 120, // Adjust button width here
                                       height: 40, // Adjust button height here
-                                      child: ElevatedButton(
-                                        onPressed: () {
-                                          Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    ResourcesPage()),
-                                          );
-                                        },
-                                        style: ButtonStyle(
-                                          backgroundColor:
-                                              MaterialStateProperty.all<Color>(
-                                                  Color.fromARGB(
-                                                      255, 255, 255, 255)),
-                                        ),
-                                        child: Text(
-                                          'View',
-                                          style: TextStyle(
-                                            color: const Color.fromARGB(
-                                                255, 0, 0, 0), // Text color
-                                          ),
-                                        ),
-                                      ),
                                     ),
                                   ),
                                 ),
@@ -175,8 +152,8 @@ class _HomeState extends State<Home> {
                               right: 12,
                               child: SvgPicture.asset(
                                 'assets/undraw_online_test_re_kyfx.svg',
-                                height: 90,
-                                width: 90,
+                                height: 50,
+                                width: 50,
                               ),
                             ),
                           ],
@@ -185,7 +162,95 @@ class _HomeState extends State<Home> {
                     ),
                     SizedBox(height: 20),
                     Text(
-                      'Browse categories',
+                      'Study Tools',
+                      style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white),
+                    ),
+                    SizedBox(height: 20),
+                    Center(
+                      child: Container(
+                        width: 350,
+                        height: 149,
+                        decoration: BoxDecoration(
+                          // Remove the background color
+                          // color: Color(0xFF323232),
+                          borderRadius: BorderRadius.circular(
+                              20), // Adjust the value to change the roundness
+                          border: Border.all(
+                            color: const Color.fromARGB(
+                                255, 107, 107, 107), // Set the border color
+                            width: 2.0, // Set the border width
+                          ),
+                        ),
+                        child: Stack(
+                          children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                      left: 15.0, top: 20),
+                                  child: Text(
+                                    'Latest study updates',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 19,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(height: 5),
+                                Row(
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                          left: 15.0, right: 10.0),
+                                      child: CircleAvatar(
+                                        backgroundImage:
+                                            AssetImage('assets/Image.png'),
+                                        radius: 10,
+                                      ),
+                                    ),
+                                    Text(
+                                      'join study groups for success',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 13,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(height: 10),
+                                Align(
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(
+                                        bottom: 7.0, right: 130),
+                                    child: SizedBox(
+                                      width: 120, // Adjust button width here
+                                      height: 40, // Adjust button height here
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Positioned(
+                              top: 27,
+                              right: 12,
+                              child: SvgPicture.asset(
+                                'assets/undraw_online_test_re_kyfx.svg',
+                                height: 50,
+                                width: 50,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 20),
+                    Text(
+                      'Study categories',
                       style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
@@ -211,8 +276,15 @@ class _HomeState extends State<Home> {
                               width: 160,
                               height: 140,
                               decoration: BoxDecoration(
-                                color: Color.fromARGB(255, 41, 41, 41),
-                                borderRadius: BorderRadius.circular(15),
+                                // Remove the background color
+                                // color: Color(0xFF323232),
+                                borderRadius: BorderRadius.circular(
+                                    20), // Adjust the value to change the roundness
+                                border: Border.all(
+                                  color: const Color.fromARGB(255, 107, 107,
+                                      107), // Set the border color
+                                  width: 2.0, // Set the border width
+                                ),
                               ),
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
@@ -254,8 +326,15 @@ class _HomeState extends State<Home> {
                               width: 160,
                               height: 140,
                               decoration: BoxDecoration(
-                                color: Color.fromARGB(255, 41, 41, 41),
-                                borderRadius: BorderRadius.circular(15),
+                                // Remove the background color
+                                // color: Color(0xFF323232),
+                                borderRadius: BorderRadius.circular(
+                                    20), // Adjust the value to change the roundness
+                                border: Border.all(
+                                  color: const Color.fromARGB(255, 107, 107,
+                                      107), // Set the border color
+                                  width: 2.0, // Set the border width
+                                ),
                               ),
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
@@ -304,8 +383,15 @@ class _HomeState extends State<Home> {
                               width: 160,
                               height: 140,
                               decoration: BoxDecoration(
-                                color: Color.fromARGB(255, 41, 41, 41),
-                                borderRadius: BorderRadius.circular(15),
+                                // Remove the background color
+                                // color: Color(0xFF323232),
+                                borderRadius: BorderRadius.circular(
+                                    20), // Adjust the value to change the roundness
+                                border: Border.all(
+                                  color: const Color.fromARGB(255, 107, 107,
+                                      107), // Set the border color
+                                  width: 2.0, // Set the border width
+                                ),
                               ),
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
@@ -347,8 +433,15 @@ class _HomeState extends State<Home> {
                               width: 160,
                               height: 140,
                               decoration: BoxDecoration(
-                                color: Color.fromARGB(255, 41, 41, 41),
-                                borderRadius: BorderRadius.circular(15),
+                                // Remove the background color
+                                // color: Color(0xFF323232),
+                                borderRadius: BorderRadius.circular(
+                                    20), // Adjust the value to change the roundness
+                                border: Border.all(
+                                  color: const Color.fromARGB(255, 107, 107,
+                                      107), // Set the border color
+                                  width: 2.0, // Set the border width
+                                ),
                               ),
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
