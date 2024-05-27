@@ -54,19 +54,6 @@ class _HomeState extends State<ResourcesPage> {
                         ),
                       ],
                     ),
-                    Container(
-                      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 2),
-                      height: 30,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(30),
-                        color: Color(0xFF323232),
-                      ),
-                      child: Icon(
-                        Icons.notification_add,
-                        color: Colors.white,
-                        size: 20,
-                      ),
-                    ),
                   ],
                 ),
               ),
@@ -101,7 +88,7 @@ class _HomeState extends State<ResourcesPage> {
                     _buildBox(
                       icon: Icons.notes_rounded,
                       title: 'Your Courses',
-                      buttonColor: Color.fromRGBO(182, 166, 246, 1),
+                      buttonColor: Colors.white,
                       onTap: () {
                         Navigator.push(
                           context,
@@ -114,7 +101,7 @@ class _HomeState extends State<ResourcesPage> {
                     _buildBox(
                       icon: Icons.book_outlined,
                       title: 'Other Courses',
-                      buttonColor: Color.fromRGBO(154, 218, 204, 1),
+                      buttonColor: Colors.white,
                       onTap: () {
                         // Add functionality for Other Courses
                       },

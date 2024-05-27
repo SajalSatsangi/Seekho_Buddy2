@@ -70,7 +70,7 @@ class _Home1State extends State<Home1> {
                     Row(
                       children: [
                         IconButton(
-                          icon: Icon(Icons.arrow_back, color: Colors.white),
+                          icon: Icon(Icons.arrow_back_ios, color: Colors.white),
                           onPressed: () {
                             Navigator.of(context).pop(); // Navigate back
                           },
@@ -124,66 +124,75 @@ class _Home1State extends State<Home1> {
                       onTap: () {
                         // Add functionality for the button in each box
                       },
-                      child: Container(
-                        width: 350,
-                        height: 150,
-                        decoration: BoxDecoration(
-                          color: Color.fromRGBO(50, 50, 50, 1),
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: Stack(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.all(35.0),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    subjectName,
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 18.0,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                  SizedBox(height: 7),
-                                  Text(
-                                    '',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 12.0,
-                                    ),
-                                  ),
-                                ],
-                              ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Container(
+                            width: 350,
+                            height: 150,
+                            decoration: BoxDecoration(
+                              color: Color.fromRGBO(50, 50, 50, 1),
+                              borderRadius: BorderRadius.circular(20),
                             ),
-                            Positioned(
-                              bottom: 15,
-                              right: 40,
-                              child: ElevatedButton(
-                                onPressed: () {
-                                  // Add functionality for the button in each box
-                                },
-                                style: ButtonStyle(
-                                  backgroundColor:
-                                      MaterialStateProperty.all<Color>(
-                                    Colors.black,
+                            child: Stack(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(35.0),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        subjectName,
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 18.0,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      SizedBox(height: 7),
+                                      Text(
+                                        '',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 12.0,
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ),
-                                child: SizedBox(
-                                  width: 190,
-                                  child: Text(
-                                    'View',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      color: Colors.white,
+                                Positioned(
+                                  bottom: 15,
+                                  right: 40,
+                                  child: ElevatedButton(
+                                    onPressed: () {
+                                      // Add functionality for the button in each box
+                                    },
+                                    style: ButtonStyle(
+                                      backgroundColor:
+                                          MaterialStateProperty.all<Color>(
+                                        Colors.white,
+                                      ),
+                                    ),
+                                    child: SizedBox(
+                                      width: 190,
+                                      child: Text(
+                                        'View',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                        ),
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),
+                              ],
                             ),
-                          ],
-                        ),
+                          ),
+                          SizedBox(
+                            height: 20.0,
+                          )
+                        ],
                       ),
                     );
                   },
