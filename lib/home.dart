@@ -20,8 +20,8 @@ class MyApp extends StatelessWidget {
         brightness: Brightness.dark,
         scaffoldBackgroundColor: Color.fromARGB(255, 0, 0, 0),
         textTheme: TextTheme(
-          bodyText1: TextStyle(color: Colors.white),
-          bodyText2: TextStyle(color: Colors.white),
+          bodyLarge: TextStyle(color: Colors.white),
+          bodyMedium: TextStyle(color: Colors.white),
         ),
       ),
       home: Home(),
@@ -54,7 +54,10 @@ class _HomeState extends State<Home> {
               children: [
                 Text(
                   'Explore & Connect',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 28),
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 28,
+                      color: Colors.white),
                 ),
                 Spacer(),
                 Container(
