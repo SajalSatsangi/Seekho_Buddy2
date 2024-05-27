@@ -88,7 +88,7 @@ class _HomeState extends State<ResourcesPage> {
                     _buildBox(
                       icon: Icons.notes_rounded,
                       title: 'Your Courses',
-                      buttonColor: Color.fromRGBO(182, 166, 246, 1),
+                      buttonColor: Colors.white,
                       onTap: () {
                         Navigator.push(
                           context,
@@ -101,7 +101,7 @@ class _HomeState extends State<ResourcesPage> {
                     _buildBox(
                       icon: Icons.book_outlined,
                       title: 'Other Courses',
-                      buttonColor: Color.fromRGBO(154, 218, 204, 1),
+                      buttonColor: Colors.white,
                       onTap: () {
                         // Add functionality for Other Courses
                       },

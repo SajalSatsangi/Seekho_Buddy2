@@ -213,14 +213,14 @@ class _SubjectsPageState extends State<SubjectsPage> {
                 onPressed: onTap,
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all<Color>(
-                    Colors.black,
+                    Colors.white,
                   ),
                 ),
                 child: Text(
                   'View',
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    color: Colors.white,
+                    color: Colors.black,
                   ),
                 ),
               ),

@@ -70,7 +70,7 @@ class _Home1State extends State<Home1> {
                     Row(
                       children: [
                         IconButton(
-                          icon: Icon(Icons.arrow_back, color: Colors.white),
+                          icon: Icon(Icons.arrow_back_ios, color: Colors.white),
                           onPressed: () {
                             Navigator.of(context).pop(); // Navigate back
                           },
@@ -171,7 +171,7 @@ class _Home1State extends State<Home1> {
                                     style: ButtonStyle(
                                       backgroundColor:
                                           MaterialStateProperty.all<Color>(
-                                        Colors.black,
+                                        Colors.white,
                                       ),
                                     ),
                                     child: SizedBox(
@@ -180,7 +180,7 @@ class _Home1State extends State<Home1> {
                                         'View',
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
-                                          color: Colors.white,
+                                          color: Colors.black,
                                         ),
                                       ),
                                     ),
