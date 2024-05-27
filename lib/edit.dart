@@ -38,6 +38,13 @@ class _EditFieldState extends State<EditField> {
         ),
         backgroundColor:
             Colors.black, // Set the background color of the AppBar (optional)
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back_ios,
+              color: Colors.white), // Change to back_arrow_ios
+          onPressed: () {
+            Navigator.pop(context); // Navigate back to the previous page
+          },
+        ),
       ),
       body: Padding(
         padding: EdgeInsets.all(16.0),
@@ -91,8 +98,7 @@ class _EditFieldState extends State<EditField> {
             SizedBox(height: 20),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                backgroundColor:
-                    Color(0xFF99D9CC), // Set button color to #99D9CC
+                backgroundColor: Colors.white, // Set button color to #99D9CC
                 shape: RoundedRectangleBorder(
                   borderRadius:
                       BorderRadius.circular(20.0), // Set border radius

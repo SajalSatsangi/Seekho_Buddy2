@@ -56,8 +56,14 @@ class _EditProfileState extends State<EditProfile> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Edit Profile', style: TextStyle(color: Colors.white)),
-        iconTheme: IconThemeData(color: Colors.white),
         backgroundColor: Colors.black,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back_ios,
+              color: Colors.white), // Change to back_arrow_ios
+          onPressed: () {
+            Navigator.pop(context); // Navigate back to the previous page
+          },
+        ),
       ),
       body: userData == null
           ? Center(child: CircularProgressIndicator())
