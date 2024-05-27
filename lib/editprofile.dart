@@ -101,23 +101,20 @@ class _EditProfileState extends State<EditProfile> {
                     ),
                   ),
                 ),
-                GestureDetector(
-                  onTap: () => navigateToEditField('email', userData!['email']),
-                  child: Container(
-                    margin: EdgeInsets.symmetric(vertical: 5),
-                    padding: EdgeInsets.all(12),
-                    decoration: BoxDecoration(
-                      color: Color(0xFF292929),
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        userData!['email'],
-                        style: TextStyle(
-                          fontSize: 16,
-                          color: Colors.grey,
-                        ),
+                Container(
+                  margin: EdgeInsets.symmetric(vertical: 5),
+                  padding: EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: Color(0xFF292929),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      userData!['email'],
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.red,
                       ),
                     ),
                   ),
@@ -154,86 +151,74 @@ class _EditProfileState extends State<EditProfile> {
                     ),
                   ),
                 ),
-                GestureDetector(
-                  onTap: () =>
-                      navigateToEditField('faculty', userData!['faculty']),
-                  child: Container(
-                    margin: EdgeInsets.symmetric(vertical: 5),
-                    padding: EdgeInsets.all(12),
-                    decoration: BoxDecoration(
-                      color: Color(0xFF292929),
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        'Faculty: ${userData!['faculty']}',
-                        style: TextStyle(
-                          color: Colors.white,
-                        ),
+                Container(
+                  margin: EdgeInsets.symmetric(vertical: 5),
+                  padding: EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: Color(0xFF292929),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      'Faculty: ${userData!['faculty']}',
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.red,
                       ),
                     ),
                   ),
                 ),
-                GestureDetector(
-                  onTap: () => navigateToEditField(
-                      'subfaculty', userData!['subfaculty']),
-                  child: Container(
-                    margin: EdgeInsets.symmetric(vertical: 5),
-                    padding: EdgeInsets.all(12),
-                    decoration: BoxDecoration(
-                      color: Color(0xFF292929),
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        'Branch: ${userData!['subfaculty']}',
-                        style: TextStyle(
-                          color: Colors.white,
-                        ),
+                Container(
+                  margin: EdgeInsets.symmetric(vertical: 5),
+                  padding: EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: Color(0xFF292929),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      'Branch: ${userData!['subfaculty']}',
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.red,
                       ),
                     ),
                   ),
                 ),
-                GestureDetector(
-                  onTap: () =>
-                      navigateToEditField('subbranch', userData!['subbranch']),
-                  child: Container(
-                    margin: EdgeInsets.symmetric(vertical: 5),
-                    padding: EdgeInsets.all(12),
-                    decoration: BoxDecoration(
-                      color: Color(0xFF292929),
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        'Sub Branch: ${userData!['subbranch']}',
-                        style: TextStyle(
-                          color: Colors.white,
-                        ),
+                Container(
+                  margin: EdgeInsets.symmetric(vertical: 5),
+                  padding: EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: Color(0xFF292929),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      'Sub-Branch: ${userData!['subbranch']}',
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.red,
                       ),
                     ),
                   ),
                 ),
-                GestureDetector(
-                  onTap: () =>
-                      navigateToEditField('semester', userData!['semester']),
-                  child: Container(
-                    margin: EdgeInsets.symmetric(vertical: 5),
-                    padding: EdgeInsets.all(12),
-                    decoration: BoxDecoration(
-                      color: Color(0xFF292929),
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        'Semester: ${userData!['semester']}',
-                        style: TextStyle(
-                          color: Colors.white,
-                        ),
+                Container(
+                  margin: EdgeInsets.symmetric(vertical: 5),
+                  padding: EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: Color(0xFF292929),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      'Semester: ${userData!['semester']}',
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.red,
                       ),
                     ),
                   ),
