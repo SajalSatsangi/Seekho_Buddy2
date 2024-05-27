@@ -47,7 +47,6 @@ class _ProfilePageState extends State<ProfilePage> {
 
   Future<void> fetchUserData() async {
     if (user != null) {
-      // Query the 'users' collection to find the document with the matching 'uid' field
       var querySnapshot = await FirebaseFirestore.instance
           .collection('users')
           .where('uid', isEqualTo: user!.uid)
@@ -55,7 +54,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
       if (querySnapshot.docs.isNotEmpty) {
         setState(() {
-          userData = querySnapshot.docs.first; // Get the first matching document
+          userData = querySnapshot.docs.first;
         });
       }
     }
@@ -86,7 +85,8 @@ class _ProfilePageState extends State<ProfilePage> {
                   );
                 },
                 child: Container(
-                  padding: EdgeInsets.only(left: 8, right: 8, top: 2, bottom: 2),
+                  padding:
+                      EdgeInsets.only(left: 8, right: 8, top: 2, bottom: 2),
                   height: 30,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(30),
@@ -102,55 +102,93 @@ class _ProfilePageState extends State<ProfilePage> {
                     ],
                   ),
                 ),
-              )
+              ),
             ],
           ),
         ),
       ),
       body: userData == null
           ? Center(child: CircularProgressIndicator())
-          : Center(
+          : SingleChildScrollView(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  CircleAvatar(
-                    radius: 100,
-                    backgroundImage: NetworkImage(userData!['profile_picture']),
+                  SizedBox(
+                    height: 30.0,
                   ),
-                  SizedBox(height: 16),
-                  Text(
-                    userData!['name'],
-                    style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
+                  Center(
+                    child: Column(
+                      children: [
+                        CircleAvatar(
+                          radius: 100,
+                          backgroundImage:
+                              NetworkImage(userData!['profile_picture']),
+                        ),
+                        SizedBox(height: 16),
+                        Text(
+                          userData!['name'],
+                          style: TextStyle(
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        SizedBox(height: 8),
+                        Text(
+                          userData!['email'],
+                          style: TextStyle(
+                            fontSize: 16,
+                            color: Colors.grey,
+                          ),
+                        ),
+                        SizedBox(height: 32),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Academic Information',
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            SizedBox(height: 8),
+                            Text('University: Dayalbagh Educational Institute'),
+                            Text('Roll Number: ${userData!['rollno']}'),
+                            Text('Faculty: ${userData!['faculty']}'),
+                            Text(
+                                'Branch: ${userData!['subfaculty']}, ${userData!['subbranch']}'),
+                            Text('Semester: ${userData!['semester']}'),
+                          ],
+                        ),
+                      ],
                     ),
                   ),
-                  SizedBox(height: 8),
-                  Text(
-                    userData!['email'],
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: Colors.grey,
-                    ),
-                  ),
-                  SizedBox(height: 32),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Academic Information',
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
+                  SizedBox(height: 20),
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 46.0),
+                      child: SizedBox(
+                        width: 120, // Adjust button width here
+                        height: 40, // Adjust button height here
+                        child: ElevatedButton(
+                          onPressed: () {
+                            // Add your onPressed code here
+                          },
+                          style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all<Color>(
+                              const Color.fromARGB(255, 107, 107, 107),
+                            ),
+                          ),
+                          child: Text(
+                            'LogOut',
+                            style: TextStyle(
+                              color: Colors.white, // Text color
+                            ),
+                          ),
                         ),
                       ),
-                      SizedBox(height: 8),
-                      Text('University: Dayalbagh Educational Institute'),
-                      Text('Roll Number: ${userData!['rollno']}'),
-                      Text('Faculty: ${userData!['faculty']}'),
-                      Text('Branch: ${userData!['subfaculty']}, ${userData!['subbranch']}'),
-                      Text('Semester: ${userData!['semester']}'),
-                    ],
+                    ),
                   ),
                 ],
               ),
