@@ -54,19 +54,6 @@ class _HomeState extends State<ResourcesPage> {
                         ),
                       ],
                     ),
-                    Container(
-                      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 2),
-                      height: 30,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(30),
-                        color: Color(0xFF323232),
-                      ),
-                      child: Icon(
-                        Icons.notification_add,
-                        color: Colors.white,
-                        size: 20,
-                      ),
-                    ),
                   ],
                 ),
               ),

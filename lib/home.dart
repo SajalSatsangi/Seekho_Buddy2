@@ -90,7 +90,8 @@ class _HomeState extends State<Home> {
                     Center(
                       child: Container(
                         width: 350,
-                        height: 129,
+                        height:
+                            129, // Increase the height to accommodate the bar
                         decoration: BoxDecoration(
                           color: Color(0xFF323232),
                           borderRadius: BorderRadius.circular(
@@ -156,6 +157,25 @@ class _HomeState extends State<Home> {
                                 width: 50,
                               ),
                             ),
+                            Positioned(
+                              bottom: 20,
+                              left: 185,
+                              right: 15,
+                              child: Container(
+                                height:
+                                    10, // Adjust the height of the rectangular bar
+                                decoration: BoxDecoration(
+                                  color:
+                                      Colors.black, // Set the color of the bar
+                                  borderRadius: BorderRadius.only(
+                                    topRight: Radius.circular(
+                                        10), // Adjust the radius value as needed
+                                    bottomRight: Radius.circular(
+                                        10), // Adjust the radius value as needed
+                                  ),
+                                ),
+                              ),
+                            )
                           ],
                         ),
                       ),
@@ -164,7 +184,7 @@ class _HomeState extends State<Home> {
                     Text(
                       'Study Tools',
                       style: TextStyle(
-                          fontSize: 18,
+                          fontSize: 22,
                           fontWeight: FontWeight.bold,
                           color: Colors.white),
                     ),
@@ -206,30 +226,42 @@ class _HomeState extends State<Home> {
                                   children: [
                                     Padding(
                                       padding: const EdgeInsets.only(
-                                          left: 15.0, right: 10.0),
-                                      child: CircleAvatar(
-                                        backgroundImage:
-                                            AssetImage('assets/Image.png'),
-                                        radius: 10,
+                                        left: 15.0,
                                       ),
-                                    ),
-                                    Text(
-                                      'join study groups for success',
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 13,
+                                      child: Text(
+                                        'join study groups for success',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 13,
+                                        ),
                                       ),
                                     ),
                                   ],
                                 ),
                                 SizedBox(height: 10),
-                                Align(
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(
-                                        bottom: 7.0, right: 130),
-                                    child: SizedBox(
-                                      width: 120, // Adjust button width here
-                                      height: 40, // Adjust button height here
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                      left: 15.0, top: 5.0),
+                                  child: SizedBox(
+                                    width: 120, // Adjust button width here
+                                    height: 40, // Adjust button height here
+                                    child: ElevatedButton(
+                                      onPressed: () {
+                                        // Add your onPressed code here
+                                      },
+                                      style: ButtonStyle(
+                                        backgroundColor:
+                                            MaterialStateProperty.all<Color>(
+                                          const Color.fromARGB(
+                                              255, 107, 107, 107),
+                                        ),
+                                      ),
+                                      child: Text(
+                                        'view',
+                                        style: TextStyle(
+                                          color: Colors.white, // Text color
+                                        ),
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -252,7 +284,7 @@ class _HomeState extends State<Home> {
                     Text(
                       'Study categories',
                       style: TextStyle(
-                          fontSize: 18,
+                          fontSize: 22,
                           fontWeight: FontWeight.bold,
                           color: Colors.white),
                     ),
