@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:seekhobuddy/SignPage.dart';
-import 'package:seekhobuddy/home.dart';
-
-void main() {
-  runApp(LoginPage());
-}
+import 'home.dart';
+import 'SignPage.dart';
 
 class LoginPage extends StatelessWidget {
   @override
@@ -53,7 +49,8 @@ class _StudyHubLoginScreenState extends State<StudyHubLoginScreen> {
         final userData = userDoc.data();
 
         // Check if userData is not null and contains email field
-        if (userData != null && (userData as Map<String, dynamic>)['email'] != null) {
+        if (userData != null &&
+            (userData as Map<String, dynamic>)['email'] != null) {
           // Sign in with email and password
           final email = (userData as Map<String, dynamic>)['email'] as String;
           final password = _passwordController.text.trim();
@@ -65,7 +62,7 @@ class _StudyHubLoginScreenState extends State<StudyHubLoginScreen> {
 
           // If login successful, navigate to Home screen
           if (userCredential.user != null) {
-            Navigator.push(
+            Navigator.pushReplacement(
               context,
               MaterialPageRoute(builder: (context) => Home()),
             );
@@ -266,7 +263,6 @@ class _StudyHubLoginScreenState extends State<StudyHubLoginScreen> {
               children: [
                 TextButton(
                   onPressed: () {
-                    // Navigate to create account screen
                     Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) => SignUpPage()),
@@ -282,7 +278,6 @@ class _StudyHubLoginScreenState extends State<StudyHubLoginScreen> {
                 SizedBox(width: 10),
                 TextButton(
                   onPressed: () {
-                    // Navigate to create account screen
                     Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) => SignUpPage()),

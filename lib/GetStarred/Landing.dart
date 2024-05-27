@@ -13,8 +13,8 @@ class LandingPage extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
         textTheme: TextTheme(
-          bodyText1: TextStyle(color: Colors.white), // Set text color to white
-          bodyText2: TextStyle(color: Colors.white), // Set text color to white
+          bodyLarge: TextStyle(color: Colors.white), // Set text color to white
+          bodyMedium: TextStyle(color: Colors.white), // Set text color to white
         ),
       ),
       home: StudyHubScreen(),

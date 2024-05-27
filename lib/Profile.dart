@@ -1,15 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:seekhobuddy/editprofile.dart';
-import 'package:seekhobuddy/LoginPage.dart';
-
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
-  runApp(ProfileScreen());
-}
+import 'editprofile.dart';
+import 'LoginPage.dart';
 
 class ProfileScreen extends StatelessWidget {
   @override
@@ -22,8 +15,8 @@ class ProfileScreen extends StatelessWidget {
           backgroundColor: Colors.black,
         ),
         textTheme: TextTheme(
-          bodyText1: TextStyle(color: Colors.white),
-          bodyText2: TextStyle(color: Colors.white),
+          bodyLarge: TextStyle(color: Colors.white),
+          bodyMedium: TextStyle(color: Colors.white),
         ),
       ),
       home: ProfilePage(),
@@ -63,18 +56,18 @@ class _ProfilePageState extends State<ProfilePage> {
 
   // Function to handle logout
   Future<void> _logout() async {
-  try {
-    await FirebaseAuth.instance.signOut();
-    Navigator.of(context).pushAndRemoveUntil(
-      MaterialPageRoute(builder: (context) => LoginPage()),
-      (Route<dynamic> route) => false,
-    );
-    // Navigate to the login screen after logout and clear the navigation stack
-  } catch (e) {
-    print("Error logging out: $e");
-    // Handle any errors here
+    try {
+      await FirebaseAuth.instance.signOut();
+      Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(builder: (context) => LoginPage()),
+        (Route<dynamic> route) => false,
+      );
+      // Navigate to the login screen after logout and clear the navigation stack
+    } catch (e) {
+      print("Error logging out: $e");
+      // Handle any errors here
+    }
   }
-}
 
   @override
   Widget build(BuildContext context) {
