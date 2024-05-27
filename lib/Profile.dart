@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:seekhobuddy/editprofile.dart';
+import 'package:seekhobuddy/LoginPage.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -59,6 +60,21 @@ class _ProfilePageState extends State<ProfilePage> {
       }
     }
   }
+
+  // Function to handle logout
+  Future<void> _logout() async {
+  try {
+    await FirebaseAuth.instance.signOut();
+    Navigator.of(context).pushAndRemoveUntil(
+      MaterialPageRoute(builder: (context) => LoginPage()),
+      (Route<dynamic> route) => false,
+    );
+    // Navigate to the login screen after logout and clear the navigation stack
+  } catch (e) {
+    print("Error logging out: $e");
+    // Handle any errors here
+  }
+}
 
   @override
   Widget build(BuildContext context) {
@@ -172,9 +188,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         width: 120, // Adjust button width here
                         height: 40, // Adjust button height here
                         child: ElevatedButton(
-                          onPressed: () {
-                            // Add your onPressed code here
-                          },
+                          onPressed: _logout, // Call _logout function
                           style: ButtonStyle(
                             backgroundColor: MaterialStateProperty.all<Color>(
                               const Color.fromARGB(255, 107, 107, 107),
