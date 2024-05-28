@@ -241,7 +241,7 @@ class _StudyHubLoginScreenState extends State<StudyHubLoginScreen> {
                             _selectedSubbranch = null;
                           });
                         },
-                      ),
+                      ),  
                       SizedBox(height: 20),
                       _buildDropdown(
                         value: _selectedSubfaculty,
@@ -399,6 +399,8 @@ class _StudyHubLoginScreenState extends State<StudyHubLoginScreen> {
           'semester': _selectedSemester,
           'subbranch': _selectedSubbranch,
           'rollno': _rollnoController.text,
+          'profile_picture': '',
+          'role': 'student',
         });
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('Signup Successful')),
