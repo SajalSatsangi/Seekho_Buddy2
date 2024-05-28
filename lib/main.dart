@@ -21,14 +21,14 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: AnimatedSplashScreen(
-        splash: "assets/SplashAnimation.gif",
-        splashIconSize: 3000,
+        splash: "assets/spalshScreenGif.gif",
+        splashIconSize: 100,
         nextScreen: AuthWrapper(),
         duration: 3100,
         splashTransition: SplashTransition.fadeTransition,
         backgroundColor: Color.fromARGB(255, 0, 0, 0),
         pageTransitionType: PageTransitionType.fade,
-        animationDuration: Duration(milliseconds: 800),
+        animationDuration: Duration(milliseconds: 50),
       ),
     );
   }
