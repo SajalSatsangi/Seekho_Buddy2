@@ -31,7 +31,7 @@ class _CustomFooterState extends State<CustomFooter> {
       currentIndex: widget.selectedIndex,
       selectedItemColor: Colors.white,
       unselectedItemColor: Colors.grey,
-      backgroundColor: Color.fromARGB(255, 41, 41, 41),
+      backgroundColor: Colors.black,
       onTap: widget.onItemTapped,
       type: BottomNavigationBarType.fixed,
     );
