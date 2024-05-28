@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:seekhobuddy/GetStarred/Landing.dart';
 import 'firebase_options.dart';
 import 'LoginPage.dart';
 import 'home.dart';
@@ -43,7 +44,7 @@ class AuthWrapper extends StatelessWidget {
         if (snapshot.connectionState == ConnectionState.active) {
           User? user = snapshot.data;
           if (user == null) {
-            return LoginPage();
+            return LandingPage();
           } else {
             return Home();
           }
