@@ -313,218 +313,227 @@ class _HomeState extends State<Home> {
                           color: Colors.white),
                     ),
                     SizedBox(height: 8), // Add some spacing
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        // First box
-                        InkWell(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => ResourcesPage()),
-                            );
-                          },
-                          child: Padding(
-                            padding: const EdgeInsets.only(
-                                right: 15.0, left: 15, top: 15),
-                            child: Container(
-                              width: 160,
-                              height: 140,
-                              decoration: BoxDecoration(
-                                // Remove the background color
-                                // color: Color(0xFF323232),
-                                borderRadius: BorderRadius.circular(
-                                    20), // Adjust the value to change the roundness
-                                border: Border.all(
-                                  color: const Color.fromARGB(255, 107, 107,
-                                      107), // Set the border color
-                                  width: 2.0, // Set the border width
-                                ),
-                              ),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  SvgPicture.asset(
-                                    'assets/Resource.svg',
-                                    height: 80,
-                                    width: 80,
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(top: 15),
-                                    child: Text(
-                                      'Resource',
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 15,
+                    Padding(
+                      padding: EdgeInsets.only(right: 15.0),
+                      child: Column(
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              // First box
+                              InkWell(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => ResourcesPage()),
+                                  );
+                                },
+                                child: Padding(
+                                  padding: const EdgeInsets.only(
+                                      right: 15.0, left: 15, top: 15),
+                                  child: Container(
+                                    width: 160,
+                                    height: 140,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(20),
+                                      border: Border.all(
+                                        color: const Color.fromARGB(
+                                            255, 107, 107, 107),
+                                        width: 2.0,
                                       ),
                                     ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                        // Second box
-                        InkWell(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => ResourcesPage()),
-                            );
-                          },
-                          child: Padding(
-                            padding: const EdgeInsets.only(top: 15, left: 5),
-                            child: Container(
-                              width: 160,
-                              height: 140,
-                              decoration: BoxDecoration(
-                                // Remove the background color
-                                // color: Color(0xFF323232),
-                                borderRadius: BorderRadius.circular(
-                                    20), // Adjust the value to change the roundness
-                                border: Border.all(
-                                  color: const Color.fromARGB(255, 107, 107,
-                                      107), // Set the border color
-                                  width: 2.0, // Set the border width
-                                ),
-                              ),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  SvgPicture.asset(
-                                    'assets/Job.svg',
-                                    height: 80,
-                                    width: 80,
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(top: 15),
-                                    child: Text(
-                                      'Job',
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 15,
-                                      ),
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        SvgPicture.asset(
+                                          'assets/Resource.svg',
+                                          height: 80,
+                                          width: 80,
+                                        ),
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(top: 15),
+                                          child: Text(
+                                            'Resource',
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 15,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
                                     ),
                                   ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 8), // Add some more spacing
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        // Third box
-                        InkWell(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => ResourcesPage()),
-                            );
-                          },
-                          child: Padding(
-                            padding: const EdgeInsets.only(
-                                right: 15, left: 15, top: 15),
-                            child: Container(
-                              width: 160,
-                              height: 140,
-                              decoration: BoxDecoration(
-                                // Remove the background color
-                                // color: Color(0xFF323232),
-                                borderRadius: BorderRadius.circular(
-                                    20), // Adjust the value to change the roundness
-                                border: Border.all(
-                                  color: const Color.fromARGB(255, 107, 107,
-                                      107), // Set the border color
-                                  width: 2.0, // Set the border width
                                 ),
                               ),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  SvgPicture.asset(
-                                    'assets/Professional.svg',
-                                    height: 80,
-                                    width: 80,
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(top: 15),
-                                    child: Text(
-                                      'Professional',
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 15,
+                              // Second box
+                              InkWell(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => ResourcesPage()),
+                                  );
+                                },
+                                child: Padding(
+                                  padding:
+                                      const EdgeInsets.only(top: 15, left: 5),
+                                  child: Container(
+                                    width: 160,
+                                    height: 140,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(20),
+                                      border: Border.all(
+                                        color: const Color.fromARGB(
+                                            255, 107, 107, 107),
+                                        width: 2.0,
                                       ),
                                     ),
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        SvgPicture.asset(
+                                          'assets/Job.svg',
+                                          height: 80,
+                                          width: 80,
+                                        ),
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(top: 15),
+                                          child: Text(
+                                            'Notices',
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 15,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
                                   ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                        // Fourth box
-                        InkWell(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => ResourcesPage()),
-                            );
-                          },
-                          child: Padding(
-                            padding: const EdgeInsets.only(top: 15, left: 5),
-                            child: Container(
-                              width: 160,
-                              height: 140,
-                              decoration: BoxDecoration(
-                                // Remove the background color
-                                // color: Color(0xFF323232),
-                                borderRadius: BorderRadius.circular(
-                                    20), // Adjust the value to change the roundness
-                                border: Border.all(
-                                  color: const Color.fromARGB(255, 107, 107,
-                                      107), // Set the border color
-                                  width: 2.0, // Set the border width
                                 ),
                               ),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  SvgPicture.asset(
-                                    'assets/Network.svg',
-                                    height: 70,
-                                    width: 60,
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(top: 20),
-                                    child: Text(
-                                      'Networking',
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 15,
+                            ],
+                          ),
+                          SizedBox(height: 8), // Add some more spacing
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              // Third box
+                              InkWell(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => ResourcesPage()),
+                                  );
+                                },
+                                child: Padding(
+                                  padding: const EdgeInsets.only(
+                                      right: 15, left: 15, top: 15),
+                                  child: Container(
+                                    width: 160,
+                                    height: 140,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(20),
+                                      border: Border.all(
+                                        color: const Color.fromARGB(
+                                            255, 107, 107, 107),
+                                        width: 2.0,
                                       ),
                                     ),
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        SvgPicture.asset(
+                                          'assets/Professional.svg',
+                                          height: 80,
+                                          width: 80,
+                                        ),
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(top: 15),
+                                          child: Text(
+                                            '?????',
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 15,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
                                   ),
-                                ],
+                                ),
                               ),
-                            ),
+                              // Fourth box
+                              InkWell(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => ResourcesPage()),
+                                  );
+                                },
+                                child: Padding(
+                                  padding:
+                                      const EdgeInsets.only(top: 15, left: 5),
+                                  child: Container(
+                                    width: 160,
+                                    height: 140,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(20),
+                                      border: Border.all(
+                                        color: const Color.fromARGB(
+                                            255, 107, 107, 107),
+                                        width: 2.0,
+                                      ),
+                                    ),
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        SvgPicture.asset(
+                                          'assets/Network.svg',
+                                          height: 70,
+                                          width: 60,
+                                        ),
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(top: 20),
+                                          child: Text(
+                                            'Networking',
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 15,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ],
                 ),
