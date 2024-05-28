@@ -5,7 +5,10 @@ class PdfViewer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('PDF Note'),
+        title: Text(
+          'PDF Note',
+          style: TextStyle(color: Colors.white),
+        ),
         backgroundColor: Colors.grey[900],
         leading: IconButton(
           icon: Icon(Icons.arrow_back_ios, color: Colors.white),
@@ -20,12 +23,13 @@ class PdfViewer extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              'PDF Viewer',
-              style: TextStyle(fontSize: 24),
+              'PDF Viewe Here',
+              style: TextStyle(fontSize: 24, color: Colors.white),
             ),
           ],
         ),
       ),
+      backgroundColor: Colors.grey[900], // Setting the background color to grey
     );
   }
 }
