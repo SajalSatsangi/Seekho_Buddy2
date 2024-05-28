@@ -22,14 +22,15 @@ class NotificationsPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: Icon(Icons.arrow_back_ios, color: Colors.white),
           onPressed: () {
-            // Handle the back button action here
-            // For now, it will just print a message
-            print('Back button pressed');
+            Navigator.pop(context);
           },
         ),
-        title: Text('Notifications'),
+        title: Text(
+          'Notifications',
+          style: TextStyle(color: Colors.white),
+        ),
         backgroundColor: Colors.black,
       ),
       body: Padding(
@@ -44,7 +45,7 @@ class NotificationsPage extends StatelessWidget {
             ),
             NotificationCard(
               icon: Icons.person,
-              title: 'Someone started following',
+              title: 'Someone started following you',
             ),
             SectionTitle(title: 'Weekly summary'),
             NotificationCard(
@@ -53,7 +54,7 @@ class NotificationsPage extends StatelessWidget {
             ),
             NotificationCard(
               icon: Icons.share,
-              title: 'Your post was reshared by a',
+              title: 'Your post was reshared by a peer',
             ),
           ],
         ),
