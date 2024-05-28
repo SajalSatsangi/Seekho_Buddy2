@@ -5,7 +5,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:seekhobuddy/GetStarred/Landing.dart';
 import 'firebase_options.dart';
-import 'LoginPage.dart';
 import 'home.dart';
 
 void main() async {

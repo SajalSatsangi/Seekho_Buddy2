@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart'; // Add this import for SvgPicture
+import 'package:seekhobuddy/Notification.dart';
 import 'footer.dart';
 import 'Chat/ChatPage-home.dart';
 import 'Profile.dart';
@@ -78,14 +79,21 @@ class _HomeState extends State<Home> {
                           borderRadius: BorderRadius.circular(30),
                           color: Color(0xFF323232),
                         ),
-                        child: Row(
-                          children: <Widget>[
-                            Icon(
+                        child: Center(
+                          child: InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => NotificationsPage()),
+                              );
+                            },
+                            child: Icon(
                               Icons.notification_add,
                               color: Colors.white,
                               size: 20,
                             ),
-                          ],
+                          ),
                         ),
                       )
                     ],
