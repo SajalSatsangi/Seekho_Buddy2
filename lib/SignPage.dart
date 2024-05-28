@@ -241,7 +241,7 @@ class _StudyHubLoginScreenState extends State<StudyHubLoginScreen> {
                             _selectedSubbranch = null;
                           });
                         },
-                      ),  
+                      ),
                       SizedBox(height: 20),
                       _buildDropdown(
                         value: _selectedSubfaculty,
@@ -377,53 +377,64 @@ class _StudyHubLoginScreenState extends State<StudyHubLoginScreen> {
   }
 
   Future<void> _signUp() async {
-    if (_formKey.currentState!.validate()) {
-      try {
-         UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
-          email: _emailController.text,
-          password: _passwordController.text,
-        );
+  if (_formKey.currentState!.validate()) {
+    try {
+      UserCredential userCredential =
+          await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: _emailController.text,
+        password: _passwordController.text,
+      );
 
-        String uid = userCredential.user!.uid;
+      String uid = userCredential.user!.uid;
 
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(_nameController.text)
+          .set({
+        'uid': uid,
+        'email': _emailController.text,
+        'name': _nameController.text,
+        'faculty': _selectedFaculty,
+        'subfaculty': _selectedSubfaculty,
+        'semester': _selectedSemester,
+        'subbranch': _selectedSubbranch,
+        'rollno': _rollnoController.text,
+        'profile_picture': '',
+        'role': 'student',
+      });
 
-        await FirebaseFirestore.instance
-            .collection('users')
-            .doc(_nameController.text) // Set document ID to the user's name
-            .set({
-          'uid': uid,
-          'email': _emailController.text,
-          'name': _nameController.text,
-          'faculty': _selectedFaculty,
-          'subfaculty': _selectedSubfaculty,
-          'semester': _selectedSemester,
-          'subbranch': _selectedSubbranch,
-          'rollno': _rollnoController.text,
-          'profile_picture': '',
-          'role': 'student',
-        });
+      if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Signup Successful')),
+          SnackBar(
+            content: Text('Signed up succesfully'),
+            duration: Duration(seconds: 2),
+          ),
         );
-        // Navigate to another screen or perform other actions
+      }
+
+      if (mounted) {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (context) => Home()),
         );
-      } on FirebaseAuthException catch (e) {
+      }
+    } on FirebaseAuthException catch (e) {
+      if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('Failed to sign up: ${e.message}')),
         );
       }
     }
   }
+}
 
   Widget _buildTextField({
     required TextEditingController controller,
     required String hintText,
     required IconData icon,
     bool obscureText = false,
-    TextInputType keyboardType = TextInputType.text, // Define keyboardType parameter
+    TextInputType keyboardType =
+        TextInputType.text, // Define keyboardType parameter
     String? Function(String?)? validator,
   }) {
     return Padding(
