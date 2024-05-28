@@ -23,7 +23,7 @@ class PdfViewer extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              'PDF Viewe Here',
+              'PDF View Here',
               style: TextStyle(fontSize: 24, color: Colors.white),
             ),
           ],
