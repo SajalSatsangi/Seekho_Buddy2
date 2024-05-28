@@ -136,7 +136,7 @@ class _SubjectsPageState extends State<SubjectsPage> {
             ),
             Expanded(
               child: Padding(
-                padding: const EdgeInsets.all(25.0),
+                padding: const EdgeInsets.all(15.0),
                 child: ListView.builder(
                   itemCount: subjects.length,
                   itemBuilder: (context, index) {

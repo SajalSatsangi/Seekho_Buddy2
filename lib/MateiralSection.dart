@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'Chat/ChatPage-home.dart';
 import 'Profile.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'Materials.dart'; // Import the Materials page
 
 class Home1 extends StatefulWidget {
   final DocumentSnapshot? userData;
@@ -15,12 +16,12 @@ class Home1 extends StatefulWidget {
 
 class _Home1State extends State<Home1> {
   int _selectedIndex = 0;
-  List<String> subjects = []; // Store fetched subjects here
+  List<String> subjects = [];
 
   @override
   void initState() {
     super.initState();
-    fetchSubjects(); // Call fetchSubjects function when the widget is initialized
+    fetchSubjects();
   }
 
   void fetchSubjects() async {
@@ -35,8 +36,8 @@ class _Home1State extends State<Home1> {
           .collection(subfaculty)
           .doc(semester)
           .collection('Subjects')
-          .doc(widget.subject) // Use the subject parameter here
-          .collection(widget.subject) // Use the subject parameter here
+          .doc(widget.subject)
+          .collection(widget.subject)
           .get();
 
       setState(() {
@@ -46,13 +47,9 @@ class _Home1State extends State<Home1> {
   }
 
   void _onItemTapped(int index) {
-    if (_selectedIndex == 0 && index == 0) {
-      setState(() {});
-    } else {
-      setState(() {
-        _selectedIndex = index;
-      });
-    }
+    setState(() {
+      _selectedIndex = index;
+    });
   }
 
   Widget _buildContent() {
@@ -72,18 +69,18 @@ class _Home1State extends State<Home1> {
                         IconButton(
                           icon: Icon(Icons.arrow_back_ios, color: Colors.white),
                           onPressed: () {
-                            Navigator.of(context).pop(); // Navigate back
+                            Navigator.of(context).pop();
                           },
                         ),
                         SizedBox(
                           width: 10.0,
                         ),
                         Text(
-                          widget.subject, // Update this line
+                          widget.subject,
                           style: TextStyle(
                             fontSize: 28,
                             fontWeight: FontWeight.bold,
-                            color: Colors.white, // Text color
+                            color: Colors.white,
                           ),
                         ),
                       ],
@@ -121,9 +118,7 @@ class _Home1State extends State<Home1> {
                   itemBuilder: (context, index) {
                     String subjectName = subjects[index];
                     return GestureDetector(
-                      onTap: () {
-                        // Add functionality for the button in each box
-                      },
+                      onTap: () {},
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
@@ -166,7 +161,12 @@ class _Home1State extends State<Home1> {
                                   right: 40,
                                   child: ElevatedButton(
                                     onPressed: () {
-                                      // Add functionality for the button in each box
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => Materials(),
+                                        ),
+                                      );
                                     },
                                     style: ButtonStyle(
                                       backgroundColor:
@@ -202,9 +202,9 @@ class _Home1State extends State<Home1> {
           ],
         );
       case 1:
-        return ChatHomePage(); // Replace with your ChatPage implementation
+        return ChatHomePage();
       case 2:
-        return ProfileScreen(); // Replace with your ProfileScreen implementation
+        return ProfileScreen();
       default:
         return Center(child: Text('Unknown page'));
     }
