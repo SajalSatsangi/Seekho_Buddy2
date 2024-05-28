@@ -86,120 +86,185 @@ class _ProfilePageState extends State<ProfilePage> {
                   color: Colors.white,
                 ),
               ),
-              GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => EditProfile()),
-                  );
-                },
-                child: Container(
-                  padding:
-                      EdgeInsets.only(left: 8, right: 8, top: 2, bottom: 2),
-                  height: 30,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(30),
-                    color: Color(0xFF323232),
-                  ),
-                  child: Row(
-                    children: <Widget>[
-                      Icon(
-                        Icons.edit,
-                        color: Colors.white,
-                        size: 20,
-                      ),
-                    ],
-                  ),
-                ),
-              ),
+             
             ],
           ),
         ),
       ),
       body: userData == null
           ? Center(child: CircularProgressIndicator())
-          : SingleChildScrollView(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SizedBox(
-                    height: 30.0,
-                  ),
-                  Center(
-                    child: Column(
-                      children: [
-                        CircleAvatar(
-                          radius: 100,
-                          backgroundImage:
-                              NetworkImage(userData!['profile_picture']),
-                        ),
-                        SizedBox(height: 16),
-                        Text(
-                          userData!['name'],
-                          style: TextStyle(
-                            fontSize: 24,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        SizedBox(height: 8),
-                        Text(
-                          userData!['email'],
-                          style: TextStyle(
-                            fontSize: 16,
-                            color: Colors.grey,
-                          ),
-                        ),
-                        SizedBox(height: 32),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+          : Center(
+              child: SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.all(30.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SizedBox(height: 30.0),
+                      Center(
+                        child: Column(
                           children: [
+                            CircleAvatar(
+                              radius: 60, // Decreased radius
+                              backgroundImage:
+                                  NetworkImage(userData!['profile_picture']),
+                            ),
+                            SizedBox(height: 16),
                             Text(
-                              'Academic Information',
+                              userData!['name'],
                               style: TextStyle(
-                                fontSize: 18,
+                                fontSize: 24,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
                             SizedBox(height: 8),
-                            Text('University: Dayalbagh Educational Institute'),
-                            Text('Roll Number: ${userData!['rollno']}'),
-                            Text('Faculty: ${userData!['faculty']}'),
                             Text(
-                                'Branch: ${userData!['subfaculty']}, ${userData!['subbranch']}'),
-                            Text('Semester: ${userData!['semester']}'),
+                              userData!['email'],
+                              style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.grey,
+                              ),
+                            ),
+                            SizedBox(height: 32),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                buildInfoBox(
+                                  label: 'University',
+                                  text: 'Dayalbagh Educational Institute',
+                                  icon: Icons.location_city,
+                                ),
+                                buildInfoBox(
+                                  label: 'Roll Number',
+                                  text: userData!['rollno'],
+                                  icon: Icons.confirmation_number,
+                                ),
+                                buildInfoBox(
+                                  label: 'Faculty',
+                                  text: userData!['faculty'],
+                                  icon: Icons.account_balance,
+                                ),
+                                buildInfoBox(
+                                  label: 'Branch',
+                                  text:
+                                      '${userData!['subfaculty']}, ${userData!['subbranch']}',
+                                  icon: Icons.category,
+                                ),
+                                buildInfoBox(
+                                  label: 'Semester',
+                                  text: userData!['semester'],
+                                  icon: Icons.timeline,
+                                ),
+                              ],
+                            ),
+                            SizedBox(height: 20),
+                            Align(
+                              alignment: Alignment.center,
+                              child: SizedBox(
+                                width: 180, // Adjust button width here
+                                height: 42, // Adjust button height here
+                                child: ElevatedButton(
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => EditProfile()),
+                                    );
+                                  },
+                                  style: ButtonStyle(
+                                    backgroundColor:
+                                        MaterialStateProperty.all<Color>(
+                                      Colors.yellow, // Changed to yellow
+                                    ),
+                                  ),
+                                  child: Text(
+                                    'Edit Profile',
+                                    style: TextStyle(
+                                      color: Colors.black, // Text color
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            SizedBox(height: 20),
+                            Padding(
+                              padding: const EdgeInsets.only(right: 16.0),
+                              child: Align(
+                                alignment: Alignment.centerRight,
+                                child: SizedBox(
+                                  width: 100, // Adjust button width here
+                                  height: 40, // Adjust button height here
+                                  child: ElevatedButton(
+                                    onPressed: _logout, // Call _logout function
+                                    style: ButtonStyle(
+                                      backgroundColor:
+                                          MaterialStateProperty.all<Color>(
+                                        Color.fromRGBO(65, 48, 48, 0.591), // Changed to red
+                                      ),
+                                    ),
+                                    child: Text(
+                                      'LogOut',
+                                      style: TextStyle(
+                                        color: Color.fromARGB(255, 233, 30, 30), // Text color
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
                           ],
                         ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(height: 20),
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 46.0),
-                      child: SizedBox(
-                        width: 120, // Adjust button width here
-                        height: 40, // Adjust button height here
-                        child: ElevatedButton(
-                          onPressed: _logout, // Call _logout function
-                          style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all<Color>(
-                              const Color.fromARGB(255, 107, 107, 107),
-                            ),
-                          ),
-                          child: Text(
-                            'LogOut',
-                            style: TextStyle(
-                              color: Colors.white, // Text color
-                            ),
-                          ),
-                        ),
                       ),
-                    ),
+                    ],
                   ),
-                ],
+                ),
               ),
             ),
+    );
+  }
+
+  Widget buildInfoBox(
+      {required String label, required String text, required IconData icon}) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 4),
+      child: Container(
+        width: MediaQuery.of(context).size.width * 0.8, // Set maximum width
+        padding: EdgeInsets.symmetric(horizontal: 14.0, vertical: 10.0),
+        decoration: BoxDecoration(
+          color: Colors.black,
+          borderRadius: BorderRadius.circular(20.0),
+          border: Border.all(color: Colors.grey),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              label,
+              style: TextStyle(
+                color: Color.fromARGB(255, 255, 255, 255),
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            SizedBox(height: 4.0),
+            Row(
+              children: [
+                Icon(
+                  icon,
+                  color: Color.fromARGB(255, 255, 255, 255),
+                ),
+                SizedBox(width: 10.0),
+                Text(
+                  text,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 14.0,
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
