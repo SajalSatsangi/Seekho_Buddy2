@@ -1,35 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_cached_pdfview/flutter_cached_pdfview.dart';
 
 class PdfViewer extends StatelessWidget {
+  final String keyValue; // Value to display in the app bar
+  final String value; // URL to the PDF file
+
+  PdfViewer({required this.keyValue, required this.value});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          'PDF Note',
-          style: TextStyle(color: Colors.white),
-        ),
-        backgroundColor: Colors.grey[900],
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios, color: Colors.white),
-          onPressed: () {
-            // Navigate back when the back button is pressed
-            Navigator.of(context).pop();
-          },
-        ),
+        title: Text(keyValue), // Display keyValue in the app bar
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              'PDF View Here',
-              style: TextStyle(fontSize: 24, color: Colors.white),
-            ),
-          ],
-        ),
+      body: PDF().cachedFromUrl(
+        value,
+        placeholder: (progress) => Center(child: CircularProgressIndicator(value: progress)),
+        errorWidget: (error) => Center(child: Text("Error loading PDF: $error")),
       ),
-      backgroundColor: Colors.grey[900], // Setting the background color to grey
     );
   }
 }

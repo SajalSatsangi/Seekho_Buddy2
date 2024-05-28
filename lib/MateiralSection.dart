@@ -16,7 +16,7 @@ class Home1 extends StatefulWidget {
 
 class _Home1State extends State<Home1> {
   int _selectedIndex = 0;
-  List<String> subjects = [];
+  List<DocumentSnapshot> subjects = []; // Store DocumentSnapshots instead of strings
 
   @override
   void initState() {
@@ -41,7 +41,7 @@ class _Home1State extends State<Home1> {
           .get();
 
       setState(() {
-        subjects = snapshot.docs.map((doc) => doc.id).toList();
+        subjects = snapshot.docs;
       });
     }
   }
@@ -116,7 +116,8 @@ class _Home1State extends State<Home1> {
                 child: ListView.builder(
                   itemCount: subjects.length,
                   itemBuilder: (context, index) {
-                    String subjectName = subjects[index];
+                    DocumentSnapshot subjectDoc = subjects[index];
+                    String subjectName = subjectDoc.id;
                     return GestureDetector(
                       onTap: () {},
                       child: Column(
@@ -134,8 +135,7 @@ class _Home1State extends State<Home1> {
                                 Padding(
                                   padding: const EdgeInsets.all(35.0),
                                   child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         subjectName,
@@ -164,13 +164,16 @@ class _Home1State extends State<Home1> {
                                       Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                          builder: (context) => Materials(),
+                                          builder: (context) => Materials(
+                                            userData: widget.userData!,
+                                            subject: widget.subject,
+                                            documentId: subjectDoc.id,
+                                          ),
                                         ),
                                       );
                                     },
                                     style: ButtonStyle(
-                                      backgroundColor:
-                                          MaterialStateProperty.all<Color>(
+                                      backgroundColor: MaterialStateProperty.all<Color>(
                                         Colors.white,
                                       ),
                                     ),
