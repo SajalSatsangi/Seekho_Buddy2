@@ -134,33 +134,29 @@ class VerificationScreen extends StatelessWidget {
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Row(
-                                    children: [
-                                      Text(
-                                        user['name'],
-                                        style: TextStyle(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                      SizedBox(width: 16),
-                                      TextButton(
-                                        onPressed: () {
-                                          _showIDPopup(
-                                            context,
-                                            NetworkImage(user['studentid']),
-                                          );
-                                        },
-                                        style: TextButton.styleFrom(
-                                          backgroundColor: Colors.black,
-                                        ),
-                                        child: Text(
-                                          "ID",
-                                          style: TextStyle(color: Colors.white),
-                                        ),
-                                      ),
-                                    ],
+                                  Text(
+                                    user['name'],
+                                    style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                  SizedBox(width: 16),
+                                  TextButton(
+                                    onPressed: () {
+                                      _showIDPopup(
+                                        context,
+                                        NetworkImage(user['studentid']),
+                                      );
+                                    },
+                                    style: TextButton.styleFrom(
+                                      backgroundColor: Colors.black,
+                                    ),
+                                    child: Text(
+                                      "View ID",
+                                      style: TextStyle(color: Colors.white),
+                                    ),
                                   ),
                                   SizedBox(height: 4),
                                   Text(
