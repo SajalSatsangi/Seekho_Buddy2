@@ -5,7 +5,7 @@ import 'package:seekhobuddy/student_verification.dart';
 import 'editprofile.dart';
 import 'LoginPage.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreenAdmin extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
