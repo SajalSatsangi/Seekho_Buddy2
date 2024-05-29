@@ -266,6 +266,12 @@ class _HomeState extends State<Home> {
                                     height: 40, // Adjust button height here
                                     child: ElevatedButton(
                                       onPressed: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  ResourcesPage()),
+                                        );
                                         // Add your onPressed code here
                                       },
                                       style: ButtonStyle(

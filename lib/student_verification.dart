@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+
+
 import 'package:seekhobuddy/Profile-Admin.dart';
 import 'package:seekhobuddy/verification_history.dart';
+
 
 void main() {
   runApp(verification());
@@ -10,13 +13,13 @@ class verification extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: MyWidget(),
+      home: VerificationScreen(),
       theme: ThemeData.dark(),
     );
   }
 }
 
-class MyWidget extends StatelessWidget {
+class VerificationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -113,13 +116,38 @@ class MyWidget extends StatelessWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          "John Doe",
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold, // Make the text bold
-                            color: Colors.white,
-                          ),
+                        Row(
+                          children: [
+                            Text(
+                              "John Doe",
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight:
+                                    FontWeight.bold, // Make the text bold
+                                color: Colors.white,
+                              ),
+                            ),
+                            SizedBox(
+                                width:
+                                    16), // Added padding between text and button
+                            TextButton(
+                              onPressed: () {
+                                _showIDPopup(
+                                  context,
+                                  AssetImage(
+                                      'assets/search_result.png'), // Image to display
+                                );
+                              },
+                              style: TextButton.styleFrom(
+                                backgroundColor: Colors
+                                    .black, // Background color of the button
+                              ),
+                              child: Text(
+                                "ID",
+                                style: TextStyle(color: Colors.white),
+                              ),
+                            ),
+                          ],
                         ),
                         SizedBox(height: 4),
                         Text(
@@ -172,6 +200,36 @@ class MyWidget extends StatelessWidget {
         ),
       ),
       backgroundColor: Colors.black87,
+    );
+  }
+
+  // Function to show the popup
+  void _showIDPopup(BuildContext context, AssetImage image) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text("ID Information"),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Image(image: image),
+              SizedBox(height: 8),
+              Text("Student ID: 123456"),
+              SizedBox(height: 4),
+              Text("Institution: ABC University"),
+            ],
+          ),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text("Close"),
+            ),
+          ],
+        );
+      },
     );
   }
 }
