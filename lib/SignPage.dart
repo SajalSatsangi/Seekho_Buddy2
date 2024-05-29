@@ -45,8 +45,6 @@ class _StudyHubLoginScreenState extends State<StudyHubLoginScreen> {
   String? _selectedSemester;
   String? _selectedSubbranch;
 
-  
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -156,7 +154,7 @@ class _StudyHubLoginScreenState extends State<StudyHubLoginScreen> {
                       _buildDropdown(
                         value: _selectedSubfaculty,
                         items: subfaculties[_selectedFaculty] ?? [],
-                        hintText: 'Subfaculty',
+                        hintText: 'Branch',
                         icon: Icons.new_label,
                         onChanged: (value) {
                           setState(() {
@@ -185,7 +183,7 @@ class _StudyHubLoginScreenState extends State<StudyHubLoginScreen> {
                         items: subbranches[
                                 '${_selectedFaculty}_${_selectedSubfaculty}_${_selectedSemester}'] ??
                             [],
-                        hintText: 'Subbranch',
+                        hintText: 'Specialization',
                         icon: Icons.branding_watermark,
                         onChanged: (value) {
                           setState(() {
@@ -312,7 +310,7 @@ class _StudyHubLoginScreenState extends State<StudyHubLoginScreen> {
           'profile_picture': '',
           'role': 'student',
           'verifiedstatus': 'False',
-          'status': '', 
+          'status': '',
           'date': '',
         });
 
