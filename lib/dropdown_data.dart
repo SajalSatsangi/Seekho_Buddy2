@@ -1,3 +1,4 @@
+// dropdown_data.dart
 final List<String> faculties = [
   'Faculty of Engineering',
   'Faculty of Science',
@@ -109,90 +110,6 @@ final Map<String, List<String>> subbranches = {
     'Subbranch 18'
   ],
   'Faculty of Engineering_Fulltime-Mechanical_Semester 8': [
-    'Subbranch 19',
-    'Subbranch 20'
-  ],
-  'Faculty of Engineering_Fulltime-Footwear_Semester 1': [
-    '-',
-  ],
-  'Faculty of Engineering_Fulltime-Footwear_Semester 2': [
-    '-',
-  ],
-  'Faculty of Engineering_Fulltime-Footwear_Semester 3': [
-    '-',
-  ],
-  'Faculty of Engineering_Fulltime-Footwear_Semester 4': [
-    '-',
-  ],
-  'Faculty of Engineering_Fulltime-Footwear_Semester 5': [
-    'Subbranch 13',
-    'Subbranch 14'
-  ],
-  'Faculty of Engineering_Fulltime-Footwear_Semester 6': [
-    'Computer Science',
-    'Subbranch 16'
-  ],
-  'Faculty of Engineering_Fulltime-Footwear_Semester 7': [
-    'Subbranch 17',
-    'Subbranch 18'
-  ],
-  'Faculty of Engineering_Fulltime-Footwear_Semester 8': [
-    'Subbranch 19',
-    'Subbranch 20'
-  ],
-  'Faculty of Engineering_Fulltime-Agriculture_Semester 1': [
-    '-',
-  ],
-  'Faculty of Engineering_Fulltime-Agriculture_Semester 2': [
-    '-',
-  ],
-  'Faculty of Engineering_Fulltime-Agriculture_Semester 3': [
-    '-',
-  ],
-  'Faculty of Engineering_Fulltime-Agriculture_Semester 4': [
-    '-',
-  ],
-  'Faculty of Engineering_Fulltime-Agriculture_Semester 5': [
-    'Subbranch 13',
-    'Subbranch 14'
-  ],
-  'Faculty of Engineering_Fulltime-Agriculture_Semester 6': [
-    'Computer Science',
-    'Subbranch 16'
-  ],
-  'Faculty of Engineering_Fulltime-Agriculture_Semester 7': [
-    'Subbranch 17',
-    'Subbranch 18'
-  ],
-  'Faculty of Engineering_Fulltime-Agriculture_Semester 8': [
-    'Subbranch 19',
-    'Subbranch 20'
-  ],
-  'Faculty of Engineering_Fulltime-Civil_Semester 1': [
-    '-',
-  ],
-  'Faculty of Engineering_Fulltime-Civil_Semester 2': [
-    '-',
-  ],
-  'Faculty of Engineering_Fulltime-Civil_Semester 3': [
-    '-',
-  ],
-  'Faculty of Engineering_Fulltime-Civil_Semester 4': [
-    '-',
-  ],
-  'Faculty of Engineering_Fulltime-Civil_Semester 5': [
-    'Subbranch 13',
-    'Subbranch 14'
-  ],
-  'Faculty of Engineering_Fulltime-Civil_Semester 6': [
-    'Computer Science',
-    'Subbranch 16'
-  ],
-  'Faculty of Engineering_Fulltime-Civil_Semester 7': [
-    'Subbranch 17',
-    'Subbranch 18'
-  ],
-  'Faculty of Engineering_Fulltime-Civil_Semester 8': [
     'Subbranch 19',
     'Subbranch 20'
   ],
