@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:seekhobuddy/Profile-Admin.dart';
+import 'package:seekhobuddy/AdminScreens/Profile-Admin.dart';
 import 'package:seekhobuddy/verification_history.dart';
 
 void main() {

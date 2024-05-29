@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:seekhobuddy/student_verification.dart';
-import 'editprofile.dart';
-import 'LoginPage.dart';
+import '../editprofile.dart';
+import '../LoginPage.dart';
 
 class ProfileScreenAdmin extends StatelessWidget {
   @override
