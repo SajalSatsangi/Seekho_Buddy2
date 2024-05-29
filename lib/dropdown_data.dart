@@ -58,16 +58,16 @@ final Map<String, List<String>> semesters = {
 
 final Map<String, List<String>> subbranches = {
   'Faculty of Engineering_Fulltime-Electrical_Semester 1': [
-    '-',
+    'NIL',
   ],
   'Faculty of Engineering_Fulltime-Electrical_Semester 2': [
-    '-',
+    'NIL',
   ],
   'Faculty of Engineering_Fulltime-Electrical_Semester 3': [
-    '-',
+    'NIL',
   ],
   'Faculty of Engineering_Fulltime-Electrical_Semester 4': [
-    '-',
+    'NIL',
   ],
   'Faculty of Engineering_Fulltime-Electrical_Semester 5': [
     'Subbranch 9',
@@ -86,16 +86,16 @@ final Map<String, List<String>> subbranches = {
     'Subbranch 16'
   ],
   'Faculty of Engineering_Fulltime-Mechanical_Semester 1': [
-    '-',
+    'NIL',
   ],
   'Faculty of Engineering_Fulltime-Mechanical_Semester 2': [
-    '-',
+    'NIL',
   ],
   'Faculty of Engineering_Fulltime-Mechanical_Semester 3': [
-    '-',
+    'NIL',
   ],
   'Faculty of Engineering_Fulltime-Mechanical_Semester 4': [
-    '-',
+    'NIL',
   ],
   'Faculty of Engineering_Fulltime-Mechanical_Semester 5': [
     'Subbranch 13',
