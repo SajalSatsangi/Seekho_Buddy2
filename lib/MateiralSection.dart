@@ -16,7 +16,8 @@ class Home1 extends StatefulWidget {
 
 class _Home1State extends State<Home1> {
   int _selectedIndex = 0;
-  List<DocumentSnapshot> subjects = []; // Store DocumentSnapshots instead of strings
+  List<DocumentSnapshot> subjects =
+      []; // Store DocumentSnapshots instead of strings
 
   @override
   void initState() {
@@ -135,15 +136,26 @@ class _Home1State extends State<Home1> {
                                 Padding(
                                   padding: const EdgeInsets.all(35.0),
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
-                                      Text(
-                                        subjectName,
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 18.0,
-                                          fontWeight: FontWeight.bold,
-                                        ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(
+                                            subjectName,
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 18.0,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                          Icon(
+                                            Icons.book,
+                                            color: Colors.white,
+                                          ),
+                                        ],
                                       ),
                                       SizedBox(height: 7),
                                       Text(
@@ -158,32 +170,36 @@ class _Home1State extends State<Home1> {
                                 ),
                                 Positioned(
                                   bottom: 15,
-                                  right: 40,
-                                  child: ElevatedButton(
-                                    onPressed: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) => Materials(
-                                            userData: widget.userData!,
-                                            subject: widget.subject,
-                                            documentId: subjectDoc.id,
+                                  left: 0,
+                                  right: 0,
+                                  child: Center(
+                                    child: ElevatedButton(
+                                      onPressed: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => Materials(
+                                              userData: widget.userData!,
+                                              subject: widget.subject,
+                                              documentId: subjectDoc.id,
+                                            ),
                                           ),
+                                        );
+                                      },
+                                      style: ButtonStyle(
+                                        backgroundColor:
+                                            MaterialStateProperty.all<Color>(
+                                          Colors.white,
                                         ),
-                                      );
-                                    },
-                                    style: ButtonStyle(
-                                      backgroundColor: MaterialStateProperty.all<Color>(
-                                        Colors.white,
                                       ),
-                                    ),
-                                    child: SizedBox(
-                                      width: 190,
-                                      child: Text(
-                                        'View',
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          color: Colors.black,
+                                      child: SizedBox(
+                                        width: 230,
+                                        child: Text(
+                                          'View',
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                          ),
                                         ),
                                       ),
                                     ),
