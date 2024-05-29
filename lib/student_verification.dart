@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 
-
 import 'package:seekhobuddy/Profile-Admin.dart';
 import 'package:seekhobuddy/verification_history.dart';
-
 
 void main() {
   runApp(verification());
@@ -213,11 +211,14 @@ class VerificationScreen extends StatelessWidget {
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Image(image: image),
+              InteractiveViewer(
+                child: Image(image: image),
+                boundaryMargin: EdgeInsets.all(20),
+                minScale: 0.1,
+                maxScale: 2.0,
+              ),
               SizedBox(height: 8),
-              Text("Student ID: 123456"),
-              SizedBox(height: 4),
-              Text("Institution: ABC University"),
+              Text("Name: XYZ"),
             ],
           ),
           actions: <Widget>[
