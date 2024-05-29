@@ -9,7 +9,18 @@ import 'package:seekhobuddy/dropdown_data.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(SignUpPage());
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Builder(
+        builder: (context) => SignUpPage(),
+      ),
+    );
+  }
 }
 
 class SignUpPage extends StatelessWidget {
@@ -126,8 +137,7 @@ class _StudyHubLoginScreenState extends State<StudyHubLoginScreen> {
                         controller: _rollnoController,
                         hintText: 'Roll-No',
                         icon: Icons.numbers,
-                        keyboardType: TextInputType
-                            .number, // Set keyboard type to accept only numbers
+                        keyboardType: TextInputType.number,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return 'Please enter your roll Number';
@@ -149,6 +159,12 @@ class _StudyHubLoginScreenState extends State<StudyHubLoginScreen> {
                             _selectedSubbranch = null;
                           });
                         },
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please select a faculty';
+                          }
+                          return null;
+                        },
                       ),
                       SizedBox(height: 20),
                       _buildDropdown(
@@ -163,6 +179,12 @@ class _StudyHubLoginScreenState extends State<StudyHubLoginScreen> {
                             _selectedSubbranch = null;
                           });
                         },
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please select a branch';
+                          }
+                          return null;
+                        },
                       ),
                       SizedBox(height: 20),
                       _buildDropdown(
@@ -175,6 +197,12 @@ class _StudyHubLoginScreenState extends State<StudyHubLoginScreen> {
                             _selectedSemester = value;
                             _selectedSubbranch = null;
                           });
+                        },
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please select a semester';
+                          }
+                          return null;
                         },
                       ),
                       SizedBox(height: 20),
@@ -238,7 +266,8 @@ class _StudyHubLoginScreenState extends State<StudyHubLoginScreen> {
                       ),
                       SizedBox(height: 25),
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
+                        mainAxisAlignment:
+                        MainAxisAlignment.center,
                         children: [
                           TextButton(
                             onPressed: () {
@@ -314,27 +343,21 @@ class _StudyHubLoginScreenState extends State<StudyHubLoginScreen> {
           'date': '',
         });
 
-        if (mounted) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text('Signed up succesfully'),
-              duration: Duration(seconds: 2),
-            ),
-          );
-        }
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Signed up successfully'),
+            duration: Duration(seconds: 2),
+          ),
+        );
 
-        if (mounted) {
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (context) => WaitingVerification()),
-          );
-        }
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => WaitingVerification()),
+        );
       } on FirebaseAuthException catch (e) {
-        if (mounted) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('Failed to sign up: ${e.message}')),
-          );
-        }
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Failed to sign up: ${e.message}')),
+        );
       }
     }
   }
@@ -344,8 +367,7 @@ class _StudyHubLoginScreenState extends State<StudyHubLoginScreen> {
     required String hintText,
     required IconData icon,
     bool obscureText = false,
-    TextInputType keyboardType =
-        TextInputType.text, // Define keyboardType parameter
+    TextInputType keyboardType = TextInputType.text,
     String? Function(String?)? validator,
   }) {
     return Padding(
@@ -362,7 +384,7 @@ class _StudyHubLoginScreenState extends State<StudyHubLoginScreen> {
             child: TextFormField(
               controller: controller,
               obscureText: obscureText,
-              keyboardType: keyboardType, // Use keyboardType parameter here
+              keyboardType: keyboardType,
               style: TextStyle(color: Colors.white),
               decoration: InputDecoration(
                 hintText: hintText,
@@ -372,7 +394,6 @@ class _StudyHubLoginScreenState extends State<StudyHubLoginScreen> {
                 contentPadding: EdgeInsets.symmetric(vertical: 10).copyWith(
                   left: 20,
                 ),
-                // Adjust this value to decrease/increase height and add left padding
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(50),
                   borderSide: BorderSide.none,
@@ -392,48 +413,45 @@ class _StudyHubLoginScreenState extends State<StudyHubLoginScreen> {
     required String hintText,
     required IconData icon,
     required void Function(String?) onChanged,
+    String? Function(String?)? validator,
   }) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 30),
-      child: Container(
-        height: 50, // Adjust the height here
-        child: Row(
-          children: [
-            Icon(
-              icon,
-              color: Colors.white,
-              size: 25,
-            ),
-            SizedBox(width: 10),
-            Expanded(
-              child: DropdownButtonFormField<String>(
-                value: value,
-                onChanged: onChanged,
-                items: items.map((String value) {
-                  return DropdownMenuItem<String>(
-                    value: value,
-                    child: Text(value),
-                  );
-                }).toList(),
-                decoration: InputDecoration(
-                  hintText: hintText,
-                  hintStyle: TextStyle(color: Colors.white70),
-                  filled: true,
-                  fillColor: Colors.grey.shade800,
-                  contentPadding: EdgeInsets.symmetric(
-                      vertical: 0,
-                      horizontal: 20), // Adjust horizontal padding here
-                  // isDense: true, // This will align the text vertically centered
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(50.0),
-                    borderSide: BorderSide.none,
-                  ),
+      child: Row(
+        children: [
+          Icon(
+            icon,
+            color: Colors.white,
+            size: 25,
+          ),
+          SizedBox(width: 10),
+          Expanded(
+            child: DropdownButtonFormField<String>(
+              value: value,
+              onChanged: onChanged,
+              items: items.map((String value) {
+                return DropdownMenuItem<String>(
+                  value: value,
+                  child: Text(value),
+                );
+              }).toList(),
+              decoration: InputDecoration(
+                hintText: hintText,
+                hintStyle: TextStyle(color: Colors.white70),
+                filled: true,
+                fillColor: Colors.grey.shade800,
+                contentPadding: EdgeInsets.symmetric(horizontal: 20),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(50.0),
+                  borderSide: BorderSide.none,
                 ),
               ),
+              validator: validator,
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
 }
+
