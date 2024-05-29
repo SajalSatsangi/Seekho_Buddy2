@@ -5,6 +5,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:seekhobuddy/LoginPage.dart';
 import 'package:seekhobuddy/emailVerificationWaiting.dart';
 import 'package:seekhobuddy/dropdown_data.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -313,36 +316,42 @@ class _StudyHubLoginScreenState extends State<StudyHubLoginScreen> {
     );
   }
 
-  Future<void> _signUp() async {
-    if (_formKey.currentState!.validate()) {
-      try {
-        UserCredential userCredential =
-            await FirebaseAuth.instance.createUserWithEmailAndPassword(
-          email: _emailController.text,
-          password: _passwordController.text,
-        );
+ Future<void> _signUp() async {
+  if (_formKey.currentState!.validate()) {
+    try {
+      UserCredential userCredential =
+          await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: _emailController.text,
+        password: _passwordController.text,
+      );
 
-        String uid = userCredential.user!.uid;
+      String uid = userCredential.user!.uid;
 
-        await FirebaseFirestore.instance
-            .collection('users')
-            .doc(_nameController.text)
-            .set({
-          'uid': uid,
-          'email': _emailController.text,
-          'name': _nameController.text,
-          'faculty': _selectedFaculty,
-          'subfaculty': _selectedSubfaculty,
-          'semester': _selectedSemester,
-          'subbranch': _selectedSubbranch,
-          'rollno': _rollnoController.text,
-          'profile_picture': '',
-          'role': 'student',
-          'verifiedstatus': 'False',
-          'status': '',
-          'date': '',
-        });
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(_nameController.text)
+          .set({
+        'uid': uid,
+        'email': _emailController.text,
+        'name': _nameController.text,
+        'faculty': _selectedFaculty,
+        'subfaculty': _selectedSubfaculty,
+        'semester': _selectedSemester,
+        'subbranch': _selectedSubbranch,
+        'rollno': _rollnoController.text,
+        'profile_picture': '',
+        'role': 'student',
+        'verifiedstatus': 'False',
+        'status': '',
+        'date': '',
+      });
 
+      await _sendWelcomeEmail(
+        _emailController.text,
+        _nameController.text,
+      );
+
+      if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text('Signed up successfully'),
@@ -354,13 +363,52 @@ class _StudyHubLoginScreenState extends State<StudyHubLoginScreen> {
           context,
           MaterialPageRoute(builder: (context) => WaitingVerification()),
         );
-      } on FirebaseAuthException catch (e) {
+      }
+    } on FirebaseAuthException catch (e) {
+      if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('Failed to sign up: ${e.message}')),
         );
       }
     }
   }
+}
+
+
+
+Future<void> _sendWelcomeEmail(String email, String name) async {
+  const serviceId = 'service_lau35dl';
+  const templateId = 'template_xwjxnk8';
+  const publicKey = '71c4lPho96zuPiNeB';
+
+  final url = Uri.parse('https://api.emailjs.com/api/v1.0/email/send');
+
+  final response = await http.post(
+    url,
+    headers: {
+      'origin': 'http://localhost',
+      'Content-Type': 'application/json',
+    },
+    body: json.encode({
+      'service_id': serviceId,
+      'template_id': templateId,
+      'user_id': publicKey,
+      'template_params': {
+        'user_email': email,
+        'name': name,
+      },
+    }),
+  );
+
+  if (response.statusCode == 200) {
+    print('Email sent successfully');
+  } else {
+    print('Failed to send email: ${response.body}');
+  }
+}
+
+
+
 
   Widget _buildTextField({
     required TextEditingController controller,
