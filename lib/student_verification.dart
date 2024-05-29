@@ -105,7 +105,7 @@ class VerificationScreen extends StatelessWidget {
               child: Container(
                 padding: EdgeInsets.all(16.0),
                 decoration: BoxDecoration(
-                  color: Color(0xFF424242),
+                  color: Color(0xFF323232),
                   borderRadius: BorderRadius.circular(12.0),
                 ),
                 child: Row(
@@ -215,7 +215,7 @@ class VerificationScreen extends StatelessWidget {
                 child: Image(image: image),
                 boundaryMargin: EdgeInsets.all(20),
                 minScale: 0.1,
-                maxScale: 2.0,
+                maxScale: 5.0,
               ),
               SizedBox(height: 8),
               Text("Name: XYZ"),
