@@ -248,7 +248,7 @@ class _HomeState extends State<Home> {
                                         left: 15.0,
                                       ),
                                       child: Text(
-                                        'join study groups for success',
+                                        'best study materials for you',
                                         style: TextStyle(
                                           color: Colors.white,
                                           fontSize: 13,
