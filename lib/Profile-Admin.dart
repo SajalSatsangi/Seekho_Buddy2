@@ -102,6 +102,18 @@ class _ProfilePageState extends State<ProfilePage> {
                       );
                     },
                   ),
+                  IconButton(
+                    icon: Icon(
+                      Icons.request_page,
+                      color: Colors.white,
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => verification()),
+                      );
+                    },
+                  ),
                 ],
               ),
             ],
