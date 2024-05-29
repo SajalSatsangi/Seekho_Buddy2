@@ -47,11 +47,14 @@ class _MaterialsState extends State<Materials> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          'Materials - ${widget.documentId}', // Display the document ID in the app bar
-          style: TextStyle(color: Colors.white),
+        title: Padding(
+          padding: const EdgeInsets.only(top: 8.0),
+          child: Text(
+            'Materials - ${widget.documentId}', // Display the document ID in the app bar
+            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+          ),
         ),
-        backgroundColor: Colors.grey[900],
+        backgroundColor: Colors.black,
         leading: IconButton(
           icon: Icon(Icons.arrow_back_ios, color: Colors.white),
           onPressed: () {
@@ -62,17 +65,23 @@ class _MaterialsState extends State<Materials> {
         bottom: PreferredSize(
           preferredSize: Size.fromHeight(68.0),
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+            padding: EdgeInsets.symmetric(horizontal: 14, vertical: 14),
             child: TextField(
               decoration: InputDecoration(
-                hintText: 'Search...',
-                hintStyle: TextStyle(
+                hintText: "Search...",
+                hintStyle: TextStyle(color: Colors.white),
+                prefixIcon: Icon(
+                  Icons.search,
                   color: Colors.white,
-                ), // Set search text color to white
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(25.0),
+                  size: 20,
                 ),
-                contentPadding: EdgeInsets.symmetric(horizontal: 16.0),
+                filled: true,
+                fillColor: Color(0xFF323232),
+                contentPadding: EdgeInsets.all(8),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(20),
+                  borderSide: BorderSide(color: Color(0xFF323232)),
+                ),
               ),
             ),
           ),
@@ -95,50 +104,71 @@ class _MaterialsState extends State<Materials> {
 
           var documentData = snapshot.data!.data() as Map<String, dynamic>;
 
-          return ListView(
-            children: documentData.entries.map((entry) {
-              return Padding(
-                padding: EdgeInsets.only(top: 25.0),
-                child: ListTile(
-                  leading: Icon(
-                    Icons.folder,
-                    color: Colors.white,
-                  ), // Set folder icon color to white
-                  title: Text(
-                    entry.key,
-                    style: TextStyle(color: Colors.white),
-                  ),
-                  trailing: TextButton(
-                    onPressed: () {
-                      print('View button clicked');
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                           builder: (context) => PdfViewer(
-                            keyValue: entry.key,
-                            value: entry.value.toString(),
+          return Padding(
+            padding: EdgeInsets.all(10), // Padding around the card
+            child: Card(
+              color: Color(0xFF323232), // Set card background color
+              shape: RoundedRectangleBorder(
+                borderRadius:
+                    BorderRadius.circular(20), // Making the border more rounded
+              ),
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: documentData.entries.expand((entry) {
+                    return [
+                      ListTile(
+                        contentPadding: EdgeInsets.symmetric(
+                            horizontal: 20,
+                            vertical: 10), // Padding inside each ListTile
+                        leading: Icon(
+                          Icons.folder,
+                          color: Colors.white,
+                        ), // Set folder icon color to white
+                        title: Text(
+                          entry.key,
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        trailing: TextButton(
+                          onPressed: () {
+                            print('View button clicked');
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => PdfViewer(
+                                  keyValue: entry.key,
+                                  value: entry.value.toString(),
+                                ),
+                              ),
+                            );
+                          },
+                          child: Text(
+                            'View',
+                            style: TextStyle(
+                              color: const Color.fromARGB(255, 0, 0, 0),
+                            ),
+                          ),
+                          style: TextButton.styleFrom(
+                            backgroundColor: const Color.fromARGB(255, 255, 255, 255), // Set view button background color
                           ),
                         ),
-                      );
-                    },
-                    child: Text(
-                      'View',
-                      style: TextStyle(
-                        color: Colors.white,
                       ),
-                    ),
-                    style: TextButton.styleFrom(
-                      backgroundColor: Colors.grey[800],
-                    ),
-                  ),
+                      if (documentData.entries.last.key !=
+                          entry.key) // Add a divider if it's not the last entry
+                        Divider(
+                          color: Color.fromARGB(255, 0, 0, 0), // Set the color of the divider
+                          height: 1, // Set the height of the divider
+                          thickness: 1, // Set the thickness of the divider
+                        ),
+                    ];
+                  }).toList(),
                 ),
-              );
-            }).toList(),
+              ),
+            ),
           );
         },
       ),
-      backgroundColor:
-          Colors.grey[900], // Setting the background color to black
+      backgroundColor: Colors.black, // Setting the background color to black
     );
   }
 }
