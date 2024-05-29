@@ -5,7 +5,7 @@ import 'package:seekhobuddy/student_verification.dart';
 import 'editprofile.dart';
 import 'LoginPage.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreenAdmin extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -99,6 +99,18 @@ class _ProfilePageState extends State<ProfilePage> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) => EditProfile()),
+                      );
+                    },
+                  ),
+                  IconButton(
+                    icon: Icon(
+                      Icons.request_page,
+                      color: Colors.white,
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => verification()),
                       );
                     },
                   ),

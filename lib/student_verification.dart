@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-import 'verification_history.dart';
-import 'Profile.dart';
+
+
+import 'package:seekhobuddy/Profile-Admin.dart';
+import 'package:seekhobuddy/verification_history.dart';
+
 
 void main() {
   runApp(verification());
@@ -37,7 +40,7 @@ class VerificationScreen extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => ProfileScreen()),
+                                builder: (context) => ProfileScreenAdmin()),
                           );
                         },
                       ),
@@ -57,8 +60,7 @@ class VerificationScreen extends StatelessWidget {
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(
-                            builder: (context) => history()),
+                        MaterialPageRoute(builder: (context) => history()),
                       );
                     },
                   ),

@@ -5,7 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart'; // Add this import for SvgPicture
 import 'package:seekhobuddy/Notification.dart';
 import 'footer.dart';
 import 'Chat/ChatPage-home.dart';
-import 'Profile.dart';
+import 'Profile-Admin.dart';
 import 'Courses.dart';
 
 void main() {
@@ -545,7 +545,7 @@ class _HomeState extends State<Home> {
       case 1:
         return ChatHomePage();
       case 2:
-        return ProfileScreen();
+        return ProfileScreenAdmin();
       default:
         return Center(child: Text('Unknown page'));
     }
