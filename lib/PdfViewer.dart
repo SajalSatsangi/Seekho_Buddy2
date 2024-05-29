@@ -10,13 +10,25 @@ class PdfViewer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black,
       appBar: AppBar(
-        title: Text(keyValue), // Display keyValue in the app bar
+        backgroundColor: Colors.black,
+        leading: IconButton(
+          // Add a back button
+          icon: Icon(Icons.arrow_back_ios, color: Colors.white),
+          onPressed: () => Navigator.of(context).pop(),
+        ),
+        title: Text(
+          keyValue, // Display keyValue in the app bar
+          style: TextStyle(color: Colors.white), // Set text color to white
+        ), // Display keyValue in the app bar
       ),
       body: PDF().cachedFromUrl(
         value,
-        placeholder: (progress) => Center(child: CircularProgressIndicator(value: progress)),
-        errorWidget: (error) => Center(child: Text("Error loading PDF: $error")),
+        placeholder: (progress) =>
+            Center(child: CircularProgressIndicator(value: progress)),
+        errorWidget: (error) =>
+            Center(child: Text("Error loading PDF: $error")),
       ),
     );
   }

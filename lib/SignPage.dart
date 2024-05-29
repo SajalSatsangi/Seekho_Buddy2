@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:seekhobuddy/LoginPage.dart';
-import 'package:seekhobuddy/emailverf.dart';
+import 'package:seekhobuddy/home.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -376,48 +377,56 @@ class _StudyHubLoginScreenState extends State<StudyHubLoginScreen> {
   }
 
   Future<void> _signUp() async {
-    if (_formKey.currentState!.validate()) {
-      try {
-        UserCredential userCredential =
-            await FirebaseAuth.instance.createUserWithEmailAndPassword(
-          email: _emailController.text,
-          password: _passwordController.text,
+  if (_formKey.currentState!.validate()) {
+    try {
+      UserCredential userCredential =
+          await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: _emailController.text,
+        password: _passwordController.text,
+      );
+
+      String uid = userCredential.user!.uid;
+
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(_nameController.text)
+          .set({
+        'uid': uid,
+        'email': _emailController.text,
+        'name': _nameController.text,
+        'faculty': _selectedFaculty,
+        'subfaculty': _selectedSubfaculty,
+        'semester': _selectedSemester,
+        'subbranch': _selectedSubbranch,
+        'rollno': _rollnoController.text,
+        'profile_picture': '',
+        'role': 'student',
+      });
+
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Signed up succesfully'),
+            duration: Duration(seconds: 2),
+          ),
         );
+      }
 
-        User? user = userCredential.user;
-
-        if (user != null) {
-          await user.sendEmailVerification();
-
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-                content: Text(
-                    'Signup Successful. Please check your email to verify your account.')),
-          );
-
-          // Proceed to verification step
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-              builder: (context) => EmailVerificationPage(
-                user: user,
-                nameController: _nameController.text,
-                selectedFaculty: _selectedFaculty,
-                selectedSubfaculty: _selectedSubfaculty,
-                selectedSemester: _selectedSemester,
-                selectedSubbranch: _selectedSubbranch,
-                rollno: _rollnoController.text,
-              ),
-            ),
-          );
-        }
-      } on FirebaseAuthException catch (e) {
+      if (mounted) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => Home()),
+        );
+      }
+    } on FirebaseAuthException catch (e) {
+      if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('Failed to sign up: ${e.message}')),
         );
       }
     }
   }
+}
 
   Widget _buildTextField({
     required TextEditingController controller,
