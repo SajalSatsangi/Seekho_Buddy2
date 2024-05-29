@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:seekhobuddy/AdminScreens/Profile-Admin.dart';
 import 'package:seekhobuddy/verification_history.dart';
+import 'package:intl/intl.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -61,7 +62,7 @@ class VerificationScreen extends StatelessWidget {
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => history()),
+                        MaterialPageRoute(builder: (context) => HistoryApp()),
                       );
                     },
                   ),
@@ -220,10 +221,14 @@ class VerificationScreen extends StatelessWidget {
   }
 
   void _updateVerificationStatus(String userId, bool isApproved) {
-    FirebaseFirestore.instance.collection('users').doc(userId).update({
-      'verifiedstatus': isApproved ? "True" : "Rejected",
-    });
-  }
+
+    String formattedDate = DateFormat('yyyy-MM-dd').format(DateTime.now());
+  FirebaseFirestore.instance.collection('users').doc(userId).update({
+    'verifiedstatus': isApproved ? "True" : "Rejected",
+    'status': isApproved ? "Approved" : "Rejected", // Assuming you want a similar status update
+    'date': formattedDate,
+  });
+}
 
   void _showIDPopup(BuildContext context, ImageProvider image) {
     showDialog(

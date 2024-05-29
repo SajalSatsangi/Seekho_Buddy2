@@ -1,21 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'student_verification.dart';
 
-void main() {
-  runApp(history());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(HistoryApp());
 }
 
-class history extends StatelessWidget {
+class HistoryApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: MyWidget(),
+      home: HistoryScreen(),
       theme: ThemeData.dark(),
     );
   }
 }
 
-class MyWidget extends StatelessWidget {
+class HistoryScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -89,44 +93,69 @@ class MyWidget extends StatelessWidget {
                 ),
               ),
             ),
-            Padding(
-              padding: EdgeInsets.all(16.0),
-              child: Container(
+            Expanded(
+              child: Padding(
                 padding: EdgeInsets.all(16.0),
-                decoration: BoxDecoration(
-                  color: Color(0xFF323232),
-                  borderRadius: BorderRadius.circular(12.0),
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "John Doe",
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
+                child: StreamBuilder<QuerySnapshot>(
+                  stream: FirebaseFirestore.instance
+                      .collection('users')
+                      .where('verifiedstatus', isEqualTo: 'True')
+                      .snapshots(),
+                  builder: (context, snapshot) {
+                    if (!snapshot.hasData) {
+                      return Center(child: CircularProgressIndicator());
+                    }
+
+                    var documents = snapshot.data!.docs;
+
+                    return ListView.builder(
+                      itemCount: documents.length,
+                      itemBuilder: (context, index) {
+                        var data = documents[index].data() as Map<String, dynamic>;
+                        return Padding(
+                          padding: EdgeInsets.only(bottom: 16.0),
+                          child: Container(
+                            padding: EdgeInsets.all(16.0),
+                            decoration: BoxDecoration(
+                              color: Color(0xFF323232),
+                              borderRadius: BorderRadius.circular(12.0),
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      data['name'] ?? 'No Name',
+                                      style: TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                    SizedBox(height: 5),
+                                    Text(
+                                      "Date: ${data['date'] ?? 'No Date'}",
+                                      style: TextStyle(
+                                        color: Colors.white70,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Text(
+                                  data['status'] ?? 'No Status',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                        SizedBox(height: 5),
-                        Text(
-                          "Date: 2022-08-15",
-                          style: TextStyle(
-                            color: Colors.white70,
-                          ),
-                        ),
-                      ],
-                    ),
-                    Text(
-                      "Approved",
-                      style: TextStyle(
-                        color: Colors.white,
-                      ),
-                    ),
-                  ],
+                        );
+                      },
+                    );
+                  },
                 ),
               ),
             ),
