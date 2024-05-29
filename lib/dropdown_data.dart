@@ -11,6 +11,7 @@ final List<String> faculties = [
 
 final Map<String, List<String>> subfaculties = {
   'Faculty of Engineering': [
+    "Fulltime-1stYear",
     "Fulltime-Electrical",
     "Fulltime-Mechanical",
     "Fulltime-Civil",
@@ -33,6 +34,10 @@ final Map<String, List<String>> subfaculties = {
 };
 
 final Map<String, List<String>> semesters = {
+  'Fulltime-1stYear': [
+    'Semester 1',
+    'Semester 2',
+  ],
   'Fulltime-Electrical': [
     'Semester 1',
     'Semester 2',
@@ -57,6 +62,14 @@ final Map<String, List<String>> semesters = {
 };
 
 final Map<String, List<String>> subbranches = {
+  'Fulltime-1stYear_Semester 1': [
+    'NIL',
+    'NIL',
+  ],
+  'Fulltime-1stYear_Semester 2': [
+    'NIL',
+    'NIL',
+  ],
   'Faculty of Engineering_Fulltime-Electrical_Semester 1': [
     'NIL',
   ],
