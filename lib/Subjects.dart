@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'Chat/ChatPage-home.dart';
-import 'Profile.dart';
 import 'MateiralSection.dart';
 
 void main() {
@@ -17,9 +15,9 @@ class SubjectsPage extends StatefulWidget {
 }
 
 class _SubjectsPageState extends State<SubjectsPage> {
-  int _selectedIndex = 0;
   List<String> subjects = [];
   DocumentSnapshot? userData;
+  String _searchQuery = '';
 
   @override
   void initState() {
@@ -27,11 +25,11 @@ class _SubjectsPageState extends State<SubjectsPage> {
     fetchUserData();
   }
 
+  // Fetch user data from Firestore
   Future<void> fetchUserData() async {
     User? user = FirebaseAuth.instance.currentUser;
 
     if (user != null) {
-      // Query the 'users' collection to find the document with the matching 'uid' field
       var querySnapshot = await FirebaseFirestore.instance
           .collection('users')
           .where('uid', isEqualTo: user.uid)
@@ -39,8 +37,7 @@ class _SubjectsPageState extends State<SubjectsPage> {
 
       if (querySnapshot.docs.isNotEmpty) {
         setState(() {
-          userData =
-              querySnapshot.docs.first; // Get the first matching document
+          userData = querySnapshot.docs.first;
         });
 
         fetchSubjects();
@@ -48,14 +45,13 @@ class _SubjectsPageState extends State<SubjectsPage> {
     }
   }
 
-  void fetchSubjects() async {
+  // Fetch subjects based on user data
+  Future<void> fetchSubjects() async {
     if (userData != null) {
-      // Extract the required fields from userData
       String faculty = userData!['faculty'];
       String subfaculty = userData!['subfaculty'];
       String semester = userData!['semester'];
 
-      // Fetch subjects based on user data
       final snapshot = await FirebaseFirestore.instance
           .collection('Material DB')
           .doc(faculty)
@@ -70,109 +66,117 @@ class _SubjectsPageState extends State<SubjectsPage> {
     }
   }
 
-  void _onItemTapped(int index) {
+  // Method to handle item selection in bottom navigation bar
+
+  // Method to handle search query change
+  void _updateSearchQuery(String newQuery) {
     setState(() {
-      _selectedIndex = index;
+      _searchQuery = newQuery;
     });
   }
 
-  Widget _buildContent() {
-    switch (_selectedIndex) {
-      case 0:
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            SafeArea(
-              child: Padding(
-                padding: EdgeInsets.only(left: 16, right: 16, top: 10),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Row(
-                      children: [
-                        IconButton(
-                          icon: Icon(Icons.arrow_back_ios, color: Colors.white),
-                          onPressed: () {
-                            Navigator.of(context).pop(); // Navigate back
-                          },
-                        ),
-                        SizedBox(
-                          width: 10.0,
-                        ),
-                        Text(
-                          "Subjects",
-                          style: TextStyle(
-                            fontSize: 28,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white, // Text color
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(top: 14, left: 14, right: 14),
-              child: TextField(
-                decoration: InputDecoration(
-                  hintText: "Search...",
-                  hintStyle: TextStyle(color: Colors.white),
-                  prefixIcon: Icon(
-                    Icons.search,
-                    color: Colors.white,
-                    size: 20,
-                  ),
-                  filled: true,
-                  fillColor: Color(0xFF323232),
-                  contentPadding: EdgeInsets.all(8),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(20),
-                    borderSide: BorderSide(color: Color(0xFF323232)),
-                  ),
-                ),
-              ),
-            ),
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.all(15.0),
-                child: ListView.builder(
-                  itemCount: subjects.length,
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.only(bottom: 20.0),
-                      child: _buildBox(
-                        icon: Icons.notes_rounded,
-                        title: subjects[index],
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => Home1(
-                                userData: userData,
-                                subject: subjects[index],
-                              ),
-                            ),
-                          );
-                        },
-                      ),
-                    );
-                  },
-                ),
-              ),
-            ),
-          ],
-        );
-      case 1:
-        return ChatHomePage(); // Replace with your ChatPage implementation
-      case 2:
-        return ProfileScreen(); // Replace with your ProfileScreen implementation
-      default:
-        return Center(child: Text('Unknown page'));
-    }
+  // Method to filter subjects based on search query
+  List<String> _filterSubjects() {
+    return subjects
+        .where((subject) =>
+            subject.toLowerCase().contains(_searchQuery.toLowerCase()))
+        .toList();
   }
 
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.black,
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          SafeArea(
+            child: Padding(
+              padding: EdgeInsets.only(left: 16, right: 16, top: 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Row(
+                    children: [
+                      IconButton(
+                        icon: Icon(Icons.arrow_back_ios, color: Colors.white),
+                        onPressed: () {
+                          Navigator.of(context).pop(); // Navigate back
+                        },
+                      ),
+                      SizedBox(
+                        width: 10.0,
+                      ),
+                      Text(
+                        "Subjects",
+                        style: TextStyle(
+                          fontSize: 28,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white, // Text color
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.only(top: 14, left: 14, right: 14),
+            child: TextField(
+              onChanged: _updateSearchQuery,
+              decoration: InputDecoration(
+                hintText: "Search...",
+                hintStyle: TextStyle(color: Colors.white),
+                prefixIcon: Icon(
+                  Icons.search,
+                  color: Colors.white,
+                  size: 20,
+                ),
+                filled: true,
+                fillColor: Color(0xFF323232),
+                contentPadding: EdgeInsets.all(8),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(20),
+                  borderSide: BorderSide(color: Color(0xFF323232)),
+                ),
+              ),
+            ),
+          ),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: ListView.builder(
+                itemCount: _filterSubjects().length,
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: const EdgeInsets.only(bottom: 20.0),
+                    child: _buildBox(
+                      icon: Icons.notes_rounded,
+                      title: _filterSubjects()[index],
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => Home1(
+                              userData: userData,
+                              subject: _filterSubjects()[index],
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  );
+                },
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  // Method to build subject box widget
   Widget _buildBox({
     required IconData icon,
     required String title,
@@ -228,14 +232,6 @@ class _SubjectsPageState extends State<SubjectsPage> {
           ),
         ),
       ),
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.black,
-      body: _buildContent(),
     );
   }
 }
