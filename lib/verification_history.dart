@@ -80,7 +80,7 @@ class HistoryScreen extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(left: 16.0, top: 8.0, bottom: 8.0),
+              padding: EdgeInsets.only(left: 16.0, top: 32.0, bottom: 0.0),
               child: Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
@@ -95,7 +95,7 @@ class HistoryScreen extends StatelessWidget {
             ),
             Expanded(
               child: Padding(
-                padding: EdgeInsets.all(16.0),
+                padding: EdgeInsets.fromLTRB(16, 0, 18, 0),
                 child: StreamBuilder<QuerySnapshot>(
                   stream: FirebaseFirestore.instance
                       .collection('users')
@@ -111,7 +111,8 @@ class HistoryScreen extends StatelessWidget {
                     return ListView.builder(
                       itemCount: documents.length,
                       itemBuilder: (context, index) {
-                        var data = documents[index].data() as Map<String, dynamic>;
+                        var data =
+                            documents[index].data() as Map<String, dynamic>;
                         return Padding(
                           padding: EdgeInsets.only(bottom: 16.0),
                           child: Container(

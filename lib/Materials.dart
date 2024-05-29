@@ -50,7 +50,7 @@ class _MaterialsState extends State<Materials> {
         title: Padding(
           padding: const EdgeInsets.only(top: 8.0),
           child: Text(
-            'Materials - ${widget.documentId}', // Display the document ID in the app bar
+            '${widget.documentId}', // Display the document ID in the app bar
             style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
           ),
         ),
@@ -149,14 +149,16 @@ class _MaterialsState extends State<Materials> {
                             ),
                           ),
                           style: TextButton.styleFrom(
-                            backgroundColor: const Color.fromARGB(255, 255, 255, 255), // Set view button background color
+                            backgroundColor: const Color.fromARGB(255, 255, 255,
+                                255), // Set view button background color
                           ),
                         ),
                       ),
                       if (documentData.entries.last.key !=
                           entry.key) // Add a divider if it's not the last entry
                         Divider(
-                          color: Color.fromARGB(255, 0, 0, 0), // Set the color of the divider
+                          color: Color.fromARGB(
+                              255, 0, 0, 0), // Set the color of the divider
                           height: 1, // Set the height of the divider
                           thickness: 1, // Set the thickness of the divider
                         ),

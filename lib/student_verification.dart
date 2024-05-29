@@ -91,7 +91,7 @@ class VerificationScreen extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(left: 16.0, top: 22.0, bottom: 8.0),
+              padding: EdgeInsets.only(left: 16.0, top: 32.0, bottom: 0.0),
               child: Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
@@ -122,7 +122,7 @@ class VerificationScreen extends StatelessWidget {
                     itemBuilder: (context, index) {
                       var user = documents[index];
                       return Padding(
-                        padding: EdgeInsets.fromLTRB(16, 0, 16, 8),
+                        padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                         child: Container(
                           padding: EdgeInsets.all(16.0),
                           decoration: BoxDecoration(
@@ -221,14 +221,15 @@ class VerificationScreen extends StatelessWidget {
   }
 
   void _updateVerificationStatus(String userId, bool isApproved) {
-
     String formattedDate = DateFormat('yyyy-MM-dd').format(DateTime.now());
-  FirebaseFirestore.instance.collection('users').doc(userId).update({
-    'verifiedstatus': isApproved ? "True" : "Rejected",
-    'status': isApproved ? "Approved" : "Rejected", // Assuming you want a similar status update
-    'date': formattedDate,
-  });
-}
+    FirebaseFirestore.instance.collection('users').doc(userId).update({
+      'verifiedstatus': isApproved ? "True" : "Rejected",
+      'status': isApproved
+          ? "Approved"
+          : "Rejected", // Assuming you want a similar status update
+      'date': formattedDate,
+    });
+  }
 
   void _showIDPopup(BuildContext context, ImageProvider image) {
     showDialog(
