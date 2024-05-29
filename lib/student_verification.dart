@@ -212,7 +212,8 @@ class VerificationScreen extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               InteractiveViewer(
-                child: Image(image: image),
+                child: Image.network(
+                    'https://imgs.search.brave.com/L2JOFgYq9xjjy_C-b5DBNWhx2agN_yn8R7Uodua4foA/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9tc3dv/cmRpZGNhcmRzLmNv/bS93cC1jb250ZW50/L3VwbG9hZHMvMjAx/Ny8xMC9UZWFjaGVy/LWlkLWNhcmQtNi1D/UjJDLmpwZw'),
                 boundaryMargin: EdgeInsets.all(20),
                 minScale: 0.1,
                 maxScale: 5.0,
