@@ -311,7 +311,9 @@ class _StudyHubLoginScreenState extends State<StudyHubLoginScreen> {
           'rollno': _rollnoController.text,
           'profile_picture': '',
           'role': 'student',
-          'verifiedstatus': 'False',  
+          'verifiedstatus': 'False',
+          'status': '', 
+          'date': '',
         });
 
         if (mounted) {
