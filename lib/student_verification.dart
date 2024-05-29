@@ -90,7 +90,7 @@ class VerificationScreen extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(left: 16.0, top: 8.0, bottom: 8.0),
+              padding: EdgeInsets.only(left: 16.0, top: 22.0, bottom: 8.0),
               child: Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
@@ -121,7 +121,7 @@ class VerificationScreen extends StatelessWidget {
                     itemBuilder: (context, index) {
                       var user = documents[index];
                       return Padding(
-                        padding: EdgeInsets.all(16.0),
+                        padding: EdgeInsets.fromLTRB(16, 0, 16, 8),
                         child: Container(
                           padding: EdgeInsets.all(16.0),
                           decoration: BoxDecoration(

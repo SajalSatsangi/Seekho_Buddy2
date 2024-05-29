@@ -120,17 +120,10 @@ class MyWidget extends StatelessWidget {
                         ),
                       ],
                     ),
-                    TextButton(
-                      onPressed: () {},
-                      style: TextButton.styleFrom(
-                        padding: EdgeInsets.zero,
-                        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                      ),
-                      child: Text(
-                        "Approve",
-                        style: TextStyle(
-                          color: Colors.white,
-                        ),
+                    Text(
+                      "Approved",
+                      style: TextStyle(
+                        color: Colors.white,
                       ),
                     ),
                   ],
