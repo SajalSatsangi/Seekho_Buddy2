@@ -130,7 +130,7 @@ class _HomeState extends State<Home> {
                                   padding: const EdgeInsets.only(
                                       left: 15.0, top: 20),
                                   child: Text(
-                                    'Latest study updates',
+                                    'Latest study Materials',
                                     style: TextStyle(
                                       color: Colors.white,
                                       fontSize: 19,
@@ -232,7 +232,7 @@ class _HomeState extends State<Home> {
                                   padding: const EdgeInsets.only(
                                       left: 15.0, top: 20),
                                   child: Text(
-                                    'Latest study updates',
+                                    'Explore study Materials',
                                     style: TextStyle(
                                       color: Colors.white,
                                       fontSize: 19,
@@ -323,13 +323,7 @@ class _HomeState extends State<Home> {
                             children: [
                               // First box
                               InkWell(
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => ResourcesPage()),
-                                  );
-                                },
+                                onTap: () {},
                                 child: Padding(
                                   padding: const EdgeInsets.only(
                                       right: 15.0, left: 15, top: 15),
@@ -359,7 +353,7 @@ class _HomeState extends State<Home> {
                                           padding:
                                               const EdgeInsets.only(top: 15),
                                           child: Text(
-                                            'Resource',
+                                            '???????',
                                             style: TextStyle(
                                               color: Colors.white,
                                               fontWeight: FontWeight.bold,
@@ -374,13 +368,7 @@ class _HomeState extends State<Home> {
                               ),
                               // Second box
                               InkWell(
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => ResourcesPage()),
-                                  );
-                                },
+                                onTap: () {},
                                 child: Padding(
                                   padding:
                                       const EdgeInsets.only(top: 15, left: 5),
@@ -431,13 +419,7 @@ class _HomeState extends State<Home> {
                             children: [
                               // Third box
                               InkWell(
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => ResourcesPage()),
-                                  );
-                                },
+                                onTap: () {},
                                 child: Padding(
                                   padding: const EdgeInsets.only(
                                       right: 15, left: 15, top: 15),
@@ -482,13 +464,7 @@ class _HomeState extends State<Home> {
                               ),
                               // Fourth box
                               InkWell(
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => ResourcesPage()),
-                                  );
-                                },
+                                onTap: () {},
                                 child: Padding(
                                   padding:
                                       const EdgeInsets.only(top: 15, left: 5),
