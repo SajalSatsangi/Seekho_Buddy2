@@ -110,7 +110,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => verification()),
+                        MaterialPageRoute(builder: (context) => VerificationApp()),
                       );
                     },
                   ),
