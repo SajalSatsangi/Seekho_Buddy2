@@ -36,7 +36,7 @@ class MyWidget extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => verification()),
+                                builder: (context) => VerificationApp()),
                           );
                         },
                       ),

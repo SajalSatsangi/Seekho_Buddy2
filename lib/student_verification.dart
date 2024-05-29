@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
-
+import 'package:firebase_core/firebase_core.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:seekhobuddy/AdminScreens/Profile-Admin.dart';
 import 'package:seekhobuddy/verification_history.dart';
 
-void main() {
-  runApp(verification());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(VerificationApp());
 }
 
-class verification extends StatelessWidget {
+class VerificationApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -100,98 +103,117 @@ class VerificationScreen extends StatelessWidget {
                 ),
               ),
             ),
-            Padding(
-              padding: EdgeInsets.all(16.0),
-              child: Container(
-                padding: EdgeInsets.all(16.0),
-                decoration: BoxDecoration(
-                  color: Color(0xFF323232),
-                  borderRadius: BorderRadius.circular(12.0),
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          children: [
-                            Text(
-                              "John Doe",
-                              style: TextStyle(
-                                fontSize: 18,
-                                fontWeight:
-                                    FontWeight.bold, // Make the text bold
-                                color: Colors.white,
+            Expanded(
+              child: StreamBuilder<QuerySnapshot>(
+                stream: FirebaseFirestore.instance
+                    .collection('users')
+                    .where('verifiedstatus', isEqualTo: "False")
+                    .snapshots(),
+                builder: (context, snapshot) {
+                  if (!snapshot.hasData) {
+                    return Center(child: CircularProgressIndicator());
+                  }
+
+                  var documents = snapshot.data!.docs;
+
+                  return ListView.builder(
+                    itemCount: documents.length,
+                    itemBuilder: (context, index) {
+                      var user = documents[index];
+                      return Padding(
+                        padding: EdgeInsets.all(16.0),
+                        child: Container(
+                          padding: EdgeInsets.all(16.0),
+                          decoration: BoxDecoration(
+                            color: Color(0xFF323232),
+                            borderRadius: BorderRadius.circular(12.0),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    children: [
+                                      Text(
+                                        user['name'],
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                      SizedBox(width: 16),
+                                      TextButton(
+                                        onPressed: () {
+                                          _showIDPopup(
+                                            context,
+                                            NetworkImage(user['studentid']),
+                                          );
+                                        },
+                                        style: TextButton.styleFrom(
+                                          backgroundColor: Colors.black,
+                                        ),
+                                        child: Text(
+                                          "ID",
+                                          style: TextStyle(color: Colors.white),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(height: 4),
+                                  Text(
+                                    "Student ID: ${user['rollno']}",
+                                    style: TextStyle(
+                                      color: Colors.white70,
+                                    ),
+                                  ),
+                                  SizedBox(height: 4),
+                                  Text(
+                                    "Institution: DEI",
+                                    style: TextStyle(
+                                      color: Colors.white70,
+                                    ),
+                                  ),
+                                ],
                               ),
-                            ),
-                            SizedBox(
-                                width:
-                                    16), // Added padding between text and button
-                            TextButton(
-                              onPressed: () {
-                                _showIDPopup(
-                                  context,
-                                  AssetImage(
-                                      'assets/search_result.png'), // Image to display
-                                );
-                              },
-                              style: TextButton.styleFrom(
-                                backgroundColor: Colors
-                                    .black, // Background color of the button
+                              Column(
+                                children: [
+                                  ElevatedButton(
+                                    onPressed: () {
+                                      _updateVerificationStatus(user.id, true);
+                                    },
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: Colors.black,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(20),
+                                      ),
+                                    ),
+                                    child: Text("Approve"),
+                                  ),
+                                  SizedBox(height: 8),
+                                  ElevatedButton(
+                                    onPressed: () {
+                                      _updateVerificationStatus(user.id, false);
+                                    },
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: Colors.black,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(20),
+                                      ),
+                                    ),
+                                    child: Text("Reject"),
+                                  ),
+                                ],
                               ),
-                              child: Text(
-                                "ID",
-                                style: TextStyle(color: Colors.white),
-                              ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(height: 4),
-                        Text(
-                          "Student ID: 123456",
-                          style: TextStyle(
-                            color: Colors.white70,
+                            ],
                           ),
                         ),
-                        SizedBox(height: 4),
-                        Text(
-                          "Institution: ABC University",
-                          style: TextStyle(
-                            color: Colors.white70,
-                          ),
-                        ),
-                      ],
-                    ),
-                    Column(
-                      children: [
-                        ElevatedButton(
-                          onPressed: () {},
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.black,
-                            disabledBackgroundColor: Colors.white,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                          ),
-                          child: Text("Approve"),
-                        ),
-                        SizedBox(height: 8),
-                        ElevatedButton(
-                          onPressed: () {},
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.black,
-                            disabledBackgroundColor: Colors.white,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                          ),
-                          child: Text("Reject"),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
+                      );
+                    },
+                  );
+                },
               ),
             ),
           ],
@@ -201,8 +223,13 @@ class VerificationScreen extends StatelessWidget {
     );
   }
 
-  // Function to show the popup
-  void _showIDPopup(BuildContext context, AssetImage image) {
+  void _updateVerificationStatus(String userId, bool isApproved) {
+    FirebaseFirestore.instance.collection('users').doc(userId).update({
+      'verifiedstatus': isApproved ? "True" : "Rejected",
+    });
+  }
+
+  void _showIDPopup(BuildContext context, ImageProvider image) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -212,8 +239,7 @@ class VerificationScreen extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               InteractiveViewer(
-                child: Image.network(
-                    'https://imgs.search.brave.com/L2JOFgYq9xjjy_C-b5DBNWhx2agN_yn8R7Uodua4foA/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9tc3dv/cmRpZGNhcmRzLmNv/bS93cC1jb250ZW50/L3VwbG9hZHMvMjAx/Ny8xMC9UZWFjaGVy/LWlkLWNhcmQtNi1D/UjJDLmpwZw'),
+                child: Image(image: image),
                 boundaryMargin: EdgeInsets.all(20),
                 minScale: 0.1,
                 maxScale: 5.0,
