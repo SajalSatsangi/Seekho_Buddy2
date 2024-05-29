@@ -87,7 +87,35 @@ class _ProfilePageState extends State<ProfilePage> {
                   color: Colors.white,
                 ),
               ),
-             
+              Row(
+                // Add this
+                children: <Widget>[
+                  IconButton(
+                    icon: Icon(
+                      Icons.notifications,
+                      color: Colors.white,
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => verification()),
+                      );
+                    },
+                  ),
+                  IconButton(
+                    icon: Icon(
+                      Icons.settings,
+                      color: Colors.white,
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => EditProfile()),
+                      );
+                    },
+                  ),
+                ],
+              ),
             ],
           ),
         ),
@@ -159,35 +187,6 @@ class _ProfilePageState extends State<ProfilePage> {
                               ],
                             ),
                             SizedBox(height: 20),
-                            Align(
-                              alignment: Alignment.center,
-                              child: SizedBox(
-                                width: 180, // Adjust button width here
-                                height: 42, // Adjust button height here
-                                child: ElevatedButton(
-                                  onPressed: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => verification()),
-                                    );
-                                  },
-                                  style: ButtonStyle(
-                                    backgroundColor:
-                                        MaterialStateProperty.all<Color>(
-                                      Colors.yellow, // Changed to yellow
-                                    ),
-                                  ),
-                                  child: Text(
-                                    'Edit Profile',
-                                    style: TextStyle(
-                                      color: Colors.black, // Text color
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            SizedBox(height: 20),
                             Padding(
                               padding: const EdgeInsets.only(right: 16.0),
                               child: Align(
@@ -200,13 +199,15 @@ class _ProfilePageState extends State<ProfilePage> {
                                     style: ButtonStyle(
                                       backgroundColor:
                                           MaterialStateProperty.all<Color>(
-                                        Color.fromRGBO(65, 48, 48, 0.591), // Changed to red
+                                        Color.fromRGBO(65, 48, 48,
+                                            0.591), // Changed to red
                                       ),
                                     ),
                                     child: Text(
                                       'LogOut',
                                       style: TextStyle(
-                                        color: Color.fromARGB(255, 233, 30, 30), // Text color
+                                        color: Color.fromARGB(
+                                            255, 233, 30, 30), // Text color
                                       ),
                                     ),
                                   ),
