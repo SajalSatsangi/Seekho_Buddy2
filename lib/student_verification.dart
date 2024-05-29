@@ -4,6 +4,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:seekhobuddy/AdminScreens/Profile-Admin.dart';
 import 'package:seekhobuddy/verification_history.dart';
 import 'package:intl/intl.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -180,6 +182,7 @@ class VerificationScreen extends StatelessWidget {
                                   ElevatedButton(
                                     onPressed: () {
                                       _updateVerificationStatus(user.id, true);
+                                      _sendVerificationEmail(user['email'], user['name']);
                                     },
                                     style: ElevatedButton.styleFrom(
                                       backgroundColor: Colors.black,
@@ -262,4 +265,39 @@ class VerificationScreen extends StatelessWidget {
       },
     );
   }
+
+  void _sendVerificationEmail(String userEmail, String userName) async {
+  const serviceId = 'service_lau35dl';
+  const templateId = 'template_5r5icsd';
+  const publicKey = '71c4lPho96zuPiNeB';
+
+  final url = Uri.parse('https://api.emailjs.com/api/v1.0/email/send');
+
+  // Print the email before sending
+  print('Sending email to: $userEmail');
+
+  final response = await http.post(
+    url,
+    headers: {
+      'origin': 'http://localhost',
+      'Content-Type': 'application/json',
+    },
+    body: json.encode({
+      'service_id': serviceId,
+      'template_id': templateId,
+      'user_id': publicKey,
+      'template_params': {
+        'user_emaill': userEmail,
+        'name': userName,
+      },
+    }),
+  );
+
+  if (response.statusCode == 200) {
+    print('Email sent successfully');
+  } else {
+    print('Failed to send email: ${response.body}');
+  }
+}
+
 }
