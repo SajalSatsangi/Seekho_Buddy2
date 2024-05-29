@@ -55,14 +55,14 @@ class _LoadingScreenState extends State<LoadingScreen>
               "Your Verification Is In Progress",
               style: TextStyle(
                 color: Colors.white,
-                fontSize: 25,
+                fontSize: 20,
               ),
             ),
             Text(
               "Sorry for the wait",
               style: TextStyle(
                 color: Color.fromARGB(255, 170, 170, 170),
-                fontSize: 25,
+                fontSize: 18,
               ),
             ),
             SizedBox(height: 20), // Adjust spacing as needed
