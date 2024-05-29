@@ -117,7 +117,7 @@ class _HomeState extends State<Home> {
                         height:
                             129, // Increase the height to accommodate the bar
                         decoration: BoxDecoration(
-                          color: Color(0xFF323232),
+                          color: Color(0xFF212121),
                           borderRadius: BorderRadius.circular(
                               20), // Adjust the value to change the roundness
                         ),
@@ -173,12 +173,12 @@ class _HomeState extends State<Home> {
                               ],
                             ),
                             Positioned(
-                              top: 27,
-                              right: 12,
+                              top: 22,
+                              right: 20,
                               child: SvgPicture.asset(
                                 'assets/undraw_online_test_re_kyfx.svg',
-                                height: 50,
-                                width: 50,
+                                height: 65,
+                                width: 65,
                               ),
                             ),
                             Positioned(
@@ -190,7 +190,7 @@ class _HomeState extends State<Home> {
                                     10, // Adjust the height of the rectangular bar
                                 decoration: BoxDecoration(
                                   color:
-                                      Colors.black, // Set the color of the bar
+                                      Color.fromARGB(255, 63, 63, 63), // Set the color of the bar
                                   borderRadius: BorderRadius.only(
                                     topRight: Radius.circular(
                                         10), // Adjust the radius value as needed
@@ -218,15 +218,11 @@ class _HomeState extends State<Home> {
                         width: 350,
                         height: 149,
                         decoration: BoxDecoration(
-                          // Remove the background color
+                         color:  Color(0xFF212121),
                           // color: Color(0xFF323232),
                           borderRadius: BorderRadius.circular(
                               20), // Adjust the value to change the roundness
-                          border: Border.all(
-                            color: const Color.fromARGB(
-                                255, 107, 107, 107), // Set the border color
-                            width: 2.0, // Set the border width
-                          ),
+                          
                         ),
                         child: Stack(
                           children: [
@@ -276,14 +272,13 @@ class _HomeState extends State<Home> {
                                       style: ButtonStyle(
                                         backgroundColor:
                                             MaterialStateProperty.all<Color>(
-                                          const Color.fromARGB(
-                                              255, 107, 107, 107),
+                                          Color.fromARGB(255, 255, 255, 255),
                                         ),
                                       ),
                                       child: Text(
                                         'view',
                                         style: TextStyle(
-                                          color: Colors.white, // Text color
+                                          color: const Color.fromARGB(255, 0, 0, 0), // Text color
                                         ),
                                       ),
                                     ),
@@ -292,12 +287,12 @@ class _HomeState extends State<Home> {
                               ],
                             ),
                             Positioned(
-                              top: 27,
-                              right: 12,
+                              top: 22,
+                              right: 20,
                               child: SvgPicture.asset(
                                 'assets/undraw_online_test_re_kyfx.svg',
-                                height: 50,
-                                width: 50,
+                                height: 65,
+                                width: 65,
                               ),
                             ),
                           ],
@@ -337,11 +332,7 @@ class _HomeState extends State<Home> {
                                     height: 140,
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(20),
-                                      border: Border.all(
-                                        color: const Color.fromARGB(
-                                            255, 107, 107, 107),
-                                        width: 2.0,
-                                      ),
+                                       color: Color.fromARGB(255, 28, 28, 28),
                                     ),
                                     child: Column(
                                       mainAxisAlignment:
