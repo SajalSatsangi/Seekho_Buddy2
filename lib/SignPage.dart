@@ -3,7 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:seekhobuddy/LoginPage.dart';
-import 'package:seekhobuddy/home.dart';
+import 'package:seekhobuddy/emailVerificationWaiting.dart';
 import 'package:seekhobuddy/dropdown_data.dart';
 
 void main() async {
@@ -311,6 +311,7 @@ class _StudyHubLoginScreenState extends State<StudyHubLoginScreen> {
           'rollno': _rollnoController.text,
           'profile_picture': '',
           'role': 'student',
+          'verifiedstatus': 'False',  
         });
 
         if (mounted) {
@@ -325,7 +326,7 @@ class _StudyHubLoginScreenState extends State<StudyHubLoginScreen> {
         if (mounted) {
           Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => Home()),
+            MaterialPageRoute(builder: (context) => WaitingVerification()),
           );
         }
       } on FirebaseAuthException catch (e) {
