@@ -5,7 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart'; // Add this import for SvgPicture
 import 'package:seekhobuddy/Notification.dart';
 import 'footer.dart';
 import 'Chat/ChatPage-home.dart';
-import 'Profile-Admin.dart';
+import 'AdminScreens/Profile-Admin.dart';
 import 'Courses.dart';
 
 void main() {
