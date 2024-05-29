@@ -102,6 +102,18 @@ class _StudyHubLoginScreenState extends State<StudyHubLoginScreen> {
   };
 
   final Map<String, List<String>> _subbranches = {
+    'Faculty of Engineering_Fulltime-Electrical_Semester 1': [
+      '-',
+    ],
+    'Faculty of Engineering_Fulltime-Electrical_Semester 2': [
+      '-',
+    ],
+    'Faculty of Engineering_Fulltime-Electrical_Semester 3': [
+      '-',
+    ],
+    'Faculty of Engineering_Fulltime-Electrical_Semester 4': [
+      '-',
+    ],
     'Faculty of Engineering_Fulltime-Electrical_Semester 5': [
       'Subbranch 9',
       'Subbranch 10'
@@ -118,6 +130,18 @@ class _StudyHubLoginScreenState extends State<StudyHubLoginScreen> {
       'Subbranch 15',
       'Subbranch 16'
     ],
+    'Faculty of Engineering_Fulltime-Mechanical_Semester 1': [
+      '-',
+    ],
+    'Faculty of Engineering_Fulltime-Mechanical_Semester 2': [
+      '-',
+    ],
+    'Faculty of Engineering_Fulltime-Mechanical_Semester 3': [
+      '-',
+    ],
+    'Faculty of Engineering_Fulltime-Mechanical_Semester 4': [
+      '-',
+    ],
     'Faculty of Engineering_Fulltime-Mechanical_Semester 5': [
       'Subbranch 13',
       'Subbranch 14'
@@ -131,6 +155,90 @@ class _StudyHubLoginScreenState extends State<StudyHubLoginScreen> {
       'Subbranch 18'
     ],
     'Faculty of Engineering_Fulltime-Mechanical_Semester 8': [
+      'Subbranch 19',
+      'Subbranch 20'
+    ],
+    'Faculty of Engineering_Fulltime-Footwear_Semester 1': [
+      '-',
+    ],
+    'Faculty of Engineering_Fulltime-Footwear_Semester 2': [
+      '-',
+    ],
+    'Faculty of Engineering_Fulltime-Footwear_Semester 3': [
+      '-',
+    ],
+    'Faculty of Engineering_Fulltime-Footwear_Semester 4': [
+      '-',
+    ],
+    'Faculty of Engineering_Fulltime-Footwear_Semester 5': [
+      'Subbranch 13',
+      'Subbranch 14'
+    ],
+    'Faculty of Engineering_Fulltime-Footwear_Semester 6': [
+      'Computer Science',
+      'Subbranch 16'
+    ],
+    'Faculty of Engineering_Fulltime-Footwear_Semester 7': [
+      'Subbranch 17',
+      'Subbranch 18'
+    ],
+    'Faculty of Engineering_Fulltime-Footwear_Semester 8': [
+      'Subbranch 19',
+      'Subbranch 20'
+    ],
+    'Faculty of Engineering_Fulltime-Agriculture_Semester 1': [
+      '-',
+    ],
+    'Faculty of Engineering_Fulltime-Agriculture_Semester 2': [
+      '-',
+    ],
+    'Faculty of Engineering_Fulltime-Agriculture_Semester 3': [
+      '-',
+    ],
+    'Faculty of Engineering_Fulltime-Agriculture_Semester 4': [
+      '-',
+    ],
+    'Faculty of Engineering_Fulltime-Agriculture_Semester 5': [
+      'Subbranch 13',
+      'Subbranch 14'
+    ],
+    'Faculty of Engineering_Fulltime-Agriculture_Semester 6': [
+      'Computer Science',
+      'Subbranch 16'
+    ],
+    'Faculty of Engineering_Fulltime-Agriculture_Semester 7': [
+      'Subbranch 17',
+      'Subbranch 18'
+    ],
+    'Faculty of Engineering_Fulltime-Agriculture_Semester 8': [
+      'Subbranch 19',
+      'Subbranch 20'
+    ],
+    'Faculty of Engineering_Fulltime-Civil_Semester 1': [
+      '-',
+    ],
+    'Faculty of Engineering_Fulltime-Civil_Semester 2': [
+      '-',
+    ],
+    'Faculty of Engineering_Fulltime-Civil_Semester 3': [
+      '-',
+    ],
+    'Faculty of Engineering_Fulltime-Civil_Semester 4': [
+      '-',
+    ],
+    'Faculty of Engineering_Fulltime-Civil_Semester 5': [
+      'Subbranch 13',
+      'Subbranch 14'
+    ],
+    'Faculty of Engineering_Fulltime-Civil_Semester 6': [
+      'Computer Science',
+      'Subbranch 16'
+    ],
+    'Faculty of Engineering_Fulltime-Civil_Semester 7': [
+      'Subbranch 17',
+      'Subbranch 18'
+    ],
+    'Faculty of Engineering_Fulltime-Civil_Semester 8': [
       'Subbranch 19',
       'Subbranch 20'
     ],
@@ -377,56 +485,56 @@ class _StudyHubLoginScreenState extends State<StudyHubLoginScreen> {
   }
 
   Future<void> _signUp() async {
-  if (_formKey.currentState!.validate()) {
-    try {
-      UserCredential userCredential =
-          await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: _emailController.text,
-        password: _passwordController.text,
-      );
-
-      String uid = userCredential.user!.uid;
-
-      await FirebaseFirestore.instance
-          .collection('users')
-          .doc(_nameController.text)
-          .set({
-        'uid': uid,
-        'email': _emailController.text,
-        'name': _nameController.text,
-        'faculty': _selectedFaculty,
-        'subfaculty': _selectedSubfaculty,
-        'semester': _selectedSemester,
-        'subbranch': _selectedSubbranch,
-        'rollno': _rollnoController.text,
-        'profile_picture': '',
-        'role': 'student',
-      });
-
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('Signed up succesfully'),
-            duration: Duration(seconds: 2),
-          ),
+    if (_formKey.currentState!.validate()) {
+      try {
+        UserCredential userCredential =
+            await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: _emailController.text,
+          password: _passwordController.text,
         );
-      }
 
-      if (mounted) {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => Home()),
-        );
-      }
-    } on FirebaseAuthException catch (e) {
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Failed to sign up: ${e.message}')),
-        );
+        String uid = userCredential.user!.uid;
+
+        await FirebaseFirestore.instance
+            .collection('users')
+            .doc(_nameController.text)
+            .set({
+          'uid': uid,
+          'email': _emailController.text,
+          'name': _nameController.text,
+          'faculty': _selectedFaculty,
+          'subfaculty': _selectedSubfaculty,
+          'semester': _selectedSemester,
+          'subbranch': _selectedSubbranch,
+          'rollno': _rollnoController.text,
+          'profile_picture': '',
+          'role': 'student',
+        });
+
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('Signed up succesfully'),
+              duration: Duration(seconds: 2),
+            ),
+          );
+        }
+
+        if (mounted) {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => Home()),
+          );
+        }
+      } on FirebaseAuthException catch (e) {
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Failed to sign up: ${e.message}')),
+          );
+        }
       }
     }
   }
-}
 
   Widget _buildTextField({
     required TextEditingController controller,

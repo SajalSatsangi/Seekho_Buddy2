@@ -114,7 +114,7 @@ class _EditProfileState extends State<EditProfile> {
                       userData!['email'],
                       style: TextStyle(
                         fontSize: 16,
-                        color: Colors.red,
+                        color: Color.fromARGB(255, 185, 185, 185),
                       ),
                     ),
                   ),
@@ -130,23 +130,20 @@ class _EditProfileState extends State<EditProfile> {
                   ),
                 ),
                 SizedBox(height: 8),
-                GestureDetector(
-                  onTap: () =>
-                      navigateToEditField('rollno', userData!['rollno']),
-                  child: Container(
-                    margin: EdgeInsets.symmetric(vertical: 5),
-                    padding: EdgeInsets.all(12),
-                    decoration: BoxDecoration(
-                      color: Color(0xFF292929),
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        'Roll Number: ${userData!['rollno']}',
-                        style: TextStyle(
-                          color: Colors.white,
-                        ),
+                Container(
+                  margin: EdgeInsets.symmetric(vertical: 5),
+                  padding: EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: Color(0xFF292929),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      'Roll Number: ${userData!['rollno']}',
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Color.fromARGB(255, 185, 185, 185),
                       ),
                     ),
                   ),
@@ -164,7 +161,7 @@ class _EditProfileState extends State<EditProfile> {
                       'Faculty: ${userData!['faculty']}',
                       style: TextStyle(
                         fontSize: 16,
-                        color: Colors.red,
+                        color: Color.fromARGB(255, 185, 185, 185),
                       ),
                     ),
                   ),
@@ -182,7 +179,7 @@ class _EditProfileState extends State<EditProfile> {
                       'Branch: ${userData!['subfaculty']}',
                       style: TextStyle(
                         fontSize: 16,
-                        color: Colors.red,
+                        color: Color.fromARGB(255, 185, 185, 185),
                       ),
                     ),
                   ),
@@ -200,7 +197,7 @@ class _EditProfileState extends State<EditProfile> {
                       'Sub-Branch: ${userData!['subbranch']}',
                       style: TextStyle(
                         fontSize: 16,
-                        color: Colors.red,
+                        color: Color.fromARGB(255, 185, 185, 185),
                       ),
                     ),
                   ),
@@ -218,7 +215,7 @@ class _EditProfileState extends State<EditProfile> {
                       'Semester: ${userData!['semester']}',
                       style: TextStyle(
                         fontSize: 16,
-                        color: Colors.red,
+                        color: Color.fromARGB(255, 185, 185, 185),
                       ),
                     ),
                   ),

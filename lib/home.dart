@@ -189,8 +189,8 @@ class _HomeState extends State<Home> {
                                 height:
                                     10, // Adjust the height of the rectangular bar
                                 decoration: BoxDecoration(
-                                  color:
-                                      Color.fromARGB(255, 63, 63, 63), // Set the color of the bar
+                                  color: Color.fromARGB(255, 63, 63,
+                                      63), // Set the color of the bar
                                   borderRadius: BorderRadius.only(
                                     topRight: Radius.circular(
                                         10), // Adjust the radius value as needed
@@ -218,11 +218,10 @@ class _HomeState extends State<Home> {
                         width: 350,
                         height: 149,
                         decoration: BoxDecoration(
-                         color:  Color(0xFF212121),
+                          color: Color(0xFF212121),
                           // color: Color(0xFF323232),
                           borderRadius: BorderRadius.circular(
                               20), // Adjust the value to change the roundness
-                          
                         ),
                         child: Stack(
                           children: [
@@ -278,7 +277,8 @@ class _HomeState extends State<Home> {
                                       child: Text(
                                         'view',
                                         style: TextStyle(
-                                          color: const Color.fromARGB(255, 0, 0, 0), // Text color
+                                          color: const Color.fromARGB(
+                                              255, 0, 0, 0), // Text color
                                         ),
                                       ),
                                     ),
@@ -332,7 +332,11 @@ class _HomeState extends State<Home> {
                                     height: 140,
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(20),
-                                       color: Color.fromARGB(255, 28, 28, 28),
+                                      border: Border.all(
+                                        color: const Color.fromARGB(
+                                            255, 107, 107, 107),
+                                        width: 2.0,
+                                      ),
                                     ),
                                     child: Column(
                                       mainAxisAlignment:
