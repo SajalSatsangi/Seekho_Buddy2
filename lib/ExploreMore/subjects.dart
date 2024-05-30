@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:seekhobuddy/ExploreMore/subjects.dart';
+import 'package:seekhobuddy/ExploreMore/materialSectionPage.dart';
 
-class Semesters extends StatelessWidget {
+class Subjects extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,7 +27,7 @@ class Semesters extends StatelessWidget {
                         width: 10.0,
                       ),
                       Text(
-                        "Semesters",
+                        "Subjects",
                         style: TextStyle(
                           fontSize: 28,
                           fontWeight: FontWeight.bold,
@@ -85,7 +85,7 @@ class Semesters extends StatelessWidget {
                           ),
                           SizedBox(width: 8),
                           Text(
-                            'Semester 1',
+                            'Subject Name',
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 17.0,
@@ -98,7 +98,8 @@ class Semesters extends StatelessWidget {
                         onPressed: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => Subjects()),
+                            MaterialPageRoute(
+                                builder: (context) => Materialsectionpage()),
                           );
                         },
                         style: ButtonStyle(

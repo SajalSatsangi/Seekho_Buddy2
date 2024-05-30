@@ -59,7 +59,7 @@ class _LoadingScreenState extends State<LoadingScreen>
               ),
             ),
             Text(
-              "Sorry for the wait",
+              "It may take a few hours. Please wait...",
               style: TextStyle(
                 color: Color.fromARGB(255, 170, 170, 170),
                 fontSize: 18,

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:seekhobuddy/Profile/student_verification.dart';
+import 'package:seekhobuddy/AdminScreens/student_verification.dart';
 import '../Profile/editprofile.dart';
 import '../LoginPage.dart';
+import 'UsersData.dart';
 
 class ProfileScreenAdmin extends StatelessWidget {
   @override
@@ -112,6 +113,18 @@ class _ProfilePageState extends State<ProfilePage> {
                         context,
                         MaterialPageRoute(
                             builder: (context) => VerificationApp()),
+                      );
+                    },
+                  ),
+                  IconButton(
+                    icon: Icon(
+                      Icons.person,
+                      color: Colors.white,
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => UserDataPage()),
                       );
                     },
                   ),
