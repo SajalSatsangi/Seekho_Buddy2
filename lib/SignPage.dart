@@ -346,7 +346,7 @@ class _StudyHubLoginScreenState extends State<StudyHubLoginScreen> {
         'date': '',
       });
 
-      await _sendWelcomeEmail(
+      await sendWelcomeEmail(
         _emailController.text,
         _nameController.text,
       );
@@ -376,34 +376,23 @@ class _StudyHubLoginScreenState extends State<StudyHubLoginScreen> {
 
 
 
-Future<void> _sendWelcomeEmail(String email, String name) async {
-  const serviceId = 'service_lau35dl';
-  const templateId = 'template_xwjxnk8';
-  const publicKey = '71c4lPho96zuPiNeB';
+Future<void> sendWelcomeEmail(String email, String name) async {
+  const url = 'http://your-server-url/send-email';
 
-  final url = Uri.parse('https://api.emailjs.com/api/v1.0/email/send');
+  try {
+    final response = await http.post(
+      Uri.parse(url),
+      headers: {'Content-Type': 'application/json'},
+      body: json.encode({'userEmail': email, 'userName': name}),
+    );
 
-  final response = await http.post(
-    url,
-    headers: {
-      'origin': 'http://localhost',
-      'Content-Type': 'application/json',
-    },
-    body: json.encode({
-      'service_id': serviceId,
-      'template_id': templateId,
-      'user_id': publicKey,
-      'template_params': {
-        'user_email': email,
-        'name': name,
-      },
-    }),
-  );
-
-  if (response.statusCode == 200) {
-    print('Email sent successfully');
-  } else {
-    print('Failed to send email: ${response.body}');
+    if (response.statusCode == 200) {
+      print('Email sent successfully');
+    } else {
+      print('Failed to send email: ${response.body}');
+    }
+  } catch (e) {
+    print('Error sending email: $e');
   }
 }
 
