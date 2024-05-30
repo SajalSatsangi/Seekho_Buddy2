@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'MateiralSection.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -46,8 +47,19 @@ class _SubjectsPageState extends State<SubjectsPage> {
   }
 
   // Fetch subjects based on user data
-  Future<void> fetchSubjects() async {
-    if (userData != null) {
+  // Fetch subjects based on user data
+Future<void> fetchSubjects() async {
+  if (userData != null) {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    DateTime lastRead = DateTime.fromMillisecondsSinceEpoch(prefs.getInt('lastRead') ?? 0);
+    DateTime now = DateTime.now();
+
+    if (prefs.containsKey('subjects') && now.difference(lastRead) < Duration(days: 1)) {
+      // Load subjects from shared preferences if last read was less than a day ago
+      setState(() {
+        subjects = prefs.getStringList('subjects')!;
+      });
+    } else {
       String faculty = userData!['faculty'];
       String subfaculty = userData!['subfaculty'];
       String semester = userData!['semester'];
@@ -63,8 +75,13 @@ class _SubjectsPageState extends State<SubjectsPage> {
       setState(() {
         subjects = snapshot.docs.map((doc) => doc.id).toList();
       });
+
+      // Store subjects and current timestamp in shared preferences
+      await prefs.setStringList('subjects', subjects);
+      await prefs.setInt('lastRead', now.millisecondsSinceEpoch);
     }
   }
+}
 
   // Method to handle item selection in bottom navigation bar
 
@@ -159,7 +176,6 @@ class _SubjectsPageState extends State<SubjectsPage> {
                           context,
                           MaterialPageRoute(
                             builder: (context) => Home1(
-                              userData: userData,
                               subject: _filterSubjects()[index],
                             ),
                           ),

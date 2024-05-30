@@ -1,32 +1,52 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'Materials.dart';
 
 class Home1 extends StatefulWidget {
-  final DocumentSnapshot? userData;
   final String subject;
 
-  Home1({required this.userData, required this.subject});
+  Home1({required this.subject});
 
   @override
   _Home1State createState() => _Home1State();
 }
 
 class _Home1State extends State<Home1> {
+  DocumentSnapshot? userData;
   List<DocumentSnapshot> subjects = [];
   String _searchQuery = '';
 
   @override
   void initState() {
     super.initState();
-    fetchSubjects();
+    fetchUserData();
+  }
+
+  Future<void> fetchUserData() async {
+    User? user = FirebaseAuth.instance.currentUser;
+
+    if (user != null) {
+      var querySnapshot = await FirebaseFirestore.instance
+          .collection('users')
+          .where('uid', isEqualTo: user.uid)
+          .get();
+
+      if (querySnapshot.docs.isNotEmpty) {
+        setState(() {
+          userData = querySnapshot.docs.first;
+        });
+
+        fetchSubjects();
+      }
+    }
   }
 
   void fetchSubjects() async {
-    if (widget.userData != null) {
-      String faculty = widget.userData!['faculty'];
-      String subfaculty = widget.userData!['subfaculty'];
-      String semester = widget.userData!['semester'];
+    if (userData != null) {
+      String faculty = userData!['faculty'];
+      String subfaculty = userData!['subfaculty'];
+      String semester = userData!['semester'];
 
       final snapshot = await FirebaseFirestore.instance
           .collection('Material DB')
@@ -186,7 +206,7 @@ class _Home1State extends State<Home1> {
                                         context,
                                         MaterialPageRoute(
                                           builder: (context) => Materials(
-                                            userData: widget.userData!,
+
                                             subject: widget.subject,
                                             documentId: subjectDoc.id,
                                           ),

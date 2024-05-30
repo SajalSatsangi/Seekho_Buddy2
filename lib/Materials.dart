@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'PdfViewer.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class Materials extends StatefulWidget {
-  final DocumentSnapshot userData; // Add this parameter
   final String subject; // Add this parameter
   final String documentId; // Add this parameter
 
   Materials({
-    required this.userData,
     required this.subject,
     required this.documentId,
   }); // Update the constructor to accept the parameters
@@ -18,29 +17,29 @@ class Materials extends StatefulWidget {
 }
 
 class _MaterialsState extends State<Materials> {
-  late Future<DocumentSnapshot> _documentSnapshot;
+  DocumentSnapshot? userData;
 
   @override
   void initState() {
     super.initState();
-    _documentSnapshot = _fetchDocument();
+    fetchUserData();
   }
 
-  Future<DocumentSnapshot> _fetchDocument() async {
-    String faculty = widget.userData['faculty'];
-    String subfaculty = widget.userData['subfaculty'];
-    String semester = widget.userData['semester'];
+  Future<void> fetchUserData() async {
+    User? user = FirebaseAuth.instance.currentUser;
 
-    return await FirebaseFirestore.instance
-        .collection('Material DB')
-        .doc(faculty)
-        .collection(subfaculty)
-        .doc(semester)
-        .collection('Subjects')
-        .doc(widget.subject)
-        .collection(widget.subject)
-        .doc(widget.documentId)
-        .get();
+    if (user != null) {
+      var querySnapshot = await FirebaseFirestore.instance
+          .collection('users')
+          .where('uid', isEqualTo: user.uid)
+          .get();
+
+      if (querySnapshot.docs.isNotEmpty) {
+        setState(() {
+          userData = querySnapshot.docs.first;
+        });
+      }
+    }
   }
 
   @override
@@ -88,9 +87,11 @@ class _MaterialsState extends State<Materials> {
         ),
       ),
       body: FutureBuilder<DocumentSnapshot>(
-        future: _documentSnapshot,
+        future: userData != null ? _fetchDocument() : null,
         builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
+          if (userData == null) {
+            return Center(child: CircularProgressIndicator());
+          } else if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(child: CircularProgressIndicator());
           } else if (snapshot.hasError) {
             return Center(
@@ -172,5 +173,26 @@ class _MaterialsState extends State<Materials> {
       ),
       backgroundColor: Colors.black, // Setting the background color to black
     );
+  }
+
+  Future<DocumentSnapshot> _fetchDocument() async {
+    if (userData == null) {
+      throw Exception('userData is not initialized');
+    }
+
+    String faculty = userData!['faculty'];
+    String subfaculty = userData!['subfaculty'];
+    String semester = userData!['semester'];
+
+    return await FirebaseFirestore.instance
+        .collection('Material DB')
+        .doc(faculty)
+        .collection(subfaculty)
+        .doc(semester)
+        .collection('Subjects')
+        .doc(widget.subject)
+        .collection(widget.subject)
+        .doc(widget.documentId)
+        .get();
   }
 }
