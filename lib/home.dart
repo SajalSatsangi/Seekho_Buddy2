@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:seekhobuddy/Notices.dart';
 import 'package:seekhobuddy/Notification.dart';
 import 'package:seekhobuddy/Subjects.dart';
 import 'footer.dart';
@@ -272,7 +273,7 @@ class _HomeState extends State<Home> {
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) =>
-                                              ComingSoonScreen()),
+                                              Notices()),
                                     );
                                   },
                                   child: Padding(
