@@ -54,14 +54,17 @@ class _HomeState extends State<Home> {
             automaticallyImplyLeading: false,
             title: Row(
               children: [
-                Text(
-                  'Explore & Connect',
-                  style: TextStyle(
+                Expanded(
+                  child: Text(
+                    'Explore & Connect',
+                    style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 28,
-                      color: Colors.white),
+                      color: Colors.white,
+                    ),
+                    overflow: TextOverflow.ellipsis,
+                  ),
                 ),
-                Spacer(),
                 Container(
                   padding:
                       EdgeInsets.only(left: 8, right: 8, top: 2, bottom: 2),
@@ -202,227 +205,237 @@ class _HomeState extends State<Home> {
                     ),
                     SizedBox(height: 8),
                     Padding(
-                      padding: EdgeInsets.only(right: 15.0),
+                      padding: EdgeInsets.only(right: 0.0),
                       child: Column(
                         children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              InkWell(
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            ComingSoonScreen()),
-                                  );
-                                },
-                                child: Padding(
-                                  padding: const EdgeInsets.only(
-                                      right: 15.0, left: 15, top: 15),
-                                  child: Container(
-                                    width: 160,
-                                    height: 140,
-                                    decoration: BoxDecoration(
-                                      color: Color.fromARGB(87, 162, 162, 162),
-                                      borderRadius: BorderRadius.circular(20),
-                                      border: Border.all(
-                                        color: const Color.fromARGB(
-                                            255, 107, 107, 107),
-                                        width: 2.0,
-                                      ),
-                                    ),
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        SvgPicture.asset(
-                                          'assets/Resource.svg',
-                                          height: 80,
-                                          width: 80,
+                          SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                InkWell(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              ComingSoonScreen()),
+                                    );
+                                  },
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(
+                                        right: 15.0, left: 15, top: 15),
+                                    child: Container(
+                                      width: 160,
+                                      height: 140,
+                                      decoration: BoxDecoration(
+                                        color:
+                                            Color.fromARGB(87, 162, 162, 162),
+                                        borderRadius: BorderRadius.circular(20),
+                                        border: Border.all(
+                                          color: const Color.fromARGB(
+                                              255, 107, 107, 107),
+                                          width: 2.0,
                                         ),
-                                        Padding(
-                                          padding:
-                                              const EdgeInsets.only(top: 15),
-                                          child: Text(
-                                            'Explore More',
-                                            style: TextStyle(
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 15,
+                                      ),
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          SvgPicture.asset(
+                                            'assets/Resource.svg',
+                                            height: 80,
+                                            width: 80,
+                                          ),
+                                          Padding(
+                                            padding:
+                                                const EdgeInsets.only(top: 15),
+                                            child: Text(
+                                              'Explore More',
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 15,
+                                              ),
                                             ),
                                           ),
-                                        ),
-                                      ],
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),
-                              InkWell(
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            ComingSoonScreen()),
-                                  );
-                                },
-                                child: Padding(
-                                  padding:
-                                      const EdgeInsets.only(top: 15, left: 5),
-                                  child: Container(
-                                    width: 160,
-                                    height: 140,
-                                    decoration: BoxDecoration(
-                                      color: Color.fromARGB(87, 162, 162, 162),
-                                      borderRadius: BorderRadius.circular(20),
-                                      border: Border.all(
-                                        color: const Color.fromARGB(
-                                            255, 107, 107, 107),
-                                        width: 2.0,
-                                      ),
-                                    ),
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        SvgPicture.asset(
-                                          'assets/Job.svg',
-                                          height: 80,
-                                          width: 80,
+                                InkWell(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              ComingSoonScreen()),
+                                    );
+                                  },
+                                  child: Padding(
+                                    padding:
+                                        const EdgeInsets.only(top: 15, left: 5),
+                                    child: Container(
+                                      width: 160,
+                                      height: 140,
+                                      decoration: BoxDecoration(
+                                        color:
+                                            Color.fromARGB(87, 162, 162, 162),
+                                        borderRadius: BorderRadius.circular(20),
+                                        border: Border.all(
+                                          color: const Color.fromARGB(
+                                              255, 107, 107, 107),
+                                          width: 1.0, // Reduced border width
                                         ),
-                                        Padding(
-                                          padding:
-                                              const EdgeInsets.only(top: 15),
-                                          child: Text(
-                                            'Notices',
-                                            style: TextStyle(
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 15,
+                                      ),
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          SvgPicture.asset(
+                                            'assets/Job.svg',
+                                            height: 80,
+                                            width: 80,
+                                          ),
+                                          Padding(
+                                            padding:
+                                                const EdgeInsets.only(top: 15),
+                                            child: Text(
+                                              'Notices',
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 15,
+                                              ),
                                             ),
                                           ),
-                                        ),
-                                      ],
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                           SizedBox(height: 8),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              InkWell(
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            ComingSoonScreen()),
-                                  );
-                                },
-                                child: Padding(
-                                  padding: const EdgeInsets.only(
-                                      right: 15, left: 15, top: 15),
-                                  child: Container(
-                                    width: 160,
-                                    height: 140,
-                                    decoration: BoxDecoration(
-                                      color: Color.fromARGB(87, 162, 162, 162),
-                                      borderRadius: BorderRadius.circular(20),
-                                      border: Border.all(
-                                        color: const Color.fromARGB(
-                                            255, 107, 107, 107),
-                                        width: 2.0,
-                                      ),
-                                    ),
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        SvgPicture.asset(
-                                          'assets/Professional.svg',
-                                          height: 80,
-                                          width: 80,
+                          SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                InkWell(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              ComingSoonScreen()),
+                                    );
+                                  },
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(
+                                        right: 15, left: 15, top: 15),
+                                    child: Container(
+                                      width: 160,
+                                      height: 140,
+                                      decoration: BoxDecoration(
+                                        color:
+                                            Color.fromARGB(87, 162, 162, 162),
+                                        borderRadius: BorderRadius.circular(20),
+                                        border: Border.all(
+                                          color: const Color.fromARGB(
+                                              255, 107, 107, 107),
+                                          width: 2.0,
                                         ),
-                                        Padding(
-                                          padding:
-                                              const EdgeInsets.only(top: 15),
-                                          child: Text(
-                                            'Projects',
-                                            style: TextStyle(
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 15,
+                                      ),
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          SvgPicture.asset(
+                                            'assets/Professional.svg',
+                                            height: 80,
+                                            width: 80,
+                                          ),
+                                          Padding(
+                                            padding:
+                                                const EdgeInsets.only(top: 15),
+                                            child: Text(
+                                              'Projects',
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 15,
+                                              ),
                                             ),
                                           ),
-                                        ),
-                                      ],
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),
-                              InkWell(
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            ComingSoonScreen()),
-                                  );
-                                },
-                                child: Padding(
-                                  padding:
-                                      const EdgeInsets.only(top: 15, left: 5),
-                                  child: Container(
-                                    width: 160,
-                                    height: 140,
-                                    decoration: BoxDecoration(
-                                      color: Color.fromARGB(87, 162, 162, 162),
-                                      borderRadius: BorderRadius.circular(20),
-                                      border: Border.all(
-                                        color: const Color.fromARGB(
-                                            255, 107, 107, 107),
-                                        width: 2.0,
-                                      ),
-                                    ),
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        SvgPicture.asset(
-                                          'assets/Network.svg',
-                                          height: 70,
-                                          width: 60,
+                                InkWell(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              ComingSoonScreen()),
+                                    );
+                                  },
+                                  child: Padding(
+                                    padding:
+                                        const EdgeInsets.only(top: 15, left: 5),
+                                    child: Container(
+                                      width: 160,
+                                      height: 140,
+                                      decoration: BoxDecoration(
+                                        color:
+                                            Color.fromARGB(87, 162, 162, 162),
+                                        borderRadius: BorderRadius.circular(20),
+                                        border: Border.all(
+                                          color: const Color.fromARGB(
+                                              255, 107, 107, 107),
+                                          width: 1.0, // Reduced border width
                                         ),
-                                        Padding(
-                                          padding:
-                                              const EdgeInsets.only(top: 20),
-                                          child: Text(
-                                            'Networking',
-                                            style: TextStyle(
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 15,
+                                      ),
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          SvgPicture.asset(
+                                            'assets/Network.svg',
+                                            height: 70,
+                                            width: 60,
+                                          ),
+                                          Padding(
+                                            padding:
+                                                const EdgeInsets.only(top: 20),
+                                            child: Text(
+                                              'Networking',
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 15,
+                                              ),
                                             ),
                                           ),
-                                        ),
-                                      ],
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         ],
                       ),
