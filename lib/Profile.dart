@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:shared_preferences/shared_preferences.dart'; // Import shared preferences package
 import 'editprofile.dart';
 import 'LoginPage.dart';
 
@@ -32,26 +33,52 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   User? user = FirebaseAuth.instance.currentUser;
   DocumentSnapshot? userData;
+  late SharedPreferences prefs;
 
   @override
   void initState() {
     super.initState();
+    initPrefs();
     fetchUserData();
   }
 
-  Future<void> fetchUserData() async {
-    if (user != null) {
-      var querySnapshot = await FirebaseFirestore.instance
-          .collection('users')
-          .where('uid', isEqualTo: user!.uid)
-          .get();
+  Future<void> initPrefs() async {
+    prefs = await SharedPreferences.getInstance();
+  }
 
-      if (querySnapshot.docs.isNotEmpty) {
-        setState(() {
-          userData = querySnapshot.docs.first;
-        });
+  Future<void> fetchUserData() async {
+    // Check if it's been more than a day since last fetch
+    DateTime lastFetchTime =
+        DateTime.parse(prefs.getString('lastFetchTime') ?? '2000-01-01');
+    DateTime now = DateTime.now();
+    if (now.difference(lastFetchTime).inDays >= 1 || userData == null) {
+      if (user != null) {
+        var querySnapshot = await FirebaseFirestore.instance
+            .collection('users')
+            .where('uid', isEqualTo: user!.uid)
+            .get();
+
+        if (querySnapshot.docs.isNotEmpty) {
+          setState(() {
+            userData = querySnapshot.docs.first;
+            saveUserDataLocally(); // Save data locally when fetched
+            prefs.setString('lastFetchTime', now.toIso8601String());
+          });
+        }
       }
     }
+  }
+
+  // Function to save user data locally
+  Future<void> saveUserDataLocally() async {
+    await prefs.setString('name', userData!['name']);
+    await prefs.setString('email', userData!['email']);
+    await prefs.setString('profile_picture', userData!['profile_picture']);
+    await prefs.setString('rollno', userData!['rollno']);
+    await prefs.setString('faculty', userData!['faculty']);
+    await prefs.setString('subfaculty', userData!['subfaculty']);
+    await prefs.setString('subbranch', userData!['subbranch']);
+    await prefs.setString('semester', userData!['semester']);
   }
 
   // Function to handle logout
@@ -127,7 +154,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             ),
                             SizedBox(height: 16),
                             Text(
-                              userData!['name'],
+                              prefs.getString('name') ?? '', // Use local data
                               style: TextStyle(
                                 fontSize: 24,
                                 fontWeight: FontWeight.bold,
@@ -135,7 +162,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             ),
                             SizedBox(height: 3),
                             Text(
-                              userData!['email'],
+                              prefs.getString('email') ?? '', // Use local data
                               style: TextStyle(
                                 fontSize: 16,
                                 color: Colors.grey,
@@ -153,26 +180,29 @@ class _ProfilePageState extends State<ProfilePage> {
                                 SizedBox(height: 5),
                                 buildInfoBox(
                                   label: 'Roll Number',
-                                  text: userData!['rollno'],
+                                  text: prefs.getString('rollno') ??
+                                      '', // Use local data
                                   icon: Icons.confirmation_number,
                                 ),
                                 SizedBox(height: 5),
                                 buildInfoBox(
                                   label: 'Faculty',
-                                  text: userData!['faculty'],
+                                  text: prefs.getString('faculty') ??
+                                      '', // Use local data
                                   icon: Icons.account_balance,
                                 ),
                                 SizedBox(height: 5),
                                 buildInfoBox(
                                   label: 'Branch',
                                   text:
-                                      '${userData!['subfaculty']}, ${userData!['subbranch']}',
+                                      '${prefs.getString('subfaculty') ?? ''}, ${prefs.getString('subbranch') ?? ''}',
                                   icon: Icons.category,
                                 ),
                                 SizedBox(height: 5),
                                 buildInfoBox(
                                   label: 'Semester',
-                                  text: userData!['semester'],
+                                  text: prefs.getString('semester') ??
+                                      '', // Use local data
                                   icon: Icons.timeline,
                                 ),
                               ],
