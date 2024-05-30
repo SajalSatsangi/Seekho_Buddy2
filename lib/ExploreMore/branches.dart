@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:seekhobuddy/ExploreMore/Semesters.dart';
 
-class Faculties extends StatelessWidget {
+class Branches extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,7 +27,7 @@ class Faculties extends StatelessWidget {
                         width: 10.0,
                       ),
                       Text(
-                        "Faculties",
+                        "Branches",
                         style: TextStyle(
                           fontSize: 28,
                           fontWeight: FontWeight.bold,
@@ -84,7 +85,7 @@ class Faculties extends StatelessWidget {
                           ),
                           SizedBox(width: 8),
                           Text(
-                            'Faculty Name',
+                            'Branch Name',
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 17.0,
@@ -94,7 +95,13 @@ class Faculties extends StatelessWidget {
                         ],
                       ),
                       ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Semesters()),
+                          );
+                        },
                         style: ButtonStyle(
                           backgroundColor: MaterialStateProperty.all<Color>(
                             Colors.white,

@@ -72,9 +72,8 @@ class _Home1State extends State<Home1> {
 
   List<DocumentSnapshot> _filterSubjects() {
     return subjects
-        .where((subject) => subject.id
-            .toLowerCase()
-            .contains(_searchQuery.toLowerCase()))
+        .where((subject) =>
+            subject.id.toLowerCase().contains(_searchQuery.toLowerCase()))
         .toList();
   }
 
@@ -163,8 +162,7 @@ class _Home1State extends State<Home1> {
                               Padding(
                                 padding: const EdgeInsets.all(35.0),
                                 child: Column(
-                                  crossAxisAlignment:
-                                      CrossAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Row(
                                       mainAxisAlignment:
@@ -206,7 +204,6 @@ class _Home1State extends State<Home1> {
                                         context,
                                         MaterialPageRoute(
                                           builder: (context) => Materials(
-
                                             subject: widget.subject,
                                             documentId: subjectDoc.id,
                                           ),

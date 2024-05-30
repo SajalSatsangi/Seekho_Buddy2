@@ -48,40 +48,42 @@ class _SubjectsPageState extends State<SubjectsPage> {
 
   // Fetch subjects based on user data
   // Fetch subjects based on user data
-Future<void> fetchSubjects() async {
-  if (userData != null) {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    DateTime lastRead = DateTime.fromMillisecondsSinceEpoch(prefs.getInt('lastRead') ?? 0);
-    DateTime now = DateTime.now();
+  Future<void> fetchSubjects() async {
+    if (userData != null) {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      DateTime lastRead =
+          DateTime.fromMillisecondsSinceEpoch(prefs.getInt('lastRead') ?? 0);
+      DateTime now = DateTime.now();
 
-    if (prefs.containsKey('subjects') && now.difference(lastRead) < Duration(days: 1)) {
-      // Load subjects from shared preferences if last read was less than a day ago
-      setState(() {
-        subjects = prefs.getStringList('subjects')!;
-      });
-    } else {
-      String faculty = userData!['faculty'];
-      String subfaculty = userData!['subfaculty'];
-      String semester = userData!['semester'];
+      if (prefs.containsKey('subjects') &&
+          now.difference(lastRead) < Duration(days: 1)) {
+        // Load subjects from shared preferences if last read was less than a day ago
+        setState(() {
+          subjects = prefs.getStringList('subjects')!;
+        });
+      } else {
+        String faculty = userData!['faculty'];
+        String subfaculty = userData!['subfaculty'];
+        String semester = userData!['semester'];
 
-      final snapshot = await FirebaseFirestore.instance
-          .collection('Material DB')
-          .doc(faculty)
-          .collection(subfaculty)
-          .doc(semester)
-          .collection('Subjects')
-          .get();
+        final snapshot = await FirebaseFirestore.instance
+            .collection('Material DB')
+            .doc(faculty)
+            .collection(subfaculty)
+            .doc(semester)
+            .collection('Subjects')
+            .get();
 
-      setState(() {
-        subjects = snapshot.docs.map((doc) => doc.id).toList();
-      });
+        setState(() {
+          subjects = snapshot.docs.map((doc) => doc.id).toList();
+        });
 
-      // Store subjects and current timestamp in shared preferences
-      await prefs.setStringList('subjects', subjects);
-      await prefs.setInt('lastRead', now.millisecondsSinceEpoch);
+        // Store subjects and current timestamp in shared preferences
+        await prefs.setStringList('subjects', subjects);
+        await prefs.setInt('lastRead', now.millisecondsSinceEpoch);
+      }
     }
   }
-}
 
   // Method to handle item selection in bottom navigation bar
 

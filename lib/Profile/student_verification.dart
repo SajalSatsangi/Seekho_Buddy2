@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:seekhobuddy/AdminScreens/Profile-Admin.dart';
-import 'package:seekhobuddy/verification_history.dart';
+import 'package:seekhobuddy/Profile/verification_history.dart';
 import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -182,7 +182,8 @@ class VerificationScreen extends StatelessWidget {
                                   ElevatedButton(
                                     onPressed: () {
                                       _updateVerificationStatus(user.id, true);
-                                      sendVerificationEmail(user['email'], user['name']);
+                                      sendVerificationEmail(
+                                          user['email'], user['name']);
                                     },
                                     style: ElevatedButton.styleFrom(
                                       backgroundColor: Colors.black,
@@ -267,23 +268,23 @@ class VerificationScreen extends StatelessWidget {
   }
 
   Future<void> sendVerificationEmail(String userEmail, String userName) async {
-  const url = 'https://seekhobuddy-mailer.vercel.app/api/send-emailverification';
+    const url =
+        'https://seekhobuddy-mailer.vercel.app/api/send-emailverification';
 
-  try {
-    final response = await http.post(
-      Uri.parse(url),
-      headers: {'Content-Type': 'application/json'},
-      body: json.encode({'userEmail': userEmail, 'userName': userName}),
-    );
+    try {
+      final response = await http.post(
+        Uri.parse(url),
+        headers: {'Content-Type': 'application/json'},
+        body: json.encode({'userEmail': userEmail, 'userName': userName}),
+      );
 
-    if (response.statusCode == 200) {
-      print('Email sent successfully');
-    } else {
-      print('Failed to send email: ${response.body}');
+      if (response.statusCode == 200) {
+        print('Email sent successfully');
+      } else {
+        print('Failed to send email: ${response.body}');
+      }
+    } catch (e) {
+      print('Error sending email: $e');
     }
-  } catch (e) {
-    print('Error sending email: $e');
   }
-}
-
 }
