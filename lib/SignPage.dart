@@ -377,7 +377,7 @@ class _StudyHubLoginScreenState extends State<StudyHubLoginScreen> {
 
 
 Future<void> sendWelcomeEmail(String email, String name) async {
-  const url = 'http://your-server-url/send-email';
+  const url = 'https://seekhobuddy-mailer.vercel.app/api/send-emailsignup';
 
   try {
     final response = await http.post(
