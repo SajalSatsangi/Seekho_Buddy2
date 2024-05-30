@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:image_picker/image_picker.dart';
+import 'dart:io';
 import 'edit.dart'; // Import the EditField screen
 
 class EditProfile extends StatefulWidget {
@@ -10,7 +13,7 @@ class EditProfile extends StatefulWidget {
 
 class _EditProfileState extends State<EditProfile> {
   User? user = FirebaseAuth.instance.currentUser;
-  DocumentSnapshot? userData;
+  DocumentSnapshot<Map<String, dynamic>>? userData;
 
   @override
   void initState() {
@@ -33,16 +36,51 @@ class _EditProfileState extends State<EditProfile> {
     }
   }
 
+  Future<void> updateProfilePicture() async {
+  final picker = ImagePicker();
+  final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+
+  if (pickedFile != null) {
+    File file = File(pickedFile.path);
+
+    try {
+      // Retrieve the user's name
+      String userName = userData!.data()!['name'];
+      // Construct the file path using the user's name
+      String filePath = 'profile_pictures/${userName}.png';
+      UploadTask uploadTask = FirebaseStorage.instance.ref(filePath).putFile(file);
+
+      TaskSnapshot taskSnapshot = await uploadTask;
+      String downloadURL = await taskSnapshot.ref.getDownloadURL();
+
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(userData!.id)
+          .update({'profile_picture': downloadURL});
+
+      // Fetch updated user data from Firestore
+      await fetchUserData();
+    } catch (e) {
+      print(e);
+      // Show an error message to the user
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Failed to upload profile picture. Please try again.'),
+        ),
+      );
+    }
+  }
+}
+
+
   Future<void> navigateToEditField(String field, String currentValue) async {
     final result = await Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) =>
-            EditField(field: field, currentValue: currentValue),
+        builder: (context) => EditField(field: field, currentValue: currentValue),
       ),
     );
     if (result != null) {
-      // Update the specific field in Firestore and local state
       await FirebaseFirestore.instance
           .collection('users')
           .doc(userData!.id)
@@ -58,10 +96,9 @@ class _EditProfileState extends State<EditProfile> {
         title: Text('Edit Profile', style: TextStyle(color: Colors.white)),
         backgroundColor: Colors.black,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios,
-              color: Colors.white), // Change to back_arrow_ios
+          icon: Icon(Icons.arrow_back_ios, color: Colors.white),
           onPressed: () {
-            Navigator.pop(context); // Navigate back to the previous page
+            Navigator.pop(context);
           },
         ),
       ),
@@ -71,16 +108,15 @@ class _EditProfileState extends State<EditProfile> {
               padding: EdgeInsets.all(16),
               children: [
                 GestureDetector(
-                  onTap: () => navigateToEditField(
-                      'profile_picture', userData!['profile_picture']),
+                  onTap: () => updateProfilePicture(),
                   child: CircleAvatar(
                     radius: 100,
-                    backgroundImage: NetworkImage(userData!['profile_picture']),
+                    backgroundImage: NetworkImage(userData!.data()!['profile_picture']),
                   ),
                 ),
                 SizedBox(height: 16),
                 GestureDetector(
-                  onTap: () => navigateToEditField('name', userData!['name']),
+                  onTap: () => navigateToEditField('name', userData!.data()!['name']),
                   child: Container(
                     margin: EdgeInsets.symmetric(vertical: 5),
                     padding: EdgeInsets.all(12),
@@ -91,7 +127,7 @@ class _EditProfileState extends State<EditProfile> {
                     child: Align(
                       alignment: Alignment.centerLeft,
                       child: Text(
-                        userData!['name'],
+                        userData!.data()!['name'],
                         style: TextStyle(
                           fontSize: 24,
                           fontWeight: FontWeight.bold,
@@ -111,7 +147,7 @@ class _EditProfileState extends State<EditProfile> {
                   child: Align(
                     alignment: Alignment.centerLeft,
                     child: Text(
-                      userData!['email'],
+                      userData!.data()!['email'],
                       style: TextStyle(
                         fontSize: 16,
                         color: Color.fromARGB(255, 185, 185, 185),
@@ -140,7 +176,7 @@ class _EditProfileState extends State<EditProfile> {
                   child: Align(
                     alignment: Alignment.centerLeft,
                     child: Text(
-                      'Roll Number: ${userData!['rollno']}',
+                      'Roll Number: ${userData!.data()!['rollno']}',
                       style: TextStyle(
                         fontSize: 16,
                         color: Color.fromARGB(255, 185, 185, 185),
@@ -158,7 +194,7 @@ class _EditProfileState extends State<EditProfile> {
                   child: Align(
                     alignment: Alignment.centerLeft,
                     child: Text(
-                      'Faculty: ${userData!['faculty']}',
+                      'Faculty: ${userData!.data()!['faculty']}',
                       style: TextStyle(
                         fontSize: 16,
                         color: Color.fromARGB(255, 185, 185, 185),
@@ -176,7 +212,7 @@ class _EditProfileState extends State<EditProfile> {
                   child: Align(
                     alignment: Alignment.centerLeft,
                     child: Text(
-                      'Branch: ${userData!['subfaculty']}',
+                      'Branch: ${userData!.data()!['subfaculty']}',
                       style: TextStyle(
                         fontSize: 16,
                         color: Color.fromARGB(255, 185, 185, 185),
@@ -194,7 +230,7 @@ class _EditProfileState extends State<EditProfile> {
                   child: Align(
                     alignment: Alignment.centerLeft,
                     child: Text(
-                      'Sub-Branch: ${userData!['subbranch']}',
+                      'Sub-Branch: ${userData!.data()!['subbranch']}',
                       style: TextStyle(
                         fontSize: 16,
                         color: Color.fromARGB(255, 185, 185, 185),
@@ -212,7 +248,7 @@ class _EditProfileState extends State<EditProfile> {
                   child: Align(
                     alignment: Alignment.centerLeft,
                     child: Text(
-                      'Semester: ${userData!['semester']}',
+                      'Semester: ${userData!.data()!['semester']}',
                       style: TextStyle(
                         fontSize: 16,
                         color: Color.fromARGB(255, 185, 185, 185),
