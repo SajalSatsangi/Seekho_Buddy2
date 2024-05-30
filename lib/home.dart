@@ -17,7 +17,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Explorer App',
+      title: 'SeekhoBuddy App',
       theme: ThemeData(
         brightness: Brightness.dark,
         scaffoldBackgroundColor: Color.fromARGB(255, 0, 0, 0),
