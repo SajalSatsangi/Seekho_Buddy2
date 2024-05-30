@@ -5,6 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:seekhobuddy/Notices.dart';
 import 'package:seekhobuddy/Notification.dart';
 import 'package:seekhobuddy/Subjects.dart';
+import 'package:seekhobuddy/facultyData.dart';
 import 'footer.dart';
 import 'Chat/ChatPage-home.dart';
 import 'AdminScreens/Profile-Admin.dart';
@@ -219,8 +220,7 @@ class _HomeState extends State<Home> {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) =>
-                                              ComingSoonScreen()),
+                                          builder: (context) => Faculties()),
                                     );
                                   },
                                   child: Padding(
@@ -272,8 +272,7 @@ class _HomeState extends State<Home> {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) =>
-                                              Notices()),
+                                          builder: (context) => Notices()),
                                     );
                                   },
                                   child: Padding(
