@@ -288,7 +288,7 @@ class _HomeState extends State<Home> {
                                         border: Border.all(
                                           color: const Color.fromARGB(
                                               255, 107, 107, 107),
-                                          width: 1.0, // Reduced border width
+                                          width: 2.0, // Reduced border width
                                         ),
                                       ),
                                       child: Column(
@@ -403,7 +403,7 @@ class _HomeState extends State<Home> {
                                         border: Border.all(
                                           color: const Color.fromARGB(
                                               255, 107, 107, 107),
-                                          width: 1.0, // Reduced border width
+                                          width: 2.0, // Reduced border width
                                         ),
                                       ),
                                       child: Column(
