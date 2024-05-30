@@ -1,12 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_svg/flutter_svg.dart'; // Add this import for SvgPicture
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:seekhobuddy/Notification.dart';
+import 'package:seekhobuddy/Subjects.dart';
 import 'footer.dart';
 import 'Chat/ChatPage-home.dart';
 import 'AdminScreens/Profile-Admin.dart';
-import 'Courses.dart';
+import 'ComingSoonPage.dart'; // Import the ComingSoonPage
 
 void main() {
   runApp(HomePage());
@@ -16,7 +17,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Explorer App',
+      title: 'SeekhoBuddy App',
       theme: ThemeData(
         brightness: Brightness.dark,
         scaffoldBackgroundColor: Color.fromARGB(255, 0, 0, 0),
@@ -117,9 +118,7 @@ class _HomeState extends State<Home> {
                         height: 149,
                         decoration: BoxDecoration(
                           color: Color(0xFF212121),
-                          // color: Color(0xFF323232),
-                          borderRadius: BorderRadius.circular(
-                              20), // Adjust the value to change the roundness
+                          borderRadius: BorderRadius.circular(20),
                         ),
                         child: Stack(
                           children: [
@@ -142,9 +141,8 @@ class _HomeState extends State<Home> {
                                 Row(
                                   children: [
                                     Padding(
-                                      padding: const EdgeInsets.only(
-                                        left: 15.0,
-                                      ),
+                                      padding:
+                                          const EdgeInsets.only(left: 15.0),
                                       child: Text(
                                         'best study materials for you',
                                         style: TextStyle(
@@ -160,17 +158,16 @@ class _HomeState extends State<Home> {
                                   padding: const EdgeInsets.only(
                                       left: 20.0, top: 5.0),
                                   child: SizedBox(
-                                    width: 120, // Adjust button width here
-                                    height: 40, // Adjust button height here
+                                    width: 120,
+                                    height: 40,
                                     child: ElevatedButton(
                                       onPressed: () {
                                         Navigator.push(
                                           context,
                                           MaterialPageRoute(
                                               builder: (context) =>
-                                                  ResourcesPage()),
+                                                  SubjectsPage()),
                                         );
-                                        // Add your onPressed code here
                                       },
                                       style: ButtonStyle(
                                         backgroundColor:
@@ -182,7 +179,7 @@ class _HomeState extends State<Home> {
                                         'View',
                                         style: TextStyle(
                                           color: const Color.fromARGB(
-                                              255, 0, 0, 0), // Text color
+                                              255, 0, 0, 0),
                                         ),
                                       ),
                                     ),
@@ -203,7 +200,7 @@ class _HomeState extends State<Home> {
                         ),
                       ),
                     ),
-                    SizedBox(height: 8), // Add some spacing
+                    SizedBox(height: 8),
                     Padding(
                       padding: EdgeInsets.only(right: 15.0),
                       child: Column(
@@ -211,9 +208,15 @@ class _HomeState extends State<Home> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              // First box
                               InkWell(
-                                onTap: () {},
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            ComingSoonScreen()),
+                                  );
+                                },
                                 child: Padding(
                                   padding: const EdgeInsets.only(
                                       right: 15.0, left: 15, top: 15),
@@ -244,7 +247,7 @@ class _HomeState extends State<Home> {
                                           padding:
                                               const EdgeInsets.only(top: 15),
                                           child: Text(
-                                            '???????',
+                                            'Explore More',
                                             style: TextStyle(
                                               color: Colors.white,
                                               fontWeight: FontWeight.bold,
@@ -257,9 +260,15 @@ class _HomeState extends State<Home> {
                                   ),
                                 ),
                               ),
-                              // Second box
                               InkWell(
-                                onTap: () {},
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            ComingSoonScreen()),
+                                  );
+                                },
                                 child: Padding(
                                   padding:
                                       const EdgeInsets.only(top: 15, left: 5),
@@ -305,13 +314,19 @@ class _HomeState extends State<Home> {
                               ),
                             ],
                           ),
-                          SizedBox(height: 8), // Add some more spacing
+                          SizedBox(height: 8),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              // Third box
                               InkWell(
-                                onTap: () {},
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            ComingSoonScreen()),
+                                  );
+                                },
                                 child: Padding(
                                   padding: const EdgeInsets.only(
                                       right: 15, left: 15, top: 15),
@@ -355,9 +370,15 @@ class _HomeState extends State<Home> {
                                   ),
                                 ),
                               ),
-                              // Fourth box
                               InkWell(
-                                onTap: () {},
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            ComingSoonScreen()),
+                                  );
+                                },
                                 child: Padding(
                                   padding:
                                       const EdgeInsets.only(top: 15, left: 5),

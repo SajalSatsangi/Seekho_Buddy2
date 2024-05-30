@@ -11,13 +11,13 @@ final List<String> faculties = [
 
 final Map<String, List<String>> subfaculties = {
   'Faculty of Engineering': [
-    "Fulltime-1stYear",
-    "Fulltime-Electrical",
-    "Fulltime-Mechanical",
-    "Fulltime-Civil",
-    "Fulltime-Footwear",
-    "Fulltime-Agriculture",
-    "Parttime-Electrical",
+    "1stYear",
+    "Electrical",
+    "Mechanical",
+    "Civil",
+    "Footwear",
+    "Agriculture",
+    "Electrical",
     "BVoc-RE",
     "BVoc-WS",
     "BVoc-AI",
@@ -34,11 +34,11 @@ final Map<String, List<String>> subfaculties = {
 };
 
 final Map<String, List<String>> semesters = {
-  'Fulltime-1stYear': [
+  '1stYear': [
     'Semester 1',
     'Semester 2',
   ],
-  'Fulltime-Electrical': [
+  'Electrical': [
     'Semester 1',
     'Semester 2',
     'Semester 3',
@@ -48,7 +48,7 @@ final Map<String, List<String>> semesters = {
     'Semester 7',
     'Semester 8'
   ],
-  'Fulltime-Mechanical': [
+  'Mechanical': [
     'Semester 1',
     'Semester 2',
     'Semester 3',
@@ -62,67 +62,55 @@ final Map<String, List<String>> semesters = {
 };
 
 final Map<String, List<String>> subbranches = {
-  'Fulltime-1stYear_Semester 1': [
+  '1stYear_Semester 1': [
     'NIL',
     'NIL',
   ],
-  'Fulltime-1stYear_Semester 2': [
+  '1stYear_Semester 2': [
     'NIL',
     'NIL',
   ],
-  'Faculty of Engineering_Fulltime-Electrical_Semester 1': [
+  'Faculty of Engineering_Electrical_Semester 3': [
     'NIL',
   ],
-  'Faculty of Engineering_Fulltime-Electrical_Semester 2': [
+  'Faculty of Engineering_Electrical_Semester 4': [
     'NIL',
   ],
-  'Faculty of Engineering_Fulltime-Electrical_Semester 3': [
-    'NIL',
-  ],
-  'Faculty of Engineering_Fulltime-Electrical_Semester 4': [
-    'NIL',
-  ],
-  'Faculty of Engineering_Fulltime-Electrical_Semester 5': [
+  'Faculty of Engineering_Electrical_Semester 5': [
     'Subbranch 9',
     'Subbranch 10'
   ],
-  'Faculty of Engineering_Fulltime-Electrical_Semester 6': [
+  'Faculty of Engineering_Electrical_Semester 6': [
     'Computer Science',
     'Subbranch 12'
   ],
-  'Faculty of Engineering_Fulltime-Electrical_Semester 7': [
+  'Faculty of Engineering_Electrical_Semester 7': [
     'Subbranch 13',
     'Subbranch 14'
   ],
-  'Faculty of Engineering_Fulltime-Electrical_Semester 8': [
+  'Faculty of Engineering_Electrical_Semester 8': [
     'Subbranch 15',
     'Subbranch 16'
   ],
-  'Faculty of Engineering_Fulltime-Mechanical_Semester 1': [
+  'Faculty of Engineering_Mechanical_Semester 3': [
     'NIL',
   ],
-  'Faculty of Engineering_Fulltime-Mechanical_Semester 2': [
+  'Faculty of Engineering_Mechanical_Semester 4': [
     'NIL',
   ],
-  'Faculty of Engineering_Fulltime-Mechanical_Semester 3': [
-    'NIL',
-  ],
-  'Faculty of Engineering_Fulltime-Mechanical_Semester 4': [
-    'NIL',
-  ],
-  'Faculty of Engineering_Fulltime-Mechanical_Semester 5': [
+  'Faculty of Engineering_Mechanical_Semester 5': [
     'Subbranch 13',
     'Subbranch 14'
   ],
-  'Faculty of Engineering_Fulltime-Mechanical_Semester 6': [
+  'Faculty of Engineering_Mechanical_Semester 6': [
     'Computer Science',
     'Subbranch 16'
   ],
-  'Faculty of Engineering_Fulltime-Mechanical_Semester 7': [
+  'Faculty of Engineering_Mechanical_Semester 7': [
     'Subbranch 17',
     'Subbranch 18'
   ],
-  'Faculty of Engineering_Fulltime-Mechanical_Semester 8': [
+  'Faculty of Engineering_Mechanical_Semester 8': [
     'Subbranch 19',
     'Subbranch 20'
   ],
