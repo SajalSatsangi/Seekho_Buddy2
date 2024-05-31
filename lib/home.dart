@@ -6,7 +6,6 @@ import 'package:seekhobuddy/Courses.dart';
 import 'package:seekhobuddy/Notices/Notices.dart';
 import 'package:seekhobuddy/Notification.dart';
 import 'footer.dart';
-import 'Chat/ChatPage-home.dart';
 import 'AdminScreens/Profile-Admin.dart';
 import 'ComingSoonPage.dart'; // Import the ComingSoonPage
 
@@ -440,6 +439,40 @@ class _HomeState extends State<Home> {
                         ],
                       ),
                     ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 230.0, top: 15.0),
+                      child: SizedBox(
+                        width: 120,
+                        height: 40,
+                        child: ElevatedButton(
+                          onPressed: () {},
+                          style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all<Color>(
+                              Color.fromARGB(255, 93, 93, 93),
+                            ),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                'Help',
+                                style: TextStyle(
+                                  color: Color.fromARGB(255, 252, 251, 251),
+                                  fontSize: 18,
+                                ),
+                              ),
+                              SizedBox(
+                                  width:
+                                      8), // Space between the text and the icon
+                              Icon(
+                                Icons.help, // You can use any icon from Icons
+                                color: Color.fromARGB(255, 252, 251, 251),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    )
                   ],
                 ),
               ),
@@ -447,7 +480,7 @@ class _HomeState extends State<Home> {
           ),
         );
       case 1:
-        return ChatHomePage();
+        return ComingSoonScreen();
       case 2:
         return ProfileScreenAdmin();
       default:
