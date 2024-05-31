@@ -37,7 +37,7 @@ class UserDataPage extends StatelessWidget {
                       ),
                       SizedBox(width: 10.0),
                       Text(
-                        "Courses",
+                        "User Data",
                         style: TextStyle(
                           fontSize: 28,
                           fontWeight: FontWeight.bold,
