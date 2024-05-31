@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:seekhobuddy/AdminScreens/Profile-Admin.dart';
+import 'package:seekhobuddy/AdminScreens/UserData_Edit.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(userdata());
 }
 
-class MyApp extends StatelessWidget {
+class userdata extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -32,7 +34,11 @@ class UserDataPage extends StatelessWidget {
                       IconButton(
                         icon: Icon(Icons.arrow_back_ios, color: Colors.white),
                         onPressed: () {
-                          Navigator.of(context).pop();
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ProfileScreenAdmin()),
+                          );
                         },
                       ),
                       SizedBox(width: 10.0),
@@ -138,6 +144,12 @@ class UserDataPage extends StatelessWidget {
                           color: Colors.white,
                         ),
                         onPressed: () {
+
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => userdata_edit()),
+                          );
                           // Add functionality for edit here
                         },
                       ),
