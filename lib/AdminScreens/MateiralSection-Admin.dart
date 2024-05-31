@@ -77,8 +77,33 @@ class _MateiralsectionAdminState extends State<MateiralsectionAdmin> {
         .toList();
   }
 
-  void _onAddButtonPressed() {
-    // Handle add button press
+  void _onAddButtonPressed(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Add Folder'),
+          content: TextField(
+            decoration: InputDecoration(hintText: "Enter Folder Name"),
+          ),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(); // Close the dialog
+              },
+              child: Text('Cancel'),
+            ),
+            TextButton(
+              onPressed: () {
+                // Handle the action when "Add" is pressed
+                Navigator.of(context).pop(); // Close the dialog
+              },
+              child: Text('Add'),
+            ),
+          ],
+        );
+      },
+    );
   }
 
   @override
@@ -251,7 +276,7 @@ class _MateiralsectionAdminState extends State<MateiralsectionAdmin> {
       floatingActionButton: Padding(
         padding: const EdgeInsets.only(bottom: 36.0),
         child: FloatingActionButton(
-          onPressed: _onAddButtonPressed,
+          onPressed: () => _onAddButtonPressed(context),
           backgroundColor: Color(0xFF323232),
           child: Icon(Icons.add, color: Colors.white),
         ),
