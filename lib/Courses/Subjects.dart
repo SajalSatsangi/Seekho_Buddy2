@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'MateiralSection.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../AdminScreens/MateiralSection-Admin.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -177,7 +177,7 @@ class _SubjectsPageState extends State<SubjectsPage> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => Home1(
+                            builder: (context) => MateiralsectionAdmin(
                               subject: _filterSubjects()[index],
                             ),
                           ),

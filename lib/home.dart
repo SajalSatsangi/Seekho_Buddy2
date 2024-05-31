@@ -2,10 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:seekhobuddy/Courses.dart';
 import 'package:seekhobuddy/Notices/Notices.dart';
 import 'package:seekhobuddy/Notification.dart';
-import 'package:seekhobuddy/Courses/Subjects.dart';
-import 'package:seekhobuddy/ExploreMore/facultyData.dart';
 import 'footer.dart';
 import 'Chat/ChatPage-home.dart';
 import 'AdminScreens/Profile-Admin.dart';
@@ -171,7 +170,7 @@ class _HomeState extends State<Home> {
                                           context,
                                           MaterialPageRoute(
                                               builder: (context) =>
-                                                  SubjectsPage()),
+                                                  ResourcesPage()),
                                         );
                                       },
                                       style: ButtonStyle(
@@ -220,7 +219,8 @@ class _HomeState extends State<Home> {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => Faculties()),
+                                          builder: (context) =>
+                                              ComingSoonScreen()),
                                     );
                                   },
                                   child: Padding(
