@@ -1,115 +1,340 @@
 import 'package:flutter/material.dart';
-import 'package:seekhobuddy/AdminScreens/UsersData.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:image_picker/image_picker.dart';
+import 'dart:io';
 
-void main() {
-  runApp(userdata_edit());
-}
+import 'package:seekhobuddy/AdminScreens/useredit.dart';
 
-class userdata_edit extends StatelessWidget {
+class userdata_edit extends StatefulWidget {
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: MyWidget(),
-      theme: ThemeData.dark(),
-    );
-  }
+  _EditProfileState createState() => _EditProfileState();
 }
 
-class MyWidget extends StatelessWidget {
+class _EditProfileState extends State<userdata_edit> {
+  User? user = FirebaseAuth.instance.currentUser;
+  DocumentSnapshot<Map<String, dynamic>>? userData;
+
+  @override
+  void initState() {
+    super.initState();
+    fetchUserData();
+  }
+
+  Future<void> fetchUserData() async {
+    if (user != null) {
+      var querySnapshot = await FirebaseFirestore.instance
+          .collection('users')
+          .where('uid', isEqualTo: user!.uid)
+          .get();
+
+      if (querySnapshot.docs.isNotEmpty) {
+        setState(() {
+          userData = querySnapshot.docs.first;
+        });
+      }
+    }
+  }
+
+  Future<void> updateProfilePicture() async {
+    final picker = ImagePicker();
+    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+
+    if (pickedFile != null) {
+      File file = File(pickedFile.path);
+
+      try {
+        // Retrieve the user's name
+        String userName = userData!.data()!['name'];
+        // Construct the file path using the user's name
+        String filePath = 'profile_pictures/${userName}.png';
+        UploadTask uploadTask =
+            FirebaseStorage.instance.ref(filePath).putFile(file);
+
+        TaskSnapshot taskSnapshot = await uploadTask;
+        String downloadURL = await taskSnapshot.ref.getDownloadURL();
+
+        await FirebaseFirestore.instance
+            .collection('users')
+            .doc(userData!.id)
+            .update({'profile_picture': downloadURL});
+
+        // Fetch updated user data from Firestore
+        await fetchUserData();
+      } catch (e) {
+        print(e);
+        // Show an error message to the user
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content:
+                Text('Failed to upload profile picture. Please try again.'),
+          ),
+        );
+      }
+    }
+  }
+
+  Future<void> navigateToEditField(String field, String currentValue) async {
+    final result = await Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) =>
+            useredit(field: field, currentValue: currentValue),
+      ),
+    );
+    if (result != null) {
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(userData!.id)
+          .update({field: result});
+      fetchUserData();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: EdgeInsets.only(top: 28.0), // Additional padding from the top
-        child: Column(
-          children: [
-            Padding(
-              padding: EdgeInsets.only(left: 16, right: 16, top: 10),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Row(
-                    children: [
-                      IconButton(
-                        icon: Icon(Icons.arrow_back_ios, color: Colors.white),
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => userdata()),
-                          );
-                        },
-                      ),
-                      SizedBox(width: 10.0),
-                      Text(
-                        "UserData Edit",
+      appBar: AppBar(
+        title: Text('Edit Profile', style: TextStyle(color: Colors.white)),
+        backgroundColor: Colors.black,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back_ios, color: Colors.white),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+      ),
+      body: userData == null
+          ? Center(child: CircularProgressIndicator())
+          : ListView(
+              padding: EdgeInsets.all(16),
+              children: [
+                GestureDetector(
+                  onTap: () => updateProfilePicture(),
+                  child: CircleAvatar(
+                    radius: 100,
+                    backgroundImage:
+                        NetworkImage(userData!.data()!['profile_picture']),
+                  ),
+                ),
+                SizedBox(height: 16),
+                GestureDetector(
+                  onTap: () =>
+                      navigateToEditField('name', userData!.data()!['name']),
+                  child: Container(
+                    margin: EdgeInsets.symmetric(vertical: 5),
+                    padding: EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                      color: Color(0xFF292929),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        userData!.data()!['name'],
                         style: TextStyle(
-                          fontSize: 28,
+                          fontSize: 24,
                           fontWeight: FontWeight.bold,
                           color: Colors.white,
                         ),
                       ),
-                    ],
+                    ),
                   ),
-                ],
-              ),
-            ),
-            // Add the circular image after the title bar
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 14, vertical: 14),
-              child: ClipOval(
-                child: Image.network(
-                  'https://resize.indiatv.in/resize/newbucket/400_-/2024/04/virat-kohli-7-1712427968.webp',
-                  width: 150,
-                  height: 150,
-                  fit: BoxFit.cover,
                 ),
-              ),
+                Container(
+                  margin: EdgeInsets.symmetric(vertical: 5),
+                  padding: EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: Color(0xFF292929),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      userData!.data()!['email'],
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Color.fromARGB(255, 185, 185, 185),
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(height: 32),
+                Center(
+                  child: Text(
+                    'Academic Information',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                SizedBox(height: 8),
+                Container(
+                  margin: EdgeInsets.symmetric(vertical: 5),
+                  padding: EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: Color(0xFF292929),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      'Roll Number: ${userData!.data()!['rollno']}',
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Color.fromARGB(255, 185, 185, 185),
+                      ),
+                    ),
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.symmetric(vertical: 5),
+                  padding: EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: Color(0xFF292929),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      'Faculty: ${userData!.data()!['faculty']}',
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Color.fromARGB(255, 185, 185, 185),
+                      ),
+                    ),
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.symmetric(vertical: 5),
+                  padding: EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: Color(0xFF292929),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      'Branch: ${userData!.data()!['subfaculty']}',
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Color.fromARGB(255, 185, 185, 185),
+                      ),
+                    ),
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.symmetric(vertical: 5),
+                  padding: EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: Color(0xFF292929),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      'Sub-Branch: ${userData!.data()!['subbranch']}',
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Color.fromARGB(255, 185, 185, 185),
+                      ),
+                    ),
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.symmetric(vertical: 5),
+                  padding: EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: Color(0xFF292929),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      'Semester: ${userData!.data()!['semester']}',
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Color.fromARGB(255, 185, 185, 185),
+                      ),
+                    ),
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.symmetric(vertical: 5),
+                  padding: EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: Color(0xFF292929),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      'Status: ${userData!.data()!['status']}',
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Color.fromARGB(255, 185, 185, 185),
+                      ),
+                    ),
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.symmetric(vertical: 5),
+                  padding: EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: Color(0xFF292929),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      'UID: ${userData!.data()!['uid']}',
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Color.fromARGB(255, 185, 185, 185),
+                      ),
+                    ),
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.symmetric(vertical: 5),
+                  padding: EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: Color(0xFF292929),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      'Verifiedstatus: ${userData!.data()!['verifiedstatus']}',
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Color.fromARGB(255, 185, 185, 185),
+                      ),
+                    ),
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.symmetric(vertical: 5),
+                  padding: EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: Color(0xFF292929),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      'Date: ${userData!.data()!['date']}',
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Color.fromARGB(255, 185, 185, 185),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
-            // Add the text lines with boxes after the image
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 14, vertical: 10),
-              child: Column(
-                children: [
-                  BoxedText(text: 'Name: Virat Kohli'),
-                  BoxedText(text: 'Email: virath@gmail.com'),
-                  BoxedText(text: 'Roll Number: 2104221'),
-                  BoxedText(text: 'Faculty: Faculty of Engineering'),
-                  BoxedText(text: 'Branch: 1st Year'),
-                  BoxedText(text: 'Sub-Branch: Computer Science'),
-                  BoxedText(text: 'Semester: Semester 1'),
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
-      backgroundColor: Colors.black87,
-    );
-  }
-}
-
-class BoxedText extends StatelessWidget {
-  final String text;
-
-  BoxedText({required this.text});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      padding: EdgeInsets.all(12),
-      margin: EdgeInsets.only(bottom: 10),
-      decoration: BoxDecoration(
-        color: Color(0xFF323232),
-        borderRadius: BorderRadius.circular(10),
-      ),
-      child: Text(
-        text,
-        style: TextStyle(
-          fontSize: 18,
-          color: Colors.white,
-        ),
-      ),
     );
   }
 }
