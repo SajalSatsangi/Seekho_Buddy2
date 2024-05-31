@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:seekhobuddy/AdminScreens/materialSectionPage-Admin.dart';
-// import 'package:seekhobuddy/ExploreMore/materialSectionPage.dart';
 
-class Subjects extends StatelessWidget {
+class Materialpage_Admin extends StatelessWidget {
+  void _onAddButtonPressed() {
+    // Define the action that occurs when the button is pressed
+    print('Floating action button pressed');
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,7 +31,7 @@ class Subjects extends StatelessWidget {
                         width: 10.0,
                       ),
                       Text(
-                        "Subjects",
+                        "Materialpage",
                         style: TextStyle(
                           fontSize: 28,
                           fontWeight: FontWeight.bold,
@@ -86,7 +89,7 @@ class Subjects extends StatelessWidget {
                           ),
                           SizedBox(width: 8),
                           Text(
-                            'Subject Name',
+                            'Material Name',
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 17.0,
@@ -96,13 +99,7 @@ class Subjects extends StatelessWidget {
                         ],
                       ),
                       ElevatedButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => Materialsectionpage_Admin()),
-                          );
-                        },
+                        onPressed: () {},
                         style: ButtonStyle(
                           backgroundColor: MaterialStateProperty.all<Color>(
                             Colors.white,
@@ -123,6 +120,14 @@ class Subjects extends StatelessWidget {
             ),
           ),
         ],
+      ),
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.only(bottom: 36.0),
+        child: FloatingActionButton(
+          onPressed: _onAddButtonPressed,
+          backgroundColor: Color(0xFF323232),
+          child: Icon(Icons.add, color: Colors.white),
+        ),
       ),
     );
   }
