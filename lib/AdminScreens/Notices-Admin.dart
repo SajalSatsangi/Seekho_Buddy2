@@ -152,7 +152,7 @@ class MyWidget extends StatelessWidget {
                   ),
                 ),
                 style: TextStyle(color: Colors.white),
-                maxLines: null,
+                maxLines: 5,
               ),
               SizedBox(height: 16),
               // Upload Image Button
@@ -189,7 +189,7 @@ class MyWidget extends StatelessWidget {
                 // You can access the text fields' values here
               },
               style: ElevatedButton.styleFrom(
-                backgroundColor:  Color.fromARGB(255, 255, 255, 255) ,
+                backgroundColor: Color.fromARGB(255, 255, 255, 255),
               ),
               child: Text(
                 'Add',
@@ -203,7 +203,6 @@ class MyWidget extends StatelessWidget {
       },
     );
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -340,4 +339,3 @@ class MyWidget extends StatelessWidget {
     );
   }
 }
-
