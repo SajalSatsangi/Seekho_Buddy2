@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:seekhobuddy/Chat/chatUsersModel.dart';
 import 'package:seekhobuddy/Chat/conversationList.dart';
-import 'package:seekhobuddy/Chat/NewChatPage.dart';
+import 'package:seekhobuddy/Chat/addnewuser.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ChatPage extends StatefulWidget {
