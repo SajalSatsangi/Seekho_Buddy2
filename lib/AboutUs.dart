@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 void main() {
-  runApp(about());
+  runApp(About());
 }
 
-class about extends StatelessWidget {
+class About extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -26,40 +26,38 @@ class about extends StatelessWidget {
         ),
         body: Center(
           child: SingleChildScrollView(
-            child: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  ProfileCard(
-                    name: 'Nihal Saran',
-                    imageUrl:
-                        'https://avatars.githubusercontent.com/u/92871743?v=4',
-                    isImageRight: false,
-                    linkedinUrl: 'https://www.linkedin.com/in/nihal-saran/',
-                  ),
-                  ProfileCard(
-                    name: 'Sajal Satsangi',
-                    imageUrl:
-                        'https://avatars.githubusercontent.com/u/119046714?v=4',
-                    isImageRight: true,
-                    linkedinUrl: 'https://www.linkedin.com/in/sajal-satsangi/',
-                  ),
-                  ProfileCard(
-                    name: 'N. Shikhar',
-                    imageUrl:
-                        'https://avatars.githubusercontent.com/u/92314161?v=4',
-                    isImageRight: false,
-                    linkedinUrl: 'https://www.linkedin.com/in/n-shikhar/',
-                  ),
-                  ProfileCard(
-                    name: 'Ansh Prasad',
-                    imageUrl:
-                        'https://avatars.githubusercontent.com/u/129548078?v=4',
-                    isImageRight: true,
-                    linkedinUrl: 'https://www.linkedin.com/in/ansh-prasad/',
-                  ),
-                ],
-              ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ProfileCard(
+                  name: 'Nihal Saran',
+                  imageUrl:
+                      'https://avatars.githubusercontent.com/u/92871743?v=4',
+                  isImageRight: false,
+                  linkedinUrl: 'https://www.linkedin.com/in/nihal-saran/',
+                ),
+                ProfileCard(
+                  name: 'Sajal Satsangi',
+                  imageUrl:
+                      'https://media.licdn.com/dms/image/D4D03AQGbLkLrr_VNKA/profile-displayphoto-shrink_400_400/0/1689824948962?e=1722470400&v=beta&t=SuvABQD393ep4IaHNzgMFIkI0OYIWl_PPT42dXzJDhU',
+                  isImageRight: true,
+                  linkedinUrl: 'https://www.linkedin.com/in/sajal-satsangi/',
+                ),
+                ProfileCard(
+                  name: 'Ansh Prasad',
+                  imageUrl:
+                      'https://avatars.githubusercontent.com/u/129548078?v=4',
+                  isImageRight: false,
+                  linkedinUrl: 'https://www.linkedin.com/in/ansh-prasad/',
+                ),
+                ProfileCard(
+                  name: 'N. Shikhar',
+                  imageUrl:
+                      'https://avatars.githubusercontent.com/u/92314161?v=4',
+                  isImageRight: true,
+                  linkedinUrl: 'https://www.linkedin.com/in/n-shikhar/',
+                ),
+              ],
             ),
           ),
         ),
@@ -74,11 +72,12 @@ class ProfileCard extends StatelessWidget {
   final bool isImageRight;
   final String linkedinUrl;
 
-  ProfileCard(
-      {required this.name,
-      required this.imageUrl,
-      required this.isImageRight,
-      required this.linkedinUrl});
+  ProfileCard({
+    required this.name,
+    required this.imageUrl,
+    required this.isImageRight,
+    required this.linkedinUrl,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -88,7 +87,7 @@ class ProfileCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          if (!isImageRight)
+          if (!isImageRight) ...[
             Container(
               margin: EdgeInsets.only(left: 0),
               child: ClipRRect(
@@ -101,7 +100,8 @@ class ProfileCard extends StatelessWidget {
                 ),
               ),
             ),
-          if (!isImageRight) SizedBox(width: 40),
+            SizedBox(width: 40),
+          ],
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -147,7 +147,7 @@ class ProfileCard extends StatelessWidget {
                       ),
                       SizedBox(width: 4),
                       Text(
-                        'linkedin',
+                        'LinkedIn',
                         style: TextStyle(
                           color: Colors.black,
                           fontSize: 14,
@@ -159,8 +159,8 @@ class ProfileCard extends StatelessWidget {
               ),
             ],
           ),
-          if (isImageRight) SizedBox(width: 10),
-          if (isImageRight)
+          if (isImageRight) ...[
+            SizedBox(width: 10),
             Container(
               margin: EdgeInsets.only(left: 16),
               child: ClipRRect(
@@ -173,6 +173,7 @@ class ProfileCard extends StatelessWidget {
                 ),
               ),
             ),
+          ],
         ],
       ),
     );

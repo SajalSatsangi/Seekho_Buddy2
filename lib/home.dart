@@ -118,7 +118,7 @@ class _HomeState extends State<Home> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => about()),
+                                    builder: (context) => About()),
                               );
                             },
                             child: Icon(
