@@ -100,7 +100,8 @@ class Subjects extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => Materialsectionpage_Admin()),
+                                builder: (context) =>
+                                    Materialsectionpage_Admin()),
                           );
                         },
                         style: ButtonStyle(

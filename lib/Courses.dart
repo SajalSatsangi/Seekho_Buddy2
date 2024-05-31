@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:seekhobuddy/Courses/Subjects.dart';
 import 'package:seekhobuddy/ExploreMore/facultyData.dart';
-import 'package:seekhobuddy/ExploreMore/subjects.dart';
 
 class ResourcesPage extends StatelessWidget {
   @override
@@ -103,7 +103,7 @@ class ResourcesPage extends StatelessWidget {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => Subjects()),
+                                    builder: (context) => SubjectsPage()),
                               );
                             },
                             style: ButtonStyle(
