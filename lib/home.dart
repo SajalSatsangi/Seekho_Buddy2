@@ -4,7 +4,6 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:seekhobuddy/AdminScreens/Notices-Admin.dart';
 import 'package:seekhobuddy/Courses.dart';
-import 'package:seekhobuddy/Notices/Notices.dart';
 import 'package:seekhobuddy/Notification.dart';
 import 'package:seekhobuddy/donation.dart';
 import 'package:seekhobuddy/help.dart';
@@ -274,7 +273,8 @@ class _HomeState extends State<Home> {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => Notices_admin()),
+                                          builder: (context) =>
+                                              Notices_admin()),
                                     );
                                   },
                                   child: Padding(

@@ -14,6 +14,7 @@ class HelpPage extends StatelessWidget {
           },
         ),
       ),
+      backgroundColor: Colors.black,
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -22,7 +23,7 @@ class HelpPage extends StatelessWidget {
             Container(
               padding: EdgeInsets.all(16.0),
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: const Color.fromARGB(255, 85, 85, 85),
                 borderRadius: BorderRadius.circular(8.0),
                 boxShadow: [
                   BoxShadow(
@@ -34,27 +35,120 @@ class HelpPage extends StatelessWidget {
                 ],
               ),
               child: Column(
+                mainAxisSize: MainAxisSize.min,
                 children: [
                   TextField(
                     decoration: InputDecoration(
-                      labelText: 'Title',
-                      border: OutlineInputBorder(),
-                      filled: true, // Add this line
+                      hintText: 'Your Name*',
+                      hintStyle: TextStyle(color: Colors.grey),
+                      enabledBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white),
+                      ),
+                      filled: true,
                       fillColor: Colors.black,
                     ),
+                    style: TextStyle(color: Colors.white),
                   ),
-                  SizedBox(height: 16.0),
+                  SizedBox(height: 16),
                   TextField(
                     decoration: InputDecoration(
-                      labelText: 'Description',
-                      border: OutlineInputBorder(),
+                      hintText: 'Your Course*',
+                      hintStyle: TextStyle(color: Colors.grey),
+                      enabledBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white),
+                      ),
+                      filled: true,
+                      fillColor: Colors.black,
+                    ),
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  SizedBox(height: 16),
+                  TextField(
+                    decoration: InputDecoration(
+                      hintText: 'Your Year*',
+                      hintStyle: TextStyle(color: Colors.grey),
+                      enabledBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white),
+                      ),
+                      filled: true,
+                      fillColor: Colors.black,
+                    ),
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  SizedBox(height: 16),
+                  TextField(
+                    decoration: InputDecoration(
+                      hintText: 'Your Roll Number*',
+                      hintStyle: TextStyle(color: Colors.grey),
+                      enabledBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white),
+                      ),
+                      filled: true,
+                      fillColor: Colors.black,
+                    ),
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  SizedBox(height: 16),
+                  TextField(
+                    decoration: InputDecoration(
+                      hintText: 'Your Branch/Specialization/Stream*',
+                      hintStyle: TextStyle(color: Colors.grey),
+                      enabledBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white),
+                      ),
+                      filled: true,
+                      fillColor: Colors.black,
+                    ),
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  SizedBox(height: 16),
+                  TextField(
+                    decoration: InputDecoration(
+                      hintText:
+                          'Detailed Description of Your Issue (Please provide as much detail as possible)*',
+                      hintStyle: TextStyle(color: Colors.grey),
+                      enabledBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white),
+                      ),
                       filled: true, // Add this line
                       fillColor: Colors.black, // Add this line
                     ),
-                    maxLines: 3,
-                    style: TextStyle(
-                        color: Colors
-                            .white), // Add this line to make the text color white
+                    style: TextStyle(color: Colors.white),
+                    maxLines: 6,
+                  ),
+                  SizedBox(height: 16),
+                  // Upload Image Button
+                  TextButton.icon(
+                    onPressed: () {
+                      // Implement your image upload logic here
+                    },
+                    style: TextButton.styleFrom(
+                      backgroundColor: Color.fromARGB(255, 0, 0, 0),
+                    ),
+                    icon: Icon(Icons.file_upload),
+                    label: Text(
+                      'Upload Image',
+                      style:
+                          TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 26.0, left: 160.0),
+                    child: ElevatedButton(
+                      onPressed: () {
+                        // Handle add button press
+                        // You can access the text fields' values here
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Color.fromARGB(255, 0, 0, 0),
+                      ),
+                      child: Text(
+                        'Send Help Request',
+                        style: TextStyle(
+                          color: const Color.fromARGB(255, 255, 255, 255),
+                        ),
+                      ),
+                    ),
                   ),
                 ],
               ),
