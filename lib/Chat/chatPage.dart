@@ -1,6 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:seekhobuddy/Chat/chatUsersModel.dart';
 import 'package:seekhobuddy/Chat/conversationList.dart';
+import 'package:seekhobuddy/Chat/NewChatPage.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ChatPage extends StatefulWidget {
   @override
@@ -9,59 +13,53 @@ class ChatPage extends StatefulWidget {
 
 class _ChatPageState extends State<ChatPage> {
   List<ChatUsers> chatUsers = [
-    ChatUsers(
-      text: "Jane Russel",
-      secondaryText: "Awesome Setup",
-      image:
-          "https://images.unsplash.com/photo-1567515004624-219c11d31f2e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwyMDUzMDJ8MHwxfHNlYXJjaHw1MXx8bWFufGVufDF8fHx8MTY2Njc4NzAwOA&ixlib=rb-4.0.3&q=80&w=1080",
-      time: "Now",
-    ),
-    ChatUsers(
-      text: "Glady's Murphy",
-      secondaryText: "That's Great",
-      image:
-          "https://images.unsplash.com/photo-1596305589440-2e180399a760?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwyMDUzMDJ8MHwxfHNlYXJjaHwxMjJ8fGJsYWNrJTIwd29tYW58ZW58MXx8fHwxNjY2ODY1MDg3&ixlib=rb-4.0.3&q=80&w=1080",
-      time: "Yesterday",
-    ),
-    ChatUsers(
-      text: "Jorge Henry",
-      secondaryText: "Hey where are you?",
-      image:
-          "https://images.unsplash.com/photo-1607990281513-2c110a25bd8c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwyMDUzMDJ8MHwxfHNlYXJjaHwyNXx8bWFufGVufDF8fHx8MTY2NjYzNjY1Nw&ixlib=rb-4.0.3&q=80&w=1080",
-      time: "31 Mar",
-    ),
-    ChatUsers(
-        text: "Philip Fox",
-        secondaryText: "Busy! Call me in 20 mins",
-        image:
-            "https://images.unsplash.com/photo-1567515004624-219c11d31f2e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwyMDUzMDJ8MHwxfHNlYXJjaHw1MXx8bWFufGVufDF8fHx8MTY2Njc4NzAwOA&ixlib=rb-4.0.3&q=80&w=1080",
-        time: "28 Mar"),
-    ChatUsers(
-        text: "Debra Hawkins",
-        secondaryText: "Thankyou, It's awesome",
-        image:
-            "https://images.unsplash.com/photo-1567515004624-219c11d31f2e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwyMDUzMDJ8MHwxfHNlYXJjaHw1MXx8bWFufGVufDF8fHx8MTY2Njc4NzAwOA&ixlib=rb-4.0.3&q=80&w=1080",
-        time: "23 Mar"),
-    ChatUsers(
-        text: "Jacob Pena",
-        secondaryText: "will update you in evening",
-        image:
-            "https://images.unsplash.com/photo-1567515004624-219c11d31f2e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwyMDUzMDJ8MHwxfHNlYXJjaHw1MXx8bWFufGVufDF8fHx8MTY2Njc4NzAwOA&ixlib=rb-4.0.3&q=80&w=1080",
-        time: "17 Mar"),
-    ChatUsers(
-        text: "Andrey Jones",
-        secondaryText: "Can you please share the file?",
-        image:
-            "https://images.unsplash.com/photo-1567515004624-219c11d31f2e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwyMDUzMDJ8MHwxfHNlYXJjaHw1MXx8bWFufGVufDF8fHx8MTY2Njc4NzAwOA&ixlib=rb-4.0.3&q=80&w=1080",
-        time: "24 Feb"),
-    ChatUsers(
-        text: "John Wick",
-        secondaryText: "How are you?",
-        image:
-            "https://images.unsplash.com/photo-1567515004624-219c11d31f2e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwyMDUzMDJ8MHwxfHNlYXJjaHw1MXx8bWFufGVufDF8fHx8MTY2Njc4NzAwOA&ixlib=rb-4.0.3&q=80&w=1080",
-        time: "18 Feb"),
     // Add more ChatUsers with alternate image URLs here...
   ];
+
+  @override
+  void initState() {
+    super.initState();
+    loadUserDetails();
+  }
+
+  void loadUserDetails() async {
+    List<ChatUsers> savedUsers = await getUserDetails();
+    setState(() {
+      chatUsers = savedUsers;
+    });
+  }
+
+  Future<void> saveUserDetails(ChatUsers newUser) async {
+    final prefs = await SharedPreferences.getInstance();
+
+    List<String> users = prefs.getStringList('users') ?? [];
+
+    users.add(jsonEncode({
+      'name': newUser.text,
+      'message': newUser.secondaryText,
+      'profile_picture': newUser.image,
+      'time': newUser.time,
+    }));
+
+    await prefs.setStringList('users', users);
+  }
+
+  Future<List<ChatUsers>> getUserDetails() async {
+    final prefs = await SharedPreferences.getInstance();
+
+    List<String> users = prefs.getStringList('users') ?? [];
+
+    return users.map((user) {
+      Map<String, dynamic> attributes = jsonDecode(user);
+
+      return ChatUsers(
+        text: attributes['name'],
+        secondaryText: attributes['message'],
+        image: attributes['profile_picture'],
+        time: attributes['time'],
+      );
+    }).toList();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -87,33 +85,60 @@ class _ChatPageState extends State<ChatPage> {
                           color: Colors.white, // Text color
                         ),
                       ),
-                      Container(
-                        padding: EdgeInsets.only(
-                            left: 8, right: 8, top: 2, bottom: 2),
-                        height: 30,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(30),
-                          color: Color(0xFF323232),
-                        ),
-                        child: Row(
-                          children: <Widget>[
-                            Icon(
-                              Icons.add,
-                              color: Colors.white,
-                              size: 20,
-                            ),
-                            SizedBox(
-                              width: 2,
-                            ),
-                            Text(
-                              "Add New",
-                              style: TextStyle(
-                                fontSize: 14,
+                      GestureDetector(
+                        onTap: () async {
+                          final newChatUserDetails = await Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => NewChatPage()),
+                          );
+
+                          if (newChatUserDetails != null) {
+                            ChatUsers newChatUser = ChatUsers(
+                              text: newChatUserDetails['name'],
+                              secondaryText:
+                                  'Hello', // replace with appropriate value
+                              image: newChatUserDetails['profile_picture'],
+                              time: 'Now', // replace with appropriate value
+                            );
+
+                            // Save the new user details
+                            await saveUserDetails(newChatUser);
+
+                            // Update the chatUsers list
+                            setState(() {
+                              chatUsers.insert(0, newChatUser);
+                            });
+                          }
+                        },
+                        child: Container(
+                          padding: EdgeInsets.only(
+                              left: 8, right: 8, top: 2, bottom: 2),
+                          height: 30,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(30),
+                            color: Color(0xFF323232),
+                          ),
+                          child: Row(
+                            children: <Widget>[
+                              Icon(
+                                Icons.add,
                                 color: Colors.white,
-                                fontWeight: FontWeight.bold,
+                                size: 20,
                               ),
-                            ),
-                          ],
+                              SizedBox(
+                                width: 2,
+                              ),
+                              Text(
+                                "Add New",
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       )
                     ],
@@ -150,9 +175,8 @@ class _ChatPageState extends State<ChatPage> {
                   return ConversationList(
                     name: chatUsers[index].text,
                     messageText: chatUsers[index].secondaryText,
-                    imageUrl: index.isEven
-                        ? "https://images.unsplash.com/photo-1596305589440-2e180399a760?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwyMDUzMDJ8MHwxfHNlYXJjaHwxMjJ8fGJsYWNrJTIwd29tYW58ZW58MXx8fHwxNjY2ODY1MDg3&ixlib=rb-4.0.3&q=80&w=1080"
-                        : "https://images.unsplash.com/photo-1607990281513-2c110a25bd8c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwyMDUzMDJ8MHwxfHNlYXJjaHwyNXx8bWFufGVufDF8fHx8MTY2NjYzNjY1Nw&ixlib=rb-4.0.3&q=80&w=1080",
+                    imageUrl: chatUsers[index]
+                        .image, // Use profile_picture from chatUsers
                     time: chatUsers[index].time,
                     isMessageRead: (index == 0 || index == 3) ? true : false,
                   );
