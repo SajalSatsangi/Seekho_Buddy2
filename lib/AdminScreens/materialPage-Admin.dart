@@ -6,9 +6,22 @@ class Materialpage_Admin extends StatelessWidget {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Add Material'),
-          content: TextField(
-            decoration: InputDecoration(hintText: "Enter material name"),
+          title: Text('Add Pdf'),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              TextField(
+                decoration: InputDecoration(
+                  hintText: "Enter Pdf Name",
+                ),
+              ),
+              SizedBox(height: 8),
+              TextField(
+                decoration: InputDecoration(
+                  hintText: "Enter Pdf URL",
+                ),
+              ),
+            ],
           ),
           actions: <Widget>[
             TextButton(

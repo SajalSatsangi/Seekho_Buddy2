@@ -8,10 +8,9 @@ class Materialsectionpage_Admin extends StatelessWidget {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Add Material Section'),
+          title: Text('Add Folder'),
           content: TextField(
-            decoration:
-                InputDecoration(hintText: "Enter material section name"),
+            decoration: InputDecoration(hintText: "Enter Folder Name"),
           ),
           actions: <Widget>[
             TextButton(
