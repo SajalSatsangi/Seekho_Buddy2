@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'branches.dart'; // Import the Branches widget
 
 class Faculties extends StatelessWidget {
+  // ignore: deprecated_member_use
+  final DatabaseReference _databaseReference = FirebaseDatabase(
+    databaseURL:
+        'https://seekhobuddy-default-rtdb.asia-southeast1.firebasedatabase.app',
+    // ignore: deprecated_member_use
+  ).reference().child('Material DB');
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,23 +70,32 @@ class Faculties extends StatelessWidget {
             ),
           ),
           Expanded(
-            child: StreamBuilder<QuerySnapshot>(
-              stream: FirebaseFirestore.instance.collection('Material DB').snapshots(),
+            child: StreamBuilder<DatabaseEvent>(
+              stream: _databaseReference.onValue,
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return Center(child: CircularProgressIndicator());
                 }
                 if (snapshot.hasError) {
-                  return Center(child: Text('Error: ${snapshot.error}', style: TextStyle(color: Colors.white)));
+                  return Center(
+                      child: Text('Error: ${snapshot.error}',
+                          style: TextStyle(color: Colors.white)));
                 }
-                final data = snapshot.data?.docs;
-                if (data == null || data.isEmpty) {
-                  return Center(child: Text('No faculties found', style: TextStyle(color: Colors.white)));
+                if (!snapshot.hasData ||
+                    snapshot.data!.snapshot.value == null) {
+                  return Center(
+                      child: Text('No faculties found',
+                          style: TextStyle(color: Colors.white)));
                 }
+                final Map<String, dynamic> data = Map<String, dynamic>.from(
+                    snapshot.data!.snapshot.value as Map);
+                final List<Map<String, dynamic>> faculties = data.values
+                    .map((value) => Map<String, dynamic>.from(value))
+                    .toList();
                 return ListView.builder(
-                  itemCount: data.length,
+                  itemCount: faculties.length,
                   itemBuilder: (context, index) {
-                    final documentId = data[index].id;
+                    final faculty = faculties[index];
                     return Padding(
                       padding: const EdgeInsets.all(25.0),
                       child: GestureDetector(
@@ -104,7 +120,7 @@ class Faculties extends StatelessWidget {
                                     ),
                                     SizedBox(width: 8),
                                     Text(
-                                      documentId,
+                                      faculty['name'],
                                       style: TextStyle(
                                         color: Colors.white,
                                         fontSize: 17.0,
@@ -117,11 +133,18 @@ class Faculties extends StatelessWidget {
                                   onPressed: () {
                                     Navigator.push(
                                       context,
-                                      MaterialPageRoute(builder: (context) => Branches()),
+                                      MaterialPageRoute(
+                                        builder: (context) => Branches(
+                                          facultyName: faculty['name'],
+                                          facultyData:
+                                              faculty, // Pass the entire faculty map
+                                        ),
+                                      ),
                                     );
                                   },
                                   style: ButtonStyle(
-                                    backgroundColor: MaterialStateProperty.all<Color>(
+                                    backgroundColor:
+                                        MaterialStateProperty.all<Color>(
                                       Colors.white,
                                     ),
                                   ),
