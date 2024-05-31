@@ -1,22 +1,57 @@
 import 'package:flutter/material.dart';
 import 'package:seekhobuddy/Chat/chatMessageModel.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ChatDetailPage extends StatefulWidget {
+  final String name;
+  final String imageUrl;
+  final String recipientId;
+
+  ChatDetailPage({required this.name, required this.imageUrl, required this.recipientId});
+
   @override
   _ChatDetailPageState createState() => _ChatDetailPageState();
 }
 
 class _ChatDetailPageState extends State<ChatDetailPage> {
-  List<ChatMessage> messages = [
-    ChatMessage(messageContent: "Hello, Will", messageType: "receiver"),
-    ChatMessage(messageContent: "How have you been?", messageType: "receiver"),
-    ChatMessage(
-        messageContent: "Hey Kriss, I am doing fine dude. wbu?",
-        messageType: "sender"),
-    ChatMessage(messageContent: "ehhhh, doing OK.", messageType: "receiver"),
-    ChatMessage(
-        messageContent: "Is there any thing wrong?", messageType: "sender"),
-  ];
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  late CollectionReference _messagesCollection;
+
+  @override
+  void initState() {
+    super.initState();
+    _messagesCollection = _firestore.collection('messages');
+    _fetchMessages();
+  }
+
+  Future<void> _fetchMessages() async {
+    QuerySnapshot querySnapshot = await _messagesCollection
+        .where('recipientId', isEqualTo: widget.recipientId)
+        .orderBy('timestamp', descending: true)
+        .get();
+
+    setState(() {
+      messages = querySnapshot.docs.map((doc) {
+        return ChatMessage(
+          messageContent: doc['messageContent'],
+          messageType: doc['recipientId'] == widget.recipientId ? 'receiver' : 'sender',
+        );
+      }).toList();
+    });
+  }
+
+  Future<void> _sendMessage(String messageContent) async {
+    await _messagesCollection.add({
+      'recipientId': widget.recipientId,
+      'messageContent': messageContent,
+      'timestamp': FieldValue.serverTimestamp(),
+    });
+    _fetchMessages();
+  }
+
+  List<ChatMessage> messages = [];
+
+  final TextEditingController _controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -43,8 +78,7 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
                   width: 2,
                 ),
                 CircleAvatar(
-                  backgroundImage: NetworkImage(
-                      "https://images.unsplash.com/photo-1567515004624-219c11d31f2e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwyMDUzMDJ8MHwxfHNlYXJjaHw1MXx8bWFufGVufDF8fHx8MTY2Njc4NzAwOA&ixlib=rb-4.0.3&q=80&w=1080"),
+                  backgroundImage: NetworkImage(widget.imageUrl),
                   maxRadius: 20,
                 ),
                 SizedBox(
@@ -56,11 +90,12 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Text(
-                        "Kriss Benwat",
+                        widget.name,
                         style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                            color: Colors.white),
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.white,
+                        ),
                       ),
                       SizedBox(
                         height: 6,
@@ -82,7 +117,7 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
         ),
       ),
       body: Container(
-        color: Color(0xFF161616), // Set background color
+        color: Color(0xFF161616),
         child: Stack(
           children: <Widget>[
             ListView.builder(
@@ -92,8 +127,7 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
               physics: NeverScrollableScrollPhysics(),
               itemBuilder: (context, index) {
                 return Container(
-                  padding:
-                      EdgeInsets.only(left: 14, right: 14, top: 10, bottom: 10),
+                  padding: EdgeInsets.only(left: 14, right: 14, top: 10, bottom: 10),
                   child: Align(
                     alignment: (messages[index].messageType == "receiver"
                         ? Alignment.topLeft
@@ -102,17 +136,15 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
                         color: (messages[index].messageType == "receiver"
-                            ? Color(0xFF323232) // Change receiver bg color
-                            : Color(0xFF323232)), // Change sender bg color
+                            ? Color(0xFF323232)
+                            : Color(0xFF323232)),
                       ),
                       padding: EdgeInsets.all(16),
                       child: Text(
                         messages[index].messageContent,
                         style: TextStyle(
                           fontSize: 15,
-                          color: (messages[index].messageType == "receiver"
-                              ? Colors.white // Change receiver text color
-                              : Colors.white), // Change sender text color
+                          color: Colors.white,
                         ),
                       ),
                     ),
@@ -150,17 +182,26 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
                     ),
                     Expanded(
                       child: TextField(
+                        controller: _controller,
                         decoration: InputDecoration(
-                            hintText: "Write message...",
-                            hintStyle: TextStyle(color: Colors.white70),
-                            border: InputBorder.none),
+                          hintText: "Write message...",
+                          hintStyle: TextStyle(color: Colors.white70),
+                          border: InputBorder.none,
+                        ),
+                        onSubmitted: (text) {
+                          _sendMessage(text);
+                          _controller.clear();
+                        },
                       ),
                     ),
                     SizedBox(
                       width: 15,
                     ),
                     FloatingActionButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        _sendMessage(_controller.text);
+                        _controller.clear();
+                      },
                       child: Icon(
                         Icons.send,
                         color: Colors.white70,

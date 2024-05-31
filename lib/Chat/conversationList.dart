@@ -23,10 +23,10 @@ class _ConversationListState extends State<ConversationList> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context) {
-          return ChatDetailPage();
-        }));
-      },
+    Navigator.push(context, MaterialPageRoute(builder: (context) {
+      return ChatDetailPage(name: widget.name, imageUrl: widget.imageUrl, recipientId: widget.name);
+    }));
+  },
       child: Container(
         color: Color(0xFF161616), // Set background color to #161616
         padding: EdgeInsets.only(left: 16, right: 16, top: 10, bottom: 10),
