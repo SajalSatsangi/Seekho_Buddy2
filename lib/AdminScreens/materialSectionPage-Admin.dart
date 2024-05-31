@@ -3,9 +3,34 @@ import 'package:seekhobuddy/AdminScreens/materialPage-Admin.dart';
 // import 'package:seekhobuddy/ExploreMore/materialPage.dart';
 
 class Materialsectionpage_Admin extends StatelessWidget {
-  void _onAddButtonPressed() {
-    // Define the action that occurs when the button is pressed
-    print('Floating action button pressed');
+  void _onAddButtonPressed(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Add Material Section'),
+          content: TextField(
+            decoration:
+                InputDecoration(hintText: "Enter material section name"),
+          ),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(); // Close the dialog
+              },
+              child: Text('Cancel'),
+            ),
+            TextButton(
+              onPressed: () {
+                // Handle the action when "Add" is pressed
+                Navigator.of(context).pop(); // Close the dialog
+              },
+              child: Text('Add'),
+            ),
+          ],
+        );
+      },
+    );
   }
 
   @override
@@ -132,7 +157,7 @@ class Materialsectionpage_Admin extends StatelessWidget {
       floatingActionButton: Padding(
         padding: const EdgeInsets.only(bottom: 36.0),
         child: FloatingActionButton(
-          onPressed: _onAddButtonPressed,
+          onPressed: () => _onAddButtonPressed(context),
           backgroundColor: Color(0xFF323232),
           child: Icon(Icons.add, color: Colors.white),
         ),
