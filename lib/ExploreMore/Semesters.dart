@@ -78,7 +78,8 @@ class Semesters extends StatelessWidget {
                                 ),
                                 SizedBox(width: 8),
                                 Text(
-                                  semester['semesterName'] ?? 'Default Semester Name',
+                                  semester['semesterName'] ??
+                                      'Default Semester Name',
                                   style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 17.0,
@@ -91,11 +92,15 @@ class Semesters extends StatelessWidget {
                               onPressed: () {
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => Subjects()),
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        Subjects(semester: semester),
+                                  ),
                                 );
                               },
                               style: ButtonStyle(
-                                backgroundColor: MaterialStateProperty.all<Color>(
+                                backgroundColor:
+                                    MaterialStateProperty.all<Color>(
                                   Colors.white,
                                 ),
                               ),

@@ -2,8 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:seekhobuddy/ExploreMore/materialPage.dart';
 
 class Materialsectionpage extends StatelessWidget {
+  final Map subject;
+
+  Materialsectionpage({required this.subject});
+
   @override
   Widget build(BuildContext context) {
+    print(subject);
+    Map materials = Map.from(subject)..remove('subjectName');
+
     return Scaffold(
       backgroundColor: Colors.black,
       body: Column(
@@ -61,64 +68,75 @@ class Materialsectionpage extends StatelessWidget {
               ),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(25.0),
-            child: GestureDetector(
-              onTap: () {},
-              child: Container(
-                width: 450,
-                height: 80,
-                decoration: BoxDecoration(
-                  color: Color.fromRGBO(50, 50, 50, 1),
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.school,
-                            color: Colors.white,
-                          ),
-                          SizedBox(width: 8),
-                          Text(
-                            'Material Section Name',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 17.0,
-                              fontWeight: FontWeight.bold,
+          Expanded(
+            child: ListView.builder(
+              itemCount: materials.length,
+              itemBuilder: (context, index) {
+                String materialKey = materials.keys.elementAt(index);
+                Map material = materials[materialKey];
+
+                return Padding(
+                  padding: const EdgeInsets.all(25.0),
+                  child: GestureDetector(
+                    onTap: () {},
+                    child: Container(
+                      width: 450,
+                      height: 80,
+                      decoration: BoxDecoration(
+                        color: Color.fromRGBO(50, 50, 50, 1),
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              children: [
+                                Icon(
+                                  Icons.school,
+                                  color: Colors.white,
+                                ),
+                                SizedBox(width: 8),
+                                Text(
+                                  material['materialName'] ?? 'Default Material Name',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 17.0,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ],
                             ),
-                          ),
-                        ],
-                      ),
-                      ElevatedButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => Materialpage()),
-                          );
-                        },
-                        style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all<Color>(
-                            Colors.white,
-                          ),
+                            ElevatedButton(
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          Materialpage(material: material)),
+                                );
+                              },
+                              style: ButtonStyle(
+                                backgroundColor: MaterialStateProperty.all<Color>(
+                                  Colors.white,
+                                ),
+                              ),
+                              child: Text(
+                                'View',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  color: Colors.black,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
-                        child: Text(
-                          'View',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: Colors.black,
-                          ),
-                        ),
                       ),
-                    ],
+                    ),
                   ),
-                ),
-              ),
+                );
+              },
             ),
           ),
         ],
