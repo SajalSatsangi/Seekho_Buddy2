@@ -19,14 +19,36 @@ class Materialpage_Admin extends StatelessWidget {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text("Add Material"),
-            content: Text("This is where you can add new materials."),
+            title: Text('Add Pdf'),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                TextField(
+                  decoration: InputDecoration(
+                    hintText: "Enter Pdf Name",
+                  ),
+                ),
+                SizedBox(height: 8),
+                TextField(
+                  decoration: InputDecoration(
+                    hintText: "Enter Pdf URL",
+                  ),
+                ),
+              ],
+            ),
             actions: <Widget>[
               TextButton(
                 onPressed: () {
-                  Navigator.of(context).pop();
+                  Navigator.of(context).pop(); // Close the dialog
                 },
-                child: Text('Close'),
+                child: Text('Cancel'),
+              ),
+              TextButton(
+                onPressed: () {
+                  // Handle the action when "Add" is pressed
+                  Navigator.of(context).pop(); // Close the dialog
+                },
+                child: Text('Add'),
               ),
             ],
           );
@@ -167,7 +189,7 @@ class Materialpage_Admin extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _showAddMaterialDialog, // Function to show popup dialog
-        child: Icon(Icons.add , color: Colors.white),
+        child: Icon(Icons.add, color: Colors.white),
         backgroundColor: Color(0xFF323232),
       ),
     );

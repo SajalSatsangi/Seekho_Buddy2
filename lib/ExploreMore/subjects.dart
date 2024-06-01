@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:seekhobuddy/AdminScreens/materialSectionPage-Admin.dart';
-import 'package:seekhobuddy/ExploreMore/materialSectionPage.dart';
 
 class Subjects extends StatelessWidget {
   final Map semester;
@@ -116,7 +115,8 @@ class Subjects extends StatelessWidget {
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) =>
-                                        Materialsectionpage_Admin(subject: subject),
+                                        Materialsectionpage_Admin(
+                                            subject: subject),
                                   ),
                                 );
                               },

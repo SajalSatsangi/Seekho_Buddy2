@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:seekhobuddy/AdminScreens/materialPage-Admin.dart';
-import 'package:seekhobuddy/ExploreMore/materialPage.dart';
 
 class Materialsectionpage_Admin extends StatelessWidget {
   final Map subject;
@@ -18,14 +17,23 @@ class Materialsectionpage_Admin extends StatelessWidget {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text("Add Material"),
-            content: Text("This is where you can add new materials."),
+            title: Text('Add Folder'),
+            content: TextField(
+              decoration: InputDecoration(hintText: "Enter Folder Name"),
+            ),
             actions: <Widget>[
               TextButton(
                 onPressed: () {
-                  Navigator.of(context).pop();
+                  Navigator.of(context).pop(); // Close the dialog
                 },
-                child: Text('Close'),
+                child: Text('Cancel'),
+              ),
+              TextButton(
+                onPressed: () {
+                  // Handle the action when "Add" is pressed
+                  Navigator.of(context).pop(); // Close the dialog
+                },
+                child: Text('Add'),
               ),
             ],
           );
