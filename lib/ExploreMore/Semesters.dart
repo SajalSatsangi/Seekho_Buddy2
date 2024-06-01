@@ -2,8 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:seekhobuddy/ExploreMore/subjects.dart';
 
 class Semesters extends StatelessWidget {
+  final Map branch;
+
+  Semesters({required this.branch});
+
   @override
   Widget build(BuildContext context) {
+    print(branch);
+    Map semesters = Map.from(branch)..remove('branchName');
+
     return Scaffold(
       backgroundColor: Colors.black,
       body: Column(
@@ -29,9 +36,9 @@ class Semesters extends StatelessWidget {
                       Text(
                         "Semesters",
                         style: TextStyle(
-                          fontSize: 28,
+                          color: Colors.white,
+                          fontSize: 30.0,
                           fontWeight: FontWeight.bold,
-                          color: Colors.white, // Text color
                         ),
                       ),
                     ],
@@ -40,84 +47,81 @@ class Semesters extends StatelessWidget {
               ),
             ),
           ),
-          Padding(
-            padding: EdgeInsets.only(top: 14, left: 14, right: 14),
-            child: TextField(
-              decoration: InputDecoration(
-                hintText: "Search...",
-                hintStyle: TextStyle(color: Colors.white),
-                prefixIcon: Icon(
-                  Icons.search,
-                  color: Colors.white,
-                  size: 20,
-                ),
-                filled: true,
-                fillColor: Color(0xFF323232),
-                contentPadding: EdgeInsets.all(8),
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(20),
-                  borderSide: BorderSide(color: Color(0xFF323232)),
-                ),
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(25.0),
-            child: GestureDetector(
-              onTap: () {},
-              child: Container(
-                width: 450,
-                height: 80,
-                decoration: BoxDecoration(
-                  color: Color.fromRGBO(50, 50, 50, 1),
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.school,
-                            color: Colors.white,
-                          ),
-                          SizedBox(width: 8),
-                          Text(
-                            'Semester 1',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 17.0,
-                              fontWeight: FontWeight.bold,
+          Expanded(
+            child: ListView.builder(
+              itemCount: semesters.length,
+              itemBuilder: (context, index) {
+                String semesterKey = semesters.keys.elementAt(index);
+                if (semesters[semesterKey] is! Map) {
+                  throw 'Expected a Map, but got ${semesters[semesterKey].runtimeType}';
+                }
+                Map semester = semesters[semesterKey];
+
+                return Padding(
+                  padding: const EdgeInsets.all(25.0),
+                  child: GestureDetector(
+                    onTap: () {},
+                    child: Container(
+                      width: 450,
+                      height: 80,
+                      decoration: BoxDecoration(
+                        color: Color.fromRGBO(50, 50, 50, 1),
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              children: [
+                                Icon(
+                                  Icons.school,
+                                  color: Colors.white,
+                                ),
+                                SizedBox(width: 8),
+                                Text(
+                                  semester['semesterName'] ??
+                                      'Default Semester Name',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 17.0,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ],
                             ),
-                          ),
-                        ],
-                      ),
-                      ElevatedButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => Subjects()),
-                          );
-                        },
-                        style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all<Color>(
-                            Colors.white,
-                          ),
+                            ElevatedButton(
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        Subjects(semester: semester),
+                                  ),
+                                );
+                              },
+                              style: ButtonStyle(
+                                backgroundColor:
+                                    MaterialStateProperty.all<Color>(
+                                  Colors.white,
+                                ),
+                              ),
+                              child: Text(
+                                'View',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  color: Colors.black,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
-                        child: Text(
-                          'View',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: Colors.black,
-                          ),
-                        ),
                       ),
-                    ],
+                    ),
                   ),
-                ),
-              ),
+                );
+              },
             ),
           ),
         ],
