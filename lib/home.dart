@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:seekhobuddy/AboutUs.dart';
 import 'package:seekhobuddy/AdminScreens/Notices-Admin.dart';
 import 'package:seekhobuddy/Courses.dart';
 import 'package:seekhobuddy/NewHelp.dart';
@@ -104,32 +103,6 @@ class _HomeState extends State<Home> {
                           ),
                         ),
                       ),
-                      SizedBox(width: 10),
-                      Container(
-                        padding: EdgeInsets.only(
-                            left: 8, right: 8, top: 2, bottom: 2),
-                        height: 30,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(30),
-                          color: Color(0xFF323232),
-                        ),
-                        child: Center(
-                          child: InkWell(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => About()),
-                              );
-                            },
-                            child: Icon(
-                              Icons.person,
-                              color: Colors.white,
-                              size: 20,
-                            ),
-                          ),
-                        ),
-                      )
                     ],
                   ),
                 ),

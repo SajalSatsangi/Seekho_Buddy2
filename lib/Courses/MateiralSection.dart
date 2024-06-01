@@ -1,18 +1,18 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'Materials.dart';
+import 'package:seekhobuddy/Courses/Materials.dart';
 
-class Home1 extends StatefulWidget {
+class MateiralsectionAdmin extends StatefulWidget {
   final String subject;
 
-  Home1({required this.subject});
+  MateiralsectionAdmin({required this.subject});
 
   @override
-  _Home1State createState() => _Home1State();
+  _MateiralsectionAdminState createState() => _MateiralsectionAdminState();
 }
 
-class _Home1State extends State<Home1> {
+class _MateiralsectionAdminState extends State<MateiralsectionAdmin> {
   DocumentSnapshot? userData;
   List<DocumentSnapshot> subjects = [];
   String _searchQuery = '';
