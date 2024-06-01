@@ -169,7 +169,7 @@ class MyWidget extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            "About Us",
+                            "SeekhoBuddy Team",
                             style: TextStyle(
                               fontSize: 28,
                               fontWeight: FontWeight.bold,
