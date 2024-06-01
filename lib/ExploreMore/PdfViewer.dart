@@ -24,7 +24,7 @@ class PdfViewer extends StatelessWidget {
         ),
       ),
       body: PDF().cachedFromUrl(
-        AA['list']['link'],
+        AA['link'],
         placeholder: (progress) =>
             Center(child: CircularProgressIndicator(value: progress)),
         errorWidget: (error) =>
