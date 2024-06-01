@@ -34,7 +34,7 @@ class Branches extends StatelessWidget {
                         width: 10.0,
                       ),
                       Text(
-                        "Branches",
+                        facultyName,
                         style: TextStyle(
                           fontSize: 28,
                           fontWeight: FontWeight.bold,
@@ -113,8 +113,11 @@ class Branches extends StatelessWidget {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) =>
-                                        Semesters(branch: branch as Map),
+                                    builder: (context) => Semesters(
+                                      branchName: branch[
+                                          'branchName'], // assuming 'branchName' is the key for the branch name
+                                      branchData: branch as Map,
+                                    ),
                                   ),
                                 );
                               },

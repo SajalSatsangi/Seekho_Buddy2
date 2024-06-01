@@ -2,14 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:seekhobuddy/AdminScreens/materialSectionPage-Admin.dart';
 
 class Subjects extends StatelessWidget {
-  final Map semester;
+  final String semesterName;
+  final Map semesterData;
 
-  Subjects({required this.semester});
+  Subjects({required this.semesterName, required this.semesterData});
 
   @override
   Widget build(BuildContext context) {
-    print(semester);
-    Map subjects = Map.from(semester)..remove('semesterName');
+    print(semesterData);
+    Map subjects = Map.from(semesterData)..remove('semesterName');
 
     return Scaffold(
       backgroundColor: Colors.black,
@@ -34,7 +35,7 @@ class Subjects extends StatelessWidget {
                         width: 10.0,
                       ),
                       Text(
-                        "Subjects",
+                        semesterName,
                         style: TextStyle(
                           fontSize: 28,
                           fontWeight: FontWeight.bold,
@@ -116,7 +117,10 @@ class Subjects extends StatelessWidget {
                                   MaterialPageRoute(
                                     builder: (context) =>
                                         Materialsectionpage_Admin(
-                                            subject: subject),
+                                      subjectName: subject[
+                                          'subjectName'], // assuming 'subjectName' is the key for the subject name
+                                      subject: subject,
+                                    ),
                                   ),
                                 );
                               },
