@@ -1,12 +1,29 @@
+import 'dart:io';
 import 'dart:ui';
-
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
 import 'package:seekhobuddy/home.dart';
+import 'package:file_picker/file_picker.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 
 void main() {
   runApp(Notices_admin());
 }
+class Notice {
+  final String title;
+  final String description;
+  final String date;
+  final String fileUrl;
+
+  Notice({
+    required this.title,
+    required this.description,
+    required this.date,
+    required this.fileUrl,
+  });
+}
+
 
 class Notices_admin extends StatelessWidget {
   @override
@@ -114,6 +131,14 @@ class MyWidget extends StatelessWidget {
     );
   }
 
+  final titleController = TextEditingController();
+  final descriptionController = TextEditingController();
+
+  List<String> selectedFaculties = [];
+  List<String> selectedSubfaculties = [];
+  List<String> selectedSemesters = [];
+  List<String> selectedSubbranches = [];
+
   Future<void> _showAddPopup(BuildContext context) async {
     final List<String> faculties = [
       'Faculty of Engineering',
@@ -145,6 +170,8 @@ class MyWidget extends StatelessWidget {
     ];
     final List<String> subbranches = ['Students', 'Teachers', 'All'];
 
+    PlatformFile? selectedFile;
+
     return showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -164,6 +191,7 @@ class MyWidget extends StatelessWidget {
               children: [
                 // Title TextField
                 TextField(
+                  controller: titleController,
                   decoration: InputDecoration(
                     hintText: 'Title',
                     hintStyle: TextStyle(color: Colors.grey),
@@ -176,6 +204,7 @@ class MyWidget extends StatelessWidget {
                 SizedBox(height: 16),
                 // Description TextField
                 TextField(
+                  controller: descriptionController,
                   decoration: InputDecoration(
                     hintText: 'Description',
                     hintStyle: TextStyle(color: Colors.grey),
@@ -189,8 +218,16 @@ class MyWidget extends StatelessWidget {
                 SizedBox(height: 16),
                 // Upload Image Button
                 TextButton.icon(
-                  onPressed: () {
-                    // Implement your image upload logic here
+                  onPressed: () async {
+                    // Pick a file
+                    FilePickerResult? result =
+                        await FilePicker.platform.pickFiles();
+
+                    if (result != null) {
+                      selectedFile = result.files.first;
+                    } else {
+                      // User canceled the picker
+                    }
                   },
                   style: TextButton.styleFrom(
                     backgroundColor: const Color.fromARGB(255, 255, 255, 255),
@@ -225,7 +262,7 @@ class MyWidget extends StatelessWidget {
                   itemsTextStyle:
                       TextStyle(color: Colors.white), // Option text color
                   onConfirm: (results) {
-                    // Handle the selected faculties
+                    selectedFaculties = results;
                   },
                 ),
                 SizedBox(height: 16),
@@ -253,7 +290,7 @@ class MyWidget extends StatelessWidget {
                   itemsTextStyle:
                       TextStyle(color: Colors.white), // Option text color
                   onConfirm: (results) {
-                    // Handle the selected subfaculties
+                    selectedSubfaculties = results;
                   },
                 ),
                 SizedBox(height: 16),
@@ -280,7 +317,7 @@ class MyWidget extends StatelessWidget {
                   itemsTextStyle:
                       TextStyle(color: Colors.white), // Option text color
                   onConfirm: (results) {
-                    // Handle the selected semesters
+                    selectedSemesters = results;
                   },
                 ),
                 SizedBox(height: 16),
@@ -307,7 +344,7 @@ class MyWidget extends StatelessWidget {
                   itemsTextStyle:
                       TextStyle(color: Colors.white), // Option text color
                   onConfirm: (results) {
-                    // Handle the selected semesters
+                    selectedSubbranches = results;
                   },
                 ),
               ],
@@ -326,9 +363,48 @@ class MyWidget extends StatelessWidget {
             ),
             // Add Button
             ElevatedButton(
-              onPressed: () {
-                // Handle add button press
-                // You can access the text fields' values here
+              onPressed: () async {
+                if (selectedFile != null) {
+                  // Upload the file to Firebase Storage
+                  TaskSnapshot snapshot = await FirebaseStorage.instance
+                      .ref('notices/${selectedFile!.name}')
+                      .putFile(File(selectedFile!.path!));
+
+                  // Get the download URL of the uploaded file
+                  String fileUrl = await snapshot.ref.getDownloadURL();
+
+                  final data = {
+                    'title': titleController.text,
+                    'description': descriptionController.text,
+                    'faculties': selectedFaculties,
+                    'subfaculties': selectedSubfaculties,
+                    'semesters': selectedSemesters,
+                    'subbranches': selectedSubbranches,
+                    'fileUrl': fileUrl,
+                    'date': DateTime.now().toString(),
+                  };
+
+                  FirebaseFirestore firestore = FirebaseFirestore.instance;
+
+// Get the number of documents in the 'notices' collection
+                  int docCount = await firestore
+                      .collection('notices')
+                      .get()
+                      .then((querySnapshot) => querySnapshot.docs.length);
+
+// Add 1 to the document count
+                  int newDocId = docCount + 1;
+
+// Add the data to Firestore with the new document ID
+                  firestore
+                      .collection('notices')
+                      .doc('Notice ' + newDocId.toString())
+                      .set(data);
+
+                  Navigator.of(context).pop();
+                } else {
+                  // No file selected
+                }
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Color.fromARGB(255, 255, 255, 255),
@@ -345,6 +421,22 @@ class MyWidget extends StatelessWidget {
       },
     );
   }
+Future<List<Notice>> fetchNotices() async {
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
+  QuerySnapshot querySnapshot = await firestore.collection('notices').get();
+  List<Notice> notices = querySnapshot.docs.map((doc) {
+    return Notice(
+      title: doc['title'],
+      description: doc['description'],
+      date: doc['date'],
+      fileUrl: doc['fileUrl'],
+    );
+  }).toList();
+  return notices;
+}
+
+
+
 
   @override
   Widget build(BuildContext context) {
