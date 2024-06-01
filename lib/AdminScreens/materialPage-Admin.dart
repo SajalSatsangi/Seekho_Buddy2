@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:seekhobuddy/ExploreMore/PdfViewer.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Materialpage_Admin extends StatelessWidget {
   final Map material;
@@ -77,7 +78,7 @@ class Materialpage_Admin extends StatelessWidget {
                   final databaseReference = FirebaseDatabase(
                     databaseURL:
                         'https://seekhobuddy-default-rtdb.asia-southeast1.firebasedatabase.app',
-                  // ignore: deprecated_member_use
+                    // ignore: deprecated_member_use
                   ).reference();
 
                   // Add the new PDF to the Firebase Realtime Database
@@ -90,6 +91,25 @@ class Materialpage_Admin extends StatelessWidget {
                       .child(subjectName)
                       .child(materialName)
                       .child(newPdfName)
+                      .set({
+                    'pdfName': newPdfName,
+                    'link': newPdfUrl,
+                  });
+
+                  final firestoreReference = FirebaseFirestore.instance;
+
+                  // Add the new PDF to Firestore
+                  firestoreReference
+                      .collection('Material DB')
+                      .doc(facultyName)
+                      .collection(branchName)
+                      .doc(semesterName)
+                      .collection('Subjects')
+                      .doc(subjectName)
+                      .collection(subjectName)
+                      .doc(materialName)
+                      .collection(materialName)
+                      .doc(newPdfName)
                       .set({
                     'pdfName': newPdfName,
                     'link': newPdfUrl,
