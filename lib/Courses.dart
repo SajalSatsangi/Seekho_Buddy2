@@ -28,7 +28,7 @@ class ResourcesPage extends StatelessWidget {
                         width: 10.0,
                       ),
                       Text(
-                        "Cources",
+                        "Courses",
                         style: TextStyle(
                           fontSize: 28,
                           fontWeight: FontWeight.bold,
