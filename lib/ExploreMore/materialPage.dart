@@ -3,8 +3,9 @@ import 'package:seekhobuddy/ExploreMore/PdfViewer.dart';
 
 class Materialpage extends StatelessWidget {
   final Map material;
+  final String materialName;
 
-  Materialpage({required this.material});
+  Materialpage({required this.materialName, required this.material});
 
   @override
   Widget build(BuildContext context) {
@@ -12,6 +13,49 @@ class Materialpage extends StatelessWidget {
     Map AAs = Map.from(material)
       ..remove('materialName')
       ..remove('subjectName');
+
+    // Function to show the popup dialog
+    void _showAddMaterialDialog() {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Add Pdf'),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                TextField(
+                  decoration: InputDecoration(
+                    hintText: "Enter Pdf Name",
+                  ),
+                ),
+                SizedBox(height: 8),
+                TextField(
+                  decoration: InputDecoration(
+                    hintText: "Enter Pdf URL",
+                  ),
+                ),
+              ],
+            ),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop(); // Close the dialog
+                },
+                child: Text('Cancel'),
+              ),
+              TextButton(
+                onPressed: () {
+                  // Handle the action when "Add" is pressed
+                  Navigator.of(context).pop(); // Close the dialog
+                },
+                child: Text('Add'),
+              ),
+            ],
+          );
+        },
+      );
+    }
 
     return Scaffold(
       backgroundColor: Colors.black,
@@ -36,7 +80,7 @@ class Materialpage extends StatelessWidget {
                         width: 10.0,
                       ),
                       Text(
-                        "Materialpage",
+                        materialName,
                         style: TextStyle(
                           fontSize: 28,
                           fontWeight: FontWeight.bold,

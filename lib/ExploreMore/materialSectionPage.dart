@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:seekhobuddy/ExploreMore/materialPage.dart';
+import 'package:seekhobuddy/AdminScreens/materialPage-Admin.dart';
 
 class Materialsectionpage extends StatelessWidget {
+  final String subjectName;
   final Map subject;
 
-  Materialsectionpage({required this.subject});
+  Materialsectionpage({required this.subjectName, required this.subject});
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +35,7 @@ class Materialsectionpage extends StatelessWidget {
                         width: 10.0,
                       ),
                       Text(
-                        "Materialsectionpage",
+                        subjectName,
                         style: TextStyle(
                           fontSize: 28,
                           fontWeight: FontWeight.bold,
@@ -114,8 +115,12 @@ class Materialsectionpage extends StatelessWidget {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) =>
-                                          Materialpage(material: material)),
+                                      builder: (context) => Materialpage_Admin(
+                                            materialName: material[
+                                                'materialName'], // assuming 'materialName' is the key for the material name
+                                            material:
+                                                material, // Pass the entire material map
+                                          )),
                                 );
                               },
                               style: ButtonStyle(
