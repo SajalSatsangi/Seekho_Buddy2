@@ -1,26 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:seekhobuddy/AdminScreens/materialSectionPage-Admin.dart';
 
-class Subjects extends StatelessWidget {
+class Subjects extends StatefulWidget {
   final String semesterName;
   final Map semesterData;
   final String facultyName;
   final String branchName;
 
-  Subjects({required this.semesterName, 
-  required this.semesterData,
-  required this.facultyName,
-  required this.branchName
-  });
+  Subjects(
+      {required this.semesterName,
+      required this.semesterData,
+      required this.facultyName,
+      required this.branchName});
+
+  @override
+  _SubjectsState createState() => _SubjectsState();
+}
+
+class _SubjectsState extends State<Subjects> {
+  String searchQuery = '';
 
   @override
   Widget build(BuildContext context) {
-    print(semesterData);
-
-
-
-
-    Map subjects = Map.from(semesterData)..remove('semesterName');
+    Map subjects = Map.from(widget.semesterData)..remove('semesterName');
+    Map filteredSubjects = {};
+    for (var key in subjects.keys) {
+      if (key.toString().toLowerCase().contains(searchQuery.toLowerCase())) {
+        filteredSubjects[key] = subjects[key];
+      }
+    }
 
     return Scaffold(
       backgroundColor: Colors.black,
@@ -45,7 +53,7 @@ class Subjects extends StatelessWidget {
                         width: 10.0,
                       ),
                       Text(
-                        semesterName,
+                        widget.semesterName,
                         style: TextStyle(
                           fontSize: 28,
                           fontWeight: FontWeight.bold,
@@ -61,6 +69,12 @@ class Subjects extends StatelessWidget {
           Padding(
             padding: EdgeInsets.only(top: 14, left: 14, right: 14),
             child: TextField(
+              onChanged: (value) {
+                setState(() {
+                  searchQuery = value;
+                });
+              },
+              style: TextStyle(color: Colors.white), // Add this line
               decoration: InputDecoration(
                 hintText: "Search...",
                 hintStyle: TextStyle(color: Colors.white),
@@ -81,10 +95,10 @@ class Subjects extends StatelessWidget {
           ),
           Expanded(
             child: ListView.builder(
-              itemCount: subjects.length,
+              itemCount: filteredSubjects.length,
               itemBuilder: (context, index) {
-                String subjectKey = subjects.keys.elementAt(index);
-                Map subject = subjects[subjectKey];
+                String subjectKey = filteredSubjects.keys.elementAt(index);
+                Map subject = filteredSubjects[subjectKey];
 
                 return Padding(
                   padding: const EdgeInsets.symmetric(
@@ -130,9 +144,9 @@ class Subjects extends StatelessWidget {
                                       subjectName: subject[
                                           'subjectName'], // assuming 'subjectName' is the key for the subject name
                                       subject: subject,
-                                      facultyName: facultyName,
-                                      branchName: branchName,
-                                      semesterName: semesterName,
+                                      facultyName: widget.facultyName,
+                                      branchName: widget.branchName,
+                                      semesterName: widget.semesterName,
                                     ),
                                   ),
                                 );
