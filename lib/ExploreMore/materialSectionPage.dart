@@ -8,14 +8,12 @@ class Materialsectionpage extends StatelessWidget {
   final String branchName;
   final String semesterName;
 
-
-
-  Materialsectionpage({required this.subjectName, 
-  required this.subject,
-  required this.facultyName,
-  required this.branchName,
-  required this.semesterName
-  });
+  Materialsectionpage(
+      {required this.subjectName,
+      required this.subject,
+      required this.facultyName,
+      required this.branchName,
+      required this.semesterName});
 
   @override
   Widget build(BuildContext context) {
@@ -55,27 +53,6 @@ class Materialsectionpage extends StatelessWidget {
                     ],
                   ),
                 ],
-              ),
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.only(top: 14, left: 14, right: 14),
-            child: TextField(
-              decoration: InputDecoration(
-                hintText: "Search...",
-                hintStyle: TextStyle(color: Colors.white),
-                prefixIcon: Icon(
-                  Icons.search,
-                  color: Colors.white,
-                  size: 20,
-                ),
-                filled: true,
-                fillColor: Color(0xFF323232),
-                contentPadding: EdgeInsets.all(8),
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(20),
-                  borderSide: BorderSide(color: Color(0xFF323232)),
-                ),
               ),
             ),
           ),
@@ -128,13 +105,13 @@ class Materialsectionpage extends StatelessWidget {
                                       builder: (context) => Materialpage_Admin(
                                             materialName: material[
                                                 'materialName'], // assuming 'materialName' is the key for the material name
-                                            material: material, // Pass the entire material map
+                                            material:
+                                                material, // Pass the entire material map
                                             facultyName: facultyName,
                                             branchName: branchName,
                                             semesterName: semesterName,
                                             subjectName: subjectName,
-                                          )
-                                          ),
+                                          )),
                                 );
                               },
                               style: ButtonStyle(

@@ -143,7 +143,7 @@ class MyWidget extends StatelessWidget {
                           ),
                         ),
                       ),
-                      SizedBox(height: 30),
+                      SizedBox(height: 15),
                       ElevatedButton(
                         onPressed: () {
                           Navigator.push(
@@ -164,13 +164,22 @@ class MyWidget extends StatelessWidget {
                               vertical: 15, horizontal: 60),
                         ),
                       ),
+                      SizedBox(height: 100),
                       Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
+                          Text(
+                            "About Us",
+                            style: TextStyle(
+                              fontSize: 28,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
+                          ),
                           ProfileCard(
                             name: 'Nihal Saran',
                             imageUrl:
-                                'https://avatars.githubusercontent.com/u/92871743?v=4',
+                                'https://media.licdn.com/dms/image/D4D03AQFaaIZWO9IPQw/profile-displayphoto-shrink_100_100/0/1706756591651?e=1722470400&v=beta&t=OGajEuphTl79NiJXhFqNqhQGjLiS0BB0LzR8DYc8lnI',
                             isImageRight: false,
                             linkedinUrl:
                                 'https://www.linkedin.com/in/nihal-saran/',
@@ -186,7 +195,7 @@ class MyWidget extends StatelessWidget {
                           ProfileCard(
                             name: 'Ansh Prasad',
                             imageUrl:
-                                'https://avatars.githubusercontent.com/u/129548078?v=4',
+                                'https://media.licdn.com/dms/image/D4D03AQFYjXW3zGg0Kg/profile-displayphoto-shrink_100_100/0/1674130190372?e=1722470400&v=beta&t=3K1-c3toN7nWILNTBl1NMIFavi6ZT5EDxJQDMrlkZzA',
                             isImageRight: false,
                             linkedinUrl:
                                 'https://www.linkedin.com/in/ansh-prasad/',
@@ -194,7 +203,7 @@ class MyWidget extends StatelessWidget {
                           ProfileCard(
                             name: 'N. Shikhar',
                             imageUrl:
-                                'https://avatars.githubusercontent.com/u/92314161?v=4',
+                                'https://media.licdn.com/dms/image/D4D03AQEJoLYZ8IkgeA/profile-displayphoto-shrink_100_100/0/1685933964356?e=1722470400&v=beta&t=OMxYQxVsDYn46NOUwWvAz_UOb9tsNiBo5tDXLHNwDhA',
                             isImageRight: true,
                             linkedinUrl:
                                 'https://www.linkedin.com/in/n-shikhar/',
@@ -242,8 +251,8 @@ class ProfileCard extends StatelessWidget {
                 borderRadius: BorderRadius.circular(12),
                 child: Image.network(
                   imageUrl,
-                  width: 150,
-                  height: 150,
+                  width: 100,
+                  height: 100,
                   fit: BoxFit.cover,
                 ),
               ),
@@ -253,7 +262,7 @@ class ProfileCard extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: 20), // Adjust the height as needed
+              SizedBox(height: 10), // Adjust the height as needed
               Text(
                 name,
                 style: TextStyle(
@@ -262,7 +271,6 @@ class ProfileCard extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              SizedBox(height: 4),
               Text(
                 'B.Tech 4th Year',
                 style: TextStyle(
@@ -270,7 +278,7 @@ class ProfileCard extends StatelessWidget {
                   fontSize: 14,
                 ),
               ),
-              SizedBox(height: 8),
+              SizedBox(height: 6),
               InkWell(
                 onTap: () async {
                   if (await canLaunch(linkedinUrl)) {
@@ -315,8 +323,8 @@ class ProfileCard extends StatelessWidget {
                 borderRadius: BorderRadius.circular(12),
                 child: Image.network(
                   imageUrl,
-                  width: 150,
-                  height: 150,
+                  width: 100,
+                  height: 100,
                   fit: BoxFit.cover,
                 ),
               ),

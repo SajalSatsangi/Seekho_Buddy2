@@ -115,28 +115,6 @@ class _MateiralsectionAdminState extends State<MateiralsectionAdmin> {
               ),
             ),
           ),
-          Padding(
-            padding: EdgeInsets.only(top: 14, left: 14, right: 14),
-            child: TextField(
-              onChanged: _updateSearchQuery,
-              decoration: InputDecoration(
-                hintText: "Search...",
-                hintStyle: TextStyle(color: Colors.white),
-                prefixIcon: Icon(
-                  Icons.search,
-                  color: Colors.white,
-                  size: 20,
-                ),
-                filled: true,
-                fillColor: Color(0xFF323232),
-                contentPadding: EdgeInsets.all(8),
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(20),
-                  borderSide: BorderSide(color: Color(0xFF323232)),
-                ),
-              ),
-            ),
-          ),
           Expanded(
             child: Padding(
               padding: const EdgeInsets.fromLTRB(30.0, 5.0, 30.0, 30.0),
