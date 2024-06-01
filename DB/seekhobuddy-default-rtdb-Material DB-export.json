@@ -5620,7 +5620,7 @@
             "semesterName": "Semester 1"
           },
           "Semester 2": {
-            "ENH101": {
+            "ENH281": {
               "Additional Assignment": {
                 "AA1": {
                   "pdfName": "AA1",
@@ -5720,7 +5720,2863 @@
                 },
                 "materialName": "Notes"
               },
-              "subjectName": "ENH101"
+              "subjectName": "ENH281"
+            },
+            "PHM281": {
+              "Additional Assignment": {
+                "AA1": {
+                  "pdfName": "AA1",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "AA2": {
+                  "pdfName": "AA2",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "Additional Assignment"
+              },
+              "QB & Syllabus": {
+                "QB": {
+                  "pdfName": "QB",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Syllabus": {
+                  "pdfName": "Syllabus",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "QB & Syllabus"
+              },
+              "Question Papers": {
+                "CT1": {
+                  "pdfName": "CT1",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "CT2": {
+                  "pdfName": "CT2",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "ENDSEM": {
+                  "pdfName": "ENDSEM",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "Question Papers"
+              },
+              "Book": {
+                "Book1": {
+                  "pdfName": "XYZ",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Book2": {
+                  "pdfName": "ABC",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "Book"
+              },
+              "Notes": {
+                "Unit1": {
+                  "pdfName": "Unit1",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Unit2": {
+                  "pdfName": "Unit2",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Unit3": {
+                  "pdfName": "Unit3",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Unit4": {
+                  "pdfName": "Unit4",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Unit5": {
+                  "pdfName": "Unit5",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "Notes"
+              },
+              "subjectName": "PHM281"
+            },
+            "PHM282": {
+              "Additional Assignment": {
+                "AA1": {
+                  "pdfName": "AA1",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "AA2": {
+                  "pdfName": "AA2",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "Additional Assignment"
+              },
+              "QB & Syllabus": {
+                "QB": {
+                  "pdfName": "QB",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Syllabus": {
+                  "pdfName": "Syllabus",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "QB & Syllabus"
+              },
+              "Question Papers": {
+                "CT1": {
+                  "pdfName": "CT1",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "CT2": {
+                  "pdfName": "CT2",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "ENDSEM": {
+                  "pdfName": "ENDSEM",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "Question Papers"
+              },
+              "Book": {
+                "Book1": {
+                  "pdfName": "XYZ",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Book2": {
+                  "pdfName": "ABC",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "Book"
+              },
+              "Notes": {
+                "Unit1": {
+                  "pdfName": "Unit1",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Unit2": {
+                  "pdfName": "Unit2",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Unit3": {
+                  "pdfName": "Unit3",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Unit4": {
+                  "pdfName": "Unit4",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Unit5": {
+                  "pdfName": "Unit5",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "Notes"
+              },
+              "subjectName": "PHM282"
+            },
+            "EEM201": {
+              "Additional Assignment": {
+                "AA1": {
+                  "pdfName": "AA1",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "AA2": {
+                  "pdfName": "AA2",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "Additional Assignment"
+              },
+              "QB & Syllabus": {
+                "QB": {
+                  "pdfName": "QB",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Syllabus": {
+                  "pdfName": "Syllabus",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "QB & Syllabus"
+              },
+              "Question Papers": {
+                "CT1": {
+                  "pdfName": "CT1",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "CT2": {
+                  "pdfName": "CT2",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "ENDSEM": {
+                  "pdfName": "ENDSEM",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "Question Papers"
+              },
+              "Book": {
+                "Book1": {
+                  "pdfName": "XYZ",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Book2": {
+                  "pdfName": "ABC",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "Book"
+              },
+              "Notes": {
+                "Unit1": {
+                  "pdfName": "Unit1",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Unit2": {
+                  "pdfName": "Unit2",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Unit3": {
+                  "pdfName": "Unit3",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Unit4": {
+                  "pdfName": "Unit4",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Unit5": {
+                  "pdfName": "Unit5",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "Notes"
+              },
+              "subjectName": "EEM201"
+            },
+            "EEM202": {
+              "Additional Assignment": {
+                "AA1": {
+                  "pdfName": "AA1",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "AA2": {
+                  "pdfName": "AA2",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "Additional Assignment"
+              },
+              "QB & Syllabus": {
+                "QB": {
+                  "pdfName": "QB",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Syllabus": {
+                  "pdfName": "Syllabus",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "QB & Syllabus"
+              },
+              "Question Papers": {
+                "CT1": {
+                  "pdfName": "CT1",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "CT2": {
+                  "pdfName": "CT2",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "ENDSEM": {
+                  "pdfName": "ENDSEM",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "Question Papers"
+              },
+              "Book": {
+                "Book1": {
+                  "pdfName": "XYZ",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Book2": {
+                  "pdfName": "ABC",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "Book"
+              },
+              "Notes": {
+                "Unit1": {
+                  "pdfName": "Unit1",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Unit2": {
+                  "pdfName": "Unit2",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Unit3": {
+                  "pdfName": "Unit3",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Unit4": {
+                  "pdfName": "Unit4",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Unit5": {
+                  "pdfName": "Unit5",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "Notes"
+              },
+              "subjectName": "EEM202"
+            },
+            "MEM201": {
+              "Additional Assignment": {
+                "AA1": {
+                  "pdfName": "AA1",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "AA2": {
+                  "pdfName": "AA2",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "Additional Assignment"
+              },
+              "QB & Syllabus": {
+                "QB": {
+                  "pdfName": "QB",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Syllabus": {
+                  "pdfName": "Syllabus",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "QB & Syllabus"
+              },
+              "Question Papers": {
+                "CT1": {
+                  "pdfName": "CT1",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "CT2": {
+                  "pdfName": "CT2",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "ENDSEM": {
+                  "pdfName": "ENDSEM",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "Question Papers"
+              },
+              "Book": {
+                "Book1": {
+                  "pdfName": "XYZ",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Book2": {
+                  "pdfName": "ABC",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "Book"
+              },
+              "Notes": {
+                "Unit1": {
+                  "pdfName": "Unit1",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Unit2": {
+                  "pdfName": "Unit2",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Unit3": {
+                  "pdfName": "Unit3",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Unit4": {
+                  "pdfName": "Unit4",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Unit5": {
+                  "pdfName": "Unit5",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "Notes"
+              },
+              "subjectName": "MEM201"
+            },
+            "MEM202": {
+              "Additional Assignment": {
+                "AA1": {
+                  "pdfName": "AA1",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "AA2": {
+                  "pdfName": "AA2",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "Additional Assignment"
+              },
+              "QB & Syllabus": {
+                "QB": {
+                  "pdfName": "QB",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Syllabus": {
+                  "pdfName": "Syllabus",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "QB & Syllabus"
+              },
+              "Question Papers": {
+                "CT1": {
+                  "pdfName": "CT1",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "CT2": {
+                  "pdfName": "CT2",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "ENDSEM": {
+                  "pdfName": "ENDSEM",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "Question Papers"
+              },
+              "Book": {
+                "Book1": {
+                  "pdfName": "XYZ",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Book2": {
+                  "pdfName": "ABC",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "Book"
+              },
+              "Notes": {
+                "Unit1": {
+                  "pdfName": "Unit1",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Unit2": {
+                  "pdfName": "Unit2",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Unit3": {
+                  "pdfName": "Unit3",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Unit4": {
+                  "pdfName": "Unit4",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Unit5": {
+                  "pdfName": "Unit5",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "Notes"
+              },
+              "subjectName": "MEM202"
+            },
+            "MEM203": {
+              "Additional Assignment": {
+                "AA1": {
+                  "pdfName": "AA1",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "AA2": {
+                  "pdfName": "AA2",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "Additional Assignment"
+              },
+              "QB & Syllabus": {
+                "QB": {
+                  "pdfName": "QB",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Syllabus": {
+                  "pdfName": "Syllabus",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "QB & Syllabus"
+              },
+              "Question Papers": {
+                "CT1": {
+                  "pdfName": "CT1",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "CT2": {
+                  "pdfName": "CT2",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "ENDSEM": {
+                  "pdfName": "ENDSEM",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "Question Papers"
+              },
+              "Book": {
+                "Book1": {
+                  "pdfName": "XYZ",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Book2": {
+                  "pdfName": "ABC",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "Book"
+              },
+              "Notes": {
+                "Unit1": {
+                  "pdfName": "Unit1",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Unit2": {
+                  "pdfName": "Unit2",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Unit3": {
+                  "pdfName": "Unit3",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Unit4": {
+                  "pdfName": "Unit4",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Unit5": {
+                  "pdfName": "Unit5",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "Notes"
+              },
+              "subjectName": "MEM203"
+            },
+            "MAM281": {
+              "Additional Assignment": {
+                "AA1": {
+                  "pdfName": "AA1",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "AA2": {
+                  "pdfName": "AA2",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "Additional Assignment"
+              },
+              "QB & Syllabus": {
+                "QB": {
+                  "pdfName": "QB",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Syllabus": {
+                  "pdfName": "Syllabus",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "QB & Syllabus"
+              },
+              "Question Papers": {
+                "CT1": {
+                  "pdfName": "CT1",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "CT2": {
+                  "pdfName": "CT2",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "ENDSEM": {
+                  "pdfName": "ENDSEM",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "Question Papers"
+              },
+              "Book": {
+                "Book1": {
+                  "pdfName": "XYZ",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Book2": {
+                  "pdfName": "ABC",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "Book"
+              },
+              "Notes": {
+                "Unit1": {
+                  "pdfName": "Unit1",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Unit2": {
+                  "pdfName": "Unit2",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Unit3": {
+                  "pdfName": "Unit3",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Unit4": {
+                  "pdfName": "Unit4",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Unit5": {
+                  "pdfName": "Unit5",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "Notes"
+              },
+              "subjectName": "MAM281"
+            },
+            "EGC281": {
+              "Additional Assignment": {
+                "AA1": {
+                  "pdfName": "AA1",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "AA2": {
+                  "pdfName": "AA2",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "Additional Assignment"
+              },
+              "QB & Syllabus": {
+                "QB": {
+                  "pdfName": "QB",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Syllabus": {
+                  "pdfName": "Syllabus",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "QB & Syllabus"
+              },
+              "Question Papers": {
+                "CT1": {
+                  "pdfName": "CT1",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "CT2": {
+                  "pdfName": "CT2",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "ENDSEM": {
+                  "pdfName": "ENDSEM",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "Question Papers"
+              },
+              "Book": {
+                "Book1": {
+                  "pdfName": "XYZ",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Book2": {
+                  "pdfName": "ABC",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "Book"
+              },
+              "Notes": {
+                "Unit1": {
+                  "pdfName": "Unit1",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Unit2": {
+                  "pdfName": "Unit2",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Unit3": {
+                  "pdfName": "Unit3",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Unit4": {
+                  "pdfName": "Unit4",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Unit5": {
+                  "pdfName": "Unit5",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "Notes"
+              },
+              "subjectName": "EGC281"
+            },
+            "ESC281": {
+              "Additional Assignment": {
+                "AA1": {
+                  "pdfName": "AA1",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "AA2": {
+                  "pdfName": "AA2",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "Additional Assignment"
+              },
+              "QB & Syllabus": {
+                "QB": {
+                  "pdfName": "QB",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Syllabus": {
+                  "pdfName": "Syllabus",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "QB & Syllabus"
+              },
+              "Question Papers": {
+                "CT1": {
+                  "pdfName": "CT1",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "CT2": {
+                  "pdfName": "CT2",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "ENDSEM": {
+                  "pdfName": "ENDSEM",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "Question Papers"
+              },
+              "Book": {
+                "Book1": {
+                  "pdfName": "XYZ",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Book2": {
+                  "pdfName": "ABC",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "Book"
+              },
+              "Notes": {
+                "Unit1": {
+                  "pdfName": "Unit1",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Unit2": {
+                  "pdfName": "Unit2",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Unit3": {
+                  "pdfName": "Unit3",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Unit4": {
+                  "pdfName": "Unit4",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Unit5": {
+                  "pdfName": "Unit5",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "Notes"
+              },
+              "subjectName": "ESC281"
+            },
+            "GKC281": {
+              "Additional Assignment": {
+                "AA1": {
+                  "pdfName": "AA1",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "AA2": {
+                  "pdfName": "AA2",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "Additional Assignment"
+              },
+              "QB & Syllabus": {
+                "QB": {
+                  "pdfName": "QB",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Syllabus": {
+                  "pdfName": "Syllabus",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "QB & Syllabus"
+              },
+              "Question Papers": {
+                "CT1": {
+                  "pdfName": "CT1",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "CT2": {
+                  "pdfName": "CT2",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "ENDSEM": {
+                  "pdfName": "ENDSEM",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "Question Papers"
+              },
+              "Book": {
+                "Book1": {
+                  "pdfName": "XYZ",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Book2": {
+                  "pdfName": "ABC",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "Book"
+              },
+              "Notes": {
+                "Unit1": {
+                  "pdfName": "Unit1",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Unit2": {
+                  "pdfName": "Unit2",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Unit3": {
+                  "pdfName": "Unit3",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Unit4": {
+                  "pdfName": "Unit4",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Unit5": {
+                  "pdfName": "Unit5",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "Notes"
+              },
+              "subjectName": "GKC281"
+            },
+            "RDC281": {
+              "Additional Assignment": {
+                "AA1": {
+                  "pdfName": "AA1",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "AA2": {
+                  "pdfName": "AA2",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "Additional Assignment"
+              },
+              "QB & Syllabus": {
+                "QB": {
+                  "pdfName": "QB",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Syllabus": {
+                  "pdfName": "Syllabus",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "QB & Syllabus"
+              },
+              "Question Papers": {
+                "CT1": {
+                  "pdfName": "CT1",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "CT2": {
+                  "pdfName": "CT2",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "ENDSEM": {
+                  "pdfName": "ENDSEM",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "Question Papers"
+              },
+              "Book": {
+                "Book1": {
+                  "pdfName": "XYZ",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Book2": {
+                  "pdfName": "ABC",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "Book"
+              },
+              "Notes": {
+                "Unit1": {
+                  "pdfName": "Unit1",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Unit2": {
+                  "pdfName": "Unit2",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Unit3": {
+                  "pdfName": "Unit3",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Unit4": {
+                  "pdfName": "Unit4",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Unit5": {
+                  "pdfName": "Unit5",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "Notes"
+              },
+              "subjectName": "RDC281"
+            },
+            "RDC282": {
+              "Additional Assignment": {
+                "AA1": {
+                  "pdfName": "AA1",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "AA2": {
+                  "pdfName": "AA2",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "Additional Assignment"
+              },
+              "QB & Syllabus": {
+                "QB": {
+                  "pdfName": "QB",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Syllabus": {
+                  "pdfName": "Syllabus",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "QB & Syllabus"
+              },
+              "Question Papers": {
+                "CT1": {
+                  "pdfName": "CT1",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "CT2": {
+                  "pdfName": "CT2",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "ENDSEM": {
+                  "pdfName": "ENDSEM",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "Question Papers"
+              },
+              "Book": {
+                "Book1": {
+                  "pdfName": "XYZ",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Book2": {
+                  "pdfName": "ABC",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "Book"
+              },
+              "Notes": {
+                "Unit1": {
+                  "pdfName": "Unit1",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Unit2": {
+                  "pdfName": "Unit2",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Unit3": {
+                  "pdfName": "Unit3",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Unit4": {
+                  "pdfName": "Unit4",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Unit5": {
+                  "pdfName": "Unit5",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "Notes"
+              },
+              "subjectName": "RDC282"
+            },
+            "CAC281": {
+              "Additional Assignment": {
+                "AA1": {
+                  "pdfName": "AA1",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "AA2": {
+                  "pdfName": "AA2",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "Additional Assignment"
+              },
+              "QB & Syllabus": {
+                "QB": {
+                  "pdfName": "QB",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Syllabus": {
+                  "pdfName": "Syllabus",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "QB & Syllabus"
+              },
+              "Question Papers": {
+                "CT1": {
+                  "pdfName": "CT1",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "CT2": {
+                  "pdfName": "CT2",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "ENDSEM": {
+                  "pdfName": "ENDSEM",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "Question Papers"
+              },
+              "Book": {
+                "Book1": {
+                  "pdfName": "XYZ",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Book2": {
+                  "pdfName": "ABC",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "Book"
+              },
+              "Notes": {
+                "Unit1": {
+                  "pdfName": "Unit1",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Unit2": {
+                  "pdfName": "Unit2",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Unit3": {
+                  "pdfName": "Unit3",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Unit4": {
+                  "pdfName": "Unit4",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Unit5": {
+                  "pdfName": "Unit5",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "Notes"
+              },
+              "subjectName": "CAC281"
+            },
+            "MEM204": {
+              "Additional Assignment": {
+                "AA1": {
+                  "pdfName": "AA1",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "AA2": {
+                  "pdfName": "AA2",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "Additional Assignment"
+              },
+              "QB & Syllabus": {
+                "QB": {
+                  "pdfName": "QB",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Syllabus": {
+                  "pdfName": "Syllabus",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "QB & Syllabus"
+              },
+              "Question Papers": {
+                "CT1": {
+                  "pdfName": "CT1",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "CT2": {
+                  "pdfName": "CT2",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "ENDSEM": {
+                  "pdfName": "ENDSEM",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "Question Papers"
+              },
+              "Book": {
+                "Book1": {
+                  "pdfName": "XYZ",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Book2": {
+                  "pdfName": "ABC",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "Book"
+              },
+              "Notes": {
+                "Unit1": {
+                  "pdfName": "Unit1",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Unit2": {
+                  "pdfName": "Unit2",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Unit3": {
+                  "pdfName": "Unit3",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Unit4": {
+                  "pdfName": "Unit4",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Unit5": {
+                  "pdfName": "Unit5",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "Notes"
+              },
+              "subjectName": "MEM204"
+            },
+            "FEM201": {
+              "Additional Assignment": {
+                "AA1": {
+                  "pdfName": "AA1",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "AA2": {
+                  "pdfName": "AA2",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "Additional Assignment"
+              },
+              "QB & Syllabus": {
+                "QB": {
+                  "pdfName": "QB",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Syllabus": {
+                  "pdfName": "Syllabus",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "QB & Syllabus"
+              },
+              "Question Papers": {
+                "CT1": {
+                  "pdfName": "CT1",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "CT2": {
+                  "pdfName": "CT2",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "ENDSEM": {
+                  "pdfName": "ENDSEM",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "Question Papers"
+              },
+              "Book": {
+                "Book1": {
+                  "pdfName": "XYZ",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Book2": {
+                  "pdfName": "ABC",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "Book"
+              },
+              "Notes": {
+                "Unit1": {
+                  "pdfName": "Unit1",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Unit2": {
+                  "pdfName": "Unit2",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Unit3": {
+                  "pdfName": "Unit3",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Unit4": {
+                  "pdfName": "Unit4",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Unit5": {
+                  "pdfName": "Unit5",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "Notes"
+              },
+              "subjectName": "FEM201"
+            },
+            "FCM201": {
+              "Additional Assignment": {
+                "AA1": {
+                  "pdfName": "AA1",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "AA2": {
+                  "pdfName": "AA2",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "Additional Assignment"
+              },
+              "QB & Syllabus": {
+                "QB": {
+                  "pdfName": "QB",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Syllabus": {
+                  "pdfName": "Syllabus",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "QB & Syllabus"
+              },
+              "Question Papers": {
+                "CT1": {
+                  "pdfName": "CT1",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "CT2": {
+                  "pdfName": "CT2",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "ENDSEM": {
+                  "pdfName": "ENDSEM",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "Question Papers"
+              },
+              "Book": {
+                "Book1": {
+                  "pdfName": "XYZ",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Book2": {
+                  "pdfName": "ABC",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "Book"
+              },
+              "Notes": {
+                "Unit1": {
+                  "pdfName": "Unit1",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Unit2": {
+                  "pdfName": "Unit2",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Unit3": {
+                  "pdfName": "Unit3",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Unit4": {
+                  "pdfName": "Unit4",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Unit5": {
+                  "pdfName": "Unit5",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "Notes"
+              },
+              "subjectName": "FCM201"
+            },
+            "FCM202": {
+              "Additional Assignment": {
+                "AA1": {
+                  "pdfName": "AA1",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "AA2": {
+                  "pdfName": "AA2",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "Additional Assignment"
+              },
+              "QB & Syllabus": {
+                "QB": {
+                  "pdfName": "QB",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Syllabus": {
+                  "pdfName": "Syllabus",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "QB & Syllabus"
+              },
+              "Question Papers": {
+                "CT1": {
+                  "pdfName": "CT1",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "CT2": {
+                  "pdfName": "CT2",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "ENDSEM": {
+                  "pdfName": "ENDSEM",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "Question Papers"
+              },
+              "Book": {
+                "Book1": {
+                  "pdfName": "XYZ",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Book2": {
+                  "pdfName": "ABC",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "Book"
+              },
+              "Notes": {
+                "Unit1": {
+                  "pdfName": "Unit1",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Unit2": {
+                  "pdfName": "Unit2",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Unit3": {
+                  "pdfName": "Unit3",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Unit4": {
+                  "pdfName": "Unit4",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Unit5": {
+                  "pdfName": "Unit5",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "Notes"
+              },
+              "subjectName": "FCM202"
+            },
+            "FCM203": {
+              "Additional Assignment": {
+                "AA1": {
+                  "pdfName": "AA1",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "AA2": {
+                  "pdfName": "AA2",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "Additional Assignment"
+              },
+              "QB & Syllabus": {
+                "QB": {
+                  "pdfName": "QB",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Syllabus": {
+                  "pdfName": "Syllabus",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "QB & Syllabus"
+              },
+              "Question Papers": {
+                "CT1": {
+                  "pdfName": "CT1",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "CT2": {
+                  "pdfName": "CT2",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "ENDSEM": {
+                  "pdfName": "ENDSEM",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "Question Papers"
+              },
+              "Book": {
+                "Book1": {
+                  "pdfName": "XYZ",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Book2": {
+                  "pdfName": "ABC",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "Book"
+              },
+              "Notes": {
+                "Unit1": {
+                  "pdfName": "Unit1",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Unit2": {
+                  "pdfName": "Unit2",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Unit3": {
+                  "pdfName": "Unit3",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Unit4": {
+                  "pdfName": "Unit4",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Unit5": {
+                  "pdfName": "Unit5",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "Notes"
+              },
+              "subjectName": "FCM203"
+            },
+            "FBM201": {
+              "Additional Assignment": {
+                "AA1": {
+                  "pdfName": "AA1",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "AA2": {
+                  "pdfName": "AA2",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "Additional Assignment"
+              },
+              "QB & Syllabus": {
+                "QB": {
+                  "pdfName": "QB",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Syllabus": {
+                  "pdfName": "Syllabus",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "QB & Syllabus"
+              },
+              "Question Papers": {
+                "CT1": {
+                  "pdfName": "CT1",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "CT2": {
+                  "pdfName": "CT2",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "ENDSEM": {
+                  "pdfName": "ENDSEM",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "Question Papers"
+              },
+              "Book": {
+                "Book1": {
+                  "pdfName": "XYZ",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Book2": {
+                  "pdfName": "ABC",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "Book"
+              },
+              "Notes": {
+                "Unit1": {
+                  "pdfName": "Unit1",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Unit2": {
+                  "pdfName": "Unit2",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Unit3": {
+                  "pdfName": "Unit3",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Unit4": {
+                  "pdfName": "Unit4",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Unit5": {
+                  "pdfName": "Unit5",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "Notes"
+              },
+              "subjectName": "FBM201"
+            },
+            "FBM202": {
+              "Additional Assignment": {
+                "AA1": {
+                  "pdfName": "AA1",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "AA2": {
+                  "pdfName": "AA2",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "Additional Assignment"
+              },
+              "QB & Syllabus": {
+                "QB": {
+                  "pdfName": "QB",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Syllabus": {
+                  "pdfName": "Syllabus",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "QB & Syllabus"
+              },
+              "Question Papers": {
+                "CT1": {
+                  "pdfName": "CT1",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "CT2": {
+                  "pdfName": "CT2",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "ENDSEM": {
+                  "pdfName": "ENDSEM",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "Question Papers"
+              },
+              "Book": {
+                "Book1": {
+                  "pdfName": "XYZ",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Book2": {
+                  "pdfName": "ABC",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "Book"
+              },
+              "Notes": {
+                "Unit1": {
+                  "pdfName": "Unit1",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Unit2": {
+                  "pdfName": "Unit2",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Unit3": {
+                  "pdfName": "Unit3",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Unit4": {
+                  "pdfName": "Unit4",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Unit5": {
+                  "pdfName": "Unit5",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "Notes"
+              },
+              "subjectName": "FBM202"
+            },
+            "FBM203": {
+              "Additional Assignment": {
+                "AA1": {
+                  "pdfName": "AA1",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "AA2": {
+                  "pdfName": "AA2",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "Additional Assignment"
+              },
+              "QB & Syllabus": {
+                "QB": {
+                  "pdfName": "QB",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Syllabus": {
+                  "pdfName": "Syllabus",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "QB & Syllabus"
+              },
+              "Question Papers": {
+                "CT1": {
+                  "pdfName": "CT1",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "CT2": {
+                  "pdfName": "CT2",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "ENDSEM": {
+                  "pdfName": "ENDSEM",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "Question Papers"
+              },
+              "Book": {
+                "Book1": {
+                  "pdfName": "XYZ",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Book2": {
+                  "pdfName": "ABC",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "Book"
+              },
+              "Notes": {
+                "Unit1": {
+                  "pdfName": "Unit1",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Unit2": {
+                  "pdfName": "Unit2",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Unit3": {
+                  "pdfName": "Unit3",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Unit4": {
+                  "pdfName": "Unit4",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Unit5": {
+                  "pdfName": "Unit5",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "Notes"
+              },
+              "subjectName": "FBM203"
+            },
+            "ENH281": {
+              "Additional Assignment": {
+                "AA1": {
+                  "pdfName": "AA1",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "AA2": {
+                  "pdfName": "AA2",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "Additional Assignment"
+              },
+              "QB & Syllabus": {
+                "QB": {
+                  "pdfName": "QB",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Syllabus": {
+                  "pdfName": "Syllabus",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "QB & Syllabus"
+              },
+              "Question Papers": {
+                "CT1": {
+                  "pdfName": "CT1",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "CT2": {
+                  "pdfName": "CT2",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "ENDSEM": {
+                  "pdfName": "ENDSEM",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "Question Papers"
+              },
+              "Book": {
+                "Book1": {
+                  "pdfName": "XYZ",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Book2": {
+                  "pdfName": "ABC",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "Book"
+              },
+              "Notes": {
+                "Unit1": {
+                  "pdfName": "Unit1",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Unit2": {
+                  "pdfName": "Unit2",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Unit3": {
+                  "pdfName": "Unit3",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Unit4": {
+                  "pdfName": "Unit4",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Unit5": {
+                  "pdfName": "Unit5",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "Notes"
+              },
+              "subjectName": "ENH281"
+            },
+            "HSH281": {
+              "Additional Assignment": {
+                "AA1": {
+                  "pdfName": "AA1",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "AA2": {
+                  "pdfName": "AA2",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "Additional Assignment"
+              },
+              "QB & Syllabus": {
+                "QB": {
+                  "pdfName": "QB",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Syllabus": {
+                  "pdfName": "Syllabus",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "QB & Syllabus"
+              },
+              "Question Papers": {
+                "CT1": {
+                  "pdfName": "CT1",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "CT2": {
+                  "pdfName": "CT2",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "ENDSEM": {
+                  "pdfName": "ENDSEM",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "Question Papers"
+              },
+              "Book": {
+                "Book1": {
+                  "pdfName": "XYZ",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Book2": {
+                  "pdfName": "ABC",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "Book"
+              },
+              "Notes": {
+                "Unit1": {
+                  "pdfName": "Unit1",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Unit2": {
+                  "pdfName": "Unit2",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Unit3": {
+                  "pdfName": "Unit3",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Unit4": {
+                  "pdfName": "Unit4",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Unit5": {
+                  "pdfName": "Unit5",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "Notes"
+              },
+              "subjectName": "HSH281"
+            },
+            "MUH281": {
+              "Additional Assignment": {
+                "AA1": {
+                  "pdfName": "AA1",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "AA2": {
+                  "pdfName": "AA2",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "Additional Assignment"
+              },
+              "QB & Syllabus": {
+                "QB": {
+                  "pdfName": "QB",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Syllabus": {
+                  "pdfName": "Syllabus",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "QB & Syllabus"
+              },
+              "Question Papers": {
+                "CT1": {
+                  "pdfName": "CT1",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "CT2": {
+                  "pdfName": "CT2",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "ENDSEM": {
+                  "pdfName": "ENDSEM",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "Question Papers"
+              },
+              "Book": {
+                "Book1": {
+                  "pdfName": "XYZ",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Book2": {
+                  "pdfName": "ABC",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "Book"
+              },
+              "Notes": {
+                "Unit1": {
+                  "pdfName": "Unit1",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Unit2": {
+                  "pdfName": "Unit2",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Unit3": {
+                  "pdfName": "Unit3",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Unit4": {
+                  "pdfName": "Unit4",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Unit5": {
+                  "pdfName": "Unit5",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "Notes"
+              },
+              "subjectName": "MUH281"
+            },
+            "SYH281": {
+              "Additional Assignment": {
+                "AA1": {
+                  "pdfName": "AA1",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "AA2": {
+                  "pdfName": "AA2",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "Additional Assignment"
+              },
+              "QB & Syllabus": {
+                "QB": {
+                  "pdfName": "QB",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Syllabus": {
+                  "pdfName": "Syllabus",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "QB & Syllabus"
+              },
+              "Question Papers": {
+                "CT1": {
+                  "pdfName": "CT1",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "CT2": {
+                  "pdfName": "CT2",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "ENDSEM": {
+                  "pdfName": "ENDSEM",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "Question Papers"
+              },
+              "Book": {
+                "Book1": {
+                  "pdfName": "XYZ",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Book2": {
+                  "pdfName": "ABC",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "Book"
+              },
+              "Notes": {
+                "Unit1": {
+                  "pdfName": "Unit1",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Unit2": {
+                  "pdfName": "Unit2",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Unit3": {
+                  "pdfName": "Unit3",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Unit4": {
+                  "pdfName": "Unit4",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Unit5": {
+                  "pdfName": "Unit5",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "Notes"
+              },
+              "subjectName": "SYH281"
+            },
+            "EEH291": {
+              "Additional Assignment": {
+                "AA1": {
+                  "pdfName": "AA1",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "AA2": {
+                  "pdfName": "AA2",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "Additional Assignment"
+              },
+              "QB & Syllabus": {
+                "QB": {
+                  "pdfName": "QB",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Syllabus": {
+                  "pdfName": "Syllabus",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "QB & Syllabus"
+              },
+              "Question Papers": {
+                "CT1": {
+                  "pdfName": "CT1",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "CT2": {
+                  "pdfName": "CT2",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "ENDSEM": {
+                  "pdfName": "ENDSEM",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "Question Papers"
+              },
+              "Book": {
+                "Book1": {
+                  "pdfName": "XYZ",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Book2": {
+                  "pdfName": "ABC",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "Book"
+              },
+              "Notes": {
+                "Unit1": {
+                  "pdfName": "Unit1",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Unit2": {
+                  "pdfName": "Unit2",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Unit3": {
+                  "pdfName": "Unit3",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Unit4": {
+                  "pdfName": "Unit4",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Unit5": {
+                  "pdfName": "Unit5",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "Notes"
+              },
+              "subjectName": "EEH291"
+            },
+            "MEH291": {
+              "Additional Assignment": {
+                "AA1": {
+                  "pdfName": "AA1",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "AA2": {
+                  "pdfName": "AA2",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "Additional Assignment"
+              },
+              "QB & Syllabus": {
+                "QB": {
+                  "pdfName": "QB",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Syllabus": {
+                  "pdfName": "Syllabus",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "QB & Syllabus"
+              },
+              "Question Papers": {
+                "CT1": {
+                  "pdfName": "CT1",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "CT2": {
+                  "pdfName": "CT2",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "ENDSEM": {
+                  "pdfName": "ENDSEM",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "Question Papers"
+              },
+              "Book": {
+                "Book1": {
+                  "pdfName": "XYZ",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Book2": {
+                  "pdfName": "ABC",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "Book"
+              },
+              "Notes": {
+                "Unit1": {
+                  "pdfName": "Unit1",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Unit2": {
+                  "pdfName": "Unit2",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Unit3": {
+                  "pdfName": "Unit3",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Unit4": {
+                  "pdfName": "Unit4",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "Unit5": {
+                  "pdfName": "Unit5",
+                  "list": {
+                    "link": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                  }
+                },
+                "materialName": "Notes"
+              },
+              "subjectName": "MEH291"
             },
             "semesterName": "Semester 2"
           },

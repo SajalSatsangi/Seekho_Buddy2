@@ -5,9 +5,10 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:seekhobuddy/AboutUs.dart';
 import 'package:seekhobuddy/AdminScreens/Notices-Admin.dart';
 import 'package:seekhobuddy/Courses.dart';
+import 'package:seekhobuddy/NewHelp.dart';
 import 'package:seekhobuddy/Notification.dart';
 import 'package:seekhobuddy/donation.dart';
-import 'package:seekhobuddy/help.dart';
+// import 'package:seekhobuddy/help.dart';
 import 'footer.dart';
 import 'AdminScreens/Profile-Admin.dart';
 import 'ComingSoonPage.dart'; // Import the ComingSoonPage
@@ -522,7 +523,7 @@ class _HomeState extends State<Home> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => HelpPage()),
+                                      builder: (context) => Newhelp()),
                                 );
                               },
                               style: ButtonStyle(
