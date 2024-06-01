@@ -97,7 +97,8 @@ class Faculties extends StatelessWidget {
                   itemBuilder: (context, index) {
                     final faculty = faculties[index];
                     return Padding(
-                      padding: const EdgeInsets.all(25.0),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 24.0, vertical: 7.0), // Reduced padding
                       child: GestureDetector(
                         onTap: () {},
                         child: Container(
