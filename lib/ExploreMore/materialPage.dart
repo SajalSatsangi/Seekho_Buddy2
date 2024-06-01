@@ -78,18 +78,18 @@ class Materialpage extends StatelessWidget {
                 Map AA = AAs[AAKey];
 
                 return Padding(
-                  padding: const EdgeInsets.all(25.0),
+                  padding: const EdgeInsets.symmetric(
+                      vertical: 7.0, horizontal: 27.0),
                   child: GestureDetector(
                     onTap: () {},
                     child: Container(
-                      width: 450,
-                      height: 80,
+                      height: 70,
                       decoration: BoxDecoration(
                         color: Color.fromRGBO(50, 50, 50, 1),
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: Padding(
-                        padding: const EdgeInsets.all(20.0),
+                        padding: const EdgeInsets.all(12.0),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -104,7 +104,7 @@ class Materialpage extends StatelessWidget {
                                   AA['pdfName'] ?? 'Default AA Name',
                                   style: TextStyle(
                                     color: Colors.white,
-                                    fontSize: 17.0,
+                                    fontSize: 16.0,
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
