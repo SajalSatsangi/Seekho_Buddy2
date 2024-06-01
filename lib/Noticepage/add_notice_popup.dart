@@ -29,7 +29,6 @@ Future<void> showAddPopup(BuildContext context) async {
     "Civil",
     "Footwear",
     "Agriculture",
-    "Electrical",
   ];
   final List<String> semesters = [
     'Semester 1',
@@ -41,7 +40,7 @@ Future<void> showAddPopup(BuildContext context) async {
     'Semester 7',
     'Semester 8'
   ];
-  final List<String> subbranches = ['Students', 'Teachers', 'All'];
+  final List<String> subbranches = ['Computer Science', 'Nil', ''];
 
   PlatformFile? selectedFile;
 
@@ -89,7 +88,8 @@ Future<void> showAddPopup(BuildContext context) async {
               SizedBox(height: 16),
               TextButton.icon(
                 onPressed: () async {
-                  FilePickerResult? result = await FilePicker.platform.pickFiles();
+                  FilePickerResult? result =
+                      await FilePicker.platform.pickFiles();
                   if (result != null) {
                     selectedFile = result.files.first;
                   }
@@ -201,27 +201,43 @@ Future<void> showAddPopup(BuildContext context) async {
 
                 String fileUrl = await snapshot.ref.getDownloadURL();
 
-                final data = {
+                final data = <String, dynamic>{
                   'title': titleController.text,
                   'description': descriptionController.text,
-                  'faculties': selectedFaculties,
-                  'subfaculties': selectedSubfaculties,
-                  'semesters': selectedSemesters,
-                  'subbranches': selectedSubbranches,
                   'fileUrl': fileUrl,
                   'date': DateTime.now().toString(),
                 };
 
+                if (selectedFaculties.isNotEmpty) {
+                  data['faculties'] = selectedFaculties;
+                }
+                if (selectedSubfaculties.isNotEmpty) {
+                  data['subfaculties'] = selectedSubfaculties;
+                }
+                if (selectedSemesters.isNotEmpty) {
+                  data['semesters'] = selectedSemesters;
+                }
+                if (selectedSubbranches.isNotEmpty) {
+                  data['subbranches'] = selectedSubbranches;
+                }
+
                 FirebaseFirestore firestore = FirebaseFirestore.instance;
-                int docCount = await firestore.collection('notices').get().then((querySnapshot) => querySnapshot.docs.length);
+                int docCount = await firestore
+                    .collection('notices')
+                    .get()
+                    .then((querySnapshot) => querySnapshot.docs.length);
                 int newDocId = docCount + 1;
 
-                firestore.collection('notices').doc('Notice ' + newDocId.toString()).set(data);
+                firestore
+                    .collection('notices')
+                    .doc('Notice ' + newDocId.toString())
+                    .set(data);
 
                 Navigator.of(context).pop();
               }
             },
-            style: ElevatedButton.styleFrom(backgroundColor: Color.fromARGB(255, 255, 255, 255)),
+            style: ElevatedButton.styleFrom(
+                backgroundColor: Color.fromARGB(255, 255, 255, 255)),
             child: Text(
               'Add',
               style: TextStyle(color: Colors.black),
