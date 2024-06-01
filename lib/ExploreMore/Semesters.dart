@@ -4,8 +4,9 @@ import 'package:seekhobuddy/ExploreMore/subjects.dart';
 class Semesters extends StatelessWidget {
   final String branchName;
   final Map branchData;
+   final String facultyName;
 
-  Semesters({required this.branchName, required this.branchData});
+  Semesters({required this.facultyName,required this.branchName, required this.branchData});
 
   @override
   Widget build(BuildContext context) {
@@ -98,6 +99,8 @@ class Semesters extends StatelessWidget {
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) => Subjects(
+                                      facultyName: facultyName,
+                                      branchName: branchName,
                                       semesterName: semester[
                                           'semesterName'], // assuming 'semesterName' is the key for the semester name
                                       semesterData:

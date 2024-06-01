@@ -4,12 +4,22 @@ import 'package:seekhobuddy/AdminScreens/materialSectionPage-Admin.dart';
 class Subjects extends StatelessWidget {
   final String semesterName;
   final Map semesterData;
+  final String facultyName;
+  final String branchName;
 
-  Subjects({required this.semesterName, required this.semesterData});
+  Subjects({required this.semesterName, 
+  required this.semesterData,
+  required this.facultyName,
+  required this.branchName
+  });
 
   @override
   Widget build(BuildContext context) {
     print(semesterData);
+
+
+
+
     Map subjects = Map.from(semesterData)..remove('semesterName');
 
     return Scaffold(
@@ -120,6 +130,9 @@ class Subjects extends StatelessWidget {
                                       subjectName: subject[
                                           'subjectName'], // assuming 'subjectName' is the key for the subject name
                                       subject: subject,
+                                      facultyName: facultyName,
+                                      branchName: branchName,
+                                      semesterName: semesterName,
                                     ),
                                   ),
                                 );

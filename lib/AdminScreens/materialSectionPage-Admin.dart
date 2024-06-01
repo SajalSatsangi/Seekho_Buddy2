@@ -4,8 +4,16 @@ import 'package:seekhobuddy/AdminScreens/materialPage-Admin.dart';
 class Materialsectionpage_Admin extends StatelessWidget {
   final String subjectName;
   final Map subject;
+  final String facultyName;
+  final String branchName;
+  final String semesterName;
 
-  Materialsectionpage_Admin({required this.subjectName, required this.subject});
+  Materialsectionpage_Admin({required this.subjectName, 
+  required this.subject,
+  required this.facultyName,
+  required this.branchName,
+  required this.semesterName
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -148,9 +156,13 @@ class Materialsectionpage_Admin extends StatelessWidget {
                                       builder: (context) => Materialpage_Admin(
                                             materialName: material[
                                                 'materialName'], // assuming 'materialName' is the key for the material name
-                                            material:
-                                                material, // Pass the entire material map
-                                          )),
+                                            material: material, // Pass the entire material map
+                                            facultyName: facultyName,
+                                            branchName: branchName,
+                                            semesterName: semesterName,
+                                            subjectName: subjectName,
+                                          )
+                                          ),
                                 );
                               },
                               style: ButtonStyle(

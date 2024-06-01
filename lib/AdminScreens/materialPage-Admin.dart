@@ -1,15 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:seekhobuddy/ExploreMore/PdfViewer.dart';
+import 'package:firebase_database/firebase_database.dart';
 
 class Materialpage_Admin extends StatelessWidget {
   final Map material;
-   final String materialName;
+  final String materialName;
+  final String facultyName;
+  final String branchName;
+  final String semesterName;
+  final String subjectName;
 
-  Materialpage_Admin({required this.materialName, required this.material});
+  Materialpage_Admin({
+    required this.materialName,
+    required this.material,
+    required this.facultyName,
+    required this.branchName,
+    required this.semesterName,
+    required this.subjectName,
+  });
+
+  final pdfNameController = TextEditingController();
+  final pdfUrlController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     print(material);
+    print(facultyName);
+    print(branchName);
+    print(semesterName);
+    print(subjectName);
+    print(materialName);
     Map AAs = Map.from(material)
       ..remove('materialName')
       ..remove('subjectName');
@@ -25,12 +45,14 @@ class Materialpage_Admin extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 TextField(
+                  controller: pdfNameController,
                   decoration: InputDecoration(
                     hintText: "Enter Pdf Name",
                   ),
                 ),
                 SizedBox(height: 8),
                 TextField(
+                  controller: pdfUrlController,
                   decoration: InputDecoration(
                     hintText: "Enter Pdf URL",
                   ),
@@ -47,6 +69,35 @@ class Materialpage_Admin extends StatelessWidget {
               TextButton(
                 onPressed: () {
                   // Handle the action when "Add" is pressed
+                  String newPdfName = pdfNameController.text;
+                  String newPdfUrl = pdfUrlController.text;
+
+                  // Create a reference to the Firebase Realtime Database
+                  // ignore: deprecated_member_use
+                  final databaseReference = FirebaseDatabase(
+                    databaseURL:
+                        'https://seekhobuddy-default-rtdb.asia-southeast1.firebasedatabase.app',
+                  // ignore: deprecated_member_use
+                  ).reference();
+
+                  // Add the new PDF to the Firebase Realtime Database
+                  databaseReference
+                      .child('Material DB')
+                      .child(facultyName)
+                      .child('branches')
+                      .child(branchName)
+                      .child(semesterName)
+                      .child(subjectName)
+                      .child(materialName)
+                      .child(newPdfName)
+                      .set({
+                    'pdfName': newPdfName,
+                    'link': newPdfUrl,
+                  });
+
+                  pdfNameController.clear();
+                  pdfUrlController.clear();
+
                   Navigator.of(context).pop(); // Close the dialog
                 },
                 child: Text('Add'),
