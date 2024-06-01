@@ -2,9 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:seekhobuddy/AboutUs.dart';
+import 'package:seekhobuddy/AdminScreens/Notices-Admin.dart';
 import 'package:seekhobuddy/Courses.dart';
-import 'package:seekhobuddy/Notices/Notices.dart';
 import 'package:seekhobuddy/Notification.dart';
+import 'package:seekhobuddy/donation.dart';
+import 'package:seekhobuddy/help.dart';
 import 'footer.dart';
 import 'AdminScreens/Profile-Admin.dart';
 import 'ComingSoonPage.dart'; // Import the ComingSoonPage
@@ -94,6 +97,32 @@ class _HomeState extends State<Home> {
                             },
                             child: Icon(
                               Icons.notification_add,
+                              color: Colors.white,
+                              size: 20,
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(width: 10),
+                      Container(
+                        padding: EdgeInsets.only(
+                            left: 8, right: 8, top: 2, bottom: 2),
+                        height: 30,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(30),
+                          color: Color(0xFF323232),
+                        ),
+                        child: Center(
+                          child: InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => About()),
+                              );
+                            },
+                            child: Icon(
+                              Icons.person,
                               color: Colors.white,
                               size: 20,
                             ),
@@ -271,7 +300,8 @@ class _HomeState extends State<Home> {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => Notices()),
+                                          builder: (context) =>
+                                              Notices_admin()),
                                     );
                                   },
                                   child: Padding(
@@ -439,40 +469,92 @@ class _HomeState extends State<Home> {
                         ],
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 230.0, top: 15.0),
-                      child: SizedBox(
-                        width: 120,
-                        height: 40,
-                        child: ElevatedButton(
-                          onPressed: () {},
-                          style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all<Color>(
-                              Color.fromARGB(255, 93, 93, 93),
-                            ),
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                'Help',
-                                style: TextStyle(
-                                  color: Color.fromARGB(255, 252, 251, 251),
-                                  fontSize: 18,
+                    Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(left: 70.0, top: 25.0),
+                          child: SizedBox(
+                            width: 155,
+                            height: 40,
+                            child: ElevatedButton(
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => DonationPage()),
+                                );
+                              },
+                              style: ButtonStyle(
+                                backgroundColor:
+                                    MaterialStateProperty.all<Color>(
+                                  Color.fromARGB(255, 93, 93, 93),
                                 ),
                               ),
-                              SizedBox(
-                                  width:
-                                      8), // Space between the text and the icon
-                              Icon(
-                                Icons.help, // You can use any icon from Icons
-                                color: Color.fromARGB(255, 252, 251, 251),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    'Donation',
+                                    style: TextStyle(
+                                      color: Color.fromARGB(255, 252, 251, 251),
+                                      fontSize: 18,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                      width:
+                                          8), // Space between the text and the icon
+                                  Icon(
+                                    Icons.badge,
+                                    color: Color.fromARGB(255, 252, 251, 251),
+                                  ),
+                                ],
                               ),
-                            ],
+                            ),
                           ),
                         ),
-                      ),
-                    )
+                        Padding(
+                          padding: const EdgeInsets.only(left: 10.0, top: 25.0),
+                          child: SizedBox(
+                            width: 120,
+                            height: 40,
+                            child: ElevatedButton(
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => HelpPage()),
+                                );
+                              },
+                              style: ButtonStyle(
+                                backgroundColor:
+                                    MaterialStateProperty.all<Color>(
+                                  Color.fromARGB(255, 93, 93, 93),
+                                ),
+                              ),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    'Help',
+                                    style: TextStyle(
+                                      color: Color.fromARGB(255, 252, 251, 251),
+                                      fontSize: 18,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                      width:
+                                          8), // Space between the text and the icon
+                                  Icon(
+                                    Icons.help,
+                                    color: Color.fromARGB(255, 252, 251, 251),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ],
                 ),
               ),
