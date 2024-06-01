@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:seekhobuddy/AdminScreens/materialPage-Admin.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Materialsectionpage_Admin extends StatelessWidget {
   final String subjectName;
@@ -8,12 +10,12 @@ class Materialsectionpage_Admin extends StatelessWidget {
   final String branchName;
   final String semesterName;
 
-  Materialsectionpage_Admin({required this.subjectName, 
-  required this.subject,
-  required this.facultyName,
-  required this.branchName,
-  required this.semesterName
-  });
+  Materialsectionpage_Admin(
+      {required this.subjectName,
+      required this.subject,
+      required this.facultyName,
+      required this.branchName,
+      required this.semesterName});
 
   @override
   Widget build(BuildContext context) {
@@ -22,13 +24,23 @@ class Materialsectionpage_Admin extends StatelessWidget {
 
     // Function to show the popup dialog
     void _showAddMaterialDialog() {
+      final TextEditingController _folderNameController =
+          TextEditingController();
+      final DatabaseReference _databaseReference = FirebaseDatabase(
+        databaseURL:
+            'https://seekhobuddy-default-rtdb.asia-southeast1.firebasedatabase.app',
+      ).reference();
+
       showDialog(
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text('Add Folder'),
+            title: Text('Add New Material'),
             content: TextField(
-              decoration: InputDecoration(hintText: "Enter Folder Name"),
+              controller: _folderNameController,
+              decoration: InputDecoration(
+                hintText: 'Enter Material Name',
+              ),
             ),
             actions: <Widget>[
               TextButton(
@@ -40,6 +52,58 @@ class Materialsectionpage_Admin extends StatelessWidget {
               TextButton(
                 onPressed: () {
                   // Handle the action when "Add" is pressed
+                  String folderName = _folderNameController.text;
+                  if (folderName.isNotEmpty) {
+                    Map newMaterial = {
+                      'materialName': folderName,
+                    };
+                    materials[folderName] = newMaterial;
+
+                    // Update the Firebase Realtime Database
+                    _databaseReference
+                        .child('Material DB')
+                        .child(facultyName)
+                        .child('branches')
+                        .child(branchName)
+                        .child(semesterName)
+                        .child(subjectName)
+                        .child(folderName)
+                        .set(newMaterial);
+                  }
+
+                  final firestoreReference = FirebaseFirestore.instance;
+
+                  // Add the new PDF to Firestore
+                  firestoreReference
+                      .collection('Material DB')
+                      .doc(facultyName)
+                      .collection(branchName)
+                      .doc(semesterName)
+                      .collection('Subjects')
+                      .doc(subjectName)
+                      .collection(subjectName)
+                      .doc(folderName)
+                      .set({
+                    'materialName': folderName
+                  }) // Set the document with the folderName
+                      .then((value) {
+                    // After the document is set, create a new collection with the folderName
+                    firestoreReference
+                        .collection('Material DB')
+                        .doc(facultyName)
+                        .collection(branchName)
+                        .doc(semesterName)
+                        .collection('Subjects')
+                        .doc(subjectName)
+                        .collection(subjectName)
+                        .doc(folderName)
+                        .collection(folderName)
+                        .doc(
+                            'test') // You need to create a document within the collection
+                        .set({
+                      'test': 'test'
+                    }); // Set the document with your data
+                  });
                   Navigator.of(context).pop(); // Close the dialog
                 },
                 child: Text('Add'),
@@ -156,13 +220,13 @@ class Materialsectionpage_Admin extends StatelessWidget {
                                       builder: (context) => Materialpage_Admin(
                                             materialName: material[
                                                 'materialName'], // assuming 'materialName' is the key for the material name
-                                            material: material, // Pass the entire material map
+                                            material:
+                                                material, // Pass the entire material map
                                             facultyName: facultyName,
                                             branchName: branchName,
                                             semesterName: semesterName,
                                             subjectName: subjectName,
-                                          )
-                                          ),
+                                          )),
                                 );
                               },
                               style: ButtonStyle(
