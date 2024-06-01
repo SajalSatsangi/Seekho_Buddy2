@@ -6,15 +6,19 @@ class DonationPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Donation'),
+        title: Text(
+          'Donation',
+          style: TextStyle(fontWeight: FontWeight.bold , color: Colors.white ),
+        ),
         leading: IconButton(
           icon: Icon(Icons.arrow_back_ios, color: Colors.white),
           onPressed: () {
             Navigator.pop(context);
           },
         ),
+        backgroundColor: const Color(0xFF000000), // Set the background color to black
       ),
-      backgroundColor: Colors.black,
+      backgroundColor: const Color.fromARGB(255, 0, 0, 0),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -24,16 +28,8 @@ class DonationPage extends StatelessWidget {
               Container(
                 padding: EdgeInsets.all(16.0),
                 decoration: BoxDecoration(
-                  color: const Color.fromARGB(255, 85, 85, 85),
-                  borderRadius: BorderRadius.circular(8.0),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.5),
-                      spreadRadius: 2,
-                      blurRadius: 5,
-                      offset: Offset(0, 3),
-                    ),
-                  ],
+                  color: Color(0xFF323232),
+                  borderRadius: BorderRadius.circular(16.0), // Rounded corners
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -45,7 +41,7 @@ class DonationPage extends StatelessWidget {
                     ),
                     SizedBox(height: 8),
                     Text(
-                      'You are stepping toward wellbeing, we thank you for your contribution:',
+                      'You are stepping toward wellbeing, we thank you for your contribution',
                       style: TextStyle(color: Colors.white, fontSize: 16),
                     ),
                     SizedBox(height: 16),
@@ -53,63 +49,68 @@ class DonationPage extends StatelessWidget {
                       decoration: InputDecoration(
                         hintText: 'Your Name*',
                         hintStyle: TextStyle(color: Colors.grey),
-                        enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Colors.white),
-                        ),
                         filled: true,
                         fillColor: Colors.black,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(16.0), // Rounded corners
+                          borderSide: BorderSide.none,
+                        ),
                       ),
                       style: TextStyle(color: Colors.white),
                     ),
                     SizedBox(height: 16),
                     TextField(
                       decoration: InputDecoration(
-                        hintText: 'Your Course*',
+                        hintText: 'Your Course',
                         hintStyle: TextStyle(color: Colors.grey),
-                        enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Colors.white),
-                        ),
                         filled: true,
                         fillColor: Colors.black,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(16.0), // Rounded corners
+                          borderSide: BorderSide.none,
+                        ),
                       ),
                       style: TextStyle(color: Colors.white),
                     ),
                     SizedBox(height: 16),
                     TextField(
                       decoration: InputDecoration(
-                        hintText: 'Your Year*',
+                        hintText: 'Your Year',
                         hintStyle: TextStyle(color: Colors.grey),
-                        enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Colors.white),
-                        ),
                         filled: true,
                         fillColor: Colors.black,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(16.0), // Rounded corners
+                          borderSide: BorderSide.none,
+                        ),
                       ),
                       style: TextStyle(color: Colors.white),
                     ),
                     SizedBox(height: 16),
                     TextField(
                       decoration: InputDecoration(
-                        hintText: 'Your Roll Number*',
+                        hintText: 'Your Roll Number',
                         hintStyle: TextStyle(color: Colors.grey),
-                        enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Colors.white),
-                        ),
                         filled: true,
                         fillColor: Colors.black,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(16.0), // Rounded corners
+                          borderSide: BorderSide.none,
+                        ),
                       ),
                       style: TextStyle(color: Colors.white),
                     ),
                     SizedBox(height: 16),
                     TextField(
                       decoration: InputDecoration(
-                        hintText: 'Your Branch/Specialization/Stream*',
+                        hintText: 'Your Branch/Specialization/Stream',
                         hintStyle: TextStyle(color: Colors.grey),
-                        enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Colors.white),
-                        ),
                         filled: true,
                         fillColor: Colors.black,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(16.0), // Rounded corners
+                          borderSide: BorderSide.none,
+                        ),
                       ),
                       style: TextStyle(color: Colors.white),
                     ),
@@ -130,7 +131,7 @@ class DonationPage extends StatelessWidget {
                     ),
                     SizedBox(height: 8),
                     Text(
-                      'Through Google Drive:',
+                      'Through Google Drive',
                       style: TextStyle(color: Colors.white, fontSize: 16),
                     ),
                     SizedBox(height: 8),
@@ -140,12 +141,12 @@ class DonationPage extends StatelessWidget {
                     ),
                     SizedBox(height: 8),
                     Text(
-                      'Through Upload:',
+                      'Through Upload',
                       style: TextStyle(color: Colors.white, fontSize: 16),
                     ),
                     SizedBox(height: 8),
                     Text(
-                      'You can upload your pdfs directly here.',
+                      'You can upload your pdfs directly here',
                       style: TextStyle(color: Colors.white, fontSize: 16),
                     ),
                     SizedBox(height: 8),
@@ -155,15 +156,17 @@ class DonationPage extends StatelessWidget {
                     ),
                     SizedBox(height: 16),
                     TextField(
+                      minLines: 5, // Increase the number of lines for the description box
+                      maxLines: null,
                       decoration: InputDecoration(
-                        hintText:
-                            'Description (tell us about whatever you are donating to us in brief)*',
+                        hintText: 'Description (tell us about whatever you are donating to us in brief)',
                         hintStyle: TextStyle(color: Colors.grey),
-                        enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Colors.white),
-                        ),
                         filled: true,
                         fillColor: Colors.black,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(16.0), // Rounded corners
+                          borderSide: BorderSide.none,
+                        ),
                       ),
                       style: TextStyle(color: Colors.white),
                     ),
@@ -172,11 +175,12 @@ class DonationPage extends StatelessWidget {
                       decoration: InputDecoration(
                         hintText: 'Drive Link',
                         hintStyle: TextStyle(color: Colors.grey),
-                        enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Colors.white),
-                        ),
                         filled: true,
                         fillColor: Colors.black,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(16.0), // Rounded corners
+                          borderSide: BorderSide.none,
+                        ),
                       ),
                       style: TextStyle(color: Colors.white),
                     ),
@@ -187,12 +191,14 @@ class DonationPage extends StatelessWidget {
                       },
                       style: TextButton.styleFrom(
                         backgroundColor: Color.fromARGB(255, 0, 0, 0),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(16.0), // Rounded corners
+                        ),
                       ),
-                      icon: Icon(Icons.file_upload),
+                      icon: Icon(Icons.file_upload, color: Colors.white),
                       label: Text(
                         'Upload Pdf',
-                        style: TextStyle(
-                            color: Color.fromARGB(255, 255, 255, 255)),
+                        style: TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
                       ),
                     ),
                     SizedBox(height: 16),
@@ -200,11 +206,12 @@ class DonationPage extends StatelessWidget {
                       decoration: InputDecoration(
                         hintText: 'Any other Information or Suggestion',
                         hintStyle: TextStyle(color: Colors.grey),
-                        enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Colors.white),
-                        ),
                         filled: true,
                         fillColor: Colors.black,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(16.0), // Rounded corners
+                          borderSide: BorderSide.none,
+                        ),
                       ),
                       style: TextStyle(color: Colors.white),
                     ),
@@ -218,16 +225,28 @@ class DonationPage extends StatelessWidget {
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Color.fromARGB(255, 0, 0, 0),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(
+                                  16.0), // Rounded corners
+                            ),
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 32.0,
+                                vertical:
+                                    16.0), // Increased padding for a larger button
+                            textStyle:
+                                TextStyle(fontSize: 20), // Increased font size
                           ),
                           child: Text(
                             'Donate Now',
                             style: TextStyle(
-                              color: const Color.fromARGB(255, 255, 255, 255),
+                              color: Color.fromARGB(255, 255, 255, 255),
+                              fontSize: 15, // Increased font size
                             ),
                           ),
                         ),
                       ),
                     ),
+
                   ],
                 ),
               ),
