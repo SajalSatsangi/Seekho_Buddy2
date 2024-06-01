@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:seekhobuddy/AdminScreens/materialSectionPage-Admin.dart';
 import 'package:seekhobuddy/ExploreMore/materialSectionPage.dart';
 
 class Subjects extends StatelessWidget {
@@ -115,7 +116,7 @@ class Subjects extends StatelessWidget {
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) =>
-                                        Materialsectionpage(subject: subject),
+                                        Materialsectionpage_Admin(subject: subject),
                                   ),
                                 );
                               },

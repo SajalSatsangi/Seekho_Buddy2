@@ -1,50 +1,39 @@
 import 'package:flutter/material.dart';
+import 'package:seekhobuddy/ExploreMore/PdfViewer.dart';
 
 class Materialpage_Admin extends StatelessWidget {
-  void _onAddButtonPressed(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text('Add Pdf'),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              TextField(
-                decoration: InputDecoration(
-                  hintText: "Enter Pdf Name",
-                ),
-              ),
-              SizedBox(height: 8),
-              TextField(
-                decoration: InputDecoration(
-                  hintText: "Enter Pdf URL",
-                ),
-              ),
-            ],
-          ),
-          actions: <Widget>[
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop(); // Close the dialog
-              },
-              child: Text('Cancel'),
-            ),
-            TextButton(
-              onPressed: () {
-                // Handle the action when "Add" is pressed
-                Navigator.of(context).pop(); // Close the dialog
-              },
-              child: Text('Add'),
-            ),
-          ],
-        );
-      },
-    );
-  }
+  final Map material;
+
+  Materialpage_Admin({required this.material});
 
   @override
   Widget build(BuildContext context) {
+    print(material);
+    Map AAs = Map.from(material)
+      ..remove('materialName')
+      ..remove('subjectName');
+
+    // Function to show the popup dialog
+    void _showAddMaterialDialog() {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text("Add Material"),
+            content: Text("This is where you can add new materials."),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text('Close'),
+              ),
+            ],
+          );
+        },
+      );
+    }
+
     return Scaffold(
       backgroundColor: Colors.black,
       body: Column(
@@ -102,69 +91,84 @@ class Materialpage_Admin extends StatelessWidget {
               ),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(25.0),
-            child: GestureDetector(
-              onTap: () {},
-              child: Container(
-                width: 450,
-                height: 80,
-                decoration: BoxDecoration(
-                  color: Color.fromRGBO(50, 50, 50, 1),
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.school,
-                            color: Colors.white,
-                          ),
-                          SizedBox(width: 8),
-                          Text(
-                            'Material Name',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 17.0,
-                              fontWeight: FontWeight.bold,
+          Expanded(
+            child: ListView.builder(
+              itemCount: AAs.length,
+              itemBuilder: (context, index) {
+                String AAKey = AAs.keys.elementAt(index);
+                Map AA = AAs[AAKey];
+
+                return Padding(
+                  padding: const EdgeInsets.symmetric(
+                      vertical: 7.0, horizontal: 27.0),
+                  child: GestureDetector(
+                    onTap: () {},
+                    child: Container(
+                      height: 70,
+                      decoration: BoxDecoration(
+                        color: Color.fromRGBO(50, 50, 50, 1),
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(12.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              children: [
+                                Icon(
+                                  Icons.school,
+                                  color: Colors.white,
+                                ),
+                                SizedBox(width: 8),
+                                Text(
+                                  AA['pdfName'] ?? 'Default AA Name',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 16.0,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ],
                             ),
-                          ),
-                        ],
-                      ),
-                      ElevatedButton(
-                        onPressed: () {},
-                        style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all<Color>(
-                            Colors.white,
-                          ),
+                            ElevatedButton(
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => PdfViewer(AA: AA),
+                                  ),
+                                );
+                              },
+                              style: ButtonStyle(
+                                backgroundColor:
+                                    MaterialStateProperty.all<Color>(
+                                  Colors.white,
+                                ),
+                              ),
+                              child: Text(
+                                'View',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  color: Colors.black,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
-                        child: Text(
-                          'View',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: Colors.black,
-                          ),
-                        ),
                       ),
-                    ],
+                    ),
                   ),
-                ),
-              ),
+                );
+              },
             ),
           ),
         ],
       ),
-      floatingActionButton: Padding(
-        padding: const EdgeInsets.only(bottom: 36.0),
-        child: FloatingActionButton(
-          onPressed: () => _onAddButtonPressed(context),
-          backgroundColor: Color(0xFF323232),
-          child: Icon(Icons.add, color: Colors.white),
-        ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _showAddMaterialDialog, // Function to show popup dialog
+        child: Icon(Icons.add , color: Colors.white),
+        backgroundColor: Color(0xFF323232),
       ),
     );
   }
