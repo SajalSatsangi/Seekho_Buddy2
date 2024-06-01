@@ -114,6 +114,7 @@ class Branches extends StatelessWidget {
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) => Semesters(
+                                      facultyName: facultyName,
                                       branchName: branch[
                                           'branchName'], // assuming 'branchName' is the key for the branch name
                                       branchData: branch as Map,
