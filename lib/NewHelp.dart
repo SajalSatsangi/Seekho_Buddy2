@@ -21,7 +21,7 @@ class MyWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: EdgeInsets.only(top: 28.0), // Additional padding from the top
+        padding: EdgeInsets.only(top: 28.0),
         child: Column(
           children: [
             Padding(

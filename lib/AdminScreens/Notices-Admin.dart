@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:multi_select_flutter/multi_select_flutter.dart';
 import 'package:seekhobuddy/home.dart';
 
 void main() {
@@ -113,8 +114,38 @@ class MyWidget extends StatelessWidget {
     );
   }
 
-  void _showAddPopup(BuildContext context) {
-    showDialog(
+  Future<void> _showAddPopup(BuildContext context) async {
+    final List<String> faculties = [
+      'Faculty of Engineering',
+      'Faculty of Science',
+      'Faculty of Arts',
+      'Faculty of Commerce',
+      'Faculty of Education',
+      'Faculty of Architecture',
+      'DEI Technical College'
+    ];
+    final List<String> subfaculties = [
+      "1stYear",
+      "Electrical",
+      "Mechanical",
+      "Civil",
+      "Footwear",
+      "Agriculture",
+      "Electrical",
+    ];
+    final List<String> semesters = [
+      'Semester 1',
+      'Semester 2',
+      'Semester 3',
+      'Semester 4',
+      'Semester 5',
+      'Semester 6',
+      'Semester 7',
+      'Semester 8'
+    ];
+    final List<String> subbranches = ['Students', 'Teachers', 'All'];
+
+    return showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
@@ -127,49 +158,160 @@ class MyWidget extends StatelessWidget {
               fontWeight: FontWeight.bold,
             ),
           ),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              // Title TextField
-              TextField(
-                decoration: InputDecoration(
-                  hintText: 'Title',
-                  hintStyle: TextStyle(color: Colors.grey),
-                  enabledBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(color: Colors.white),
+          content: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                // Title TextField
+                TextField(
+                  decoration: InputDecoration(
+                    hintText: 'Title',
+                    hintStyle: TextStyle(color: Colors.grey),
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Colors.white),
+                    ),
+                  ),
+                  style: TextStyle(color: Colors.white),
+                ),
+                SizedBox(height: 16),
+                // Description TextField
+                TextField(
+                  decoration: InputDecoration(
+                    hintText: 'Description',
+                    hintStyle: TextStyle(color: Colors.grey),
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Colors.white),
+                    ),
+                  ),
+                  style: TextStyle(color: Colors.white),
+                  maxLines: 5,
+                ),
+                SizedBox(height: 16),
+                // Upload Image Button
+                TextButton.icon(
+                  onPressed: () {
+                    // Implement your image upload logic here
+                  },
+                  style: TextButton.styleFrom(
+                    backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+                  ),
+                  icon: Icon(Icons.file_upload),
+                  label: Text(
+                    'Upload Image',
+                    style: TextStyle(color: const Color.fromARGB(255, 0, 0, 0)),
                   ),
                 ),
-                style: TextStyle(color: Colors.white),
-              ),
-              SizedBox(height: 16),
-              // Description TextField
-              TextField(
-                decoration: InputDecoration(
-                  hintText: 'Description',
-                  hintStyle: TextStyle(color: Colors.grey),
-                  enabledBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(color: Colors.white),
+                SizedBox(height: 16),
+                // Multi-select Dropdown 1
+                MultiSelectDialogField(
+                  items: faculties.map((e) => MultiSelectItem(e, e)).toList(),
+                  title: Text("Faculties"),
+                  selectedColor: Colors.blue,
+                  decoration: BoxDecoration(
+                    color: Colors.black,
+                    borderRadius: BorderRadius.all(Radius.circular(40)),
+                    border: Border.all(
+                      color: Colors.white,
+                      width: 2,
+                    ),
                   ),
+                  buttonText: Text(
+                    "Select faculties",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                    ),
+                  ),
+                  itemsTextStyle:
+                      TextStyle(color: Colors.white), // Option text color
+                  onConfirm: (results) {
+                    // Handle the selected faculties
+                  },
                 ),
-                style: TextStyle(color: Colors.white),
-                maxLines: 5,
-              ),
-              SizedBox(height: 16),
-              // Upload Image Button
-              TextButton.icon(
-                onPressed: () {
-                  // Implement your image upload logic here
-                },
-                style: TextButton.styleFrom(
-                  backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+                SizedBox(height: 16),
+                // Multi-select Dropdown 2
+                MultiSelectDialogField(
+                  items:
+                      subfaculties.map((e) => MultiSelectItem(e, e)).toList(),
+                  title: Text("Branches"),
+                  selectedColor: Colors.blue,
+                  decoration: BoxDecoration(
+                    color: Colors.black,
+                    borderRadius: BorderRadius.all(Radius.circular(40)),
+                    border: Border.all(
+                      color: Colors.white,
+                      width: 2,
+                    ),
+                  ),
+                  buttonText: Text(
+                    "Select Branch",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                    ),
+                  ),
+                  itemsTextStyle:
+                      TextStyle(color: Colors.white), // Option text color
+                  onConfirm: (results) {
+                    // Handle the selected subfaculties
+                  },
                 ),
-                icon: Icon(Icons.file_upload),
-                label: Text(
-                  'Upload Image',
-                  style: TextStyle(color: const Color.fromARGB(255, 0, 0, 0)),
+                SizedBox(height: 16),
+                // Multi-select Dropdown 3
+                MultiSelectDialogField(
+                  items: semesters.map((e) => MultiSelectItem(e, e)).toList(),
+                  title: Text("Semesters"),
+                  selectedColor: Colors.blue,
+                  decoration: BoxDecoration(
+                    color: Colors.black,
+                    borderRadius: BorderRadius.all(Radius.circular(40)),
+                    border: Border.all(
+                      color: Colors.white,
+                      width: 2,
+                    ),
+                  ),
+                  buttonText: Text(
+                    "Select Semester",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                    ),
+                  ),
+                  itemsTextStyle:
+                      TextStyle(color: Colors.white), // Option text color
+                  onConfirm: (results) {
+                    // Handle the selected semesters
+                  },
                 ),
-              ),
-            ],
+                SizedBox(height: 16),
+                // Multi-select Dropdown 3
+                MultiSelectDialogField(
+                  items: subbranches.map((e) => MultiSelectItem(e, e)).toList(),
+                  title: Text("Specilization"),
+                  selectedColor: Colors.blue,
+                  decoration: BoxDecoration(
+                    color: Colors.black,
+                    borderRadius: BorderRadius.all(Radius.circular(40)),
+                    border: Border.all(
+                      color: Colors.white,
+                      width: 2,
+                    ),
+                  ),
+                  buttonText: Text(
+                    "Select Specilization",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                    ),
+                  ),
+                  itemsTextStyle:
+                      TextStyle(color: Colors.white), // Option text color
+                  onConfirm: (results) {
+                    // Handle the selected semesters
+                  },
+                ),
+              ],
+            ),
           ),
           actions: <Widget>[
             // Cancel Button
