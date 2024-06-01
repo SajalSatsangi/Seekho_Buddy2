@@ -2,14 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:seekhobuddy/ExploreMore/subjects.dart';
 
 class Semesters extends StatelessWidget {
-  final Map branch;
+  final String branchName;
+  final Map branchData;
 
-  Semesters({required this.branch});
+  Semesters({required this.branchName, required this.branchData});
 
   @override
   Widget build(BuildContext context) {
-    print(branch);
-    Map semesters = Map.from(branch)..remove('branchName');
+    print(branchData);
+    Map semesters = Map.from(branchData)..remove('branchName');
 
     return Scaffold(
       backgroundColor: Colors.black,
@@ -34,7 +35,7 @@ class Semesters extends StatelessWidget {
                         width: 10.0,
                       ),
                       Text(
-                        "Semesters",
+                        branchName,
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 30.0,
@@ -96,8 +97,12 @@ class Semesters extends StatelessWidget {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) =>
-                                        Subjects(semester: semester),
+                                    builder: (context) => Subjects(
+                                      semesterName: semester[
+                                          'semesterName'], // assuming 'semesterName' is the key for the semester name
+                                      semesterData:
+                                          semester, // Pass the entire semester map
+                                    ),
                                   ),
                                 );
                               },

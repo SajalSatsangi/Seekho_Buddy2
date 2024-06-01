@@ -3,8 +3,9 @@ import 'package:seekhobuddy/ExploreMore/PdfViewer.dart';
 
 class Materialpage_Admin extends StatelessWidget {
   final Map material;
+   final String materialName;
 
-  Materialpage_Admin({required this.material});
+  Materialpage_Admin({required this.materialName, required this.material});
 
   @override
   Widget build(BuildContext context) {
@@ -79,7 +80,7 @@ class Materialpage_Admin extends StatelessWidget {
                         width: 10.0,
                       ),
                       Text(
-                        "Materialpage",
+                        materialName,
                         style: TextStyle(
                           fontSize: 28,
                           fontWeight: FontWeight.bold,

@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:seekhobuddy/AdminScreens/materialPage-Admin.dart';
 
 class Materialsectionpage_Admin extends StatelessWidget {
+  final String subjectName;
   final Map subject;
 
-  Materialsectionpage_Admin({required this.subject});
+  Materialsectionpage_Admin({required this.subjectName, required this.subject});
 
   @override
   Widget build(BuildContext context) {
@@ -64,7 +65,7 @@ class Materialsectionpage_Admin extends StatelessWidget {
                         width: 10.0,
                       ),
                       Text(
-                        "Materialsectionpage",
+                        subjectName,
                         style: TextStyle(
                           fontSize: 28,
                           fontWeight: FontWeight.bold,
@@ -145,7 +146,11 @@ class Materialsectionpage_Admin extends StatelessWidget {
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) => Materialpage_Admin(
-                                          material: material)),
+                                            materialName: material[
+                                                'materialName'], // assuming 'materialName' is the key for the material name
+                                            material:
+                                                material, // Pass the entire material map
+                                          )),
                                 );
                               },
                               style: ButtonStyle(
