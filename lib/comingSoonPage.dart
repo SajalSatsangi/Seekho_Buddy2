@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:seekhobuddy/home.dart';
 
 void main() {
   runApp(ComingSoonApp());
@@ -50,7 +51,12 @@ class _ComingSoonScreenState extends State<ComingSoonScreen>
         backgroundColor: Colors.black,
         leading: IconButton(
           icon: Icon(Icons.arrow_back_ios, color: Colors.white),
-          onPressed: () => Navigator.of(context).pop(),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => HomePage()),
+            );
+          },
         ),
       ),
       backgroundColor: Colors.black,
