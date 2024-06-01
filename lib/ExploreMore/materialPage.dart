@@ -1,8 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:seekhobuddy/ExploreMore/PdfViewer.dart';
 
 class Materialpage extends StatelessWidget {
+  final Map material;
+
+  Materialpage({required this.material});
+
   @override
   Widget build(BuildContext context) {
+    print(material);
+    Map AAs = Map.from(material)
+      ..remove('materialName')
+      ..remove('subjectName');
+
     return Scaffold(
       backgroundColor: Colors.black,
       body: Column(
@@ -60,58 +70,76 @@ class Materialpage extends StatelessWidget {
               ),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(25.0),
-            child: GestureDetector(
-              onTap: () {},
-              child: Container(
-                width: 450,
-                height: 80,
-                decoration: BoxDecoration(
-                  color: Color.fromRGBO(50, 50, 50, 1),
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.school,
-                            color: Colors.white,
-                          ),
-                          SizedBox(width: 8),
-                          Text(
-                            'Material Name',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 17.0,
-                              fontWeight: FontWeight.bold,
+          Expanded(
+            child: ListView.builder(
+              itemCount: AAs.length,
+              itemBuilder: (context, index) {
+                String AAKey = AAs.keys.elementAt(index);
+                Map AA = AAs[AAKey];
+
+                return Padding(
+                  padding: const EdgeInsets.all(25.0),
+                  child: GestureDetector(
+                    onTap: () {},
+                    child: Container(
+                      width: 450,
+                      height: 80,
+                      decoration: BoxDecoration(
+                        color: Color.fromRGBO(50, 50, 50, 1),
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              children: [
+                                Icon(
+                                  Icons.school,
+                                  color: Colors.white,
+                                ),
+                                SizedBox(width: 8),
+                                Text(
+                                  AA['pdfName'] ?? 'Default AA Name',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 17.0,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ],
                             ),
-                          ),
-                        ],
-                      ),
-                      ElevatedButton(
-                        onPressed: () {},
-                        style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all<Color>(
-                            Colors.white,
-                          ),
+                            ElevatedButton(
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => PdfViewer(AA: AA),
+                                  ),
+                                );
+                              },
+                              style: ButtonStyle(
+                                backgroundColor:
+                                    MaterialStateProperty.all<Color>(
+                                  Colors.white,
+                                ),
+                              ),
+                              child: Text(
+                                'View',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  color: Colors.black,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
-                        child: Text(
-                          'View',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: Colors.black,
-                          ),
-                        ),
                       ),
-                    ],
+                    ),
                   ),
-                ),
-              ),
+                );
+              },
             ),
           ),
         ],

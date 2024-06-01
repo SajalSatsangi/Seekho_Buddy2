@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:seekhobuddy/AdminScreens/materialSectionPage-Admin.dart';
+import 'package:seekhobuddy/ExploreMore/materialSectionPage.dart';
 // import 'package:seekhobuddy/ExploreMore/materialSectionPage.dart';
 
 class Subjects extends StatelessWidget {
+  final Map semester;
+
+  Subjects({required this.semester});
+
   @override
   Widget build(BuildContext context) {
+    print(semester);
+    Map subjects = Map.from(semester)..remove('semesterName');
+
     return Scaffold(
       backgroundColor: Colors.black,
       body: Column(
@@ -62,65 +69,79 @@ class Subjects extends StatelessWidget {
               ),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(25.0),
-            child: GestureDetector(
-              onTap: () {},
-              child: Container(
-                width: 450,
-                height: 80,
-                decoration: BoxDecoration(
-                  color: Color.fromRGBO(50, 50, 50, 1),
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.school,
-                            color: Colors.white,
-                          ),
-                          SizedBox(width: 8),
-                          Text(
-                            'Subject Name',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 17.0,
-                              fontWeight: FontWeight.bold,
+          Expanded(
+            child: ListView.builder(
+              itemCount: subjects.length,
+              itemBuilder: (context, index) {
+                String subjectKey = subjects.keys.elementAt(index);
+                Map subject = subjects[subjectKey];
+
+                return Padding(
+                  padding: const EdgeInsets.all(25.0),
+                  child: GestureDetector(
+                    onTap: () {},
+                    child: Container(
+                      width: 450,
+                      height: 80,
+                      decoration: BoxDecoration(
+                        color: Color.fromRGBO(50, 50, 50, 1),
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              children: [
+                                Icon(
+                                  Icons.school,
+                                  color: Colors.white,
+                                ),
+                                SizedBox(width: 8),
+                                Text(
+                                  subject['subjectName'] ??
+                                      'Default Subject Name',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 17.0,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ],
                             ),
-                          ),
-                        ],
-                      ),
-                      ElevatedButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    Materialsectionpage_Admin()),
-                          );
-                        },
-                        style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all<Color>(
-                            Colors.white,
-                          ),
+                            ElevatedButton(
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        Materialsectionpage(
+                                            subject: subject),
+                                  ),
+                                );
+                              },
+                              style: ButtonStyle(
+                                backgroundColor:
+                                    MaterialStateProperty.all<Color>(
+                                  Colors.white,
+                                ),
+                              ),
+                              child: Text(
+                                'View',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  color: Colors.black,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
-                        child: Text(
-                          'View',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: Colors.black,
-                          ),
-                        ),
                       ),
-                    ],
+                    ),
                   ),
-                ),
-              ),
+                );
+              },
             ),
           ),
         ],
