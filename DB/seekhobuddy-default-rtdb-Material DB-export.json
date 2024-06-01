@@ -1,0 +1,69 @@
+{
+  "Faculty1": {
+    "branches": {
+      "Branch1": "Biology",
+      "Branch2": "Chemistry"
+    },
+    "description": "Description for Faculty of Science",
+    "name": "Faculty of Science"
+  },
+  "Faculty2": {
+    "branches": {
+      "Branch1": "History",
+      "Branch2": "Literature"
+    },
+    "description": "Description for Faculty of Arts",
+    "name": "Faculty of Arts"
+  },
+  "Faculty3": {
+    "branches": {
+      "Branch1": {
+        "Semester 2": {
+          "semesterName": "Semester 2"
+        },
+        "Semester 3": {
+          "Subject1": {
+            "Material1": {
+              "AA1": {
+                "aaName": "AA1",
+                "list": {
+                  "link1": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                }
+              },
+              "AA2": {
+                "aaName": "AA2",
+                "list": {
+                  "link1": "https://drive.google.com/uc?export=view&id=1pCaNxKodk5lq6rtyIr9QsMV-RVOGdBoB"
+                }
+              },
+              "materialName": "Additional Assignment"
+            },
+            "subjectName": "ENH101"
+          },
+          "semesterName": "Semester 3"
+        },
+        "Semester1": {
+          "semesterName": "Semester 1"
+        },
+        "name": "Mechanical"
+      },
+      "Branch2": {
+        "name": "Electrical"
+      },
+      "Branch3": {
+        "name": "Civil"
+      },
+      "Branch4": {
+        "name": "Footwear"
+      },
+      "Branch5": {
+        "name": "Agriculture"
+      },
+      "Branch6": {
+        "name": "1stYear"
+      }
+    },
+    "description": "Description for Faculty of Engineering",
+    "name": "Faculty of Engineering"
+  }
+}

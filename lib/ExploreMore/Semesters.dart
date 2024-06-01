@@ -9,7 +9,7 @@ class Semesters extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     print(branch);
-    Map semesters = Map.from(branch)..remove('name');
+    Map semesters = Map.from(branch)..remove('branchName');
 
     return Scaffold(
       backgroundColor: Colors.black,
@@ -52,6 +52,9 @@ class Semesters extends StatelessWidget {
               itemCount: semesters.length,
               itemBuilder: (context, index) {
                 String semesterKey = semesters.keys.elementAt(index);
+                if (semesters[semesterKey] is! Map) {
+                  throw 'Expected a Map, but got ${semesters[semesterKey].runtimeType}';
+                }
                 Map semester = semesters[semesterKey];
 
                 return Padding(

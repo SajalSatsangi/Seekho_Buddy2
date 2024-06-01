@@ -19,12 +19,12 @@ class PdfViewer extends StatelessWidget {
           onPressed: () => Navigator.of(context).pop(),
         ),
         title: Text(
-          AA['aaName'], // Display aaName in the app bar
+          AA['pdfName'], // Display aaName in the app bar
           style: TextStyle(color: Colors.white), // Set text color to white
         ),
       ),
       body: PDF().cachedFromUrl(
-        AA['list']['link1'],
+        AA['list']['link'],
         placeholder: (progress) =>
             Center(child: CircularProgressIndicator(value: progress)),
         errorWidget: (error) =>

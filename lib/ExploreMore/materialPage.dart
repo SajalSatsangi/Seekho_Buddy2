@@ -101,7 +101,7 @@ class Materialpage extends StatelessWidget {
                                 ),
                                 SizedBox(width: 8),
                                 Text(
-                                  AA['aaName'] ?? 'Default AA Name',
+                                  AA['pdfName'] ?? 'Default AA Name',
                                   style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 17.0,

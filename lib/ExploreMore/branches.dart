@@ -101,7 +101,7 @@ class Branches extends StatelessWidget {
                                 ),
                                 SizedBox(width: 8),
                                 Text(
-                                  branch['name'], // Display the branch name
+                                  branch['branchName'], // Display the branch name
                                   style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 17.0,
