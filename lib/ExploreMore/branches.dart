@@ -11,7 +11,6 @@ class Branches extends StatelessWidget {
   Widget build(BuildContext context) {
     print(facultyData);
 
-    // Assuming 'branches' is the key in the facultyData map that contains the list of branches
     List branches = facultyData['branches'].values.toList();
 
     return Scaffold(
@@ -29,9 +28,7 @@ class Branches extends StatelessWidget {
                     children: [
                       IconButton(
                         icon: Icon(Icons.arrow_back_ios, color: Colors.white),
-                        onPressed: () {
-                          Navigator.of(context).pop(); // Navigate back
-                        },
+                        onPressed: () => Navigator.of(context).pop(),
                       ),
                       SizedBox(
                         width: 10.0,
@@ -41,7 +38,7 @@ class Branches extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 28,
                           fontWeight: FontWeight.bold,
-                          color: Colors.white, // Text color
+                          color: Colors.white,
                         ),
                       ),
                     ],
@@ -78,11 +75,12 @@ class Branches extends StatelessWidget {
                 var branch = branches[index];
 
                 return Padding(
-                  padding: const EdgeInsets.all(25.0),
+                  // Reduced vertical padding to decrease space between items
+                  padding: const EdgeInsets.symmetric(
+                      vertical: 8.0, horizontal: 25.0),
                   child: GestureDetector(
                     onTap: () {},
                     child: Container(
-                      width: 450,
                       height: 80,
                       decoration: BoxDecoration(
                         color: Color.fromRGBO(50, 50, 50, 1),
@@ -101,7 +99,7 @@ class Branches extends StatelessWidget {
                                 ),
                                 SizedBox(width: 8),
                                 Text(
-                                  branch['branchName'], // Display the branch name
+                                  branch['branchName'],
                                   style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 17.0,
@@ -123,15 +121,11 @@ class Branches extends StatelessWidget {
                               style: ButtonStyle(
                                 backgroundColor:
                                     MaterialStateProperty.all<Color>(
-                                  Colors.white,
-                                ),
+                                        Colors.white),
                               ),
                               child: Text(
                                 'View',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  color: Colors.black,
-                                ),
+                                style: TextStyle(color: Colors.black),
                               ),
                             ),
                           ],
