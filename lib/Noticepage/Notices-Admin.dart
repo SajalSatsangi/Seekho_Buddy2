@@ -162,7 +162,7 @@ class _MyWidgetState extends State<MyWidget> {
                       if (shouldRenderNotice(data)) {
                         return new GestureDetector(
                           onTap: () {
-                            showMaintenanceNotice(context);
+                            showMaintenanceNotice(context, data['title'], data['description'], data['fileUrl']);
                           },
                           child: Padding(
                             padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),

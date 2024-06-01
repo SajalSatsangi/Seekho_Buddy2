@@ -1,13 +1,15 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 
-void showMaintenanceNotice(BuildContext context) {
+void showMaintenanceNotice(
+    BuildContext context, String title, String description, String fileUrl) {
   showGeneralDialog(
     context: context,
     barrierDismissible: true,
     barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel,
     transitionDuration: const Duration(milliseconds: 200),
-    pageBuilder: (BuildContext buildContext, Animation animation, Animation secondaryAnimation) {
+    pageBuilder: (BuildContext buildContext, Animation animation,
+        Animation secondaryAnimation) {
       return Center(
         child: Padding(
           padding: EdgeInsets.symmetric(vertical: 30),
@@ -41,7 +43,7 @@ void showMaintenanceNotice(BuildContext context) {
                           ),
                           SizedBox(height: 8),
                           Text(
-                            "Server Maintenance",
+                            title,
                             style: TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.bold,
@@ -50,7 +52,7 @@ void showMaintenanceNotice(BuildContext context) {
                           ),
                           SizedBox(height: 8),
                           Text(
-                            "Our servers will undergo maintenance on 25th August from 10:00 PM to 2:00 AM. During this time, there may be intermittent disruptions in service. We apologize for any inconvenience caused. Thank you for your understanding.",
+                            description,
                             style: TextStyle(
                               color: Colors.white,
                             ),
@@ -70,7 +72,7 @@ void showMaintenanceNotice(BuildContext context) {
                         bottom: Radius.circular(20.0),
                       ),
                       child: Image.network(
-                        'https://assets.api.uizard.io/api/cdn/stream/3c5a2383-de2c-44b8-a0b4-3b08795acbb3.png',
+                        fileUrl,
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -84,7 +86,8 @@ void showMaintenanceNotice(BuildContext context) {
     },
     transitionBuilder: (context, animation, secondaryAnimation, child) {
       return BackdropFilter(
-        filter: ImageFilter.blur(sigmaX: 2 * animation.value, sigmaY: 2 * animation.value),
+        filter: ImageFilter.blur(
+            sigmaX: 2 * animation.value, sigmaY: 2 * animation.value),
         child: ScaleTransition(
           scale: CurvedAnimation(parent: animation, curve: Curves.easeOut),
           child: child,
