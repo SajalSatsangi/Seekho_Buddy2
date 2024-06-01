@@ -76,18 +76,18 @@ class Materialsectionpage extends StatelessWidget {
                 Map material = materials[materialKey];
 
                 return Padding(
-                  padding: const EdgeInsets.all(25.0),
+                  padding: const EdgeInsets.symmetric(
+                      vertical: 7.0, horizontal: 27.0),
                   child: GestureDetector(
                     onTap: () {},
                     child: Container(
-                      width: 450,
-                      height: 80,
+                      height: 70,
                       decoration: BoxDecoration(
                         color: Color.fromRGBO(50, 50, 50, 1),
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: Padding(
-                        padding: const EdgeInsets.all(20.0),
+                        padding: const EdgeInsets.all(12.0),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -99,10 +99,11 @@ class Materialsectionpage extends StatelessWidget {
                                 ),
                                 SizedBox(width: 8),
                                 Text(
-                                  material['materialName'] ?? 'Default Material Name',
+                                  material['materialName'] ??
+                                      'Default Material Name',
                                   style: TextStyle(
                                     color: Colors.white,
-                                    fontSize: 17.0,
+                                    fontSize: 16.0,
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
@@ -118,7 +119,8 @@ class Materialsectionpage extends StatelessWidget {
                                 );
                               },
                               style: ButtonStyle(
-                                backgroundColor: MaterialStateProperty.all<Color>(
+                                backgroundColor:
+                                    MaterialStateProperty.all<Color>(
                                   Colors.white,
                                 ),
                               ),
