@@ -2,13 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_cached_pdfview/flutter_cached_pdfview.dart';
 
 class PdfViewer extends StatelessWidget {
-  final String keyValue; // Value to display in the app bar
-  final String value; // URL to the PDF file
+  final String pdfName;
+  final String pdfLink;
 
-  PdfViewer({required this.keyValue, required this.value});
-
+  PdfViewer({
+    required this.pdfName,
+    required this.pdfLink,
+  });
   @override
   Widget build(BuildContext context) {
+    print(pdfLink);
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
@@ -19,12 +22,12 @@ class PdfViewer extends StatelessWidget {
           onPressed: () => Navigator.of(context).pop(),
         ),
         title: Text(
-          keyValue, // Display keyValue in the app bar
+          pdfName, // Display keyValue in the app bar
           style: TextStyle(color: Colors.white), // Set text color to white
         ), // Display keyValue in the app bar
       ),
       body: PDF().cachedFromUrl(
-        value,
+        pdfLink,
         placeholder: (progress) =>
             Center(child: CircularProgressIndicator(value: progress)),
         errorWidget: (error) =>

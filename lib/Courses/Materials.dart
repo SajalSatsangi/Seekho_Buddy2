@@ -4,13 +4,13 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class Materials extends StatefulWidget {
-  final String subject; // Add this parameter
-  final String documentId; // Add this parameter
+  final String subject;
+  final String documentId;
 
   Materials({
     required this.subject,
     required this.documentId,
-  }); // Update the constructor to accept the parameters
+  });
 
   @override
   _MaterialsState createState() => _MaterialsState();
@@ -49,7 +49,7 @@ class _MaterialsState extends State<Materials> {
         title: Padding(
           padding: const EdgeInsets.only(top: 8.0),
           child: Text(
-            '${widget.documentId}', // Display the document ID in the app bar
+            '${widget.documentId}',
             style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
           ),
         ),
@@ -57,7 +57,6 @@ class _MaterialsState extends State<Materials> {
         leading: IconButton(
           icon: Icon(Icons.arrow_back_ios, color: Colors.white),
           onPressed: () {
-            // Navigate back when the back button is pressed
             Navigator.of(context).pop();
           },
         ),
@@ -86,8 +85,8 @@ class _MaterialsState extends State<Materials> {
           ),
         ),
       ),
-      body: FutureBuilder<DocumentSnapshot>(
-        future: userData != null ? _fetchDocument() : null,
+      body: FutureBuilder<QuerySnapshot>(
+        future: userData != null ? _fetchDocuments() : null,
         builder: (context, snapshot) {
           if (userData == null) {
             return Center(child: CircularProgressIndicator());
@@ -97,73 +96,62 @@ class _MaterialsState extends State<Materials> {
             return Center(
                 child: Text('Error: ${snapshot.error}',
                     style: TextStyle(color: Colors.white)));
-          } else if (!snapshot.hasData || !snapshot.data!.exists) {
+          } else if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
             return Center(
-                child: Text('Document does not exist',
+                child: Text('No documents found',
                     style: TextStyle(color: Colors.white)));
           }
 
-          var documentData = snapshot.data!.data() as Map<String, dynamic>;
-
           return Padding(
-            padding: EdgeInsets.all(10), // Padding around the card
+            padding: EdgeInsets.all(10),
             child: Card(
-              color: Color(0xFF323232), // Set card background color
+              color: Color(0xFF323232),
               shape: RoundedRectangleBorder(
-                borderRadius:
-                    BorderRadius.circular(20), // Making the border more rounded
+                borderRadius: BorderRadius.circular(20),
               ),
               child: SingleChildScrollView(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: documentData.entries.expand((entry) {
-                    return [
-                      ListTile(
-                        contentPadding: EdgeInsets.symmetric(
-                            horizontal: 20,
-                            vertical: 10), // Padding inside each ListTile
-                        leading: Icon(
-                          Icons.folder,
-                          color: Colors.white,
-                        ), // Set folder icon color to white
-                        title: Text(
-                          entry.key,
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        trailing: TextButton(
-                          onPressed: () {
-                            print('View button clicked');
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => PdfViewer(
-                                  keyValue: entry.key,
-                                  value: entry.value.toString(),
-                                ),
+                  children: snapshot.data!.docs.map((doc) {
+                    return ListTile(
+                      contentPadding:
+                          EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                      leading: Icon(
+                        Icons.folder,
+                        color: Colors.white,
+                      ),
+                      title: Text(
+                        doc.id,
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      trailing: TextButton(
+                        onPressed: () {
+                          String pdfName = doc.id;
+                          Map<String, dynamic> data =
+                              doc.data() as Map<String, dynamic>;
+                          String pdfLink = data['link'] ??
+                              ''; // Fetch the "link" value from the document
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => PdfViewer(
+                                pdfName: pdfName, // Pass the document name
+                                pdfLink: pdfLink, // Pass the "link" value
                               ),
-                            );
-                          },
-                          child: Text(
-                            'View',
-                            style: TextStyle(
-                              color: const Color.fromARGB(255, 0, 0, 0),
                             ),
+                          );
+                        },
+                        child: Text(
+                          'View',
+                          style: TextStyle(
+                            color: Colors.black,
                           ),
-                          style: TextButton.styleFrom(
-                            backgroundColor: const Color.fromARGB(255, 255, 255,
-                                255), // Set view button background color
-                          ),
+                        ),
+                        style: TextButton.styleFrom(
+                          backgroundColor: Colors.white,
                         ),
                       ),
-                      if (documentData.entries.last.key !=
-                          entry.key) // Add a divider if it's not the last entry
-                        Divider(
-                          color: Color.fromARGB(
-                              255, 0, 0, 0), // Set the color of the divider
-                          height: 1, // Set the height of the divider
-                          thickness: 1, // Set the thickness of the divider
-                        ),
-                    ];
+                    );
                   }).toList(),
                 ),
               ),
@@ -171,11 +159,11 @@ class _MaterialsState extends State<Materials> {
           );
         },
       ),
-      backgroundColor: Colors.black, // Setting the background color to black
+      backgroundColor: Colors.black,
     );
   }
 
-  Future<DocumentSnapshot> _fetchDocument() async {
+  Future<QuerySnapshot<Map<String, dynamic>>> _fetchDocuments() async {
     if (userData == null) {
       throw Exception('userData is not initialized');
     }
@@ -193,6 +181,7 @@ class _MaterialsState extends State<Materials> {
         .doc(widget.subject)
         .collection(widget.subject)
         .doc(widget.documentId)
+        .collection(widget.documentId)
         .get();
   }
 }
