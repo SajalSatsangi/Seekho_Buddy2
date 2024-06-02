@@ -1,11 +1,13 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'add_notice_popup.dart';
 import 'notice_popup.dart';
 import 'package:seekhobuddy/home.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 
 void main() {
   runApp(NoticesAdmin());
@@ -41,29 +43,72 @@ class MyWidget extends StatefulWidget {
 }
 
 class _MyWidgetState extends State<MyWidget> {
-  final CollectionReference collectionRef = FirebaseFirestore.instance.collection('notices');
+  final CollectionReference collectionRef =
+      FirebaseFirestore.instance.collection('notices');
   DocumentSnapshot? userData;
   late SharedPreferences prefs;
+  late FirebaseMessaging _firebaseMessaging;
+  late FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
 
   @override
   void initState() {
     super.initState();
+    _firebaseMessaging = FirebaseMessaging.instance;
+    _initializeFirebaseMessaging();
     fetchUserData();
+    listenForNewNotices();
+
+    var initializationSettingsAndroid =
+        AndroidInitializationSettings('@mipmap/ic_launcher');
+    var initializationSettingsIOS = IOSInitializationSettings(
+      requestAlertPermission: true,
+      requestBadgePermission: true,
+      requestSoundPermission: true,
+    );
+    var initializationSettings = InitializationSettings(
+      android: initializationSettingsAndroid,
+      iOS: initializationSettingsIOS,
+    );
+    flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
+    flutterLocalNotificationsPlugin.initialize(initializationSettings);
+  }
+
+  Future<void> _initializeFirebaseMessaging() async {
+    NotificationSettings settings =
+        await _firebaseMessaging.requestPermission();
+    print('User granted permission: ${settings.authorizationStatus}');
+
+    _firebaseMessaging.getToken().then((String? token) {
+      print('FCM Token: $token');
+      // Save token to Firestore or your backend server
+    });
+
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+      print('Received push notification: ${message.notification?.title}');
+      // Handle notification when app is in foreground
+    });
+
+    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+      print(
+          'App opened from push notification: ${message.notification?.title}');
+      // Handle notification when app is opened from background or terminated
+    });
   }
 
   Future<void> fetchUserData() async {
     prefs = await SharedPreferences.getInstance();
-    DateTime lastFetchTime = DateTime.parse(prefs.getString('lastFetchTime') ?? '2000-01-01');
+    DateTime lastFetchTime =
+        DateTime.parse(prefs.getString('lastFetchTime') ?? '2000-01-01');
     DateTime now = DateTime.now();
 
     final User? user = FirebaseAuth.instance.currentUser;
 
     if (now.difference(lastFetchTime).inDays >= 1 || userData == null) {
-    if (user != null) {
-    var querySnapshot = await FirebaseFirestore.instance
-        .collection('users')
-        .where('uid', isEqualTo: user.uid)
-        .get();
+      if (user != null) {
+        var querySnapshot = await FirebaseFirestore.instance
+            .collection('users')
+            .where('uid', isEqualTo: user.uid)
+            .get();
 
         if (querySnapshot.docs.isNotEmpty) {
           setState(() {
@@ -76,7 +121,39 @@ class _MyWidgetState extends State<MyWidget> {
     }
   }
 
-  
+  void listenForNewNotices() {
+    collectionRef.snapshots().listen((snapshot) {
+      snapshot.docChanges.forEach((change) {
+        if (change.type == DocumentChangeType.added) {
+          // A new document was added
+          Map<String, dynamic> data = change.doc.data() as Map<String, dynamic>;
+          if (shouldRenderNotice(data)) {
+            // If the notice is relevant to the user, display a notification
+            _showNotification(data['title'], data['description']);
+          }
+        }
+      });
+    });
+  }
+
+  Future<void> _showNotification(String title, String description) async {
+  var androidPlatformChannelSpecifics = const AndroidNotificationDetails(
+      'new_notice_channel',
+      'New Notice Notifications',
+      importance: Importance.max,
+      priority: Priority.high,
+      showWhen: false);
+  var iOSPlatformChannelSpecifics = const IOSNotificationDetails();
+  var platformChannelSpecifics = NotificationDetails(
+      android: androidPlatformChannelSpecifics,
+      iOS: iOSPlatformChannelSpecifics);
+  try {
+    await flutterLocalNotificationsPlugin.show(
+        0, title, description, platformChannelSpecifics);
+  } catch (e) {
+    print('Failed to show notification: $e');
+  }
+}
 
   void saveUserDataLocally() {
     // Implement saving user data locally if necessary
@@ -143,7 +220,8 @@ class _MyWidgetState extends State<MyWidget> {
             Expanded(
               child: StreamBuilder<QuerySnapshot>(
                 stream: collectionRef.snapshots(),
-                builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+                builder: (BuildContext context,
+                    AsyncSnapshot<QuerySnapshot> snapshot) {
                   if (snapshot.hasError) {
                     return Text('Something went wrong');
                   }
@@ -157,15 +235,19 @@ class _MyWidgetState extends State<MyWidget> {
                   }
 
                   return new ListView(
-                    children: snapshot.data!.docs.map((DocumentSnapshot document) {
-                      Map<String, dynamic> data = document.data() as Map<String, dynamic>;
+                    children:
+                        snapshot.data!.docs.map((DocumentSnapshot document) {
+                      Map<String, dynamic> data =
+                          document.data() as Map<String, dynamic>;
                       if (shouldRenderNotice(data)) {
                         return new GestureDetector(
                           onTap: () {
-                            showMaintenanceNotice(context, data['title'], data['description'], data['fileUrl']);
+                            showMaintenanceNotice(context, data['title'],
+                                data['description'], data['fileUrl']);
                           },
                           child: Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 16, vertical: 8),
                             child: Stack(
                               children: [
                                 Container(
@@ -177,7 +259,8 @@ class _MyWidgetState extends State<MyWidget> {
                                   ),
                                   padding: EdgeInsets.all(16),
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         data['title'],
@@ -248,41 +331,42 @@ class _MyWidgetState extends State<MyWidget> {
   }
 
   bool shouldRenderNotice(Map<String, dynamic> noticeData) {
-  print('Notice data: $noticeData');
-  if (userData == null) return false;
+    print('Notice data: $noticeData');
+    if (userData == null) return false;
 
-  var userFaculty = userData!['faculty'];
-  var userSubFaculty = userData!['subfaculty'];
-  var userSemester = userData!['semester'];
-  var userSubBranch = userData!['subbranch'];
+    var userFaculty = userData!['faculty'];
+    var userSubFaculty = userData!['subfaculty'];
+    var userSemester = userData!['semester'];
+    var userSubBranch = userData!['subbranch'];
 
-  var noticeFaculties = noticeData['faculties'];
-  var noticeSubFaculties = noticeData['subfaculties'];
-  var noticeSemesters = noticeData['semesters'];
-  var noticeSubBranches = noticeData['subbranches'];
+    var noticeFaculties = noticeData['faculties'];
+    var noticeSubFaculties = noticeData['subfaculties'];
+    var noticeSemesters = noticeData['semesters'];
+    var noticeSubBranches = noticeData['subbranches'];
 
-  if (noticeFaculties != null) {
-    if (!noticeFaculties.contains(userFaculty)) {
-      return false;
-    } else {
-      if (noticeSubFaculties != null) {
-        if (!noticeSubFaculties.contains(userSubFaculty)) {
-          return false;
-        } else {
-          if (noticeSemesters != null) {
-            if (!noticeSemesters.contains(userSemester)) {
-              return false;
-            } else {
-              if (noticeSubBranches != null && !noticeSubBranches.contains(userSubBranch)) {
+    if (noticeFaculties != null) {
+      if (!noticeFaculties.contains(userFaculty)) {
+        return false;
+      } else {
+        if (noticeSubFaculties != null) {
+          if (!noticeSubFaculties.contains(userSubFaculty)) {
+            return false;
+          } else {
+            if (noticeSemesters != null) {
+              if (!noticeSemesters.contains(userSemester)) {
                 return false;
+              } else {
+                if (noticeSubBranches != null &&
+                    !noticeSubBranches.contains(userSubBranch)) {
+                  return false;
+                }
               }
             }
           }
         }
       }
     }
-  }
 
-  return true;
-}
+    return true;
+  }
 }

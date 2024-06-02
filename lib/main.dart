@@ -8,6 +8,7 @@ import 'firebase_options.dart';
 import 'home.dart';
 import 'Getstarred/landing.dart';
 import 'emailVerificationWaiting.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -35,6 +36,41 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
+// Implement Firebase messaging and token handling in the main.dart file
+void initializeFCM() {
+  FirebaseMessaging messaging = FirebaseMessaging.instance;
+  messaging.onTokenRefresh.listen((String token) {
+    storeFCMToken(token);
+  });
+}
+
+Future<void> storeFCMToken(String token) async {
+  final currentUser = FirebaseAuth.instance.currentUser;
+  if (currentUser != null) {
+    final userCollection = FirebaseFirestore.instance.collection('users');
+    final userSnapshot = await userCollection.where('uid', isEqualTo: currentUser.uid).get();
+
+    if (userSnapshot.docs.isNotEmpty) {
+      final userDoc = userSnapshot.docs.first;
+      await userCollection.doc(userDoc.id).set({'fcmToken': token}, SetOptions(merge: true));
+    }
+  }
+}
+
+Future<void> requestNotificationPermission() async {
+  FirebaseMessaging messaging = FirebaseMessaging.instance;
+  NotificationSettings settings = await messaging.requestPermission();
+
+  if (settings.authorizationStatus == AuthorizationStatus.authorized) {
+    print('User granted permission');
+  } else if (settings.authorizationStatus == AuthorizationStatus.provisional) {
+    print('User granted provisional permission');
+  } else {
+    print('User declined or has not yet responded to the permission request');
+  }
+}
+
 
 class AuthWrapper extends StatelessWidget {
   @override

@@ -7,7 +7,7 @@ import 'package:seekhobuddy/emailVerificationWaiting.dart';
 import 'package:seekhobuddy/dropdown_data.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-
+import 'package:firebase_messaging/firebase_messaging.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -269,8 +269,7 @@ class _StudyHubLoginScreenState extends State<StudyHubLoginScreen> {
                       ),
                       SizedBox(height: 25),
                       Row(
-                        mainAxisAlignment:
-                        MainAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           TextButton(
                             onPressed: () {
@@ -316,88 +315,86 @@ class _StudyHubLoginScreenState extends State<StudyHubLoginScreen> {
     );
   }
 
- Future<void> _signUp() async {
-  if (_formKey.currentState!.validate()) {
+  Future<void> _signUp() async {
+    if (_formKey.currentState!.validate()) {
+      try {
+        UserCredential userCredential =
+            await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: _emailController.text,
+          password: _passwordController.text,
+        );
+
+        String uid = userCredential.user!.uid;
+
+        String? fcmToken = await FirebaseMessaging.instance.getToken();
+
+        await FirebaseFirestore.instance
+            .collection('users')
+            .doc(_nameController.text)
+            .set({
+          'uid': uid,
+          'email': _emailController.text,
+          'name': _nameController.text,
+          'faculty': _selectedFaculty,
+          'subfaculty': _selectedSubfaculty,
+          'semester': _selectedSemester,
+          'subbranch': _selectedSubbranch,
+          'rollno': _rollnoController.text,
+          'profile_picture': '',
+          'role': 'student',
+          'verifiedstatus': 'False',
+          'status': '',
+          'date': '',
+          'fcmToken': fcmToken,
+        });
+
+        await sendWelcomeEmail(
+          _emailController.text,
+          _nameController.text,
+        );
+
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('Signed up successfully'),
+              duration: Duration(seconds: 2),
+            ),
+          );
+
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => WaitingVerification()),
+          );
+        }
+      } on FirebaseAuthException catch (e) {
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Failed to sign up: ${e.message}')),
+          );
+        }
+      }
+    }
+  }
+
+  Future<void> sendWelcomeEmail(String email, String name) async {
+    const url = 'https://seekhobuddy-mailer.vercel.app/api/send-emailsignup';
+
     try {
-      UserCredential userCredential =
-          await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: _emailController.text,
-        password: _passwordController.text,
+      final response = await http.post(
+        Uri.parse(url),
+        headers: {'Content-Type': 'application/json'},
+        body: json.encode({'userEmail': email, 'userName': name}),
       );
 
-      String uid = userCredential.user!.uid;
-
-      await FirebaseFirestore.instance
-          .collection('users')
-          .doc(_nameController.text)
-          .set({
-        'uid': uid,
-        'email': _emailController.text,
-        'name': _nameController.text,
-        'faculty': _selectedFaculty,
-        'subfaculty': _selectedSubfaculty,
-        'semester': _selectedSemester,
-        'subbranch': _selectedSubbranch,
-        'rollno': _rollnoController.text,
-        'profile_picture': '',
-        'role': 'student',
-        'verifiedstatus': 'False',
-        'status': '',
-        'date': '',
-      });
-
-      await sendWelcomeEmail(
-        _emailController.text,
-        _nameController.text,
-      );
-
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('Signed up successfully'),
-            duration: Duration(seconds: 2),
-          ),
-        );
-
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => WaitingVerification()),
-        );
+      if (response.statusCode == 200) {
+        print('Email sent successfully');
+      } else {
+        print('Failed to send email: ${response.body}');
       }
-    } on FirebaseAuthException catch (e) {
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Failed to sign up: ${e.message}')),
-        );
-      }
+    } catch (e) {
+      print('Error sending email: $e');
     }
   }
-}
-
-
-
-Future<void> sendWelcomeEmail(String email, String name) async {
-  const url = 'https://seekhobuddy-mailer.vercel.app/api/send-emailsignup';
-
-  try {
-    final response = await http.post(
-      Uri.parse(url),
-      headers: {'Content-Type': 'application/json'},
-      body: json.encode({'userEmail': email, 'userName': name}),
-    );
-
-    if (response.statusCode == 200) {
-      print('Email sent successfully');
-    } else {
-      print('Failed to send email: ${response.body}');
-    }
-  } catch (e) {
-    print('Error sending email: $e');
-  }
-}
-
-
-
 
   Widget _buildTextField({
     required TextEditingController controller,
@@ -491,4 +488,3 @@ Future<void> sendWelcomeEmail(String email, String name) async {
     );
   }
 }
-
