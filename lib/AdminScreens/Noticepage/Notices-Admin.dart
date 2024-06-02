@@ -71,7 +71,18 @@ class _MyWidgetState extends State<MyWidget> {
       iOS: initializationSettingsIOS,
     );
     flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
-    flutterLocalNotificationsPlugin.initialize(initializationSettings);
+    Future selectNotification(String? payload) async {
+      if (payload != null) {
+        debugPrint('notification payload: ' + payload);
+      }
+      await Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => NoticesAdmin()),
+      );
+    }
+
+    flutterLocalNotificationsPlugin.initialize(initializationSettings,
+        onSelectNotification: selectNotification);
   }
 
   Future<void> _initializeFirebaseMessaging() async {
