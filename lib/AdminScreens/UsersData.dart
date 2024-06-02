@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:seekhobuddy/AdminScreens/Profile-Admin.dart';
 import 'package:seekhobuddy/AdminScreens/UserData_Edit.dart';
@@ -76,86 +77,107 @@ class UserDataPage extends StatelessWidget {
                 ),
               ),
             ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16.0),
-              child: Container(
-                padding: EdgeInsets.all(16.0),
-                decoration: BoxDecoration(
-                  color: Colors.grey[900],
-                  borderRadius: BorderRadius.circular(28.0),
-                ),
-                child: Row(
-                  children: [
-                    CircleAvatar(
-                      radius: 40.0,
-                      backgroundImage: NetworkImage(
-                        'https://resize.indiatv.in/resize/newbucket/400_-/2024/04/virat-kohli-7-1712427968.webp',
-                      ),
-                    ),
-                    SizedBox(width: 16.0),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Container(
-                            width: double.infinity,
-                            child: Text(
-                              "Name - Virat Kohli",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 18.0,
-                              ),
-                            ),
-                          ),
-                          SizedBox(height: 8.0),
-                          Text(
-                            "Faculty - India ",
-                            style: TextStyle(
-                              color: const Color.fromARGB(255, 201, 201, 201),
-                              fontSize: 13.0,
-                            ),
-                          ),
-                          Text(
-                            "Branch - T20 WC",
-                            style: TextStyle(
-                              color: const Color.fromARGB(255, 201, 201, 201),
-                              fontSize: 13.0,
-                            ),
-                          ),
-                          Text(
-                            "Sem - 2024",
-                            style: TextStyle(
-                              color: const Color.fromARGB(255, 201, 201, 201),
-                              fontSize: 13.0,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Container(
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: const Color.fromARGB(255, 201, 201, 201)
-                            .withOpacity(0.2),
-                      ),
-                      child: IconButton(
-                        icon: Icon(
-                          Icons.edit,
-                          color: Colors.white,
-                        ),
-                        onPressed: () {
+            Expanded(
+              child: StreamBuilder<QuerySnapshot>(
+                stream: FirebaseFirestore.instance.collection('users').snapshots(),
+                builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+                  if (snapshot.hasError) {
+                    return Text('Something went wrong');
+                  }
 
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => userdata_edit()),
-                          );
-                          // Add functionality for edit here
-                        },
-                      ),
-                    ),
-                  ],
-                ),
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return Text("Loading");
+                  }
+
+                  return ListView(
+                    children: snapshot.data!.docs.map((DocumentSnapshot document) {
+                      Map<String, dynamic> data = document.data() as Map<String, dynamic>;
+                      return Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 16.0),
+                        child: Container(
+                          padding: EdgeInsets.all(16.0),
+                          decoration: BoxDecoration(
+                            color: Colors.grey[900],
+                            borderRadius: BorderRadius.circular(28.0),
+                          ),
+                          child: Row(
+                            children: [
+                              CircleAvatar(
+                                radius: 40.0,
+                                backgroundImage: NetworkImage(
+                                  data['profile_picture'],
+                                ),
+                              ),
+                              SizedBox(width: 16.0),
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Container(
+                                      width: double.infinity,
+                                      child: Text(
+                                        "Name - ${data['name']}",
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 18.0,
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(height: 8.0),
+                                    Text(
+                                      "Faculty - ${data['faculty']}",
+                                      style: TextStyle(
+                                        color: const Color.fromARGB(255, 201, 201, 201),
+                                        fontSize: 13.0,
+                                      ),
+                                    ),
+                                    Text(
+                                      "Branch - ${data['subfaculty']}",
+                                      style: TextStyle(
+                                        color: const Color.fromARGB(255, 201, 201, 201),
+                                        fontSize: 13.0,
+                                      ),
+                                    ),
+                                    Text(
+                                      "Sem - ${data['semester']}",
+                                      style: TextStyle(
+                                        color: const Color.fromARGB(255, 201, 201, 201),
+                                        fontSize: 13.0,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Container(
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: const Color.fromARGB(255, 201, 201, 201)
+                                      .withOpacity(0.2),
+                                ),
+                                child: IconButton(
+                                  icon: Icon(
+                                    Icons.edit,
+                                    color: Colors.white,
+                                  ),
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => userdata_edit(
+                                            userData: data,
+                                          )),
+                                    );
+                                    // Add functionality for edit here
+                                  },
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      );
+                    }).toList(),
+                  );
+                },
               ),
             ),
           ],
