@@ -1,52 +1,54 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:seekhobuddy/AdminScreens/Noticepage/Notices-Admin.dart';
 import 'package:seekhobuddy/Courses.dart';
 import 'package:seekhobuddy/NewHelp.dart';
 import 'package:seekhobuddy/donation.dart';
-// import 'package:seekhobuddy/help.dart';
 import 'footer.dart';
 import 'AdminScreens/Profile-Admin.dart';
-import 'ComingSoonPage.dart'; // Import the ComingSoonPage
+import 'ComingSoonPage.dart';
 
 void main() {
-  runApp(HomePage());
+  runApp(const HomePage());
 }
 
 class HomePage extends StatelessWidget {
+  const HomePage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'SeekhoBuddy App',
       theme: ThemeData(
         brightness: Brightness.dark,
-        scaffoldBackgroundColor: Color.fromARGB(255, 0, 0, 0),
-        textTheme: TextTheme(
+        scaffoldBackgroundColor: const Color.fromARGB(255, 0, 0, 0),
+        textTheme: const TextTheme(
           bodyLarge: TextStyle(color: Colors.white),
           bodyMedium: TextStyle(color: Colors.white),
         ),
       ),
-      home: Home(),
+      home: const Home(),
     );
   }
 }
 
 class Home extends StatefulWidget {
+  const Home({super.key});
+
   @override
+  // ignore: library_private_types_in_public_api
   _HomeState createState() => _HomeState();
 }
 
 class _HomeState extends State<Home> {
   int _selectedIndex = 0;
-  PageController _pageController = PageController();
+  final PageController _pageController = PageController();
 
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
       _pageController.animateToPage(index,
-          duration: Duration(milliseconds: 300), curve: Curves.easeInOut);
+          duration: const Duration(milliseconds: 300), curve: Curves.easeInOut);
     });
   }
 
@@ -59,7 +61,7 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 0, 0, 0),
+      backgroundColor: const Color.fromARGB(255, 0, 0, 0),
       body: PageView(
         controller: _pageController,
         onPageChanged: (index) {
@@ -72,7 +74,7 @@ class _HomeState extends State<Home> {
             backgroundColor: Colors.black,
             appBar: AppBar(
               automaticallyImplyLeading: false,
-              title: Row(
+              title: const Row(
                 children: [
                   Expanded(
                     child: Text(
@@ -87,7 +89,7 @@ class _HomeState extends State<Home> {
                   ),
                 ],
               ),
-              backgroundColor: Color.fromARGB(255, 0, 0, 0),
+              backgroundColor: const Color.fromARGB(255, 0, 0, 0),
             ),
             body: SafeArea(
               child: SingleChildScrollView(
@@ -96,13 +98,13 @@ class _HomeState extends State<Home> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      SizedBox(height: 20),
+                      const SizedBox(height: 20),
                       Center(
                         child: Container(
                           width: 350,
                           height: 149,
                           decoration: BoxDecoration(
-                            color: Color(0xFF212121),
+                            color: const Color(0xFF212121),
                             borderRadius: BorderRadius.circular(20),
                           ),
                           child: Stack(
@@ -110,9 +112,9 @@ class _HomeState extends State<Home> {
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                        left: 15.0, top: 20),
+                                  const Padding(
+                                    padding:
+                                        EdgeInsets.only(left: 15.0, top: 20),
                                     child: Text(
                                       'Explore study Materials',
                                       style: TextStyle(
@@ -122,12 +124,11 @@ class _HomeState extends State<Home> {
                                       ),
                                     ),
                                   ),
-                                  SizedBox(height: 5),
-                                  Row(
+                                  const SizedBox(height: 5),
+                                  const Row(
                                     children: [
                                       Padding(
-                                        padding:
-                                            const EdgeInsets.only(left: 15.0),
+                                        padding: EdgeInsets.only(left: 15.0),
                                         child: Text(
                                           'best study materials for you',
                                           style: TextStyle(
@@ -138,7 +139,7 @@ class _HomeState extends State<Home> {
                                       ),
                                     ],
                                   ),
-                                  SizedBox(height: 10),
+                                  const SizedBox(height: 10),
                                   Padding(
                                     padding: const EdgeInsets.only(
                                         left: 20.0, top: 5.0),
@@ -156,15 +157,15 @@ class _HomeState extends State<Home> {
                                         },
                                         style: ButtonStyle(
                                           backgroundColor:
-                                              MaterialStateProperty.all<Color>(
-                                            Color.fromARGB(255, 255, 255, 255),
+                                              WidgetStateProperty.all<Color>(
+                                            const Color.fromARGB(
+                                                255, 255, 255, 255),
                                           ),
                                         ),
-                                        child: Text(
+                                        child: const Text(
                                           'View',
                                           style: TextStyle(
-                                            color: const Color.fromARGB(
-                                                255, 0, 0, 0),
+                                            color: Color.fromARGB(255, 0, 0, 0),
                                           ),
                                         ),
                                       ),
@@ -185,9 +186,9 @@ class _HomeState extends State<Home> {
                           ),
                         ),
                       ),
-                      SizedBox(height: 8),
+                      const SizedBox(height: 8),
                       Padding(
-                        padding: EdgeInsets.only(right: 0.0),
+                        padding: const EdgeInsets.only(right: 0.0),
                         child: Column(
                           children: [
                             SingleChildScrollView(
@@ -211,8 +212,8 @@ class _HomeState extends State<Home> {
                                         width: 160,
                                         height: 140,
                                         decoration: BoxDecoration(
-                                          color:
-                                              Color.fromARGB(87, 162, 162, 162),
+                                          color: const Color.fromARGB(
+                                              87, 162, 162, 162),
                                           borderRadius:
                                               BorderRadius.circular(20),
                                           border: Border.all(
@@ -232,9 +233,8 @@ class _HomeState extends State<Home> {
                                               height: 80,
                                               width: 80,
                                             ),
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  top: 15),
+                                            const Padding(
+                                              padding: EdgeInsets.only(top: 15),
                                               child: Text(
                                                 'Explore More',
                                                 style: TextStyle(
@@ -265,8 +265,8 @@ class _HomeState extends State<Home> {
                                         width: 160,
                                         height: 140,
                                         decoration: BoxDecoration(
-                                          color:
-                                              Color.fromARGB(87, 162, 162, 162),
+                                          color: const Color.fromARGB(
+                                              87, 162, 162, 162),
                                           borderRadius:
                                               BorderRadius.circular(20),
                                           border: Border.all(
@@ -286,9 +286,8 @@ class _HomeState extends State<Home> {
                                               height: 80,
                                               width: 80,
                                             ),
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  top: 15),
+                                            const Padding(
+                                              padding: EdgeInsets.only(top: 15),
                                               child: Text(
                                                 'Notices',
                                                 style: TextStyle(
@@ -306,7 +305,7 @@ class _HomeState extends State<Home> {
                                 ],
                               ),
                             ),
-                            SizedBox(height: 8),
+                            const SizedBox(height: 8),
                             SingleChildScrollView(
                               scrollDirection: Axis.horizontal,
                               child: Row(
@@ -328,8 +327,8 @@ class _HomeState extends State<Home> {
                                         width: 160,
                                         height: 140,
                                         decoration: BoxDecoration(
-                                          color:
-                                              Color.fromARGB(87, 162, 162, 162),
+                                          color: const Color.fromARGB(
+                                              87, 162, 162, 162),
                                           borderRadius:
                                               BorderRadius.circular(20),
                                           border: Border.all(
@@ -349,9 +348,8 @@ class _HomeState extends State<Home> {
                                               height: 80,
                                               width: 80,
                                             ),
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  top: 15),
+                                            const Padding(
+                                              padding: EdgeInsets.only(top: 15),
                                               child: Text(
                                                 'Projects',
                                                 style: TextStyle(
@@ -382,8 +380,8 @@ class _HomeState extends State<Home> {
                                         width: 160,
                                         height: 140,
                                         decoration: BoxDecoration(
-                                          color:
-                                              Color.fromARGB(87, 162, 162, 162),
+                                          color: const Color.fromARGB(
+                                              87, 162, 162, 162),
                                           borderRadius:
                                               BorderRadius.circular(20),
                                           border: Border.all(
@@ -403,9 +401,8 @@ class _HomeState extends State<Home> {
                                               height: 70,
                                               width: 60,
                                             ),
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  top: 20),
+                                            const Padding(
+                                              padding: EdgeInsets.only(top: 20),
                                               child: Text(
                                                 'Networking',
                                                 style: TextStyle(
@@ -450,11 +447,11 @@ class _HomeState extends State<Home> {
                                       Color.fromARGB(255, 93, 93, 93),
                                     ),
                                   ),
-                                  child: Row(
+                                  child: const Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Text(
-                                        'Donation',
+                                        'Donate',
                                         style: TextStyle(
                                           color: Color.fromARGB(
                                               255, 252, 251, 251),
@@ -491,10 +488,10 @@ class _HomeState extends State<Home> {
                                   style: ButtonStyle(
                                     backgroundColor:
                                         MaterialStateProperty.all<Color>(
-                                      Color.fromARGB(255, 93, 93, 93),
+                                      const Color.fromARGB(255, 93, 93, 93),
                                     ),
                                   ),
-                                  child: Row(
+                                  child: const Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Text(
