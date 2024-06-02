@@ -162,21 +162,6 @@ class Materialsectionpage_Admin extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(
                       vertical: 7.0, horizontal: 27.0),
                   child: GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        SlideRightPageRoute(
-                          page: Materialpage_Admin(
-                            materialName: material['materialName'],
-                            material: material,
-                            facultyName: facultyName,
-                            branchName: branchName,
-                            semesterName: semesterName,
-                            subjectName: subjectName,
-                          ),
-                        ),
-                      );
-                    },
                     child: Container(
                       height: 70,
                       decoration: BoxDecoration(

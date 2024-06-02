@@ -66,21 +66,6 @@ class Semesters extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(
                       vertical: 7.0, horizontal: 24.0),
                   child: GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        SlideLeftPageRoute(
-                          page: Subjects(
-                            facultyName: facultyName,
-                            branchName: branchName,
-                            semesterName: semester[
-                                'semesterName'], // assuming 'semesterName' is the key for the semester name
-                            semesterData:
-                                semester, // Pass the entire semester map
-                          ),
-                        ),
-                      );
-                    },
                     child: Container(
                       height: 70,
                       decoration: BoxDecoration(
