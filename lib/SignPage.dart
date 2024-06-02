@@ -64,252 +64,283 @@ class _StudyHubLoginScreenState extends State<StudyHubLoginScreen> {
     return Scaffold(
       backgroundColor: Color(0xFF161616),
       body: SafeArea(
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Image.asset(
-                  'assets/loginPage.png',
-                  height: 250,
-                ),
-                SizedBox(height: 20),
-                Text(
-                  'Seekho Buddy',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-                SizedBox(height: 10),
-                Text(
-                  'Access study materials efficiently',
-                  style: TextStyle(
-                    color: Colors.white70,
-                    fontSize: 16,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-                SizedBox(height: 30),
-                Form(
-                  key: _formKey,
-                  child: Column(
-                    children: [
-                      _buildTextField(
-                        controller: _emailController,
-                        hintText: 'Email',
-                        icon: Icons.email,
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please enter your email';
-                          }
-                          return null;
-                        },
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            double padding = constraints.maxWidth * 0.08;
+            double iconSize = constraints.maxWidth * 0.07;
+            double fontSizeTitle = constraints.maxWidth * 0.06;
+            double fontSizeSubtitle = constraints.maxWidth * 0.04;
+            double inputFieldHeight = constraints.maxHeight * 0.07;
+            double buttonHeight = constraints.maxHeight * 0.08;
+            double spacingHeight = constraints.maxHeight * 0.02;
+
+            return SingleChildScrollView(
+              child: Padding(
+                padding: EdgeInsets.all(padding),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Image.asset(
+                      'assets/loginPage.png',
+                      height: constraints.maxHeight * 0.3,
+                    ),
+                    SizedBox(height: spacingHeight),
+                    Text(
+                      'Seekho Buddy',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: fontSizeTitle,
+                        fontWeight: FontWeight.bold,
                       ),
-                      SizedBox(height: 20),
-                      _buildTextField(
-                        controller: _passwordController,
-                        hintText: 'Password',
-                        icon: Icons.password,
-                        obscureText: true,
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please enter your password';
-                          }
-                          return null;
-                        },
+                      textAlign: TextAlign.center,
+                    ),
+                    SizedBox(height: spacingHeight / 2),
+                    Text(
+                      'Access study materials efficiently',
+                      style: TextStyle(
+                        color: Colors.white70,
+                        fontSize: fontSizeSubtitle,
                       ),
-                      SizedBox(height: 20),
-                      _buildTextField(
-                        controller: _nameController,
-                        hintText: 'Name',
-                        icon: Icons.person,
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please enter your name';
-                          }
-                          return null;
-                        },
-                      ),
-                      SizedBox(height: 20),
-                      _buildTextField(
-                        controller: _rollnoController,
-                        hintText: 'Roll-No',
-                        icon: Icons.numbers,
-                        keyboardType: TextInputType.number,
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please enter your roll Number';
-                          }
-                          return null;
-                        },
-                      ),
-                      SizedBox(height: 20),
-                      _buildDropdown(
-                        value: _selectedFaculty,
-                        items: faculties,
-                        hintText: 'Faculty',
-                        icon: Icons.school,
-                        onChanged: (value) {
-                          setState(() {
-                            _selectedFaculty = value;
-                            _selectedSubfaculty = null;
-                            _selectedSemester = null;
-                            _selectedSubbranch = null;
-                          });
-                        },
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please select a faculty';
-                          }
-                          return null;
-                        },
-                      ),
-                      SizedBox(height: 20),
-                      _buildDropdown(
-                        value: _selectedSubfaculty,
-                        items: subfaculties[_selectedFaculty] ?? [],
-                        hintText: 'Branch',
-                        icon: Icons.new_label,
-                        onChanged: (value) {
-                          setState(() {
-                            _selectedSubfaculty = value;
-                            _selectedSemester = null;
-                            _selectedSubbranch = null;
-                          });
-                        },
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please select a branch';
-                          }
-                          return null;
-                        },
-                      ),
-                      SizedBox(height: 20),
-                      _buildDropdown(
-                        value: _selectedSemester,
-                        items: semesters[_selectedSubfaculty] ?? [],
-                        hintText: 'Semester',
-                        icon: Icons.calendar_month,
-                        onChanged: (value) {
-                          setState(() {
-                            _selectedSemester = value;
-                            _selectedSubbranch = null;
-                          });
-                        },
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please select a semester';
-                          }
-                          return null;
-                        },
-                      ),
-                      SizedBox(height: 20),
-                      _buildDropdown(
-                        value: _selectedSubbranch,
-                        items: subbranches[
-                                '${_selectedFaculty}_${_selectedSubfaculty}_${_selectedSemester}'] ??
-                            [],
-                        hintText: 'Specialization',
-                        icon: Icons.branding_watermark,
-                        onChanged: (value) {
-                          setState(() {
-                            _selectedSubbranch = value;
-                          });
-                        },
-                      ),
-                      SizedBox(height: 32),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 30),
-                        child: ElevatedButton(
-                          onPressed: _signUp,
-                          style: ElevatedButton.styleFrom(
-                            foregroundColor: Colors.white,
-                            backgroundColor:
-                                const Color.fromRGBO(66, 66, 66, 1),
-                            minimumSize: Size(double.infinity, 50),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(50),
-                            ),
-                          ),
-                          child: Text('Sign Up'),
-                        ),
-                      ),
-                      SizedBox(height: 40),
-                      Row(
+                      textAlign: TextAlign.center,
+                    ),
+                    SizedBox(height: spacingHeight * 2),
+                    Form(
+                      key: _formKey,
+                      child: Column(
                         children: [
-                          Expanded(
-                            child: Divider(
-                              color: Colors.grey.shade800,
-                              thickness: 1,
-                              indent: 30,
-                              endIndent: 10,
+                          _buildTextField(
+                            controller: _emailController,
+                            hintText: 'Email',
+                            icon: Icons.email,
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Please enter your email';
+                              }
+                              return null;
+                            },
+                            height: inputFieldHeight,
+                            iconSize: iconSize,
+                          ),
+                          SizedBox(height: spacingHeight),
+                          _buildTextField(
+                            controller: _passwordController,
+                            hintText: 'Password',
+                            icon: Icons.password,
+                            obscureText: true,
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Please enter your password';
+                              }
+                              return null;
+                            },
+                            height: inputFieldHeight,
+                            iconSize: iconSize,
+                          ),
+                          SizedBox(height: spacingHeight),
+                          _buildTextField(
+                            controller: _nameController,
+                            hintText: 'Name',
+                            icon: Icons.person,
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Please enter your name';
+                              }
+                              return null;
+                            },
+                            height: inputFieldHeight,
+                            iconSize: iconSize,
+                          ),
+                          SizedBox(height: spacingHeight),
+                          _buildTextField(
+                            controller: _rollnoController,
+                            hintText: 'Roll-No',
+                            icon: Icons.numbers,
+                            keyboardType: TextInputType.number,
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Please enter your roll Number';
+                              }
+                              return null;
+                            },
+                            height: inputFieldHeight,
+                            iconSize: iconSize,
+                          ),
+                          SizedBox(height: spacingHeight),
+                          _buildDropdown(
+                            value: _selectedFaculty,
+                            items: faculties,
+                            hintText: 'Faculty',
+                            icon: Icons.school,
+                            onChanged: (value) {
+                              setState(() {
+                                _selectedFaculty = value;
+                                _selectedSubfaculty = null;
+                                _selectedSemester = null;
+                                _selectedSubbranch = null;
+                              });
+                            },
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Please select a faculty';
+                              }
+                              return null;
+                            },
+                            height: inputFieldHeight,
+                            iconSize: iconSize,
+                          ),
+                          SizedBox(height: spacingHeight),
+                          _buildDropdown(
+                            value: _selectedSubfaculty,
+                            items: subfaculties[_selectedFaculty] ?? [],
+                            hintText: 'Branch',
+                            icon: Icons.new_label,
+                            onChanged: (value) {
+                              setState(() {
+                                _selectedSubfaculty = value;
+                                _selectedSemester = null;
+                                _selectedSubbranch = null;
+                              });
+                            },
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Please select a branch';
+                              }
+                              return null;
+                            },
+                            height: inputFieldHeight,
+                            iconSize: iconSize,
+                          ),
+                          SizedBox(height: spacingHeight),
+                          _buildDropdown(
+                            value: _selectedSemester,
+                            items: semesters[_selectedSubfaculty] ?? [],
+                            hintText: 'Semester',
+                            icon: Icons.calendar_month,
+                            onChanged: (value) {
+                              setState(() {
+                                _selectedSemester = value;
+                                _selectedSubbranch = null;
+                              });
+                            },
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Please select a semester';
+                              }
+                              return null;
+                            },
+                            height: inputFieldHeight,
+                            iconSize: iconSize,
+                          ),
+                          SizedBox(height: spacingHeight),
+                          _buildDropdown(
+                            value: _selectedSubbranch,
+                            items: subbranches[
+                                    '${_selectedFaculty}_${_selectedSubfaculty}_${_selectedSemester}'] ??
+                                [],
+                            hintText: 'Specialization',
+                            icon: Icons.branding_watermark,
+                            onChanged: (value) {
+                              setState(() {
+                                _selectedSubbranch = value;
+                              });
+                            },
+                            height: inputFieldHeight,
+                            iconSize: iconSize,
+                          ),
+                          SizedBox(height: spacingHeight * 2),
+                          Padding(
+                            padding: EdgeInsets.symmetric(horizontal: padding),
+                            child: ElevatedButton(
+                              onPressed: _signUp,
+                              style: ElevatedButton.styleFrom(
+                                foregroundColor: Colors.white,
+                                backgroundColor:
+                                    const Color.fromRGBO(66, 66, 66, 1),
+                                minimumSize:
+                                    Size(double.infinity, buttonHeight),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(50),
+                                ),
+                              ),
+                              child: Text('Sign Up'),
                             ),
                           ),
-                          Text(
-                            'WELCOME BACK',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 16,
-                            ),
+                          SizedBox(height: spacingHeight * 2.5),
+                          Row(
+                            children: [
+                              Expanded(
+                                child: Divider(
+                                  color: Colors.grey.shade800,
+                                  thickness: 1,
+                                  indent: padding,
+                                  endIndent: padding / 2,
+                                ),
+                              ),
+                              Text(
+                                'WELCOME BACK',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: fontSizeSubtitle,
+                                ),
+                              ),
+                              Expanded(
+                                child: Divider(
+                                  color: Colors.grey.shade800,
+                                  thickness: 1,
+                                  indent: padding / 2,
+                                  endIndent: padding,
+                                ),
+                              ),
+                            ],
                           ),
-                          Expanded(
-                            child: Divider(
-                              color: Colors.grey.shade800,
-                              thickness: 1,
-                              indent: 10,
-                              endIndent: 30,
-                            ),
+                          SizedBox(height: spacingHeight * 1.25),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => LoginPage()),
+                                  );
+                                },
+                                child: Text(
+                                  'Already have an account',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: fontSizeSubtitle,
+                                  ),
+                                ),
+                              ),
+                              SizedBox(width: spacingHeight / 2),
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => LoginPage()),
+                                  );
+                                },
+                                child: Text(
+                                  'Sign In',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: fontSizeSubtitle,
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
                         ],
                       ),
-                      SizedBox(height: 25),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          TextButton(
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => LoginPage()),
-                              );
-                            },
-                            child: Text(
-                              'Already have an account',
-                              style: TextStyle(
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
-                          SizedBox(width: 10),
-                          TextButton(
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => LoginPage()),
-                              );
-                            },
-                            child: Text(
-                              'Sign In',
-                              style: TextStyle(
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-              ],
-            ),
-          ),
+              ),
+            );
+          },
         ),
       ),
     );
@@ -403,6 +434,8 @@ class _StudyHubLoginScreenState extends State<StudyHubLoginScreen> {
     bool obscureText = false,
     TextInputType keyboardType = TextInputType.text,
     String? Function(String?)? validator,
+    required double height,
+    required double iconSize,
   }) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 30),
@@ -411,29 +444,32 @@ class _StudyHubLoginScreenState extends State<StudyHubLoginScreen> {
           Icon(
             icon,
             color: Colors.white,
-            size: 25,
+            size: iconSize,
           ),
           SizedBox(width: 10),
           Expanded(
-            child: TextFormField(
-              controller: controller,
-              obscureText: obscureText,
-              keyboardType: keyboardType,
-              style: TextStyle(color: Colors.white),
-              decoration: InputDecoration(
-                hintText: hintText,
-                hintStyle: TextStyle(color: Colors.white70),
-                filled: true,
-                fillColor: Colors.grey.shade800,
-                contentPadding: EdgeInsets.symmetric(vertical: 10).copyWith(
-                  left: 20,
+            child: Container(
+              height: height,
+              child: TextFormField(
+                controller: controller,
+                obscureText: obscureText,
+                keyboardType: keyboardType,
+                style: TextStyle(color: Colors.white),
+                decoration: InputDecoration(
+                  hintText: hintText,
+                  hintStyle: TextStyle(color: Colors.white70),
+                  filled: true,
+                  fillColor: Colors.grey.shade800,
+                  contentPadding: EdgeInsets.symmetric(vertical: 10).copyWith(
+                    left: 10,
+                  ),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(50),
+                    borderSide: BorderSide.none,
+                  ),
                 ),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(50),
-                  borderSide: BorderSide.none,
-                ),
+                validator: validator,
               ),
-              validator: validator,
             ),
           ),
         ],
@@ -448,6 +484,8 @@ class _StudyHubLoginScreenState extends State<StudyHubLoginScreen> {
     required IconData icon,
     required void Function(String?) onChanged,
     String? Function(String?)? validator,
+    required double height,
+    required double iconSize,
   }) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 30),
@@ -456,31 +494,36 @@ class _StudyHubLoginScreenState extends State<StudyHubLoginScreen> {
           Icon(
             icon,
             color: Colors.white,
-            size: 25,
+            size: iconSize,
           ),
-          SizedBox(width: 10),
+          SizedBox(width: 5),
           Expanded(
-            child: DropdownButtonFormField<String>(
-              value: value,
-              onChanged: onChanged,
-              items: items.map((String value) {
-                return DropdownMenuItem<String>(
-                  value: value,
-                  child: Text(value),
-                );
-              }).toList(),
-              decoration: InputDecoration(
-                hintText: hintText,
-                hintStyle: TextStyle(color: Colors.white70),
-                filled: true,
-                fillColor: Colors.grey.shade800,
-                contentPadding: EdgeInsets.symmetric(horizontal: 20),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(50.0),
-                  borderSide: BorderSide.none,
+            child: Container(
+              height: height,
+              child: DropdownButtonFormField<String>(
+                value: value,
+                onChanged: onChanged,
+                items: items.map((String value) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(value),
+                  );
+                }).toList(),
+                decoration: InputDecoration(
+                  hintText: hintText,
+                  hintStyle: TextStyle(color: Colors.white70),
+                  filled: true,
+                  fillColor: Colors.grey.shade800,
+                  contentPadding: EdgeInsets.symmetric(
+                      horizontal: 10,
+                      vertical: (height - 20) / 2), // Adjust vertical padding
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(50.0),
+                    borderSide: BorderSide.none,
+                  ),
                 ),
+                validator: validator,
               ),
-              validator: validator,
             ),
           ),
         ],
