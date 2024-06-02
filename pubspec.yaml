@@ -23,13 +23,17 @@ dependencies:
   shared_preferences: ^2.2.3
   image_picker: ^1.1.1
   firebase_storage: ^11.7.7
-  flutter_image_compress: ^2.3.0
   multi_select_flutter: ^4.0.0
   firebase_database: ^10.5.7
 
   url_launcher: ^6.2.6
   webview_flutter: ^2.0.13
   file_picker: ^8.0.3
+  firebase_messaging: ^14.9.4
+  googleapis_auth: ^1.6.0
+  googleapis: ^13.1.0
+  flutter_dotenv: ^5.1.0
+  flutter_local_notifications: ^9.1.2
 
 
 dev_dependencies:
