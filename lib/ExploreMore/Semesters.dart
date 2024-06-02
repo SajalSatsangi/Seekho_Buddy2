@@ -4,13 +4,16 @@ import 'package:seekhobuddy/ExploreMore/subjects.dart';
 class Semesters extends StatelessWidget {
   final String branchName;
   final Map branchData;
-   final String facultyName;
+  final String facultyName;
 
-  Semesters({required this.facultyName,required this.branchName, required this.branchData});
+  Semesters({
+    required this.facultyName,
+    required this.branchName,
+    required this.branchData,
+  });
 
   @override
   Widget build(BuildContext context) {
-    print(branchData);
     Map semesters = Map.from(branchData)..remove('branchName');
 
     return Scaffold(
@@ -63,7 +66,21 @@ class Semesters extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(
                       vertical: 7.0, horizontal: 24.0),
                   child: GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        SlideLeftPageRoute(
+                          page: Subjects(
+                            facultyName: facultyName,
+                            branchName: branchName,
+                            semesterName: semester[
+                                'semesterName'], // assuming 'semesterName' is the key for the semester name
+                            semesterData:
+                                semester, // Pass the entire semester map
+                          ),
+                        ),
+                      );
+                    },
                     child: Container(
                       height: 70,
                       decoration: BoxDecoration(
@@ -97,8 +114,8 @@ class Semesters extends StatelessWidget {
                               onPressed: () {
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(
-                                    builder: (context) => Subjects(
+                                  SlideLeftPageRoute(
+                                    page: Subjects(
                                       facultyName: facultyName,
                                       branchName: branchName,
                                       semesterName: semester[
@@ -136,4 +153,27 @@ class Semesters extends StatelessWidget {
       ),
     );
   }
+}
+
+class SlideLeftPageRoute<T> extends PageRouteBuilder<T> {
+  final Widget page;
+
+  SlideLeftPageRoute({required this.page})
+      : super(
+          pageBuilder: (context, animation, secondaryAnimation) => page,
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            const begin = Offset(1.0, 0.0);
+            const end = Offset.zero;
+            const curve = Curves.ease;
+
+            var tween =
+                Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+            var offsetAnimation = animation.drive(tween);
+
+            return SlideTransition(
+              position: offsetAnimation,
+              child: child,
+            );
+          },
+        );
 }

@@ -9,8 +9,6 @@ class Branches extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(facultyData);
-
     List branches = facultyData['branches'].values.toList();
 
     return Scaffold(
@@ -58,7 +56,19 @@ class Branches extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(
                       vertical: 8.0, horizontal: 25.0),
                   child: GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        SlideRightPageRoute(
+                          page: Semesters(
+                            facultyName: facultyName,
+                            branchName: branch[
+                                'branchName'], // assuming 'branchName' is the key for the branch name
+                            branchData: branch as Map,
+                          ),
+                        ),
+                      );
+                    },
                     child: Container(
                       height: 80,
                       decoration: BoxDecoration(
@@ -91,8 +101,8 @@ class Branches extends StatelessWidget {
                               onPressed: () {
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(
-                                    builder: (context) => Semesters(
+                                  SlideRightPageRoute(
+                                    page: Semesters(
                                       facultyName: facultyName,
                                       branchName: branch[
                                           'branchName'], // assuming 'branchName' is the key for the branch name
@@ -124,4 +134,32 @@ class Branches extends StatelessWidget {
       ),
     );
   }
+}
+
+class SlideRightPageRoute extends PageRouteBuilder {
+  final Widget page;
+
+  SlideRightPageRoute({required this.page})
+      : super(
+          pageBuilder: (
+            BuildContext context,
+            Animation<double> animation,
+            Animation<double> secondaryAnimation,
+          ) =>
+              page,
+          transitionsBuilder: (
+            BuildContext context,
+            Animation<double> animation,
+            Animation<double> secondaryAnimation,
+            Widget child,
+          ) {
+            return SlideTransition(
+              position: Tween<Offset>(
+                begin: const Offset(1.0, 0.0),
+                end: Offset.zero,
+              ).animate(animation),
+              child: child,
+            );
+          },
+        );
 }
