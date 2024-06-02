@@ -49,6 +49,7 @@ class _MyWidgetState extends State<MyWidget> {
   late SharedPreferences prefs;
   late FirebaseMessaging _firebaseMessaging;
   late FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
+  Set<String> clickedNotices = Set<String>();
 
   @override
   void initState() {
@@ -57,6 +58,7 @@ class _MyWidgetState extends State<MyWidget> {
     _initializeFirebaseMessaging();
     fetchUserData();
     listenForNewNotices();
+    loadClickedNotices();
 
     var initializationSettingsAndroid =
         AndroidInitializationSettings('@mipmap/ic_launcher');
@@ -137,26 +139,36 @@ class _MyWidgetState extends State<MyWidget> {
   }
 
   Future<void> _showNotification(String title, String description) async {
-  var androidPlatformChannelSpecifics = const AndroidNotificationDetails(
-      'new_notice_channel',
-      'New Notice Notifications',
-      importance: Importance.max,
-      priority: Priority.high,
-      showWhen: false);
-  var iOSPlatformChannelSpecifics = const IOSNotificationDetails();
-  var platformChannelSpecifics = NotificationDetails(
-      android: androidPlatformChannelSpecifics,
-      iOS: iOSPlatformChannelSpecifics);
-  try {
-    await flutterLocalNotificationsPlugin.show(
-        0, title, description, platformChannelSpecifics);
-  } catch (e) {
-    print('Failed to show notification: $e');
+    var androidPlatformChannelSpecifics = const AndroidNotificationDetails(
+        'new_notice_channel', 'New Notice Notifications',
+        importance: Importance.max, priority: Priority.high, showWhen: false);
+    var iOSPlatformChannelSpecifics = const IOSNotificationDetails();
+    var platformChannelSpecifics = NotificationDetails(
+        android: androidPlatformChannelSpecifics,
+        iOS: iOSPlatformChannelSpecifics);
+    try {
+      await flutterLocalNotificationsPlugin.show(
+          0, title, description, platformChannelSpecifics);
+    } catch (e) {
+      print('Failed to show notification: $e');
+    }
   }
-}
 
   void saveUserDataLocally() {
     // Implement saving user data locally if necessary
+  }
+
+  Future<void> loadClickedNotices() async {
+    prefs = await SharedPreferences.getInstance();
+    setState(() {
+      clickedNotices =
+          prefs.getStringList('clickedNotices')?.toSet() ?? <String>{};
+    });
+  }
+
+  Future<void> saveClickedNotices() async {
+    prefs = await SharedPreferences.getInstance();
+    await prefs.setStringList('clickedNotices', clickedNotices.toList());
   }
 
   @override
@@ -242,6 +254,10 @@ class _MyWidgetState extends State<MyWidget> {
                       if (shouldRenderNotice(data)) {
                         return new GestureDetector(
                           onTap: () {
+                            setState(() {
+                              clickedNotices.add(document.id);
+                              saveClickedNotices();
+                            });
                             showMaintenanceNotice(context, data['title'],
                                 data['description'], data['fileUrl']);
                           },
@@ -252,9 +268,11 @@ class _MyWidgetState extends State<MyWidget> {
                               children: [
                                 Container(
                                   width: 500,
-                                  height: 250,
                                   decoration: BoxDecoration(
-                                    color: Color(0xFF323232),
+                                    color: Color(0xFF323232).withOpacity(
+                                        clickedNotices.contains(document.id)
+                                            ? 0.6
+                                            : 1.0),
                                     borderRadius: BorderRadius.circular(20),
                                   ),
                                   padding: EdgeInsets.all(16),
@@ -267,39 +285,53 @@ class _MyWidgetState extends State<MyWidget> {
                                         style: TextStyle(
                                           fontSize: 18,
                                           fontWeight: FontWeight.bold,
-                                          color: Colors.white,
+                                          color: Colors.white.withOpacity(
+                                              clickedNotices
+                                                      .contains(document.id)
+                                                  ? 0.6
+                                                  : 1.0),
                                         ),
                                       ),
                                       SizedBox(height: 8),
                                       Text(
                                         data['description'],
                                         style: TextStyle(
-                                          color: Colors.white,
+                                          color: Colors.white.withOpacity(
+                                              clickedNotices
+                                                      .contains(document.id)
+                                                  ? 0.6
+                                                  : 1.0),
                                         ),
                                       ),
                                       SizedBox(height: 8),
                                       Text(
                                         "Posted on: ${data['date']}",
                                         style: TextStyle(
-                                          color: Colors.grey,
+                                          color: Colors.grey.withOpacity(
+                                              clickedNotices
+                                                      .contains(document.id)
+                                                  ? 0.6
+                                                  : 1.0),
                                           fontSize: 12,
                                         ),
                                       ),
                                     ],
                                   ),
                                 ),
-                                Positioned(
-                                  bottom: 16,
-                                  right: 16,
-                                  child: Container(
-                                    width: 17,
-                                    height: 17,
-                                    decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      shape: BoxShape.circle,
+                                if (!clickedNotices.contains(
+                                    document.id)) // Only show if not clicked
+                                  Positioned(
+                                    bottom: 16,
+                                    right: 16,
+                                    child: Container(
+                                      width: 17,
+                                      height: 17,
+                                      decoration: BoxDecoration(
+                                        color: Color.fromARGB(255, 230, 61, 27),
+                                        shape: BoxShape.circle,
+                                      ),
                                     ),
                                   ),
-                                ),
                               ],
                             ),
                           ),
