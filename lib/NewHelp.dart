@@ -176,6 +176,7 @@ class MyWidget extends StatelessWidget {
                               color: Colors.white,
                             ),
                           ),
+                          SizedBox(height: 20),
                           ProfileCard(
                             name: 'Nihal Saran',
                             imageUrl:
