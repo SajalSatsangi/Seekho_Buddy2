@@ -23,12 +23,6 @@ class LandingPage extends StatelessWidget {
 }
 
 class StudyHubScreen extends StatelessWidget {
-  final TextStyle appBarTextStyle = TextStyle(
-    fontSize: 24,
-    fontWeight: FontWeight.bold,
-    color: Colors.white,
-  );
-
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
