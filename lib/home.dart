@@ -426,95 +426,100 @@ class _HomeState extends State<Home> {
                           ],
                         ),
                       ),
-                      Row(
-                        children: [
-                          Padding(
-                            padding:
-                                const EdgeInsets.only(left: 70.0, top: 25.0),
-                            child: SizedBox(
-                              width: 155,
-                              height: 40,
-                              child: ElevatedButton(
-                                onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => DonationPage()),
-                                  );
-                                },
-                                style: ButtonStyle(
-                                  backgroundColor:
-                                      MaterialStateProperty.all<Color>(
-                                    Color.fromARGB(255, 93, 93, 93),
+                      SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Row(
+                          children: [
+                            Padding(
+                              padding:
+                                  const EdgeInsets.only(left: 70.0, top: 25.0),
+                              child: SizedBox(
+                                width: 155,
+                                height: 40,
+                                child: ElevatedButton(
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => DonationPage()),
+                                    );
+                                  },
+                                  style: ButtonStyle(
+                                    backgroundColor:
+                                        MaterialStateProperty.all<Color>(
+                                      Color.fromARGB(255, 93, 93, 93),
+                                    ),
                                   ),
-                                ),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      'Donation',
-                                      style: TextStyle(
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        'Donation',
+                                        style: TextStyle(
+                                          color: Color.fromARGB(
+                                              255, 252, 251, 251),
+                                          fontSize: 18,
+                                        ),
+                                      ),
+                                      SizedBox(
+                                          width:
+                                              8), // Space between the text and the icon
+                                      Icon(
+                                        Icons.badge,
                                         color:
                                             Color.fromARGB(255, 252, 251, 251),
-                                        fontSize: 18,
                                       ),
-                                    ),
-                                    SizedBox(
-                                        width:
-                                            8), // Space between the text and the icon
-                                    Icon(
-                                      Icons.badge,
-                                      color: Color.fromARGB(255, 252, 251, 251),
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                          Padding(
-                            padding:
-                                const EdgeInsets.only(left: 10.0, top: 25.0),
-                            child: SizedBox(
-                              width: 120,
-                              height: 40,
-                              child: ElevatedButton(
-                                onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => Newhelp()),
-                                  );
-                                },
-                                style: ButtonStyle(
-                                  backgroundColor:
-                                      MaterialStateProperty.all<Color>(
-                                    Color.fromARGB(255, 93, 93, 93),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.only(left: 10.0, top: 25.0),
+                              child: SizedBox(
+                                width: 120,
+                                height: 40,
+                                child: ElevatedButton(
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => Newhelp()),
+                                    );
+                                  },
+                                  style: ButtonStyle(
+                                    backgroundColor:
+                                        MaterialStateProperty.all<Color>(
+                                      Color.fromARGB(255, 93, 93, 93),
+                                    ),
                                   ),
-                                ),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      'Help',
-                                      style: TextStyle(
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        'Help',
+                                        style: TextStyle(
+                                          color: Color.fromARGB(
+                                              255, 252, 251, 251),
+                                          fontSize: 18,
+                                        ),
+                                      ),
+                                      SizedBox(
+                                          width:
+                                              8), // Space between the text and the icon
+                                      Icon(
+                                        Icons.help,
                                         color:
                                             Color.fromARGB(255, 252, 251, 251),
-                                        fontSize: 18,
                                       ),
-                                    ),
-                                    SizedBox(
-                                        width:
-                                            8), // Space between the text and the icon
-                                    Icon(
-                                      Icons.help,
-                                      color: Color.fromARGB(255, 252, 251, 251),
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ],
                   ),
