@@ -79,72 +79,79 @@ class Faculties extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(
                           horizontal: 24.0, vertical: 7.0), // Reduced padding
                       child: GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            SlideRightPageRoute(
-                              page: Branches(
-                                facultyName: faculty['name'],
-                                facultyData:
-                                    faculty, // Pass the entire faculty map
-                              ),
-                            ),
-                          );
-                        },
+                        
                         child: Container(
-                          width: 450,
-                          height: 80,
+                          width: double.infinity,
                           decoration: BoxDecoration(
                             color: Color.fromRGBO(50, 50, 50, 1),
                             borderRadius: BorderRadius.circular(20),
                           ),
                           child: Padding(
-                            padding: const EdgeInsets.all(20.0),
+                            padding: const EdgeInsets.all(0.0),
                             child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Row(
-                                  children: [
-                                    Icon(
-                                      Icons.school,
-                                      color: Colors.white,
-                                    ),
-                                    SizedBox(width: 8),
-                                    Text(
-                                      faculty['name'],
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 17.0,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                  ],
+                                Image.asset(
+                                  index == 0
+                                      ? 'assets/comm.png' // Image for index 0
+                                      : index == 1
+                                          ? 'assets/edu.png' // Use LinkedIn icon for the fifth image
+                                          : index == 2
+                                              ? 'assets/eng.png' // Use LinkedIn icon for the fifth image
+                                              : index == 3
+                                                  ? 'assets/art.png' // Use LinkedIn icon for the fifth image
+                                                  : index == 4
+                                                      ? 'assets/eng.png' // Use LinkedIn icon for the fifth image
+                                                      : index == 5
+                                                          ? 'assets/sci.png' // Use LinkedIn icon for the fifth image
+                                                          : index == 6
+                                                              ? 'assets/tec.png' // Use LinkedIn icon for the fifth image
+                                                              : 'assets/search_result.png', // Default image for other indices
+                                  width: 90,
+                                  height: 90,
+                                  fit: BoxFit.cover,
                                 ),
-                                ElevatedButton(
-                                  onPressed: () {
-                                    Navigator.push(
-                                      context,
-                                      SlideRightPageRoute(
-                                        page: Branches(
-                                          facultyName: faculty['name'],
-                                          facultyData:
-                                              faculty, // Pass the entire faculty map
+                                SizedBox(width: 20),
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        faculty['name'],
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 17.0,
+                                          fontWeight: FontWeight.bold,
                                         ),
                                       ),
-                                    );
-                                  },
-                                  style: ButtonStyle(
-                                    backgroundColor:
-                                        MaterialStateProperty.all<Color>(
-                                      Colors.white,
-                                    ),
-                                  ),
-                                  child: Text(
-                                    'View',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                    ),
+                                      SizedBox(height: 10),
+                                      ElevatedButton(
+                                        onPressed: () {
+                                          Navigator.push(
+                                            context,
+                                            SlideRightPageRoute(
+                                              page: Branches(
+                                                facultyName: faculty['name'],
+                                                facultyData:
+                                                    faculty, // Pass the entire faculty map
+                                              ),
+                                            ),
+                                          );
+                                        },
+                                        style: ButtonStyle(
+                                          backgroundColor:
+                                              MaterialStateProperty.all<Color>(
+                                            Colors.white,
+                                          ),
+                                        ),
+                                        child: Text(
+                                          'View',
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ),
                               ],
