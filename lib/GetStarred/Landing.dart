@@ -35,7 +35,7 @@ class StudyHubScreen extends StatelessWidget {
       builder: (context, constraints) {
         double imageWidth = constraints.maxWidth * 0.8;
         double imageHeight = constraints.maxHeight * 0.4;
-        double padding = constraints.maxWidth * 0.05;
+        double padding = constraints.maxWidth * 0.06;
 
         return Scaffold(
           backgroundColor: Color(0xFF161616),
