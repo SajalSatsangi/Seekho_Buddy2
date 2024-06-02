@@ -114,8 +114,8 @@ class _StudyHubLoginScreenState extends State<StudyHubLoginScreen> {
             double iconSize = constraints.maxWidth * 0.1;
             double fontSizeTitle = constraints.maxWidth * 0.06;
             double fontSizeSubtitle = constraints.maxWidth * 0.04;
-            double inputFieldHeight = constraints.maxHeight * 0.07;
-            double buttonHeight = constraints.maxHeight * 0.08;
+            double inputFieldHeight = constraints.maxHeight * 0.04;
+            double buttonHeight = constraints.maxHeight * 0.06;
 
             return SingleChildScrollView(
               child: Padding(

@@ -70,8 +70,8 @@ class _StudyHubLoginScreenState extends State<StudyHubLoginScreen> {
             double iconSize = constraints.maxWidth * 0.07;
             double fontSizeTitle = constraints.maxWidth * 0.06;
             double fontSizeSubtitle = constraints.maxWidth * 0.04;
-            double inputFieldHeight = constraints.maxHeight * 0.07;
-            double buttonHeight = constraints.maxHeight * 0.08;
+            double inputFieldHeight = constraints.maxHeight * 0.06;
+            double buttonHeight = constraints.maxHeight * 0.06;
             double spacingHeight = constraints.maxHeight * 0.02;
 
             return SingleChildScrollView(
@@ -298,20 +298,11 @@ class _StudyHubLoginScreenState extends State<StudyHubLoginScreen> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              TextButton(
-                                onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => LoginPage()),
-                                  );
-                                },
-                                child: Text(
-                                  'Already have an account',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: fontSizeSubtitle,
-                                  ),
+                              Text(
+                                'Already have an account',
+                                style: TextStyle(
+                                  color: Color.fromARGB(255, 123, 121, 121),
+                                  fontSize: fontSizeSubtitle,
                                 ),
                               ),
                               SizedBox(width: spacingHeight / 2),
@@ -516,7 +507,7 @@ class _StudyHubLoginScreenState extends State<StudyHubLoginScreen> {
                   fillColor: Colors.grey.shade800,
                   contentPadding: EdgeInsets.symmetric(
                       horizontal: 10,
-                      vertical: (height - 20) / 2), // Adjust vertical padding
+                      vertical: (height - 100) / 2), // Adjust vertical padding
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(50.0),
                     borderSide: BorderSide.none,
