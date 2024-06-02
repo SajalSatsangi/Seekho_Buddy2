@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'notice_popup.dart';
 import 'package:seekhobuddy/home.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 
 void main() {
   runApp(NoticesAdmin());
@@ -43,13 +45,54 @@ class _MyWidgetState extends State<MyWidget> {
       FirebaseFirestore.instance.collection('notices');
   DocumentSnapshot? userData;
   late SharedPreferences prefs;
+  late FirebaseMessaging _firebaseMessaging;
+  late FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
   Set<String> clickedNotices = Set<String>();
 
   @override
   void initState() {
     super.initState();
+    _firebaseMessaging = FirebaseMessaging.instance;
+    _initializeFirebaseMessaging();
     fetchUserData();
+    listenForNewNotices();
     loadClickedNotices();
+
+    var initializationSettingsAndroid =
+        AndroidInitializationSettings('@mipmap/ic_launcher');
+    var initializationSettingsIOS = IOSInitializationSettings(
+      requestAlertPermission: true,
+      requestBadgePermission: true,
+      requestSoundPermission: true,
+    );
+    var initializationSettings = InitializationSettings(
+      android: initializationSettingsAndroid,
+      iOS: initializationSettingsIOS,
+    );
+    flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
+    flutterLocalNotificationsPlugin.initialize(initializationSettings);
+  }
+
+  Future<void> _initializeFirebaseMessaging() async {
+    NotificationSettings settings =
+        await _firebaseMessaging.requestPermission();
+    print('User granted permission: ${settings.authorizationStatus}');
+
+    _firebaseMessaging.getToken().then((String? token) {
+      print('FCM Token: $token');
+      // Save token to Firestore or your backend server
+    });
+
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+      print('Received push notification: ${message.notification?.title}');
+      // Handle notification when app is in foreground
+    });
+
+    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+      print(
+          'App opened from push notification: ${message.notification?.title}');
+      // Handle notification when app is opened from background or terminated
+    });
   }
 
   Future<void> fetchUserData() async {
@@ -75,6 +118,37 @@ class _MyWidgetState extends State<MyWidget> {
           });
         }
       }
+    }
+  }
+
+  void listenForNewNotices() {
+    collectionRef.snapshots().listen((snapshot) {
+      snapshot.docChanges.forEach((change) {
+        if (change.type == DocumentChangeType.added) {
+          // A new document was added
+          Map<String, dynamic> data = change.doc.data() as Map<String, dynamic>;
+          if (shouldRenderNotice(data)) {
+            // If the notice is relevant to the user, display a notification
+            _showNotification(data['title'], data['description']);
+          }
+        }
+      });
+    });
+  }
+
+  Future<void> _showNotification(String title, String description) async {
+    var androidPlatformChannelSpecifics = const AndroidNotificationDetails(
+        'new_notice_channel', 'New Notice Notifications',
+        importance: Importance.max, priority: Priority.high, showWhen: false);
+    var iOSPlatformChannelSpecifics = const IOSNotificationDetails();
+    var platformChannelSpecifics = NotificationDetails(
+        android: androidPlatformChannelSpecifics,
+        iOS: iOSPlatformChannelSpecifics);
+    try {
+      await flutterLocalNotificationsPlugin.show(
+          0, title, description, platformChannelSpecifics);
+    } catch (e) {
+      print('Failed to show notification: $e');
     }
   }
 
@@ -218,14 +292,13 @@ class _MyWidgetState extends State<MyWidget> {
                                       ),
                                       SizedBox(height: 8),
                                       Text(
-                                        'Click to view details',
+                                        data['description'],
                                         style: TextStyle(
-                                          color:
-                                              Color.fromARGB(255, 80, 160, 191)
-                                                  .withOpacity(clickedNotices
-                                                          .contains(document.id)
-                                                      ? 0.6
-                                                      : 1.0),
+                                          color: Colors.white.withOpacity(
+                                              clickedNotices
+                                                      .contains(document.id)
+                                                  ? 0.6
+                                                  : 1.0),
                                         ),
                                       ),
                                       SizedBox(height: 8),
@@ -243,7 +316,8 @@ class _MyWidgetState extends State<MyWidget> {
                                     ],
                                   ),
                                 ),
-                                if (!clickedNotices.contains(document.id))
+                                if (!clickedNotices.contains(
+                                    document.id)) // Only show if not clicked
                                   Positioned(
                                     bottom: 16,
                                     right: 16,
@@ -251,8 +325,7 @@ class _MyWidgetState extends State<MyWidget> {
                                       width: 17,
                                       height: 17,
                                       decoration: BoxDecoration(
-                                        color:
-                                            Color.fromARGB(255, 157, 48, 144),
+                                        color: Color.fromARGB(255, 230, 61, 27),
                                         shape: BoxShape.circle,
                                       ),
                                     ),

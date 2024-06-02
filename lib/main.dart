@@ -25,13 +25,13 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: AnimatedSplashScreen(
         splash: "assets/spalshScreenGif.gif",
-        splashIconSize: 100,
+        splashIconSize: 3000,
         nextScreen: AuthWrapper(),
         duration: 3100,
         splashTransition: SplashTransition.fadeTransition,
         backgroundColor: Color.fromARGB(255, 0, 0, 0),
         pageTransitionType: PageTransitionType.fade,
-        animationDuration: Duration(milliseconds: 50),
+        animationDuration: Duration(milliseconds: 10),
       ),
     );
   }
@@ -49,11 +49,14 @@ Future<void> storeFCMToken(String token) async {
   final currentUser = FirebaseAuth.instance.currentUser;
   if (currentUser != null) {
     final userCollection = FirebaseFirestore.instance.collection('users');
-    final userSnapshot = await userCollection.where('uid', isEqualTo: currentUser.uid).get();
+    final userSnapshot =
+        await userCollection.where('uid', isEqualTo: currentUser.uid).get();
 
     if (userSnapshot.docs.isNotEmpty) {
       final userDoc = userSnapshot.docs.first;
-      await userCollection.doc(userDoc.id).set({'fcmToken': token}, SetOptions(merge: true));
+      await userCollection
+          .doc(userDoc.id)
+          .set({'fcmToken': token}, SetOptions(merge: true));
     }
   }
 }
@@ -70,7 +73,6 @@ Future<void> requestNotificationPermission() async {
     print('User declined or has not yet responded to the permission request');
   }
 }
-
 
 class AuthWrapper extends StatelessWidget {
   @override
