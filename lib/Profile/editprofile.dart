@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 import 'edit.dart'; // Import the EditField screen
+import 'package:flutter_image_compress/flutter_image_compress.dart';
+import 'package:path_provider/path_provider.dart';
 
 class EditProfile extends StatefulWidget {
   @override
@@ -42,6 +45,19 @@ class _EditProfileState extends State<EditProfile> {
 
   if (pickedFile != null) {
     File file = File(pickedFile.path);
+
+    // Compress the image
+    final Uint8List? compressedData = await FlutterImageCompress.compressWithFile(
+      file.absolute.path,
+      minWidth: 1024,
+      minHeight: 768,
+      quality: 88,
+    );
+
+    // Create a new file with the compressed data
+    final String dir = (await getTemporaryDirectory()).path;
+    final String targetPath = '$dir/temp.jpg';
+    file = await File(targetPath).writeAsBytes(compressedData as List<int>);
 
     try {
       // Retrieve the user's name
