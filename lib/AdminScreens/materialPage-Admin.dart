@@ -196,7 +196,6 @@ class Materialpage_Admin extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(
                       vertical: 7.0, horizontal: 27.0),
                   child: GestureDetector(
-                    onTap: () {},
                     child: Container(
                       height: 70,
                       decoration: BoxDecoration(

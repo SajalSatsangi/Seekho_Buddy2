@@ -56,19 +56,6 @@ class Branches extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(
                       vertical: 8.0, horizontal: 25.0),
                   child: GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        SlideRightPageRoute(
-                          page: Semesters(
-                            facultyName: facultyName,
-                            branchName: branch[
-                                'branchName'], // assuming 'branchName' is the key for the branch name
-                            branchData: branch as Map,
-                          ),
-                        ),
-                      );
-                    },
                     child: Container(
                       height: 80,
                       decoration: BoxDecoration(
@@ -112,9 +99,8 @@ class Branches extends StatelessWidget {
                                 );
                               },
                               style: ButtonStyle(
-                                backgroundColor:
-                                    MaterialStateProperty.all<Color>(
-                                        Colors.white),
+                                backgroundColor: WidgetStateProperty.all<Color>(
+                                    Colors.white),
                               ),
                               child: Text(
                                 'View',

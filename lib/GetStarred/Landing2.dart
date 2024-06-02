@@ -20,180 +20,162 @@ class LandingPage extends StatefulWidget {
 }
 
 class _LandingPageState extends State<LandingPage> {
-  int _selectedIndex = 0;
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor:
-            const Color.fromRGBO(0, 0, 0, 1), // Set background color to black
-        elevation: 0, // No shadow
-        automaticallyImplyLeading: false, // Remove back button
-      ),
-      body: Column(
-        children: [
-          // Header content
-          Container(
-            color: Colors.black,
-            height: 10.0, // Same height as the AppBar
-          ),
-          // Remaining content with background image
-          Expanded(
-            child: Stack(
-              children: [
-                // Background image with specific size
-                Positioned.fill(
-                  child: Align(
-                    alignment: Alignment.centerLeft, // Shift image to left
-                    child: Container(
-                      height: double.infinity,
-                      width: double.infinity,
-                      child: Image.asset(
-                        'assets/Landing2_BackGroud.png',
-                        fit: BoxFit.fitHeight,
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        double padding = constraints.maxWidth * 0.05;
+        double containerWidth = constraints.maxWidth * 0.8;
+        double fontSizeTitle = constraints.maxWidth * 0.08;
+        double fontSizeSubtitle = constraints.maxWidth * 0.04;
+        double imageSize = constraints.maxWidth * 0.5;
+
+        return Scaffold(
+          body: Column(
+            children: [
+              // Header content
+              Container(
+                color: Colors.black,
+                height: kToolbarHeight, // Same height as the AppBar
+              ),
+              // Remaining content with background image
+              Expanded(
+                child: Stack(
+                  children: [
+                    // Background image with specific size
+                    Positioned.fill(
+                      child: Align(
+                        alignment: Alignment.centerLeft, // Shift image to left
+                        child: Container(
+                          height: double.infinity,
+                          width: double.infinity,
+                          child: Image.asset(
+                            'assets/Landing2_BackGroud.png',
+                            fit: BoxFit.cover,
+                          ),
+                        ),
                       ),
                     ),
-                  ),
-                ),
-                // Overlay content
-                Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'New Arrivals!',
-                        style: TextStyle(
-                          fontSize: 35,
-                          color: Colors.black,
-                        ),
-                      ),
-                      SizedBox(height: 80),
-                      Container(
-                        width: 260,
-                        padding: EdgeInsets.all(20),
-                        decoration: BoxDecoration(
-                          color: Color(0xFF323232).withOpacity(0.9),
-                          borderRadius: BorderRadius.circular(20),
-                          boxShadow: [],
-                        ),
-                        child: Column(
-                          children: [
-                            ClipRRect(
+                    // Overlay content
+                    Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'New Arrivals!',
+                            style: TextStyle(
+                              fontSize: fontSizeTitle, // Responsive font size
+                              color: Colors.black,
+                            ),
+                          ),
+                          SizedBox(height: padding),
+                          Container(
+                            width: containerWidth,
+                            padding: EdgeInsets.all(padding),
+                            decoration: BoxDecoration(
+                              color: Color(0xFF323232).withOpacity(0.9),
                               borderRadius: BorderRadius.circular(20),
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.white.withOpacity(0.5),
-                                      spreadRadius: 5,
-                                      blurRadius: 10,
+                              boxShadow: [],
+                            ),
+                            child: Column(
+                              children: [
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(20),
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.white.withOpacity(0.5),
+                                          spreadRadius: 5,
+                                          blurRadius: 10,
+                                        ),
+                                      ],
                                     ),
-                                  ],
-                                ),
-                                child: Image.asset('assets/Landing2_Book.png'),
-                              ),
-                            ),
-                            SizedBox(height: 20),
-                            Text(
-                              'Mathematics Guide',
-                              style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                              ),
-                            ),
-                            SizedBox(height: 10),
-                            Text(
-                              'This comprehensive guide covers key math concepts and problem-solving techniques to help you excel in your studies.',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                fontSize: 14,
-                                color: Colors.white,
-                              ),
-                            ),
-                            SizedBox(height: 20),
-                            ElevatedButton(
-                              onPressed: () {
-                                // Navigate to LandingPage3 with slide animation
-                                Navigator.push(
-                                  context,
-                                  PageRouteBuilder(
-                                    pageBuilder: (context, animation,
-                                            secondaryAnimation) =>
-                                        LandingPage3(),
-                                    transitionsBuilder: (context, animation,
-                                        secondaryAnimation, child) {
-                                      const begin = Offset(1.0, 0.0);
-                                      const end = Offset.zero;
-                                      const curve = Curves.ease;
-
-                                      var tween = Tween(begin: begin, end: end)
-                                          .chain(CurveTween(curve: curve));
-                                      var offsetAnimation =
-                                          animation.drive(tween);
-
-                                      return SlideTransition(
-                                        position: offsetAnimation,
-                                        child: child,
-                                      );
-                                    },
-                                    transitionDuration: Duration(
-                                        milliseconds:
-                                            500), // Set transition duration to 500ms
+                                    child: Image.asset(
+                                      'assets/Landing2_Book.png',
+                                      width: imageSize, // Responsive image size
+                                      height:
+                                          imageSize, // Responsive image size
+                                    ),
                                   ),
-                                );
-                              },
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor:
-                                    Colors.black, // Background color
-                              ),
-                              child: Text(
-                                'Get now',
-                                style: TextStyle(
-                                  color: Colors.white, // Text color
                                 ),
-                              ),
+                                SizedBox(height: padding),
+                                Text(
+                                  'Mathematics Guide',
+                                  style: TextStyle(
+                                    fontSize:
+                                        fontSizeSubtitle, // Responsive font size
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                SizedBox(height: padding / 2),
+                                Text(
+                                  'This comprehensive guide covers key math concepts and problem-solving techniques to help you excel in your studies.',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    fontSize: fontSizeSubtitle *
+                                        0.8, // Responsive font size
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                SizedBox(height: padding),
+                                ElevatedButton(
+                                  onPressed: () {
+                                    // Navigate to LandingPage3 with slide animation
+                                    Navigator.push(
+                                      context,
+                                      PageRouteBuilder(
+                                        pageBuilder: (context, animation,
+                                                secondaryAnimation) =>
+                                            LandingPage3(),
+                                        transitionsBuilder: (context, animation,
+                                            secondaryAnimation, child) {
+                                          const begin = Offset(1.0, 0.0);
+                                          const end = Offset.zero;
+                                          const curve = Curves.ease;
+
+                                          var tween = Tween(
+                                                  begin: begin, end: end)
+                                              .chain(CurveTween(curve: curve));
+                                          var offsetAnimation =
+                                              animation.drive(tween);
+
+                                          return SlideTransition(
+                                            position: offsetAnimation,
+                                            child: child,
+                                          );
+                                        },
+                                        transitionDuration: Duration(
+                                            milliseconds:
+                                                500), // Set transition duration to 500ms
+                                      ),
+                                    );
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor:
+                                        Colors.black, // Background color
+                                  ),
+                                  child: Text(
+                                    'Get now',
+                                    style: TextStyle(
+                                      color: Colors.white, // Text color
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
-        ],
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.black, // Set background color to black
-        selectedItemColor: Colors.black, // Set selected item color to white
-        unselectedItemColor:
-            Color.fromARGB(255, 0, 0, 0), // Set unselected item color to grey
-        currentIndex: _selectedIndex,
-        onTap: _onItemTapped,
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.search),
-            label: 'Search',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.favorite),
-            label: 'Favorites',
-          ),
-        ],
-      ),
+        );
+      },
     );
   }
 }

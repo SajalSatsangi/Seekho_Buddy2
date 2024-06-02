@@ -105,7 +105,6 @@ class _SubjectsState extends State<Subjects> {
                   padding: const EdgeInsets.symmetric(
                       vertical: 7.0, horizontal: 27.0),
                   child: GestureDetector(
-                    onTap: () {},
                     child: Container(
                       height: 70,
                       decoration: BoxDecoration(

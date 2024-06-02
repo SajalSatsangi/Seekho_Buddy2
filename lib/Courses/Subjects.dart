@@ -196,7 +196,6 @@ class _SubjectsPageState extends State<SubjectsPage> {
     required VoidCallback onTap,
   }) {
     return GestureDetector(
-      onTap: onTap,
       child: Container(
         width: 350,
         height: 80,
