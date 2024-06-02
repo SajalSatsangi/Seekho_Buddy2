@@ -4,6 +4,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'home.dart';
 import 'SignPage.dart';
 
+void main() {
+  runApp(LoginPage());
+}
+
 class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -98,7 +102,8 @@ class _StudyHubLoginScreenState extends State<StudyHubLoginScreen> {
       );
     }
   }
-
+  
+  
   Future<void> _resetPassword() async {
     try {
       final rollNumber = _rollNumberController.text.trim();
@@ -199,205 +204,215 @@ class _StudyHubLoginScreenState extends State<StudyHubLoginScreen> {
     }
   }
 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xFF161616),
       body: SafeArea(
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Image.asset(
-                'assets/loginPage.png',
-                height: 250,
-              ),
-              SizedBox(height: 20),
-              Text(
-                'Seekho Buddy',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              SizedBox(height: 10),
-              Text(
-                'Access study materials efficiently',
-                style: TextStyle(
-                  color: Colors.white70,
-                  fontSize: 16,
-                ),
-              ),
-              SizedBox(height: 30),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 30),
-                child: Row(
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            double padding = constraints.maxWidth * 0.08;
+            double iconSize = constraints.maxWidth * 0.1;
+            double fontSizeTitle = constraints.maxWidth * 0.06;
+            double fontSizeSubtitle = constraints.maxWidth * 0.04;
+            double inputFieldHeight = constraints.maxHeight * 0.04;
+            double buttonHeight = constraints.maxHeight * 0.06;
+
+            return SingleChildScrollView(
+              child: Padding(
+                padding: EdgeInsets.all(padding),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(
-                      Icons.menu_book_sharp,
-                      color: Colors.white,
-                      size: 35,
+                    Image.asset(
+                      'assets/loginPage.png',
+                      height: constraints.maxHeight * 0.3,
                     ),
-                    SizedBox(width: 10),
-                    Expanded(
-                      child: TextField(
-                        controller: _rollNumberController,
-                        style: TextStyle(color: Colors.white),
-                        decoration: InputDecoration(
-                          hintText: 'Roll Number',
-                          hintStyle: TextStyle(color: Colors.white70),
-                          filled: true,
-                          fillColor: Colors.grey.shade800,
-                          contentPadding:
-                              EdgeInsets.symmetric(vertical: 14).copyWith(
-                            left:
-                                20, // Adjust this value to decrease/increase height and add left padding
-                          ),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(50),
-                            borderSide: BorderSide.none,
-                          ),
-                        ),
+                    SizedBox(height: constraints.maxHeight * 0.02),
+                    Text(
+                      'Seekho Buddy',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: fontSizeTitle,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
-                  ],
-                ),
-              ),
-              SizedBox(height: 30),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 30),
-                child: Row(
-                  children: [
-                    Icon(
-                      Icons.search,
-                      color: Colors.white,
-                      size: 35,
-                    ),
-                    SizedBox(width: 10),
-                    Expanded(
-                      child: TextField(
-                        controller: _passwordController,
-                        obscureText: true,
-                        style: TextStyle(color: Colors.white),
-                        decoration: InputDecoration(
-                          hintText: 'Password',
-                          hintStyle: TextStyle(color: Colors.white70),
-                          filled: true,
-                          fillColor: Colors.grey.shade800,
-                          contentPadding:
-                              EdgeInsets.symmetric(vertical: 14).copyWith(
-                            left:
-                                20, // Adjust this value to decrease/increase height and add left padding
-                          ),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(50),
-                            borderSide: BorderSide.none,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(height: 10),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 45),
-                child: Align(
-                  alignment: Alignment.centerRight,
-                  child: TextButton(
-                    onPressed: _resetPassword,
-                    child: Text(
-                      'Forgot your password',
+                    SizedBox(height: constraints.maxHeight * 0.01),
+                    Text(
+                      'Access study materials efficiently',
                       style: TextStyle(
                         color: Colors.white70,
-                        fontSize: 14,
+                        fontSize: fontSizeSubtitle,
                       ),
                     ),
-                  ),
+                    SizedBox(height: constraints.maxHeight * 0.03),
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: padding),
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.menu_book_sharp,
+                            color: Colors.white,
+                            size: iconSize,
+                          ),
+                          SizedBox(width: padding / 2),
+                          Expanded(
+                            child: TextField(
+                              controller: _rollNumberController,
+                              style: TextStyle(color: Colors.white),
+                              decoration: InputDecoration(
+                                hintText: 'Roll Number',
+                                hintStyle: TextStyle(color: Colors.white70),
+                                filled: true,
+                                fillColor: Colors.grey.shade800,
+                                contentPadding: EdgeInsets.symmetric(
+                                        vertical: inputFieldHeight / 2)
+                                    .copyWith(
+                                  left: 20,
+                                ),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(50),
+                                  borderSide: BorderSide.none,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(height: constraints.maxHeight * 0.03),
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: padding),
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.search,
+                            color: Colors.white,
+                            size: iconSize,
+                          ),
+                          SizedBox(width: padding / 2),
+                          Expanded(
+                            child: TextField(
+                              controller: _passwordController,
+                              obscureText: true,
+                              style: TextStyle(color: Colors.white),
+                              decoration: InputDecoration(
+                                hintText: 'Password',
+                                hintStyle: TextStyle(color: Colors.white70),
+                                filled: true,
+                                fillColor: Colors.grey.shade800,
+                                contentPadding: EdgeInsets.symmetric(
+                                        vertical: inputFieldHeight / 2)
+                                    .copyWith(
+                                  left: 20,
+                                ),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(50),
+                                  borderSide: BorderSide.none,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(height: constraints.maxHeight * 0.01),
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: padding * 1.5),
+                      child: Align(
+                        alignment: Alignment.centerRight,
+                        child: TextButton(
+                    onPressed: _resetPassword,
+                        child: Text(
+                          'Forgot your password',
+                          style: TextStyle(
+                            color: Colors.white70,
+                            fontSize: fontSizeSubtitle,
+                          ),
+                            ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: constraints.maxHeight * 0.04),
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: padding),
+                      child: ElevatedButton(
+                        onPressed: _signInWithRollNumber,
+                        child: Text('Sign In'),
+                        style: ElevatedButton.styleFrom(
+                          foregroundColor: Colors.white,
+                          backgroundColor: Colors.grey.shade800,
+                          minimumSize: Size(double.infinity, buttonHeight),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(50),
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: constraints.maxHeight * 0.04),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Divider(
+                            color: Colors.grey.shade800,
+                            thickness: 1,
+                            indent: padding,
+                            endIndent: padding / 3,
+                          ),
+                        ),
+                        Text(
+                          'OR JOIN',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: fontSizeSubtitle,
+                          ),
+                        ),
+                        Expanded(
+                          child: Divider(
+                            color: Colors.grey.shade800,
+                            thickness: 1,
+                            indent: padding / 3,
+                            endIndent: padding,
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: constraints.maxHeight * 0.025),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Create an account',
+                          style: TextStyle(
+                            color: const Color.fromARGB(255, 157, 157, 157),
+                            fontSize: fontSizeSubtitle,
+                          ),
+                        ),
+                        SizedBox(width: padding / 3),
+                        TextButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => SignUpPage()),
+                            );
+                          },
+                          child: Text(
+                            'Sign Up',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: fontSizeSubtitle,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
               ),
-              SizedBox(height: 40),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 30),
-                child: ElevatedButton(
-                  onPressed: _signInWithRollNumber,
-                  child: Text('Sign In'),
-                  style: ElevatedButton.styleFrom(
-                    foregroundColor: Colors.white,
-                    backgroundColor: Colors.grey.shade800,
-                    minimumSize: Size(double.infinity, 50),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(50),
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(height: 40),
-              Row(
-                children: [
-                  Expanded(
-                    child: Divider(
-                      color: Colors.grey.shade800,
-                      thickness: 1,
-                      indent: 30,
-                      endIndent: 10,
-                    ),
-                  ),
-                  Text(
-                    'OR JOIN',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                    ),
-                  ),
-                  Expanded(
-                    child: Divider(
-                      color: Colors.grey.shade800,
-                      thickness: 1,
-                      indent: 10,
-                      endIndent: 30,
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(height: 25),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  TextButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => SignUpPage()),
-                      );
-                    },
-                    child: Text(
-                      'Create an account',
-                      style: TextStyle(
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                  SizedBox(width: 10),
-                  TextButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => SignUpPage()),
-                      );
-                    },
-                    child: Text(
-                      'Sign Up',
-                      style: TextStyle(
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
+            );
+          },
         ),
       ),
     );
