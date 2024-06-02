@@ -77,38 +77,44 @@ class Faculties extends StatelessWidget {
                     final faculty = faculties[index];
                     return Padding(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 24.0, vertical: 7.0), // Reduced padding
+                          horizontal: 44.0, vertical: 8.0), // Reduced padding
                       child: GestureDetector(
-                        
                         child: Container(
-                          width: double.infinity,
+                          width: MediaQuery.of(context).size.width *
+                              0.6, // Adjusted width
                           decoration: BoxDecoration(
-                            color: Color.fromRGBO(50, 50, 50, 1),
+                            color: Color(0xFF323232),
+                            // add box size
                             borderRadius: BorderRadius.circular(20),
                           ),
                           child: Padding(
                             padding: const EdgeInsets.all(0.0),
                             child: Row(
                               children: [
-                                Image.asset(
-                                  index == 0
-                                      ? 'assets/comm.png' // Image for index 0
-                                      : index == 1
-                                          ? 'assets/edu.png' // Use LinkedIn icon for the fifth image
-                                          : index == 2
-                                              ? 'assets/eng.png' // Use LinkedIn icon for the fifth image
-                                              : index == 3
-                                                  ? 'assets/art.png' // Use LinkedIn icon for the fifth image
-                                                  : index == 4
-                                                      ? 'assets/eng.png' // Use LinkedIn icon for the fifth image
-                                                      : index == 5
-                                                          ? 'assets/sci.png' // Use LinkedIn icon for the fifth image
-                                                          : index == 6
-                                                              ? 'assets/tec.png' // Use LinkedIn icon for the fifth image
-                                                              : 'assets/search_result.png', // Default image for other indices
-                                  width: 90,
-                                  height: 90,
-                                  fit: BoxFit.cover,
+                                ClipRRect(
+                                  borderRadius: BorderRadius.horizontal(
+                                      left: Radius.circular(
+                                          20)), // Rounded only from the left side
+                                  child: Image.asset(
+                                    index == 0
+                                        ? 'assets/comm.png' // Image for index 0
+                                        : index == 1
+                                            ? 'assets/edu.png' // Use LinkedIn icon for the fifth image
+                                            : index == 2
+                                                ? 'assets/eng.png' // Use LinkedIn icon for the fifth image
+                                                : index == 3
+                                                    ? 'assets/art.png' // Use LinkedIn icon for the fifth image
+                                                    : index == 4
+                                                        ? 'assets/eng.png' // Use LinkedIn icon for the fifth image
+                                                        : index == 5
+                                                            ? 'assets/sci.png' // Use LinkedIn icon for the fifth image
+                                                            : index == 6
+                                                                ? 'assets/tec.png' // Use LinkedIn icon for the fifth image
+                                                                : 'assets/search_result.png', // Default image for other indices
+                                    width: 100,
+                                    height: 100,
+                                    fit: BoxFit.cover,
+                                  ),
                                 ),
                                 SizedBox(width: 20),
                                 Expanded(
