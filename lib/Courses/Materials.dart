@@ -112,45 +112,55 @@ class _MaterialsState extends State<Materials> {
               child: SingleChildScrollView(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: snapshot.data!.docs.map((doc) {
-                    return ListTile(
-                      contentPadding:
-                          EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                      leading: Icon(
-                        Icons.folder,
-                        color: Colors.white,
-                      ),
-                      title: Text(
-                        doc.id,
-                        style: TextStyle(color: Colors.white),
-                      ),
-                      trailing: TextButton(
-                        onPressed: () {
-                          String pdfName = doc.id;
-                          Map<String, dynamic> data =
-                              doc.data() as Map<String, dynamic>;
-                          String pdfLink = data['link'] ??
-                              ''; // Fetch the "link" value from the document
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => PdfViewer(
-                                pdfName: pdfName, // Pass the document name
-                                pdfLink: pdfLink, // Pass the "link" value
+                  children: snapshot.data!.docs.asMap().entries.map((entry) {
+                    int index = entry.key;
+                    DocumentSnapshot doc = entry.value;
+                    bool isLastItem = index == snapshot.data!.docs.length - 1;
+
+                    return Column(
+                      children: [
+                        ListTile(
+                          contentPadding:
+                              EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                          leading: Icon(
+                            Icons.folder,
+                            color: Colors.white,
+                          ),
+                          title: Text(
+                            doc.id,
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          trailing: TextButton(
+                            onPressed: () {
+                              String pdfName = doc.id;
+                              Map<String, dynamic> data =
+                                  doc.data() as Map<String, dynamic>;
+                              String pdfLink = data['link'] ??
+                                  ''; // Fetch the "link" value from the document
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => PdfViewer(
+                                    pdfName: pdfName, // Pass the document name
+                                    pdfLink: pdfLink, // Pass the "link" value
+                                  ),
+                                ),
+                              );
+                            },
+                            child: Text(
+                              'View',
+                              style: TextStyle(
+                                color: Colors.black,
                               ),
                             ),
-                          );
-                        },
-                        child: Text(
-                          'View',
-                          style: TextStyle(
-                            color: Colors.black,
+                            style: TextButton.styleFrom(
+                              backgroundColor: Colors.white,
+                            ),
                           ),
                         ),
-                        style: TextButton.styleFrom(
-                          backgroundColor: Colors.white,
-                        ),
-                      ),
+                        if (!isLastItem)
+                          Divider(color: Colors.black), // Add Divider here
+                      ],
                     );
                   }).toList(),
                 ),
