@@ -23,15 +23,21 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: AnimatedSplashScreen(
-        splash: "assets/spalshScreenGif.gif",
-        splashIconSize: 3000,
-        nextScreen: AuthWrapper(),
-        duration: 2950,
-        splashTransition: SplashTransition.fadeTransition,
-        backgroundColor: Color.fromARGB(255, 0, 0, 0),
-        pageTransitionType: PageTransitionType.fade,
-        animationDuration: Duration(milliseconds: 10),
+      home: Scaffold(
+        body: LayoutBuilder(
+          builder: (context, constraints) {
+            return AnimatedSplashScreen(
+              splash: "assets/spalshScreenGif.gif",
+              splashIconSize: constraints.maxWidth * 4,
+              nextScreen: AuthWrapper(),
+              duration: 2950,
+              splashTransition: SplashTransition.fadeTransition,
+              backgroundColor: Color.fromARGB(255, 0, 0, 0),
+              pageTransitionType: PageTransitionType.fade,
+              animationDuration: Duration(milliseconds: 10),
+            );
+          },
+        ),
       ),
     );
   }
