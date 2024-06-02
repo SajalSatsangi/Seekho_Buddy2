@@ -102,6 +102,108 @@ class _StudyHubLoginScreenState extends State<StudyHubLoginScreen> {
       );
     }
   }
+  
+  
+  Future<void> _resetPassword() async {
+    try {
+      final rollNumber = _rollNumberController.text.trim();
+
+      // Check if roll number field is empty
+    if (rollNumber.isEmpty) {
+      // Show dialog with message
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text("ERROR!"),
+            content: Text(
+                "Please enter your roll number and then click on Forgot Password for resetting your Password."),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text("OK"),
+              ),
+            ],
+          );
+        },
+      );
+      return;
+    }
+
+      // Query Firestore to get user document based on roll number
+      final QuerySnapshot querySnapshot = await _firestore
+          .collection('users')
+          .where('rollno', isEqualTo: rollNumber)
+          .limit(1)
+          .get();
+
+      if (querySnapshot.docs.isNotEmpty) {
+        // Get the first document
+        final userDoc = querySnapshot.docs.first;
+
+        // Get the user data
+        final userData = userDoc.data();
+
+        // Check if userData is not null and contains email field
+        if (userData != null &&
+            (userData as Map<String, dynamic>)['email'] != null) {
+          // Send password reset email
+          final email = (userData as Map<String, dynamic>)['email'] as String;
+          await _auth.sendPasswordResetEmail(email: email);
+
+          // Show success dialog or message
+          showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: Text("Success"),
+                content:
+                    Text("Password reset email sent. Please check your email."),
+                actions: [
+                  TextButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: Text("OK"),
+                  ),
+                ],
+              );
+            },
+          );
+        } else {
+          throw 'User data or email is null';
+        }
+      } else {
+        // Roll number not found
+        throw 'Invalid roll number';
+      }
+    } catch (e) {
+      // Handle errors
+      print("Failed to reset password: $e");
+      // Show error dialog or message
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text("Error"),
+            content: Text(
+                "Failed to reset password. Please check your roll number."),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text("OK"),
+              ),
+            ],
+          );
+        },
+      );
+    }
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -220,12 +322,15 @@ class _StudyHubLoginScreenState extends State<StudyHubLoginScreen> {
                       padding: EdgeInsets.symmetric(horizontal: padding * 1.5),
                       child: Align(
                         alignment: Alignment.centerRight,
+                        child: TextButton(
+                    onPressed: _resetPassword,
                         child: Text(
                           'Forgot your password',
                           style: TextStyle(
                             color: Colors.white70,
                             fontSize: fontSizeSubtitle,
                           ),
+                            ),
                         ),
                       ),
                     ),
