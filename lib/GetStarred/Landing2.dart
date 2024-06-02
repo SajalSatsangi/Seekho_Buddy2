@@ -20,16 +20,30 @@ class LandingPage extends StatefulWidget {
 }
 
 class _LandingPageState extends State<LandingPage> {
-  int _selectedIndex = 0;
+ 
 
   void _onItemTapped(int index) {
     setState(() {
-      _selectedIndex = index;
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    // Get screen size
+    var screenSize = MediaQuery.of(context).size;
+
+    // Calculate responsive size for text
+    double titleFontSize = screenSize.width / 20;
+    double descriptionFontSize = screenSize.width / 30;
+    double buttonFontSize = screenSize.width / 25;
+
+    // Calculate responsive size for padding and margins
+    double containerPadding = screenSize.width / 20;
+    double textSpacing = screenSize.height / 40;
+
+    // Calculate responsive size for images
+    double imageHeight = screenSize.height / 3;
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor:
@@ -70,14 +84,14 @@ class _LandingPageState extends State<LandingPage> {
                       Text(
                         'New Arrivals!',
                         style: TextStyle(
-                          fontSize: 35,
+                          fontSize: titleFontSize,
                           color: Colors.black,
                         ),
                       ),
-                      SizedBox(height: 80),
+                      SizedBox(height: textSpacing),
                       Container(
-                        width: 260,
-                        padding: EdgeInsets.all(20),
+                        width: screenSize.width * 0.65,
+                        padding: EdgeInsets.all(containerPadding),
                         decoration: BoxDecoration(
                           color: Color(0xFF323232).withOpacity(0.9),
                           borderRadius: BorderRadius.circular(20),
@@ -88,6 +102,7 @@ class _LandingPageState extends State<LandingPage> {
                             ClipRRect(
                               borderRadius: BorderRadius.circular(20),
                               child: Container(
+                                height: imageHeight,
                                 decoration: BoxDecoration(
                                   boxShadow: [
                                     BoxShadow(
@@ -100,25 +115,25 @@ class _LandingPageState extends State<LandingPage> {
                                 child: Image.asset('assets/Landing2_Book.png'),
                               ),
                             ),
-                            SizedBox(height: 20),
+                            SizedBox(height: textSpacing),
                             Text(
                               'Mathematics Guide',
                               style: TextStyle(
-                                fontSize: 20,
+                                fontSize: titleFontSize,
                                 fontWeight: FontWeight.bold,
                                 color: Colors.white,
                               ),
                             ),
-                            SizedBox(height: 10),
+                            SizedBox(height: textSpacing / 2),
                             Text(
                               'This comprehensive guide covers key math concepts and problem-solving techniques to help you excel in your studies.',
                               textAlign: TextAlign.center,
                               style: TextStyle(
-                                fontSize: 14,
+                                fontSize: descriptionFontSize,
                                 color: Colors.white,
                               ),
                             ),
-                            SizedBox(height: 20),
+                            SizedBox(height: textSpacing),
                             ElevatedButton(
                               onPressed: () {
                                 // Navigate to LandingPage3 with slide animation
@@ -157,6 +172,7 @@ class _LandingPageState extends State<LandingPage> {
                               child: Text(
                                 'Get now',
                                 style: TextStyle(
+                                  fontSize: buttonFontSize,
                                   color: Colors.white, // Text color
                                 ),
                               ),
@@ -172,28 +188,7 @@ class _LandingPageState extends State<LandingPage> {
           ),
         ],
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.black, // Set background color to black
-        selectedItemColor: Colors.black, // Set selected item color to white
-        unselectedItemColor:
-            Color.fromARGB(255, 0, 0, 0), // Set unselected item color to grey
-        currentIndex: _selectedIndex,
-        onTap: _onItemTapped,
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.search),
-            label: 'Search',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.favorite),
-            label: 'Favorites',
-          ),
-        ],
-      ),
+     
     );
   }
 }
