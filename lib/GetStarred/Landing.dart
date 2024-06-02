@@ -23,52 +23,53 @@ class LandingPage extends StatelessWidget {
 }
 
 class StudyHubScreen extends StatelessWidget {
-  final TextStyle appBarTextStyle = TextStyle(
-    fontSize: 24,
-    fontWeight: FontWeight.bold,
-    color: Colors.white,
-  );
-
   @override
   Widget build(BuildContext context) {
+    // Get screen size
+    var screenSize = MediaQuery.of(context).size;
+
     return Scaffold(
       backgroundColor: Color(0xFF161616),
       appBar: AppBar(
         title: Text(
           'Seekho Buddy',
-          style: appBarTextStyle,
+          style: TextStyle(
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+          ),
         ),
         backgroundColor: Color(0xFF161616),
-        centerTitle: true, // Center the title horizontally
+        centerTitle: true,
       ),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: EdgeInsets.all(screenSize.width * 0.04), // 4% of screen width
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
             Image.asset(
-              'assets/Get_Start.png', // Ensure this path is correct
-              width: 450, // Increased width
-              height: 450, // Increased height
+              'assets/Get_Start.png',
+              width: screenSize.width * 0.9, // 90% of screen width
+              height: screenSize.height * 0.4, // 40% of screen height
             ),
-            SizedBox(height: 0),
+            SizedBox(height: screenSize.height * 0.01), // 1% of screen height
             Text(
               'Welcome to Our Study Hub App!',
               style: TextStyle(
-                fontSize: 24,
+                fontSize: screenSize.width * 0.06, // 6% of screen width
                 fontWeight: FontWeight.bold,
               ),
               textAlign: TextAlign.center,
             ),
-            SizedBox(height: 10), // Decreased gap
+            SizedBox(height: screenSize.height * 0.02), // 2% of screen height
             Text(
               'Discover a world of knowledge at your fingertips. Connect with peers, access study materials, and join study groups for collaborative learning experiences.',
               style: TextStyle(
-                fontSize: 16,
+                fontSize: screenSize.width * 0.04, // 4% of screen width
               ),
               textAlign: TextAlign.center,
             ),
-            SizedBox(height: 20), // Adjusted gap to fit the design better
+            SizedBox(height: screenSize.height * 0.04), // 4% of screen height
             ElevatedButton(
               onPressed: () {
                 // Navigate to LandingPage2 with slide animation
@@ -96,8 +97,8 @@ class StudyHubScreen extends StatelessWidget {
                 );
               },
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.white, // background (button) color
-                foregroundColor: Colors.black, // foreground (text) color
+                backgroundColor: Colors.white,
+                foregroundColor: Colors.black,
               ),
               child: Text('Start learning'),
             ),
