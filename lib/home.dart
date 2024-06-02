@@ -5,7 +5,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:seekhobuddy/AdminScreens/Noticepage/Notices-Admin.dart';
 import 'package:seekhobuddy/Courses.dart';
 import 'package:seekhobuddy/NewHelp.dart';
-import 'package:seekhobuddy/Notification.dart';
 import 'package:seekhobuddy/donation.dart';
 // import 'package:seekhobuddy/help.dart';
 import 'footer.dart';
@@ -84,45 +83,6 @@ class _HomeState extends State<Home> {
                         color: Colors.white,
                       ),
                       overflow: TextOverflow.ellipsis,
-                    ),
-                  ),
-                  Container(
-                    padding:
-                        EdgeInsets.only(left: 8, right: 8, top: 2, bottom: 2),
-                    height: 30,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(30),
-                      color: Color.fromARGB(255, 0, 0, 0),
-                    ),
-                    child: Row(
-                      children: <Widget>[
-                        Container(
-                          padding: EdgeInsets.only(
-                              left: 8, right: 8, top: 2, bottom: 2),
-                          height: 30,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(30),
-                            color: Color(0xFF323232),
-                          ),
-                          child: Center(
-                            child: InkWell(
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          NotificationsPage()),
-                                );
-                              },
-                              child: Icon(
-                                Icons.notification_add,
-                                color: Colors.white,
-                                size: 20,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
                     ),
                   ),
                 ],
