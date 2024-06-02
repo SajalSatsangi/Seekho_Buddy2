@@ -79,8 +79,10 @@ class UserDataPage extends StatelessWidget {
             ),
             Expanded(
               child: StreamBuilder<QuerySnapshot>(
-                stream: FirebaseFirestore.instance.collection('users').snapshots(),
-                builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+                stream:
+                    FirebaseFirestore.instance.collection('users').snapshots(),
+                builder: (BuildContext context,
+                    AsyncSnapshot<QuerySnapshot> snapshot) {
                   if (snapshot.hasError) {
                     return Text('Something went wrong');
                   }
@@ -90,10 +92,13 @@ class UserDataPage extends StatelessWidget {
                   }
 
                   return ListView(
-                    children: snapshot.data!.docs.map((DocumentSnapshot document) {
-                      Map<String, dynamic> data = document.data() as Map<String, dynamic>;
+                    children:
+                        snapshot.data!.docs.map((DocumentSnapshot document) {
+                      Map<String, dynamic> data =
+                          document.data() as Map<String, dynamic>;
                       return Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 16.0),
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 16.0, vertical: 8.0),
                         child: Container(
                           padding: EdgeInsets.all(16.0),
                           decoration: BoxDecoration(
@@ -125,23 +130,26 @@ class UserDataPage extends StatelessWidget {
                                     ),
                                     SizedBox(height: 8.0),
                                     Text(
-                                      "Faculty - ${data['faculty']}",
+                                      "${data['faculty']}",
                                       style: TextStyle(
-                                        color: const Color.fromARGB(255, 201, 201, 201),
+                                        color: const Color.fromARGB(
+                                            255, 201, 201, 201),
                                         fontSize: 13.0,
                                       ),
                                     ),
                                     Text(
                                       "Branch - ${data['subfaculty']}",
                                       style: TextStyle(
-                                        color: const Color.fromARGB(255, 201, 201, 201),
+                                        color: const Color.fromARGB(
+                                            255, 201, 201, 201),
                                         fontSize: 13.0,
                                       ),
                                     ),
                                     Text(
                                       "Sem - ${data['semester']}",
                                       style: TextStyle(
-                                        color: const Color.fromARGB(255, 201, 201, 201),
+                                        color: const Color.fromARGB(
+                                            255, 201, 201, 201),
                                         fontSize: 13.0,
                                       ),
                                     ),
@@ -151,8 +159,9 @@ class UserDataPage extends StatelessWidget {
                               Container(
                                 decoration: BoxDecoration(
                                   shape: BoxShape.circle,
-                                  color: const Color.fromARGB(255, 201, 201, 201)
-                                      .withOpacity(0.2),
+                                  color:
+                                      const Color.fromARGB(255, 201, 201, 201)
+                                          .withOpacity(0.2),
                                 ),
                                 child: IconButton(
                                   icon: Icon(
@@ -164,8 +173,8 @@ class UserDataPage extends StatelessWidget {
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) => userdata_edit(
-                                            userData: data,
-                                          )),
+                                                userData: data,
+                                              )),
                                     );
                                     // Add functionality for edit here
                                   },
