@@ -17,7 +17,39 @@ class userdata extends StatelessWidget {
   }
 }
 
-class UserDataPage extends StatelessWidget {
+class UserDataPage extends StatefulWidget {
+  @override
+  _UserDataPageState createState() => _UserDataPageState();
+}
+
+class _UserDataPageState extends State<UserDataPage> {
+  final TextEditingController _searchController = TextEditingController();
+  List<DocumentSnapshot> _users = [];
+  List<DocumentSnapshot> _filteredUsers = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _searchController.addListener(_onSearchChanged);
+  }
+
+  @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
+  }
+
+  _onSearchChanged() {
+    setState(() {
+      _filteredUsers = _users
+          .where((user) =>
+              (user.data() as Map<String, dynamic>)['name']
+                  .toLowerCase()
+                  .contains(_searchController.text.toLowerCase()))
+          .toList();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -59,6 +91,7 @@ class UserDataPage extends StatelessWidget {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 14, vertical: 14),
               child: TextField(
+                controller: _searchController,
                 decoration: InputDecoration(
                   hintText: "Search...",
                   hintStyle: TextStyle(color: Colors.white),
@@ -91,9 +124,16 @@ class UserDataPage extends StatelessWidget {
                     return Text("Loading");
                   }
 
+                  _users = snapshot.data!.docs;
+                  _filteredUsers = _users
+                      .where((user) =>
+                          (user.data() as Map<String, dynamic>)['name']
+                              .toLowerCase()
+                              .contains(_searchController.text.toLowerCase()))
+                      .toList();
+
                   return ListView(
-                    children:
-                        snapshot.data!.docs.map((DocumentSnapshot document) {
+                    children: _filteredUsers.map((DocumentSnapshot document) {
                       Map<String, dynamic> data =
                           document.data() as Map<String, dynamic>;
                       return Padding(
@@ -121,7 +161,7 @@ class UserDataPage extends StatelessWidget {
                                     Container(
                                       width: double.infinity,
                                       child: Text(
-                                        "Name - ${data['name']}",
+                                        "${data['name']}",
                                         style: TextStyle(
                                           color: Colors.white,
                                           fontSize: 18.0,
