@@ -35,13 +35,7 @@ class _LandingPageState extends State<LandingPage> {
         backgroundColor:
             const Color.fromRGBO(0, 0, 0, 1), // Set background color to black
         elevation: 0, // No shadow
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.white),
-          onPressed: () {
-            // Handle back button press
-            Navigator.pop(context);
-          },
-        ),
+        automaticallyImplyLeading: false, // Remove back button
       ),
       body: Column(
         children: [
