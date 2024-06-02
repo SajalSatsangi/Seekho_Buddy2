@@ -1,13 +1,16 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'notice_popup.dart';
 import 'package:seekhobuddy/home.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 void main() {
-  runApp(Notices());
+  runApp(NoticesAdmin());
 }
 
-class Notices extends StatelessWidget {
+class NoticesAdmin extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -17,100 +20,65 @@ class Notices extends StatelessWidget {
   }
 }
 
-class MyWidget extends StatelessWidget {
-  void _showMaintenanceNotice(BuildContext context) {
-    showGeneralDialog(
-      context: context,
-      barrierDismissible: true,
-      barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel,
-      transitionDuration: const Duration(milliseconds: 200),
-      pageBuilder: (BuildContext buildContext, Animation animation,
-          Animation secondaryAnimation) {
-        return Center(
-          child: Padding(
-            padding: EdgeInsets.symmetric(vertical: 30),
-            child: AlertDialog(
-              backgroundColor: Color.fromARGB(255, 56, 56, 56),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(20.0)),
-              ),
-              contentPadding: EdgeInsets.all(0),
-              content: SingleChildScrollView(
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Color.fromARGB(255, 39, 39, 39),
-                    borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                  ),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.all(16),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "Important Notice:",
-                              style: TextStyle(
-                                fontSize: 24,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                              ),
-                            ),
-                            SizedBox(height: 8),
-                            Text(
-                              "Server Maintenance",
-                              style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                              ),
-                            ),
-                            SizedBox(height: 8),
-                            Text(
-                              "Our servers will undergo maintenance on 25th August from 10:00 PM to 2:00 AM. During this time, there may be intermittent disruptions in service. We apologize for any inconvenience caused. Thank you for your understanding.Our servers will undergo maintenance on 25th August from 10:00 PM to 2:00 AM. During this time, there may be intermittent disruptions in service. We apologize for any inconvenience caused. Thank you for your understanding.Our servers will undergo maintenance on 25th August from 10:00 PM to 2:00 AM. During this time, there may be intermittent disruptions in service. We apologize for any inconvenience caused. Thank you for your understanding.Our servers will undergo maintenance on 25th August from 10:00 PM to 2:00 AM. During this time, there may be intermittent disruptions in service. We apologize for any inconvenience caused. Thank you for your understanding.",
-                              style: TextStyle(
-                                color: Colors.white,
-                              ),
-                            ),
-                            SizedBox(height: 8),
-                            Text(
-                              "By-XYZ",
-                              style: TextStyle(
-                                color: Colors.white,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      ClipRRect(
-                        borderRadius: BorderRadius.vertical(
-                          bottom: Radius.circular(20.0),
-                        ),
-                        child: Image.network(
-                          'https://assets.api.uizard.io/api/cdn/stream/3c5a2383-de2c-44b8-a0b4-3b08795acbb3.png',
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          ),
-        );
-      },
-      transitionBuilder: (context, animation, secondaryAnimation, child) {
-        return BackdropFilter(
-          filter: ImageFilter.blur(
-              sigmaX: 2 * animation.value, sigmaY: 2 * animation.value),
-          child: ScaleTransition(
-            scale: CurvedAnimation(parent: animation, curve: Curves.easeOut),
-            child: child,
-          ),
-        );
-      },
-    );
+class Notice {
+  final String title;
+  final String description;
+  final String date;
+  final String fileUrl;
+
+  Notice({
+    required this.title,
+    required this.description,
+    required this.date,
+    required this.fileUrl,
+  });
+}
+
+class MyWidget extends StatefulWidget {
+  @override
+  _MyWidgetState createState() => _MyWidgetState();
+}
+
+class _MyWidgetState extends State<MyWidget> {
+  final CollectionReference collectionRef =
+      FirebaseFirestore.instance.collection('notices');
+  DocumentSnapshot? userData;
+  late SharedPreferences prefs;
+
+  @override
+  void initState() {
+    super.initState();
+    fetchUserData();
+  }
+
+  Future<void> fetchUserData() async {
+    prefs = await SharedPreferences.getInstance();
+    DateTime lastFetchTime =
+        DateTime.parse(prefs.getString('lastFetchTime') ?? '2000-01-01');
+    DateTime now = DateTime.now();
+
+    final User? user = FirebaseAuth.instance.currentUser;
+
+    if (now.difference(lastFetchTime).inDays >= 1 || userData == null) {
+      if (user != null) {
+        var querySnapshot = await FirebaseFirestore.instance
+            .collection('users')
+            .where('uid', isEqualTo: user.uid)
+            .get();
+
+        if (querySnapshot.docs.isNotEmpty) {
+          setState(() {
+            userData = querySnapshot.docs.first;
+            saveUserDataLocally(); // Save data locally when fetched
+            prefs.setString('lastFetchTime', now.toIso8601String());
+          });
+        }
+      }
+    }
+  }
+
+  void saveUserDataLocally() {
+    // Implement saving user data locally if necessary
   }
 
   @override
@@ -171,63 +139,99 @@ class MyWidget extends StatelessWidget {
                 ),
               ),
             ),
-            GestureDetector(
-              onTap: () {
-                _showMaintenanceNotice(context);
-              },
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                child: Stack(
-                  children: [
-                    Container(
-                      decoration: BoxDecoration(
-                        color: Color(0xFF323232),
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      padding: EdgeInsets.all(16),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Important Notice: Exam Timetable",
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
+            Expanded(
+              child: StreamBuilder<QuerySnapshot>(
+                stream: collectionRef.snapshots(),
+                builder: (BuildContext context,
+                    AsyncSnapshot<QuerySnapshot> snapshot) {
+                  if (snapshot.hasError) {
+                    return Text('Something went wrong');
+                  }
+
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return Text("Loading");
+                  }
+
+                  if (userData == null) {
+                    return Text("Loading user data...");
+                  }
+
+                  return new ListView(
+                    children:
+                        snapshot.data!.docs.map((DocumentSnapshot document) {
+                      Map<String, dynamic> data =
+                          document.data() as Map<String, dynamic>;
+                      if (shouldRenderNotice(data)) {
+                        return new GestureDetector(
+                          onTap: () {
+                            showMaintenanceNotice(context, data['title'],
+                                data['description'], data['fileUrl']);
+                          },
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 16, vertical: 8),
+                            child: Stack(
+                              children: [
+                                Container(
+                                  width: 500,
+                                  height: 250,
+                                  decoration: BoxDecoration(
+                                    color: Color(0xFF323232),
+                                    borderRadius: BorderRadius.circular(20),
+                                  ),
+                                  padding: EdgeInsets.all(16),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        data['title'],
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                      SizedBox(height: 8),
+                                      Text(
+                                        data['description'],
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                      SizedBox(height: 8),
+                                      Text(
+                                        "Posted on: ${data['date']}",
+                                        style: TextStyle(
+                                          color: Colors.grey,
+                                          fontSize: 12,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Positioned(
+                                  bottom: 16,
+                                  right: 16,
+                                  child: Container(
+                                    width: 17,
+                                    height: 17,
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      shape: BoxShape.circle,
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
-                          SizedBox(height: 8),
-                          Text(
-                            "The exam timetable for this semester has been posted. Please check your courses and exam dates.",
-                            style: TextStyle(
-                              color: Colors.white,
-                            ),
-                          ),
-                          SizedBox(height: 8),
-                          Text(
-                            "Posted on: 15th Oct, 2021",
-                            style: TextStyle(
-                              color: Colors.grey,
-                              fontSize: 12,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Positioned(
-                      bottom: 16,
-                      right: 16,
-                      child: Container(
-                        width: 17,
-                        height: 17,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          shape: BoxShape.circle,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+                        );
+                      } else {
+                        return SizedBox.shrink();
+                      }
+                    }).toList(),
+                  );
+                },
               ),
             ),
           ],
@@ -235,5 +239,45 @@ class MyWidget extends StatelessWidget {
       ),
       backgroundColor: Color(0xDD000000),
     );
+  }
+
+  bool shouldRenderNotice(Map<String, dynamic> noticeData) {
+    print('Notice data: $noticeData');
+    if (userData == null) return false;
+
+    var userFaculty = userData!['faculty'];
+    var userSubFaculty = userData!['subfaculty'];
+    var userSemester = userData!['semester'];
+    var userSubBranch = userData!['subbranch'];
+
+    var noticeFaculties = noticeData['faculties'];
+    var noticeSubFaculties = noticeData['subfaculties'];
+    var noticeSemesters = noticeData['semesters'];
+    var noticeSubBranches = noticeData['subbranches'];
+
+    if (noticeFaculties != null) {
+      if (!noticeFaculties.contains(userFaculty)) {
+        return false;
+      } else {
+        if (noticeSubFaculties != null) {
+          if (!noticeSubFaculties.contains(userSubFaculty)) {
+            return false;
+          } else {
+            if (noticeSemesters != null) {
+              if (!noticeSemesters.contains(userSemester)) {
+                return false;
+              } else {
+                if (noticeSubBranches != null &&
+                    !noticeSubBranches.contains(userSubBranch)) {
+                  return false;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    return true;
   }
 }
