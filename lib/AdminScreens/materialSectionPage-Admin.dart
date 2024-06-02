@@ -10,12 +10,13 @@ class Materialsectionpage_Admin extends StatelessWidget {
   final String branchName;
   final String semesterName;
 
-  Materialsectionpage_Admin(
-      {required this.subjectName,
-      required this.subject,
-      required this.facultyName,
-      required this.branchName,
-      required this.semesterName});
+  Materialsectionpage_Admin({
+    required this.subjectName,
+    required this.subject,
+    required this.facultyName,
+    required this.branchName,
+    required this.semesterName,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -161,7 +162,21 @@ class Materialsectionpage_Admin extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(
                       vertical: 7.0, horizontal: 27.0),
                   child: GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        SlideRightPageRoute(
+                          page: Materialpage_Admin(
+                            materialName: material['materialName'],
+                            material: material,
+                            facultyName: facultyName,
+                            branchName: branchName,
+                            semesterName: semesterName,
+                            subjectName: subjectName,
+                          ),
+                        ),
+                      );
+                    },
                     child: Container(
                       height: 70,
                       decoration: BoxDecoration(
@@ -195,17 +210,16 @@ class Materialsectionpage_Admin extends StatelessWidget {
                               onPressed: () {
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(
-                                      builder: (context) => Materialpage_Admin(
-                                            materialName: material[
-                                                'materialName'], // assuming 'materialName' is the key for the material name
-                                            material:
-                                                material, // Pass the entire material map
-                                            facultyName: facultyName,
-                                            branchName: branchName,
-                                            semesterName: semesterName,
-                                            subjectName: subjectName,
-                                          )),
+                                  SlideRightPageRoute(
+                                    page: Materialpage_Admin(
+                                      materialName: material['materialName'],
+                                      material: material,
+                                      facultyName: facultyName,
+                                      branchName: branchName,
+                                      semesterName: semesterName,
+                                      subjectName: subjectName,
+                                    ),
+                                  ),
                                 );
                               },
                               style: ButtonStyle(
@@ -240,4 +254,26 @@ class Materialsectionpage_Admin extends StatelessWidget {
       ),
     );
   }
+}
+
+// Custom page route for slide animation
+class SlideRightPageRoute extends PageRouteBuilder {
+  final Widget page;
+  SlideRightPageRoute({required this.page})
+      : super(
+          pageBuilder: (context, animation, secondaryAnimation) => page,
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            var begin = Offset(1.0, 0.0);
+            var end = Offset.zero;
+            var curve = Curves.ease;
+
+            var tween =
+                Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+
+            return SlideTransition(
+              position: animation.drive(tween),
+              child: child,
+            );
+          },
+        );
 }

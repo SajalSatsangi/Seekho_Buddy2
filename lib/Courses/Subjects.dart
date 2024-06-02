@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:seekhobuddy/Courses/MateiralSection.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../Courses/MateiralSection.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -47,7 +47,6 @@ class _SubjectsPageState extends State<SubjectsPage> {
   }
 
   // Fetch subjects based on user data
-  // Fetch subjects based on user data
   Future<void> fetchSubjects() async {
     if (userData != null) {
       SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -84,8 +83,6 @@ class _SubjectsPageState extends State<SubjectsPage> {
       }
     }
   }
-
-  // Method to handle item selection in bottom navigation bar
 
   // Method to handle search query change
   void _updateSearchQuery(String newQuery) {
@@ -176,11 +173,9 @@ class _SubjectsPageState extends State<SubjectsPage> {
                       onTap: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(
-                            builder: (context) => MateiralsectionAdmin(
-                              subject: _filterSubjects()[index],
-                            ),
-                          ),
+                          _createRoute(MateiralsectionAdmin(
+                            subject: _filterSubjects()[index],
+                          )),
                         );
                       },
                     ),
@@ -250,6 +245,26 @@ class _SubjectsPageState extends State<SubjectsPage> {
           ),
         ),
       ),
+    );
+  }
+
+  // Create a custom page transition
+  Route _createRoute(Widget page) {
+    return PageRouteBuilder(
+      pageBuilder: (context, animation, secondaryAnimation) => page,
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        const begin = Offset(1.0, 0.0); // Start from the right
+        const end = Offset.zero;
+        const curve = Curves.ease;
+
+        var tween =
+            Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+
+        return SlideTransition(
+          position: animation.drive(tween),
+          child: child,
+        );
+      },
     );
   }
 }

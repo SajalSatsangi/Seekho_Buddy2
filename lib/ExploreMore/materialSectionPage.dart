@@ -8,16 +8,16 @@ class Materialsectionpage extends StatelessWidget {
   final String branchName;
   final String semesterName;
 
-  Materialsectionpage(
-      {required this.subjectName,
-      required this.subject,
-      required this.facultyName,
-      required this.branchName,
-      required this.semesterName});
+  Materialsectionpage({
+    required this.subjectName,
+    required this.subject,
+    required this.facultyName,
+    required this.branchName,
+    required this.semesterName,
+  });
 
   @override
   Widget build(BuildContext context) {
-    print(subject);
     Map materials = Map.from(subject)..remove('subjectName');
 
     return Scaffold(
@@ -67,7 +67,21 @@ class Materialsectionpage extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(
                       vertical: 7.0, horizontal: 27.0),
                   child: GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        SlideRightPageRoute(
+                          page: Materialpage_Admin(
+                            materialName: material['materialName'],
+                            material: material,
+                            facultyName: facultyName,
+                            branchName: branchName,
+                            semesterName: semesterName,
+                            subjectName: subjectName,
+                          ),
+                        ),
+                      );
+                    },
                     child: Container(
                       height: 70,
                       decoration: BoxDecoration(
@@ -101,17 +115,16 @@ class Materialsectionpage extends StatelessWidget {
                               onPressed: () {
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(
-                                      builder: (context) => Materialpage_Admin(
-                                            materialName: material[
-                                                'materialName'], // assuming 'materialName' is the key for the material name
-                                            material:
-                                                material, // Pass the entire material map
-                                            facultyName: facultyName,
-                                            branchName: branchName,
-                                            semesterName: semesterName,
-                                            subjectName: subjectName,
-                                          )),
+                                  SlideRightPageRoute(
+                                    page: Materialpage_Admin(
+                                      materialName: material['materialName'],
+                                      material: material,
+                                      facultyName: facultyName,
+                                      branchName: branchName,
+                                      semesterName: semesterName,
+                                      subjectName: subjectName,
+                                    ),
+                                  ),
                                 );
                               },
                               style: ButtonStyle(
@@ -141,4 +154,32 @@ class Materialsectionpage extends StatelessWidget {
       ),
     );
   }
+}
+
+class SlideRightPageRoute extends PageRouteBuilder {
+  final Widget page;
+
+  SlideRightPageRoute({required this.page})
+      : super(
+          pageBuilder: (
+            BuildContext context,
+            Animation<double> animation,
+            Animation<double> secondaryAnimation,
+          ) =>
+              page,
+          transitionsBuilder: (
+            BuildContext context,
+            Animation<double> animation,
+            Animation<double> secondaryAnimation,
+            Widget child,
+          ) {
+            return SlideTransition(
+              position: Tween<Offset>(
+                begin: const Offset(1.0, 0.0),
+                end: Offset.zero,
+              ).animate(animation),
+              child: child,
+            );
+          },
+        );
 }

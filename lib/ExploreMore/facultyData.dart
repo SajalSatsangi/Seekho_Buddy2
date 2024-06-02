@@ -79,7 +79,18 @@ class Faculties extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(
                           horizontal: 24.0, vertical: 7.0), // Reduced padding
                       child: GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            SlideRightPageRoute(
+                              page: Branches(
+                                facultyName: faculty['name'],
+                                facultyData:
+                                    faculty, // Pass the entire faculty map
+                              ),
+                            ),
+                          );
+                        },
                         child: Container(
                           width: 450,
                           height: 80,
@@ -113,8 +124,8 @@ class Faculties extends StatelessWidget {
                                   onPressed: () {
                                     Navigator.push(
                                       context,
-                                      MaterialPageRoute(
-                                        builder: (context) => Branches(
+                                      SlideRightPageRoute(
+                                        page: Branches(
                                           facultyName: faculty['name'],
                                           facultyData:
                                               faculty, // Pass the entire faculty map
@@ -151,4 +162,32 @@ class Faculties extends StatelessWidget {
       ),
     );
   }
+}
+
+class SlideRightPageRoute extends PageRouteBuilder {
+  final Widget page;
+
+  SlideRightPageRoute({required this.page})
+      : super(
+          pageBuilder: (
+            BuildContext context,
+            Animation<double> animation,
+            Animation<double> secondaryAnimation,
+          ) =>
+              page,
+          transitionsBuilder: (
+            BuildContext context,
+            Animation<double> animation,
+            Animation<double> secondaryAnimation,
+            Widget child,
+          ) {
+            return SlideTransition(
+              position: Tween<Offset>(
+                begin: const Offset(1.0, 0.0),
+                end: Offset.zero,
+              ).animate(animation),
+              child: child,
+            );
+          },
+        );
 }
