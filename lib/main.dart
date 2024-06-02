@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
         splash: "assets/spalshScreenGif.gif",
         splashIconSize: 3000,
         nextScreen: AuthWrapper(),
-        duration: 3100,
+        duration: 2950,
         splashTransition: SplashTransition.fadeTransition,
         backgroundColor: Color.fromARGB(255, 0, 0, 0),
         pageTransitionType: PageTransitionType.fade,
