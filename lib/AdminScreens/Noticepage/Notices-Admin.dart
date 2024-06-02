@@ -1,4 +1,3 @@
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -41,29 +40,33 @@ class MyWidget extends StatefulWidget {
 }
 
 class _MyWidgetState extends State<MyWidget> {
-  final CollectionReference collectionRef = FirebaseFirestore.instance.collection('notices');
+  final CollectionReference collectionRef =
+      FirebaseFirestore.instance.collection('notices');
   DocumentSnapshot? userData;
   late SharedPreferences prefs;
+  Set<String> clickedNotices = Set<String>();
 
   @override
   void initState() {
     super.initState();
     fetchUserData();
+    loadClickedNotices();
   }
 
   Future<void> fetchUserData() async {
     prefs = await SharedPreferences.getInstance();
-    DateTime lastFetchTime = DateTime.parse(prefs.getString('lastFetchTime') ?? '2000-01-01');
+    DateTime lastFetchTime =
+        DateTime.parse(prefs.getString('lastFetchTime') ?? '2000-01-01');
     DateTime now = DateTime.now();
 
     final User? user = FirebaseAuth.instance.currentUser;
 
     if (now.difference(lastFetchTime).inDays >= 1 || userData == null) {
-    if (user != null) {
-    var querySnapshot = await FirebaseFirestore.instance
-        .collection('users')
-        .where('uid', isEqualTo: user.uid)
-        .get();
+      if (user != null) {
+        var querySnapshot = await FirebaseFirestore.instance
+            .collection('users')
+            .where('uid', isEqualTo: user.uid)
+            .get();
 
         if (querySnapshot.docs.isNotEmpty) {
           setState(() {
@@ -76,10 +79,21 @@ class _MyWidgetState extends State<MyWidget> {
     }
   }
 
-  
-
   void saveUserDataLocally() {
     // Implement saving user data locally if necessary
+  }
+
+  Future<void> loadClickedNotices() async {
+    prefs = await SharedPreferences.getInstance();
+    setState(() {
+      clickedNotices =
+          prefs.getStringList('clickedNotices')?.toSet() ?? <String>{};
+    });
+  }
+
+  Future<void> saveClickedNotices() async {
+    prefs = await SharedPreferences.getInstance();
+    await prefs.setStringList('clickedNotices', clickedNotices.toList());
   }
 
   @override
@@ -143,7 +157,8 @@ class _MyWidgetState extends State<MyWidget> {
             Expanded(
               child: StreamBuilder<QuerySnapshot>(
                 stream: collectionRef.snapshots(),
-                builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+                builder: (BuildContext context,
+                    AsyncSnapshot<QuerySnapshot> snapshot) {
                   if (snapshot.hasError) {
                     return Text('Something went wrong');
                   }
@@ -157,66 +172,92 @@ class _MyWidgetState extends State<MyWidget> {
                   }
 
                   return new ListView(
-                    children: snapshot.data!.docs.map((DocumentSnapshot document) {
-                      Map<String, dynamic> data = document.data() as Map<String, dynamic>;
+                    children:
+                        snapshot.data!.docs.map((DocumentSnapshot document) {
+                      Map<String, dynamic> data =
+                          document.data() as Map<String, dynamic>;
                       if (shouldRenderNotice(data)) {
                         return new GestureDetector(
                           onTap: () {
-                            showMaintenanceNotice(context, data['title'], data['description'], data['fileUrl']);
+                            setState(() {
+                              clickedNotices.add(document.id);
+                              saveClickedNotices();
+                            });
+                            showMaintenanceNotice(context, data['title'],
+                                data['description'], data['fileUrl']);
                           },
                           child: Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 16, vertical: 8),
                             child: Stack(
                               children: [
                                 Container(
                                   width: 500,
-                                  height: 250,
                                   decoration: BoxDecoration(
-                                    color: Color(0xFF323232),
+                                    color: Color(0xFF323232).withOpacity(
+                                        clickedNotices.contains(document.id)
+                                            ? 0.6
+                                            : 1.0),
                                     borderRadius: BorderRadius.circular(20),
                                   ),
                                   padding: EdgeInsets.all(16),
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         data['title'],
                                         style: TextStyle(
                                           fontSize: 18,
                                           fontWeight: FontWeight.bold,
-                                          color: Colors.white,
+                                          color: Colors.white.withOpacity(
+                                              clickedNotices
+                                                      .contains(document.id)
+                                                  ? 0.6
+                                                  : 1.0),
                                         ),
                                       ),
                                       SizedBox(height: 8),
                                       Text(
-                                        data['description'],
+                                        'Click to view details',
                                         style: TextStyle(
-                                          color: Colors.white,
+                                          color:
+                                              Color.fromARGB(255, 80, 160, 191)
+                                                  .withOpacity(clickedNotices
+                                                          .contains(document.id)
+                                                      ? 0.6
+                                                      : 1.0),
                                         ),
                                       ),
                                       SizedBox(height: 8),
                                       Text(
                                         "Posted on: ${data['date']}",
                                         style: TextStyle(
-                                          color: Colors.grey,
+                                          color: Colors.grey.withOpacity(
+                                              clickedNotices
+                                                      .contains(document.id)
+                                                  ? 0.6
+                                                  : 1.0),
                                           fontSize: 12,
                                         ),
                                       ),
                                     ],
                                   ),
                                 ),
-                                Positioned(
-                                  bottom: 16,
-                                  right: 16,
-                                  child: Container(
-                                    width: 17,
-                                    height: 17,
-                                    decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      shape: BoxShape.circle,
+                                if (!clickedNotices.contains(document.id))
+                                  Positioned(
+                                    bottom: 16,
+                                    right: 16,
+                                    child: Container(
+                                      width: 17,
+                                      height: 17,
+                                      decoration: BoxDecoration(
+                                        color:
+                                            Color.fromARGB(255, 157, 48, 144),
+                                        shape: BoxShape.circle,
+                                      ),
                                     ),
                                   ),
-                                ),
                               ],
                             ),
                           ),
@@ -248,41 +289,42 @@ class _MyWidgetState extends State<MyWidget> {
   }
 
   bool shouldRenderNotice(Map<String, dynamic> noticeData) {
-  print('Notice data: $noticeData');
-  if (userData == null) return false;
+    print('Notice data: $noticeData');
+    if (userData == null) return false;
 
-  var userFaculty = userData!['faculty'];
-  var userSubFaculty = userData!['subfaculty'];
-  var userSemester = userData!['semester'];
-  var userSubBranch = userData!['subbranch'];
+    var userFaculty = userData!['faculty'];
+    var userSubFaculty = userData!['subfaculty'];
+    var userSemester = userData!['semester'];
+    var userSubBranch = userData!['subbranch'];
 
-  var noticeFaculties = noticeData['faculties'];
-  var noticeSubFaculties = noticeData['subfaculties'];
-  var noticeSemesters = noticeData['semesters'];
-  var noticeSubBranches = noticeData['subbranches'];
+    var noticeFaculties = noticeData['faculties'];
+    var noticeSubFaculties = noticeData['subfaculties'];
+    var noticeSemesters = noticeData['semesters'];
+    var noticeSubBranches = noticeData['subbranches'];
 
-  if (noticeFaculties != null) {
-    if (!noticeFaculties.contains(userFaculty)) {
-      return false;
-    } else {
-      if (noticeSubFaculties != null) {
-        if (!noticeSubFaculties.contains(userSubFaculty)) {
-          return false;
-        } else {
-          if (noticeSemesters != null) {
-            if (!noticeSemesters.contains(userSemester)) {
-              return false;
-            } else {
-              if (noticeSubBranches != null && !noticeSubBranches.contains(userSubBranch)) {
+    if (noticeFaculties != null) {
+      if (!noticeFaculties.contains(userFaculty)) {
+        return false;
+      } else {
+        if (noticeSubFaculties != null) {
+          if (!noticeSubFaculties.contains(userSubFaculty)) {
+            return false;
+          } else {
+            if (noticeSemesters != null) {
+              if (!noticeSemesters.contains(userSemester)) {
                 return false;
+              } else {
+                if (noticeSubBranches != null &&
+                    !noticeSubBranches.contains(userSubBranch)) {
+                  return false;
+                }
               }
             }
           }
         }
       }
     }
-  }
 
-  return true;
-}
+    return true;
+  }
 }

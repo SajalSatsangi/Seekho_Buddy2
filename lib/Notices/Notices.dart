@@ -1,4 +1,3 @@
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -44,11 +43,13 @@ class _MyWidgetState extends State<MyWidget> {
       FirebaseFirestore.instance.collection('notices');
   DocumentSnapshot? userData;
   late SharedPreferences prefs;
+  Set<String> clickedNotices = Set<String>();
 
   @override
   void initState() {
     super.initState();
     fetchUserData();
+    loadClickedNotices();
   }
 
   Future<void> fetchUserData() async {
@@ -79,6 +80,19 @@ class _MyWidgetState extends State<MyWidget> {
 
   void saveUserDataLocally() {
     // Implement saving user data locally if necessary
+  }
+
+  Future<void> loadClickedNotices() async {
+    prefs = await SharedPreferences.getInstance();
+    setState(() {
+      clickedNotices =
+          prefs.getStringList('clickedNotices')?.toSet() ?? <String>{};
+    });
+  }
+
+  Future<void> saveClickedNotices() async {
+    prefs = await SharedPreferences.getInstance();
+    await prefs.setStringList('clickedNotices', clickedNotices.toList());
   }
 
   @override
@@ -164,6 +178,10 @@ class _MyWidgetState extends State<MyWidget> {
                       if (shouldRenderNotice(data)) {
                         return new GestureDetector(
                           onTap: () {
+                            setState(() {
+                              clickedNotices.add(document.id);
+                              saveClickedNotices();
+                            });
                             showMaintenanceNotice(context, data['title'],
                                 data['description'], data['fileUrl']);
                           },
@@ -174,9 +192,11 @@ class _MyWidgetState extends State<MyWidget> {
                               children: [
                                 Container(
                                   width: 500,
-                                  height: 250,
                                   decoration: BoxDecoration(
-                                    color: Color(0xFF323232),
+                                    color: Color(0xFF323232).withOpacity(
+                                        clickedNotices.contains(document.id)
+                                            ? 0.6
+                                            : 1.0),
                                     borderRadius: BorderRadius.circular(20),
                                   ),
                                   padding: EdgeInsets.all(16),
@@ -189,39 +209,54 @@ class _MyWidgetState extends State<MyWidget> {
                                         style: TextStyle(
                                           fontSize: 18,
                                           fontWeight: FontWeight.bold,
-                                          color: Colors.white,
+                                          color: Colors.white.withOpacity(
+                                              clickedNotices
+                                                      .contains(document.id)
+                                                  ? 0.6
+                                                  : 1.0),
                                         ),
                                       ),
                                       SizedBox(height: 8),
                                       Text(
-                                        data['description'],
+                                        'Click to view details',
                                         style: TextStyle(
-                                          color: Colors.white,
+                                          color:
+                                              Color.fromARGB(255, 80, 160, 191)
+                                                  .withOpacity(clickedNotices
+                                                          .contains(document.id)
+                                                      ? 0.6
+                                                      : 1.0),
                                         ),
                                       ),
                                       SizedBox(height: 8),
                                       Text(
                                         "Posted on: ${data['date']}",
                                         style: TextStyle(
-                                          color: Colors.grey,
+                                          color: Colors.grey.withOpacity(
+                                              clickedNotices
+                                                      .contains(document.id)
+                                                  ? 0.6
+                                                  : 1.0),
                                           fontSize: 12,
                                         ),
                                       ),
                                     ],
                                   ),
                                 ),
-                                Positioned(
-                                  bottom: 16,
-                                  right: 16,
-                                  child: Container(
-                                    width: 17,
-                                    height: 17,
-                                    decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      shape: BoxShape.circle,
+                                if (!clickedNotices.contains(document.id))
+                                  Positioned(
+                                    bottom: 16,
+                                    right: 16,
+                                    child: Container(
+                                      width: 17,
+                                      height: 17,
+                                      decoration: BoxDecoration(
+                                        color:
+                                            Color.fromARGB(255, 157, 48, 144),
+                                        shape: BoxShape.circle,
+                                      ),
                                     ),
                                   ),
-                                ),
                               ],
                             ),
                           ),
