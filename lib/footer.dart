@@ -13,27 +13,34 @@ class CustomFooter extends StatefulWidget {
 class _CustomFooterState extends State<CustomFooter> {
   @override
   Widget build(BuildContext context) {
-    return BottomNavigationBar(
-      items: const <BottomNavigationBarItem>[
-        BottomNavigationBarItem(
-          icon: Icon(Icons.home),
-          label: 'Home',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.chat),
-          label: 'Chat',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.person),
-          label: 'Profile',
-        ),
-      ],
-      currentIndex: widget.selectedIndex,
-      selectedItemColor: Colors.white,
-      unselectedItemColor: Colors.grey,
-      backgroundColor: Colors.black,
-      onTap: widget.onItemTapped,
-      type: BottomNavigationBarType.fixed,
+    return Container(
+      color: Colors.black, // Set background color
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly, // Adjust alignment
+        children: [
+          Expanded(
+            child: IconButton(
+              icon: Icon(Icons.home),
+              color: widget.selectedIndex == 0 ? Colors.white : Colors.grey,
+              onPressed: () => widget.onItemTapped(0),
+            ),
+          ),
+          Expanded(
+            child: IconButton(
+              icon: Icon(Icons.chat),
+              color: widget.selectedIndex == 1 ? Colors.white : Colors.grey,
+              onPressed: () => widget.onItemTapped(1),
+            ),
+          ),
+          Expanded(
+            child: IconButton(
+              icon: Icon(Icons.person),
+              color: widget.selectedIndex == 2 ? Colors.white : Colors.grey,
+              onPressed: () => widget.onItemTapped(2),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
