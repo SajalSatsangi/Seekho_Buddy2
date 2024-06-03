@@ -1,69 +1,104 @@
 import 'package:flutter/material.dart';
-import 'PdfViewer.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:seekhobuddy/Other%20Cources/PdfViewer.dart';
 
-class Materials extends StatefulWidget {
-  final String subject;
-  final String documentId;
+class Materialpage extends StatelessWidget {
+  final Map material;
+  final String materialName;
 
-  Materials({
-    required this.subject,
-    required this.documentId,
+
+  Materialpage({required this.materialName, 
+  required this.material,
+
   });
 
   @override
-  _MaterialsState createState() => _MaterialsState();
-}
-
-class _MaterialsState extends State<Materials> {
-  DocumentSnapshot? userData;
-
-  @override
-  void initState() {
-    super.initState();
-    fetchUserData();
-  }
-
-  Future<void> fetchUserData() async {
-    User? user = FirebaseAuth.instance.currentUser;
-
-    if (user != null) {
-      var querySnapshot = await FirebaseFirestore.instance
-          .collection('users')
-          .where('uid', isEqualTo: user.uid)
-          .get();
-
-      if (querySnapshot.docs.isNotEmpty) {
-        setState(() {
-          userData = querySnapshot.docs.first;
-        });
-      }
-    }
-  }
-
-  @override
   Widget build(BuildContext context) {
+    print(material);
+    Map AAs = Map.from(material)
+      ..remove('materialName')
+      ..remove('subjectName');
+
+    // Function to show the popup dialog
+    void _showAddMaterialDialog() {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Add Pdf'),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                TextField(
+                  decoration: InputDecoration(
+                    hintText: "Enter Pdf Name",
+                  ),
+                ),
+                SizedBox(height: 8),
+                TextField(
+                  decoration: InputDecoration(
+                    hintText: "Enter Pdf URL",
+                  ),
+                ),
+              ],
+            ),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop(); // Close the dialog
+                },
+                child: Text('Cancel'),
+              ),
+              TextButton(
+                onPressed: () {
+                  // Handle the action when "Add" is pressed
+                  Navigator.of(context).pop(); // Close the dialog
+                },
+                child: Text('Add'),
+              ),
+            ],
+          );
+        },
+      );
+    }
+
     return Scaffold(
-      appBar: AppBar(
-        title: Padding(
-          padding: const EdgeInsets.only(top: 8.0),
-          child: Text(
-            '${widget.documentId}',
-            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+      backgroundColor: Colors.black,
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          SafeArea(
+            child: Padding(
+              padding: EdgeInsets.only(left: 16, right: 16, top: 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Row(
+                    children: [
+                      IconButton(
+                        icon: Icon(Icons.arrow_back_ios, color: Colors.white),
+                        onPressed: () {
+                          Navigator.of(context).pop(); // Navigate back
+                        },
+                      ),
+                      SizedBox(
+                        width: 10.0,
+                      ),
+                      Text(
+                        materialName,
+                        style: TextStyle(
+                          fontSize: 28,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white, // Text color
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
           ),
-        ),
-        backgroundColor: Colors.black,
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios, color: Colors.white),
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-        ),
-        bottom: PreferredSize(
-          preferredSize: Size.fromHeight(68.0),
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 14, vertical: 14),
+          Padding(
+            padding: EdgeInsets.only(top: 14, left: 14, right: 14),
             child: TextField(
               decoration: InputDecoration(
                 hintText: "Search...",
@@ -83,115 +118,79 @@ class _MaterialsState extends State<Materials> {
               ),
             ),
           ),
-        ),
-      ),
-      body: FutureBuilder<QuerySnapshot>(
-        future: userData != null ? _fetchDocuments() : null,
-        builder: (context, snapshot) {
-          if (userData == null) {
-            return Center(child: CircularProgressIndicator());
-          } else if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
-          } else if (snapshot.hasError) {
-            return Center(
-                child: Text('Error: ${snapshot.error}',
-                    style: TextStyle(color: Colors.white)));
-          } else if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-            return Center(
-                child: Text('No documents found',
-                    style: TextStyle(color: Colors.white)));
-          }
+          Expanded(
+            child: ListView.builder(
+              itemCount: AAs.length,
+              itemBuilder: (context, index) {
+                String AAKey = AAs.keys.elementAt(index);
+                Map AA = AAs[AAKey];
 
-          return Padding(
-            padding: EdgeInsets.all(10),
-            child: Card(
-              color: Color(0xFF323232),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: snapshot.data!.docs.asMap().entries.map((entry) {
-                    int index = entry.key;
-                    DocumentSnapshot doc = entry.value;
-                    bool isLastItem = index == snapshot.data!.docs.length - 1;
-
-                    return Column(
-                      children: [
-                        ListTile(
-                          contentPadding:
-                              EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                          leading: Icon(
-                            Icons.folder,
-                            color: Colors.white,
-                          ),
-                          title: Text(
-                            doc.id,
-                            style: TextStyle(color: Colors.white),
-                          ),
-                          trailing: TextButton(
-                            onPressed: () {
-                              String pdfName = doc.id;
-                              Map<String, dynamic> data =
-                                  doc.data() as Map<String, dynamic>;
-                              String pdfLink = data['link'] ??
-                                  ''; // Fetch the "link" value from the document
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => PdfViewer(
-                                    pdfName: pdfName, // Pass the document name
-                                    pdfLink: pdfLink, // Pass the "link" value
+                return Padding(
+                  padding: const EdgeInsets.symmetric(
+                      vertical: 7.0, horizontal: 27.0),
+                  child: GestureDetector(
+                    child: Container(
+                      height: 70,
+                      decoration: BoxDecoration(
+                        color: Color.fromRGBO(50, 50, 50, 1),
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(12.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              children: [
+                                Icon(
+                                  Icons.school,
+                                  color: Colors.white,
+                                ),
+                                SizedBox(width: 8),
+                                Text(
+                                  AA['pdfName'] ?? 'Default AA Name',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 16.0,
+                                    fontWeight: FontWeight.bold,
                                   ),
                                 ),
-                              );
-                            },
-                            child: Text(
-                              'View',
-                              style: TextStyle(
-                                color: Colors.black,
+                              ],
+                            ),
+                            ElevatedButton(
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => PdfViewer(AA: AA),
+                                  ),
+                                );
+                              },
+                              style: ButtonStyle(
+                                backgroundColor:
+                                    MaterialStateProperty.all<Color>(
+                                  Colors.white,
+                                ),
+                              ),
+                              child: Text(
+                                'View',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  color: Colors.black,
+                                ),
                               ),
                             ),
-                            style: TextButton.styleFrom(
-                              backgroundColor: Colors.white,
-                            ),
-                          ),
+                          ],
                         ),
-                        if (!isLastItem)
-                          Divider(color: Colors.black), // Add Divider here
-                      ],
-                    );
-                  }).toList(),
-                ),
-              ),
+                      ),
+                    ),
+                  ),
+                );
+              },
             ),
-          );
-        },
+          ),
+        ],
       ),
-      backgroundColor: Colors.black,
     );
-  }
-
-  Future<QuerySnapshot<Map<String, dynamic>>> _fetchDocuments() async {
-    if (userData == null) {
-      throw Exception('userData is not initialized');
-    }
-
-    String faculty = userData!['faculty'];
-    String subfaculty = userData!['subfaculty'];
-    String semester = userData!['semester'];
-
-    return await FirebaseFirestore.instance
-        .collection('Material DB')
-        .doc(faculty)
-        .collection(subfaculty)
-        .doc(semester)
-        .collection('Subjects')
-        .doc(widget.subject)
-        .collection(widget.subject)
-        .doc(widget.documentId)
-        .collection(widget.documentId)
-        .get();
   }
 }

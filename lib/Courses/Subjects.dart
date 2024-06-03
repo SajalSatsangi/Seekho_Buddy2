@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:seekhobuddy/Courses/MateiralSection.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 void main() {
   runApp(MaterialApp(
@@ -16,7 +17,7 @@ class SubjectsPage extends StatefulWidget {
 }
 
 class _SubjectsPageState extends State<SubjectsPage> {
-  List<String> subjects = [];
+  Map<String, dynamic> subjects = {};
   DocumentSnapshot? userData;
   String _searchQuery = '';
 
@@ -26,7 +27,6 @@ class _SubjectsPageState extends State<SubjectsPage> {
     fetchUserData();
   }
 
-  // Fetch user data from Firestore
   Future<void> fetchUserData() async {
     User? user = FirebaseAuth.instance.currentUser;
 
@@ -46,56 +46,47 @@ class _SubjectsPageState extends State<SubjectsPage> {
     }
   }
 
-  // Fetch subjects based on user data
   Future<void> fetchSubjects() async {
     if (userData != null) {
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      DateTime lastRead =
-          DateTime.fromMillisecondsSinceEpoch(prefs.getInt('lastRead') ?? 0);
-      DateTime now = DateTime.now();
+      String faculty = userData!['faculty'];
+      String subfaculty = userData!['subfaculty'];
+      String semester = userData!['semester'];
 
-      if (prefs.containsKey('subjects') &&
-          now.difference(lastRead) < Duration(days: 1)) {
-        // Load subjects from shared preferences if last read was less than a day ago
-        setState(() {
-          subjects = prefs.getStringList('subjects')!;
-        });
+      var url = Uri.parse(
+          'https://seekhobuddy-server-36eb88311fa9.herokuapp.com/faculties/$faculty/branches/$subfaculty/semesters/$semester/subjects');
+      var response = await http.get(url);
+
+      if (response.statusCode == 200) {
+        var data = jsonDecode(response.body);
+
+        print('Data fetched from API: $data');
+
+        if (data is Map<String, dynamic>) {
+          setState(() {
+            subjects = data;
+          });
+        }
       } else {
-        String faculty = userData!['faculty'];
-        String subfaculty = userData!['subfaculty'];
-        String semester = userData!['semester'];
-
-        final snapshot = await FirebaseFirestore.instance
-            .collection('Material DB')
-            .doc(faculty)
-            .collection(subfaculty)
-            .doc(semester)
-            .collection('Subjects')
-            .get();
-
-        setState(() {
-          subjects = snapshot.docs.map((doc) => doc.id).toList();
-        });
-
-        // Store subjects and current timestamp in shared preferences
-        await prefs.setStringList('subjects', subjects);
-        await prefs.setInt('lastRead', now.millisecondsSinceEpoch);
+        print('Request failed with status: ${response.statusCode}.');
       }
     }
   }
 
-  // Method to handle search query change
   void _updateSearchQuery(String newQuery) {
     setState(() {
       _searchQuery = newQuery;
     });
   }
 
-  // Method to filter subjects based on search query
   List<String> _filterSubjects() {
-    return subjects
+    return subjects.values
         .where((subject) =>
-            subject.toLowerCase().contains(_searchQuery.toLowerCase()))
+            subject is Map<String, dynamic> &&
+            subject.containsKey('subjectName'))
+        .map((subject) =>
+            (subject as Map<String, dynamic>)['subjectName'] as String)
+        .where((subjectName) =>
+            subjectName.toLowerCase().contains(_searchQuery.toLowerCase()))
         .toList();
   }
 
@@ -165,16 +156,21 @@ class _SubjectsPageState extends State<SubjectsPage> {
               child: ListView.builder(
                 itemCount: _filterSubjects().length,
                 itemBuilder: (context, index) {
+                  String subjectName = _filterSubjects()[index];
                   return Padding(
                     padding: const EdgeInsets.only(bottom: 20.0),
                     child: _buildBox(
                       icon: Icons.notes_rounded,
-                      title: _filterSubjects()[index],
+                      title: subjectName,
                       onTap: () {
                         Navigator.push(
                           context,
-                          _createRoute(MateiralsectionAdmin(
-                            subject: _filterSubjects()[index],
+                          _createRoute(Materialsectionpage(
+                            data: subjects.entries
+                                .firstWhere((entry) =>
+                                    entry.value['subjectName'] == subjectName)
+                                .value,
+                            subjectName: subjectName,
                           )),
                         );
                       },
