@@ -53,6 +53,8 @@ class _ProfilePageState extends State<ProfilePage> {
         setState(() {
           userData = querySnapshot.docs.first;
         });
+
+        print(userData!.data());
       }
     }
   }
@@ -111,46 +113,62 @@ class _ProfilePageState extends State<ProfilePage> {
                       );
                     },
                   ),
-                  IconButton(
-                    icon: Icon(
-                      Icons.request_page,
-                      color: Colors.white,
-                      size: screenWidth * 0.06,
+                  Visibility(
+                    visible: userData != null &&
+                        (userData!['role'] == 'admin' ||
+                            userData!['role'] == 'verificationist'),
+                    child: IconButton(
+                      icon: Icon(
+                        Icons.request_page,
+                        color: Colors.white,
+                        size: screenWidth * 0.06,
+                      ),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => VerificationApp()),
+                        );
+                      },
                     ),
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => VerificationApp()),
-                      );
-                    },
                   ),
-                  IconButton(
-                    icon: Icon(
-                      Icons.person,
-                      color: Colors.white,
-                      size: screenWidth * 0.06,
+                  Visibility(
+                    visible: userData != null &&
+                        (userData!['role'] == 'admin' ||
+                            userData!['role'] == 'dataeditor'),
+                    child: IconButton(
+                      icon: Icon(
+                        Icons.person,
+                        color: Colors.white,
+                        size: screenWidth * 0.06,
+                      ),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => userdata()),
+                        );
+                      },
                     ),
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => userdata()),
-                      );
-                    },
                   ),
-                  IconButton(
-                    icon: Icon(
-                      Icons.book,
-                      color: Colors.white,
-                      size: screenWidth * 0.06,
+                  Visibility(
+                    visible: userData != null &&
+                        (userData!['role'] == 'admin' ||
+                            userData!['role'] == 'dataeditor'),
+                    child: IconButton(
+                      icon: Icon(
+                        Icons.book,
+                        color: Colors.white,
+                        size: screenWidth * 0.06,
+                      ),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  MaterialConfirmationScreen()),
+                        );
+                      },
                     ),
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => MaterialConfirmationScreen()),
-                      );
-                    },
                   ),
                 ],
               ),
