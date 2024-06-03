@@ -64,7 +64,7 @@ class Semesters extends StatelessWidget {
 
                 return Padding(
                   padding: const EdgeInsets.symmetric(
-                      vertical: 7.0, horizontal: 24.0),
+                      vertical: 7.0, horizontal: 34.0),
                   child: GestureDetector(
                     child: Container(
                       height: 70,
@@ -83,7 +83,7 @@ class Semesters extends StatelessWidget {
                                   Icons.school,
                                   color: Colors.white,
                                 ),
-                                SizedBox(width: 8),
+                                SizedBox(width: 18),
                                 Text(
                                   semester['semesterName'] ??
                                       'Default Semester Name',

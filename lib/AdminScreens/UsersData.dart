@@ -42,10 +42,9 @@ class _UserDataPageState extends State<UserDataPage> {
   _onSearchChanged() {
     setState(() {
       _filteredUsers = _users
-          .where((user) =>
-              (user.data() as Map<String, dynamic>)['name']
-                  .toLowerCase()
-                  .contains(_searchController.text.toLowerCase()))
+          .where((user) => (user.data() as Map<String, dynamic>)['name']
+              .toLowerCase()
+              .contains(_searchController.text.toLowerCase()))
           .toList();
     });
   }
@@ -54,11 +53,13 @@ class _UserDataPageState extends State<UserDataPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: EdgeInsets.only(top: 28.0),
+        padding:
+            EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.04),
         child: Column(
           children: [
             Padding(
-              padding: EdgeInsets.only(left: 16, right: 16, top: 10),
+              padding: EdgeInsets.symmetric(
+                  horizontal: MediaQuery.of(context).size.width * 0.04),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
@@ -74,11 +75,11 @@ class _UserDataPageState extends State<UserDataPage> {
                           );
                         },
                       ),
-                      SizedBox(width: 10.0),
+                      SizedBox(width: MediaQuery.of(context).size.width * 0.02),
                       Text(
                         "User Data",
                         style: TextStyle(
-                          fontSize: 28,
+                          fontSize: MediaQuery.of(context).size.width * 0.08,
                           fontWeight: FontWeight.bold,
                           color: Colors.white,
                         ),
@@ -89,7 +90,9 @@ class _UserDataPageState extends State<UserDataPage> {
               ),
             ),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 14, vertical: 14),
+              padding: EdgeInsets.symmetric(
+                  horizontal: MediaQuery.of(context).size.width * 0.04,
+                  vertical: MediaQuery.of(context).size.height * 0.01),
               child: TextField(
                 controller: _searchController,
                 decoration: InputDecoration(
@@ -98,13 +101,15 @@ class _UserDataPageState extends State<UserDataPage> {
                   prefixIcon: Icon(
                     Icons.search,
                     color: Colors.white,
-                    size: 20,
+                    size: MediaQuery.of(context).size.width * 0.06,
                   ),
                   filled: true,
                   fillColor: Color(0xFF323232),
-                  contentPadding: EdgeInsets.all(8),
+                  contentPadding:
+                      EdgeInsets.all(MediaQuery.of(context).size.width * 0.02),
                   enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(20),
+                    borderRadius: BorderRadius.circular(
+                        MediaQuery.of(context).size.width * 0.1),
                     borderSide: BorderSide(color: Color(0xFF323232)),
                   ),
                 ),
@@ -138,22 +143,30 @@ class _UserDataPageState extends State<UserDataPage> {
                           document.data() as Map<String, dynamic>;
                       return Padding(
                         padding: EdgeInsets.symmetric(
-                            horizontal: 16.0, vertical: 8.0),
+                            horizontal:
+                                MediaQuery.of(context).size.width * 0.04,
+                            vertical:
+                                MediaQuery.of(context).size.height * 0.01),
                         child: Container(
-                          padding: EdgeInsets.all(16.0),
+                          padding: EdgeInsets.all(
+                              MediaQuery.of(context).size.width * 0.04),
                           decoration: BoxDecoration(
                             color: Colors.grey[900],
-                            borderRadius: BorderRadius.circular(28.0),
+                            borderRadius: BorderRadius.circular(
+                                MediaQuery.of(context).size.width * 0.05),
                           ),
                           child: Row(
                             children: [
                               CircleAvatar(
-                                radius: 40.0,
+                                radius:
+                                    MediaQuery.of(context).size.width * 0.09,
                                 backgroundImage: NetworkImage(
                                   data['profile_picture'],
                                 ),
                               ),
-                              SizedBox(width: 16.0),
+                              SizedBox(
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.04),
                               Expanded(
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -164,17 +177,25 @@ class _UserDataPageState extends State<UserDataPage> {
                                         "${data['name']}",
                                         style: TextStyle(
                                           color: Colors.white,
-                                          fontSize: 18.0,
+                                          fontSize: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              0.04,
                                         ),
                                       ),
                                     ),
-                                    SizedBox(height: 8.0),
+                                    SizedBox(
+                                        height:
+                                            MediaQuery.of(context).size.height *
+                                                0.001),
                                     Text(
                                       "${data['faculty']}",
                                       style: TextStyle(
                                         color: const Color.fromARGB(
                                             255, 201, 201, 201),
-                                        fontSize: 13.0,
+                                        fontSize:
+                                            MediaQuery.of(context).size.width *
+                                                0.03,
                                       ),
                                     ),
                                     Text(
@@ -182,7 +203,9 @@ class _UserDataPageState extends State<UserDataPage> {
                                       style: TextStyle(
                                         color: const Color.fromARGB(
                                             255, 201, 201, 201),
-                                        fontSize: 13.0,
+                                        fontSize:
+                                            MediaQuery.of(context).size.width *
+                                                0.03,
                                       ),
                                     ),
                                     Text(
@@ -190,7 +213,9 @@ class _UserDataPageState extends State<UserDataPage> {
                                       style: TextStyle(
                                         color: const Color.fromARGB(
                                             255, 201, 201, 201),
-                                        fontSize: 13.0,
+                                        fontSize:
+                                            MediaQuery.of(context).size.width *
+                                                0.03,
                                       ),
                                     ),
                                   ],
