@@ -12,7 +12,7 @@ void showMaintenanceNotice(
         Animation secondaryAnimation) {
       return Center(
         child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 30),
+          padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 20),
           child: AlertDialog(
             backgroundColor: const Color.fromARGB(255, 56, 56, 56),
             shape: const RoundedRectangleBorder(
@@ -85,6 +85,20 @@ void showMaintenanceNotice(
                             fileUrl,
                             fit: BoxFit.cover,
                             width: double.infinity,
+                            errorBuilder: (context, error, stackTrace) {
+                              return Container(
+                                color: Colors.black,
+                                height: 200,
+                                width: double.infinity,
+                                child: const Center(
+                                  child: Icon(
+                                    Icons.error,
+                                    color: Colors.white,
+                                    size: 50,
+                                  ),
+                                ),
+                              );
+                            },
                           ),
                         ),
                       ],
