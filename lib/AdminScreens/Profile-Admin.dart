@@ -73,17 +73,23 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
       appBar: AppBar(
         title: Padding(
-          padding: EdgeInsets.only(left: 17, right: 16, top: 11),
+          padding: EdgeInsets.only(
+              left: screenWidth * 0.05,
+              right: screenWidth * 0.04,
+              top: screenHeight * 0.025),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               Text(
                 "Profile",
                 style: TextStyle(
-                  fontSize: 28,
+                  fontSize: screenWidth * 0.065,
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
                 ),
@@ -95,6 +101,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     icon: Icon(
                       Icons.edit,
                       color: Colors.white,
+                      size: screenWidth * 0.06,
                     ),
                     onPressed: () {
                       Navigator.push(
@@ -107,6 +114,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     icon: Icon(
                       Icons.request_page,
                       color: Colors.white,
+                      size: screenWidth * 0.06,
                     ),
                     onPressed: () {
                       Navigator.push(
@@ -120,6 +128,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     icon: Icon(
                       Icons.person,
                       color: Colors.white,
+                      size: screenWidth * 0.06,
                     ),
                     onPressed: () {
                       Navigator.push(
@@ -139,36 +148,36 @@ class _ProfilePageState extends State<ProfilePage> {
           : Center(
               child: SingleChildScrollView(
                 child: Padding(
-                  padding: const EdgeInsets.all(30.0),
+                  padding: EdgeInsets.all(screenWidth * 0.07),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      SizedBox(height: 30.0),
+                      SizedBox(height: screenHeight * 0.04),
                       Center(
                         child: Column(
                           children: [
                             CircleAvatar(
-                              radius: 60, // Decreased radius
+                              radius: screenWidth * 0.15,
                               backgroundImage:
                                   NetworkImage(userData!['profile_picture']),
                             ),
-                            SizedBox(height: 16),
+                            SizedBox(height: screenHeight * 0.03),
                             Text(
                               userData!['name'],
                               style: TextStyle(
-                                fontSize: 24,
+                                fontSize: screenWidth * 0.065,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
-                            SizedBox(height: 3),
+                            SizedBox(height: screenHeight * 0.005),
                             Text(
                               userData!['email'],
                               style: TextStyle(
-                                fontSize: 16,
+                                fontSize: screenWidth * 0.035,
                                 color: Colors.grey,
                               ),
                             ),
-                            SizedBox(height: 32),
+                            SizedBox(height: screenHeight * 0.03),
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -176,56 +185,67 @@ class _ProfilePageState extends State<ProfilePage> {
                                   label: 'University',
                                   text: 'Dayalbagh Educational Institute',
                                   icon: Icons.location_city,
+                                  screenWidth: screenWidth,
                                 ),
-                                SizedBox(height: 5),
+                                SizedBox(height: screenHeight * 0.01),
                                 buildInfoBox(
                                   label: 'Roll Number',
                                   text: userData!['rollno'],
                                   icon: Icons.confirmation_number,
+                                  screenWidth: screenWidth,
                                 ),
-                                SizedBox(height: 5),
+                                SizedBox(height: screenHeight * 0.01),
                                 buildInfoBox(
                                   label: 'Faculty',
                                   text: userData!['faculty'],
                                   icon: Icons.account_balance,
+                                  screenWidth: screenWidth,
                                 ),
-                                SizedBox(height: 5),
+                                SizedBox(height: screenHeight * 0.01),
                                 buildInfoBox(
                                   label: 'Branch',
-                                  text:
-                                      '${userData!['subfaculty']}, ${userData!['subbranch']}',
+                                  text: userData!['subfaculty'],
                                   icon: Icons.category,
+                                  screenWidth: screenWidth,
                                 ),
-                                SizedBox(height: 5),
+                                SizedBox(height: screenHeight * 0.01),
+                                buildInfoBox(
+                                  label: 'Specialization',
+                                  text: userData!['subbranch'],
+                                  icon: Icons.spa,
+                                  screenWidth: screenWidth,
+                                ),
+                                SizedBox(height: screenHeight * 0.01),
                                 buildInfoBox(
                                   label: 'Semester',
                                   text: userData!['semester'],
                                   icon: Icons.timeline,
+                                  screenWidth: screenWidth,
                                 ),
                               ],
                             ),
-                            SizedBox(height: 20),
+                            SizedBox(height: screenHeight * 0.02),
                             Padding(
-                              padding: const EdgeInsets.only(right: 16.0),
+                              padding:
+                                  EdgeInsets.only(right: screenWidth * 0.06),
                               child: Align(
                                 alignment: Alignment.centerRight,
                                 child: SizedBox(
-                                  width: 100, // Adjust button width here
-                                  height: 40, // Adjust button height here
+                                  width: screenWidth * 0.26,
+                                  height: screenHeight * 0.055,
                                   child: ElevatedButton(
-                                    onPressed: _logout, // Call _logout function
+                                    onPressed: _logout,
                                     style: ButtonStyle(
                                       backgroundColor:
                                           MaterialStateProperty.all<Color>(
-                                        Color.fromRGBO(65, 48, 48,
-                                            0.591), // Changed to red
+                                        Color.fromRGBO(65, 48, 48, 0.591),
                                       ),
                                     ),
                                     child: Text(
                                       'LogOut',
                                       style: TextStyle(
-                                        color: Color.fromARGB(
-                                            255, 233, 30, 30), // Text color
+                                        color: Color.fromARGB(255, 233, 30, 30),
+                                        fontSize: screenWidth * 0.035,
                                       ),
                                     ),
                                   ),
@@ -244,35 +264,35 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 
   Widget buildInfoBox(
-      {required String label, required String text, required IconData icon}) {
+      {required String label,
+      required String text,
+      required IconData icon,
+      required double screenWidth}) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 4),
+      padding: EdgeInsets.symmetric(vertical: screenWidth * 0.005),
       child: Container(
-        width: MediaQuery.of(context).size.width * 0.8, // Set maximum width
-        padding: EdgeInsets.symmetric(horizontal: 14.0, vertical: 10.0),
+        width: screenWidth * 0.75,
+        padding: EdgeInsets.symmetric(
+            horizontal: screenWidth * 0.04, vertical: screenWidth * 0.03),
         decoration: BoxDecoration(
           color: Color.fromRGBO(32, 32, 32, 1),
-          borderRadius: BorderRadius.circular(20.0),
+          borderRadius: BorderRadius.circular(screenWidth * 0.05),
           border: Border.all(color: const Color.fromARGB(255, 115, 115, 115)),
         ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        child: Row(
           children: [
-            Row(
-              children: [
-                Icon(
-                  icon,
-                  color: Color.fromARGB(255, 255, 255, 255),
-                ),
-                SizedBox(width: 10.0),
-                Text(
-                  text,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 14.0,
-                  ),
-                ),
-              ],
+            Icon(
+              icon,
+              color: Color.fromARGB(255, 255, 255, 255),
+              size: screenWidth * 0.07,
+            ),
+            SizedBox(width: screenWidth * 0.04),
+            Text(
+              text,
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: screenWidth * 0.035,
+              ),
             ),
           ],
         ),
