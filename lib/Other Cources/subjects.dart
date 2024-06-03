@@ -1,70 +1,51 @@
 import 'package:flutter/material.dart';
-import 'package:seekhobuddy/ExploreMore/PdfViewer.dart';
+import 'package:seekhobuddy/AdminScreens/materialSectionPage-Admin.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:seekhobuddy/Other%20Cources/materialSectionPage.dart'; 
 
-class Materialpage extends StatelessWidget {
-  final Map material;
-  final String materialName;
+class Subjects extends StatefulWidget {
+  final String semesterName;
+  final Map semesterData;
   final String facultyName;
   final String branchName;
-  final String semesterName;
-  final String subjectName;
 
-  Materialpage({required this.materialName, 
-  required this.material,
-  required this.facultyName,
-    required this.branchName,
+  Subjects({
     required this.semesterName,
-    required this.subjectName,
+    required this.semesterData,
+    required this.facultyName,
+    required this.branchName,
   });
 
   @override
-  Widget build(BuildContext context) {
-    print(material);
-    Map AAs = Map.from(material)
-      ..remove('materialName')
-      ..remove('subjectName');
+  _SubjectsState createState() => _SubjectsState();
+}
 
-    // Function to show the popup dialog
-    void _showAddMaterialDialog() {
-      showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text('Add Pdf'),
-            content: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                TextField(
-                  decoration: InputDecoration(
-                    hintText: "Enter Pdf Name",
-                  ),
-                ),
-                SizedBox(height: 8),
-                TextField(
-                  decoration: InputDecoration(
-                    hintText: "Enter Pdf URL",
-                  ),
-                ),
-              ],
-            ),
-            actions: <Widget>[
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop(); // Close the dialog
-                },
-                child: Text('Cancel'),
-              ),
-              TextButton(
-                onPressed: () {
-                  // Handle the action when "Add" is pressed
-                  Navigator.of(context).pop(); // Close the dialog
-                },
-                child: Text('Add'),
-              ),
-            ],
-          );
-        },
-      );
+class _SubjectsState extends State<Subjects> {
+  String searchQuery = '';
+
+  Future<String> getUserRole() async {
+  User? user = FirebaseAuth.instance.currentUser;
+  if (user != null) {
+    QuerySnapshot querySnapshot = await FirebaseFirestore.instance.collection('users').where('uid', isEqualTo: user.uid).get();
+    if (querySnapshot.docs.isNotEmpty) {
+      return querySnapshot.docs.first['role'];
+    } else {
+      throw Exception('No user document found');
+    }
+  } else {
+    throw Exception('No user logged in');
+  }
+}
+
+  @override
+  Widget build(BuildContext context) {
+    Map subjects = Map.from(widget.semesterData)..remove('semesterName');
+    Map filteredSubjects = {};
+    for (var key in subjects.keys) {
+      if (key.toString().toLowerCase().contains(searchQuery.toLowerCase())) {
+        filteredSubjects[key] = subjects[key];
+      }
     }
 
     return Scaffold(
@@ -90,7 +71,7 @@ class Materialpage extends StatelessWidget {
                         width: 10.0,
                       ),
                       Text(
-                        materialName,
+                        widget.semesterName,
                         style: TextStyle(
                           fontSize: 28,
                           fontWeight: FontWeight.bold,
@@ -106,6 +87,12 @@ class Materialpage extends StatelessWidget {
           Padding(
             padding: EdgeInsets.only(top: 14, left: 14, right: 14),
             child: TextField(
+              onChanged: (value) {
+                setState(() {
+                  searchQuery = value;
+                });
+              },
+              style: TextStyle(color: Colors.white), // Add this line
               decoration: InputDecoration(
                 hintText: "Search...",
                 hintStyle: TextStyle(color: Colors.white),
@@ -126,10 +113,10 @@ class Materialpage extends StatelessWidget {
           ),
           Expanded(
             child: ListView.builder(
-              itemCount: AAs.length,
+              itemCount: filteredSubjects.length,
               itemBuilder: (context, index) {
-                String AAKey = AAs.keys.elementAt(index);
-                Map AA = AAs[AAKey];
+                String subjectKey = filteredSubjects.keys.elementAt(index);
+                Map subject = filteredSubjects[subjectKey];
 
                 return Padding(
                   padding: const EdgeInsets.symmetric(
@@ -154,7 +141,8 @@ class Materialpage extends StatelessWidget {
                                 ),
                                 SizedBox(width: 8),
                                 Text(
-                                  AA['pdfName'] ?? 'Default AA Name',
+                                  subject['subjectName'] ??
+                                      'Default Subject Name',
                                   style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 16.0,
@@ -165,12 +153,37 @@ class Materialpage extends StatelessWidget {
                             ),
                             ElevatedButton(
                               onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => PdfViewer(AA: AA),
-                                  ),
-                                );
+                                getUserRole().then((role) {
+                                  if (role == 'student') {
+                                    Navigator.push(
+                                      context,
+                                      SlideLeftPageRoute(
+                                        page: Materialsectionpage(
+                                          subjectName: subject['subjectName'],
+                                          subject: subject,
+                                          facultyName: widget.facultyName,
+                                          branchName: widget.branchName,
+                                          semesterName: widget.semesterName,
+                                          role: role,  // Add this line
+                                        ),
+                                      ),
+                                    );
+                                  } else if (role == 'admin' || role == 'CR') {
+                                    Navigator.push(
+                                      context,
+                                      SlideLeftPageRoute(
+                                        page: Materialsectionpage_Admin(
+                                          subjectName: subject['subjectName'],
+                                          subject: subject,
+                                          facultyName: widget.facultyName,
+                                          branchName: widget.branchName,
+                                          semesterName: widget.semesterName,
+                                          role: role,  // Add this line
+                                        ),
+                                      ),
+                                    );
+                                  }
+                                });
                               },
                               style: ButtonStyle(
                                 backgroundColor:
@@ -185,7 +198,7 @@ class Materialpage extends StatelessWidget {
                                   color: Colors.black,
                                 ),
                               ),
-                            ),
+                            )
                           ],
                         ),
                       ),
@@ -199,4 +212,27 @@ class Materialpage extends StatelessWidget {
       ),
     );
   }
+}
+
+class SlideLeftPageRoute<T> extends PageRouteBuilder<T> {
+  final Widget page;
+
+  SlideLeftPageRoute({required this.page})
+      : super(
+          pageBuilder: (context, animation, secondaryAnimation) => page,
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            const begin = Offset(1.0, 0.0);
+            const end = Offset.zero;
+            const curve = Curves.ease;
+
+            var tween =
+                Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+            var offsetAnimation = animation.drive(tween);
+
+            return SlideTransition(
+              position: offsetAnimation,
+              child: child,
+            );
+          },
+        );
 }

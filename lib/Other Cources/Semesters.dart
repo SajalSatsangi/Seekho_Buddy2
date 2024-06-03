@@ -1,15 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:seekhobuddy/ExploreMore/Semesters.dart';
+import 'package:seekhobuddy/Other%20Cources/subjects.dart';
 
-class Branches extends StatelessWidget {
+class Semesters extends StatelessWidget {
+  final String branchName;
+  final Map branchData;
   final String facultyName;
-  final Map facultyData;
 
-  Branches({required this.facultyName, required this.facultyData});
+  Semesters({
+    required this.facultyName,
+    required this.branchName,
+    required this.branchData,
+  });
 
   @override
   Widget build(BuildContext context) {
-    List branches = facultyData['branches'].values.toList();
+    Map semesters = Map.from(branchData)..remove('branchName');
 
     return Scaffold(
       backgroundColor: Colors.black,
@@ -26,17 +31,19 @@ class Branches extends StatelessWidget {
                     children: [
                       IconButton(
                         icon: Icon(Icons.arrow_back_ios, color: Colors.white),
-                        onPressed: () => Navigator.of(context).pop(),
+                        onPressed: () {
+                          Navigator.of(context).pop(); // Navigate back
+                        },
                       ),
                       SizedBox(
                         width: 10.0,
                       ),
                       Text(
-                        facultyName,
+                        branchName,
                         style: TextStyle(
-                          fontSize: 28,
-                          fontWeight: FontWeight.bold,
                           color: Colors.white,
+                          fontSize: 30.0,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
                     ],
@@ -47,23 +54,26 @@ class Branches extends StatelessWidget {
           ),
           Expanded(
             child: ListView.builder(
-              itemCount: branches.length,
+              itemCount: semesters.length,
               itemBuilder: (context, index) {
-                var branch = branches[index];
+                String semesterKey = semesters.keys.elementAt(index);
+                if (semesters[semesterKey] is! Map) {
+                  throw 'Expected a Map, but got ${semesters[semesterKey].runtimeType}';
+                }
+                Map semester = semesters[semesterKey];
 
                 return Padding(
-                  // Reduced vertical padding to decrease space between items
                   padding: const EdgeInsets.symmetric(
-                      vertical: 8.0, horizontal: 25.0),
+                      vertical: 7.0, horizontal: 34.0),
                   child: GestureDetector(
                     child: Container(
-                      height: 80,
+                      height: 70,
                       decoration: BoxDecoration(
                         color: Color.fromRGBO(50, 50, 50, 1),
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: Padding(
-                        padding: const EdgeInsets.all(20.0),
+                        padding: const EdgeInsets.all(12.0),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -73,12 +83,13 @@ class Branches extends StatelessWidget {
                                   Icons.school,
                                   color: Colors.white,
                                 ),
-                                SizedBox(width: 8),
+                                SizedBox(width: 18),
                                 Text(
-                                  branch['branchName'],
+                                  semester['semesterName'] ??
+                                      'Default Semester Name',
                                   style: TextStyle(
                                     color: Colors.white,
-                                    fontSize: 17.0,
+                                    fontSize: 16.0,
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
@@ -88,23 +99,30 @@ class Branches extends StatelessWidget {
                               onPressed: () {
                                 Navigator.push(
                                   context,
-                                  SlideRightPageRoute(
-                                    page: Semesters(
+                                  SlideLeftPageRoute(
+                                    page: Subjects(
                                       facultyName: facultyName,
-                                      branchName: branch[
-                                          'branchName'], // assuming 'branchName' is the key for the branch name
-                                      branchData: branch as Map,
+                                      branchName: branchName,
+                                      semesterName: semester[
+                                          'semesterName'], // assuming 'semesterName' is the key for the semester name
+                                      semesterData:
+                                          semester, // Pass the entire semester map
                                     ),
                                   ),
                                 );
                               },
                               style: ButtonStyle(
-                                backgroundColor: WidgetStateProperty.all<Color>(
-                                    Colors.white),
+                                backgroundColor:
+                                    MaterialStateProperty.all<Color>(
+                                  Colors.white,
+                                ),
                               ),
                               child: Text(
                                 'View',
-                                style: TextStyle(color: Colors.black),
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  color: Colors.black,
+                                ),
                               ),
                             ),
                           ],
@@ -122,28 +140,23 @@ class Branches extends StatelessWidget {
   }
 }
 
-class SlideRightPageRoute extends PageRouteBuilder {
+class SlideLeftPageRoute<T> extends PageRouteBuilder<T> {
   final Widget page;
 
-  SlideRightPageRoute({required this.page})
+  SlideLeftPageRoute({required this.page})
       : super(
-          pageBuilder: (
-            BuildContext context,
-            Animation<double> animation,
-            Animation<double> secondaryAnimation,
-          ) =>
-              page,
-          transitionsBuilder: (
-            BuildContext context,
-            Animation<double> animation,
-            Animation<double> secondaryAnimation,
-            Widget child,
-          ) {
+          pageBuilder: (context, animation, secondaryAnimation) => page,
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            const begin = Offset(1.0, 0.0);
+            const end = Offset.zero;
+            const curve = Curves.ease;
+
+            var tween =
+                Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+            var offsetAnimation = animation.drive(tween);
+
             return SlideTransition(
-              position: Tween<Offset>(
-                begin: const Offset(1.0, 0.0),
-                end: Offset.zero,
-              ).animate(animation),
+              position: offsetAnimation,
               child: child,
             );
           },

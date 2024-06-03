@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:seekhobuddy/Courses/Subjects.dart';
-import 'package:seekhobuddy/ExploreMore/facultyData.dart';
+import 'package:seekhobuddy/Other%20Cources/facultyData.dart';
 
 class ResourcesPage extends StatelessWidget {
   @override

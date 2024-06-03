@@ -1,51 +1,70 @@
 import 'package:flutter/material.dart';
-import 'package:seekhobuddy/AdminScreens/materialSectionPage-Admin.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:seekhobuddy/ExploreMore/materialSectionPage.dart'; 
+import 'package:seekhobuddy/Other%20Cources/PdfViewer.dart';
 
-class Subjects extends StatefulWidget {
-  final String semesterName;
-  final Map semesterData;
+class Materialpage extends StatelessWidget {
+  final Map material;
+  final String materialName;
   final String facultyName;
   final String branchName;
+  final String semesterName;
+  final String subjectName;
 
-  Subjects({
-    required this.semesterName,
-    required this.semesterData,
-    required this.facultyName,
+  Materialpage({required this.materialName, 
+  required this.material,
+  required this.facultyName,
     required this.branchName,
+    required this.semesterName,
+    required this.subjectName,
   });
 
   @override
-  _SubjectsState createState() => _SubjectsState();
-}
-
-class _SubjectsState extends State<Subjects> {
-  String searchQuery = '';
-
-  Future<String> getUserRole() async {
-  User? user = FirebaseAuth.instance.currentUser;
-  if (user != null) {
-    QuerySnapshot querySnapshot = await FirebaseFirestore.instance.collection('users').where('uid', isEqualTo: user.uid).get();
-    if (querySnapshot.docs.isNotEmpty) {
-      return querySnapshot.docs.first['role'];
-    } else {
-      throw Exception('No user document found');
-    }
-  } else {
-    throw Exception('No user logged in');
-  }
-}
-
-  @override
   Widget build(BuildContext context) {
-    Map subjects = Map.from(widget.semesterData)..remove('semesterName');
-    Map filteredSubjects = {};
-    for (var key in subjects.keys) {
-      if (key.toString().toLowerCase().contains(searchQuery.toLowerCase())) {
-        filteredSubjects[key] = subjects[key];
-      }
+    print(material);
+    Map AAs = Map.from(material)
+      ..remove('materialName')
+      ..remove('subjectName');
+
+    // Function to show the popup dialog
+    void _showAddMaterialDialog() {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Add Pdf'),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                TextField(
+                  decoration: InputDecoration(
+                    hintText: "Enter Pdf Name",
+                  ),
+                ),
+                SizedBox(height: 8),
+                TextField(
+                  decoration: InputDecoration(
+                    hintText: "Enter Pdf URL",
+                  ),
+                ),
+              ],
+            ),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop(); // Close the dialog
+                },
+                child: Text('Cancel'),
+              ),
+              TextButton(
+                onPressed: () {
+                  // Handle the action when "Add" is pressed
+                  Navigator.of(context).pop(); // Close the dialog
+                },
+                child: Text('Add'),
+              ),
+            ],
+          );
+        },
+      );
     }
 
     return Scaffold(
@@ -71,7 +90,7 @@ class _SubjectsState extends State<Subjects> {
                         width: 10.0,
                       ),
                       Text(
-                        widget.semesterName,
+                        materialName,
                         style: TextStyle(
                           fontSize: 28,
                           fontWeight: FontWeight.bold,
@@ -87,12 +106,6 @@ class _SubjectsState extends State<Subjects> {
           Padding(
             padding: EdgeInsets.only(top: 14, left: 14, right: 14),
             child: TextField(
-              onChanged: (value) {
-                setState(() {
-                  searchQuery = value;
-                });
-              },
-              style: TextStyle(color: Colors.white), // Add this line
               decoration: InputDecoration(
                 hintText: "Search...",
                 hintStyle: TextStyle(color: Colors.white),
@@ -113,10 +126,10 @@ class _SubjectsState extends State<Subjects> {
           ),
           Expanded(
             child: ListView.builder(
-              itemCount: filteredSubjects.length,
+              itemCount: AAs.length,
               itemBuilder: (context, index) {
-                String subjectKey = filteredSubjects.keys.elementAt(index);
-                Map subject = filteredSubjects[subjectKey];
+                String AAKey = AAs.keys.elementAt(index);
+                Map AA = AAs[AAKey];
 
                 return Padding(
                   padding: const EdgeInsets.symmetric(
@@ -141,8 +154,7 @@ class _SubjectsState extends State<Subjects> {
                                 ),
                                 SizedBox(width: 8),
                                 Text(
-                                  subject['subjectName'] ??
-                                      'Default Subject Name',
+                                  AA['pdfName'] ?? 'Default AA Name',
                                   style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 16.0,
@@ -153,37 +165,12 @@ class _SubjectsState extends State<Subjects> {
                             ),
                             ElevatedButton(
                               onPressed: () {
-                                getUserRole().then((role) {
-                                  if (role == 'student') {
-                                    Navigator.push(
-                                      context,
-                                      SlideLeftPageRoute(
-                                        page: Materialsectionpage(
-                                          subjectName: subject['subjectName'],
-                                          subject: subject,
-                                          facultyName: widget.facultyName,
-                                          branchName: widget.branchName,
-                                          semesterName: widget.semesterName,
-                                          role: role,  // Add this line
-                                        ),
-                                      ),
-                                    );
-                                  } else if (role == 'admin' || role == 'CR') {
-                                    Navigator.push(
-                                      context,
-                                      SlideLeftPageRoute(
-                                        page: Materialsectionpage_Admin(
-                                          subjectName: subject['subjectName'],
-                                          subject: subject,
-                                          facultyName: widget.facultyName,
-                                          branchName: widget.branchName,
-                                          semesterName: widget.semesterName,
-                                          role: role,  // Add this line
-                                        ),
-                                      ),
-                                    );
-                                  }
-                                });
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => PdfViewer(AA: AA),
+                                  ),
+                                );
                               },
                               style: ButtonStyle(
                                 backgroundColor:
@@ -198,7 +185,7 @@ class _SubjectsState extends State<Subjects> {
                                   color: Colors.black,
                                 ),
                               ),
-                            )
+                            ),
                           ],
                         ),
                       ),
@@ -212,27 +199,4 @@ class _SubjectsState extends State<Subjects> {
       ),
     );
   }
-}
-
-class SlideLeftPageRoute<T> extends PageRouteBuilder<T> {
-  final Widget page;
-
-  SlideLeftPageRoute({required this.page})
-      : super(
-          pageBuilder: (context, animation, secondaryAnimation) => page,
-          transitionsBuilder: (context, animation, secondaryAnimation, child) {
-            const begin = Offset(1.0, 0.0);
-            const end = Offset.zero;
-            const curve = Curves.ease;
-
-            var tween =
-                Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-            var offsetAnimation = animation.drive(tween);
-
-            return SlideTransition(
-              position: offsetAnimation,
-              child: child,
-            );
-          },
-        );
 }

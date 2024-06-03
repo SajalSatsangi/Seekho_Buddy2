@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:seekhobuddy/ExploreMore/PdfViewer.dart';
+import 'package:seekhobuddy/Other%20Cources/PdfViewer.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 

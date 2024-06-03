@@ -1,20 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:seekhobuddy/ExploreMore/subjects.dart';
+import 'package:seekhobuddy/Other%20Cources/Semesters.dart';
 
-class Semesters extends StatelessWidget {
-  final String branchName;
-  final Map branchData;
+class Branches extends StatelessWidget {
   final String facultyName;
+  final Map facultyData;
 
-  Semesters({
-    required this.facultyName,
-    required this.branchName,
-    required this.branchData,
-  });
+  Branches({required this.facultyName, required this.facultyData});
 
   @override
   Widget build(BuildContext context) {
-    Map semesters = Map.from(branchData)..remove('branchName');
+    List branches = facultyData['branches'].values.toList();
 
     return Scaffold(
       backgroundColor: Colors.black,
@@ -31,19 +26,17 @@ class Semesters extends StatelessWidget {
                     children: [
                       IconButton(
                         icon: Icon(Icons.arrow_back_ios, color: Colors.white),
-                        onPressed: () {
-                          Navigator.of(context).pop(); // Navigate back
-                        },
+                        onPressed: () => Navigator.of(context).pop(),
                       ),
                       SizedBox(
                         width: 10.0,
                       ),
                       Text(
-                        branchName,
+                        facultyName,
                         style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 30.0,
+                          fontSize: 28,
                           fontWeight: FontWeight.bold,
+                          color: Colors.white,
                         ),
                       ),
                     ],
@@ -54,26 +47,23 @@ class Semesters extends StatelessWidget {
           ),
           Expanded(
             child: ListView.builder(
-              itemCount: semesters.length,
+              itemCount: branches.length,
               itemBuilder: (context, index) {
-                String semesterKey = semesters.keys.elementAt(index);
-                if (semesters[semesterKey] is! Map) {
-                  throw 'Expected a Map, but got ${semesters[semesterKey].runtimeType}';
-                }
-                Map semester = semesters[semesterKey];
+                var branch = branches[index];
 
                 return Padding(
+                  // Reduced vertical padding to decrease space between items
                   padding: const EdgeInsets.symmetric(
-                      vertical: 7.0, horizontal: 34.0),
+                      vertical: 8.0, horizontal: 25.0),
                   child: GestureDetector(
                     child: Container(
-                      height: 70,
+                      height: 80,
                       decoration: BoxDecoration(
                         color: Color.fromRGBO(50, 50, 50, 1),
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: Padding(
-                        padding: const EdgeInsets.all(12.0),
+                        padding: const EdgeInsets.all(20.0),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -83,13 +73,12 @@ class Semesters extends StatelessWidget {
                                   Icons.school,
                                   color: Colors.white,
                                 ),
-                                SizedBox(width: 18),
+                                SizedBox(width: 8),
                                 Text(
-                                  semester['semesterName'] ??
-                                      'Default Semester Name',
+                                  branch['branchName'],
                                   style: TextStyle(
                                     color: Colors.white,
-                                    fontSize: 16.0,
+                                    fontSize: 17.0,
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
@@ -99,30 +88,23 @@ class Semesters extends StatelessWidget {
                               onPressed: () {
                                 Navigator.push(
                                   context,
-                                  SlideLeftPageRoute(
-                                    page: Subjects(
+                                  SlideRightPageRoute(
+                                    page: Semesters(
                                       facultyName: facultyName,
-                                      branchName: branchName,
-                                      semesterName: semester[
-                                          'semesterName'], // assuming 'semesterName' is the key for the semester name
-                                      semesterData:
-                                          semester, // Pass the entire semester map
+                                      branchName: branch[
+                                          'branchName'], // assuming 'branchName' is the key for the branch name
+                                      branchData: branch as Map,
                                     ),
                                   ),
                                 );
                               },
                               style: ButtonStyle(
-                                backgroundColor:
-                                    MaterialStateProperty.all<Color>(
-                                  Colors.white,
-                                ),
+                                backgroundColor: WidgetStateProperty.all<Color>(
+                                    Colors.white),
                               ),
                               child: Text(
                                 'View',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  color: Colors.black,
-                                ),
+                                style: TextStyle(color: Colors.black),
                               ),
                             ),
                           ],
@@ -140,23 +122,28 @@ class Semesters extends StatelessWidget {
   }
 }
 
-class SlideLeftPageRoute<T> extends PageRouteBuilder<T> {
+class SlideRightPageRoute extends PageRouteBuilder {
   final Widget page;
 
-  SlideLeftPageRoute({required this.page})
+  SlideRightPageRoute({required this.page})
       : super(
-          pageBuilder: (context, animation, secondaryAnimation) => page,
-          transitionsBuilder: (context, animation, secondaryAnimation, child) {
-            const begin = Offset(1.0, 0.0);
-            const end = Offset.zero;
-            const curve = Curves.ease;
-
-            var tween =
-                Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-            var offsetAnimation = animation.drive(tween);
-
+          pageBuilder: (
+            BuildContext context,
+            Animation<double> animation,
+            Animation<double> secondaryAnimation,
+          ) =>
+              page,
+          transitionsBuilder: (
+            BuildContext context,
+            Animation<double> animation,
+            Animation<double> secondaryAnimation,
+            Widget child,
+          ) {
             return SlideTransition(
-              position: offsetAnimation,
+              position: Tween<Offset>(
+                begin: const Offset(1.0, 0.0),
+                end: Offset.zero,
+              ).animate(animation),
               child: child,
             );
           },

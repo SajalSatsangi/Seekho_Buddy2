@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:seekhobuddy/ExploreMore/materialPage.dart';
+import 'package:seekhobuddy/Other%20Cources/materialPage.dart';
 
 class Materialsectionpage extends StatelessWidget {
   final String subjectName;
