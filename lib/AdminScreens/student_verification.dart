@@ -28,11 +28,19 @@ class VerificationScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: EdgeInsets.only(top: 28.0), // Additional padding from the top
+        padding: EdgeInsets.only(
+          top: MediaQuery.of(context).size.height *
+              0.05, // Adjusted padding from the top
+        ),
         child: Column(
           children: [
             Padding(
-              padding: EdgeInsets.only(left: 16, right: 16, top: 10),
+              padding: EdgeInsets.only(
+                left: MediaQuery.of(context).size.width * 0.04,
+                right: MediaQuery.of(context).size.width * 0.04,
+                top: MediaQuery.of(context).size.height *
+                    0.02, // Adjusted padding from the top
+              ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
@@ -48,11 +56,12 @@ class VerificationScreen extends StatelessWidget {
                           );
                         },
                       ),
-                      SizedBox(width: 10.0),
+                      SizedBox(width: MediaQuery.of(context).size.width * 0.02),
                       Text(
                         "Verification",
                         style: TextStyle(
-                          fontSize: 28,
+                          fontSize: MediaQuery.of(context).size.width *
+                              0.06, // Adjusted font size
                           fontWeight: FontWeight.bold,
                           color: Colors.white,
                         ),
@@ -72,7 +81,10 @@ class VerificationScreen extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 14, vertical: 14),
+              padding: EdgeInsets.symmetric(
+                horizontal: MediaQuery.of(context).size.width * 0.03,
+                vertical: MediaQuery.of(context).size.width * 0.02,
+              ),
               child: TextField(
                 decoration: InputDecoration(
                   hintText: "Search...",
@@ -80,26 +92,38 @@ class VerificationScreen extends StatelessWidget {
                   prefixIcon: Icon(
                     Icons.search,
                     color: Colors.white,
-                    size: 20,
+                    size: MediaQuery.of(context).size.width *
+                        0.05, // Adjusted icon size
                   ),
                   filled: true,
                   fillColor: Color(0xFF323232),
-                  contentPadding: EdgeInsets.all(8),
+                  contentPadding: EdgeInsets.all(
+                      MediaQuery.of(context).size.width *
+                          0.02), // Adjusted content padding
                   enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(20),
+                    borderRadius: BorderRadius.circular(
+                        MediaQuery.of(context).size.width *
+                            0.08), // Adjusted border radius
                     borderSide: BorderSide(color: Color(0xFF323232)),
                   ),
                 ),
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(left: 16.0, top: 32.0, bottom: 0.0),
+              padding: EdgeInsets.only(
+                left: MediaQuery.of(context).size.width * 0.05,
+                top: MediaQuery.of(context).size.width *
+                    0.06, // Adjusted padding from the top
+                bottom: MediaQuery.of(context).size.width *
+                    0.02, // Adjusted padding from the bottom
+              ),
               child: Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
                   "Student Verification Requests",
                   style: TextStyle(
-                    fontSize: 24,
+                    fontSize: MediaQuery.of(context).size.width *
+                        0.05, // Adjusted font size
                     fontWeight: FontWeight.bold,
                     color: Colors.white,
                   ),
@@ -124,12 +148,18 @@ class VerificationScreen extends StatelessWidget {
                     itemBuilder: (context, index) {
                       var user = documents[index];
                       return Padding(
-                        padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
+                        padding: EdgeInsets.fromLTRB(
+                            MediaQuery.of(context).size.width * 0.03,
+                            0,
+                            MediaQuery.of(context).size.width * 0.03,
+                            0),
                         child: Container(
-                          padding: EdgeInsets.all(16.0),
+                          padding: EdgeInsets.all(
+                              MediaQuery.of(context).size.width * 0.04),
                           decoration: BoxDecoration(
                             color: Color(0xFF323232),
-                            borderRadius: BorderRadius.circular(12.0),
+                            borderRadius: BorderRadius.circular(
+                                MediaQuery.of(context).size.width * 0.03),
                           ),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -140,7 +170,9 @@ class VerificationScreen extends StatelessWidget {
                                   Text(
                                     user['name'],
                                     style: TextStyle(
-                                      fontSize: 18,
+                                      fontSize:
+                                          MediaQuery.of(context).size.width *
+                                              0.045, // Adjusted font size
                                       fontWeight: FontWeight.bold,
                                       color: Colors.white,
                                     ),
@@ -188,12 +220,17 @@ class VerificationScreen extends StatelessWidget {
                                     style: ElevatedButton.styleFrom(
                                       backgroundColor: Colors.black,
                                       shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(20),
+                                        borderRadius: BorderRadius.circular(
+                                            MediaQuery.of(context).size.width *
+                                                0.05), // Adjusted border radius
                                       ),
                                     ),
                                     child: Text("Approve"),
                                   ),
-                                  SizedBox(height: 8),
+                                  SizedBox(
+                                      height:
+                                          MediaQuery.of(context).size.width *
+                                              0.02), // Adjusted height
                                   ElevatedButton(
                                     onPressed: () {
                                       _updateVerificationStatus(user.id, false);
@@ -201,7 +238,9 @@ class VerificationScreen extends StatelessWidget {
                                     style: ElevatedButton.styleFrom(
                                       backgroundColor: Colors.black,
                                       shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(20),
+                                        borderRadius: BorderRadius.circular(
+                                            MediaQuery.of(context).size.width *
+                                                0.05), // Adjusted border radius
                                       ),
                                     ),
                                     child: Text("Reject"),
@@ -246,11 +285,14 @@ class VerificationScreen extends StatelessWidget {
             children: [
               InteractiveViewer(
                 child: Image(image: image),
-                boundaryMargin: EdgeInsets.all(20),
+                boundaryMargin:
+                    EdgeInsets.all(MediaQuery.of(context).size.width * 0.02),
                 minScale: 0.1,
                 maxScale: 5.0,
               ),
-              SizedBox(height: 8),
+              SizedBox(
+                  height: MediaQuery.of(context).size.width *
+                      0.02), // Adjusted height
               Text("Name: XYZ"),
             ],
           ),

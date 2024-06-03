@@ -24,78 +24,90 @@ class HistoryScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: EdgeInsets.only(top: 28.0), // Additional padding from the top
+        padding: EdgeInsets.symmetric(
+            vertical: MediaQuery.of(context).size.height * 0.03,
+            horizontal: MediaQuery.of(context).size.width *
+                0.04), // Adjusted padding using MediaQuery
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Padding(
-              padding: EdgeInsets.only(left: 16, right: 16, top: 10),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Row(
-                    children: [
-                      IconButton(
-                        icon: Icon(Icons.arrow_back_ios, color: Colors.white),
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => VerificationApp()),
-                          );
-                        },
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Row(
+                  children: [
+                    IconButton(
+                      icon: Icon(Icons.arrow_back_ios, color: Colors.white),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => VerificationApp()),
+                        );
+                      },
+                    ),
+                    SizedBox(
+                        width: MediaQuery.of(context).size.width *
+                            0.02), // Adjusted width using MediaQuery
+                    Text(
+                      "History",
+                      style: TextStyle(
+                        fontSize: MediaQuery.of(context).size.width *
+                            0.06, // Adjusted font size using MediaQuery
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
                       ),
-                      SizedBox(width: 10.0),
-                      Text(
-                        "History",
-                        style: TextStyle(
-                          fontSize: 28,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
+                    ),
+                  ],
+                ),
+              ],
             ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 14, vertical: 14),
-              child: TextField(
-                decoration: InputDecoration(
-                  hintText: "Search...",
-                  hintStyle: TextStyle(color: Colors.white),
-                  prefixIcon: Icon(
-                    Icons.search,
-                    color: Colors.white,
-                    size: 20,
-                  ),
-                  filled: true,
-                  fillColor: Color(0xFF323232),
-                  contentPadding: EdgeInsets.all(8),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(20),
-                    borderSide: BorderSide(color: Color(0xFF323232)),
-                  ),
+            SizedBox(
+                height: MediaQuery.of(context).size.height *
+                    0.01), // Adjusted height using MediaQuery
+            TextField(
+              decoration: InputDecoration(
+                hintText: "Search...",
+                hintStyle: TextStyle(color: Colors.white),
+                prefixIcon: Icon(
+                  Icons.search,
+                  color: Colors.white,
+                  size: MediaQuery.of(context).size.width *
+                      0.06, // Adjusted icon size using MediaQuery
+                ),
+                filled: true,
+                fillColor: Color(0xFF323232),
+                contentPadding: EdgeInsets.all(
+                    MediaQuery.of(context).size.width *
+                        0.02), // Adjusted padding using MediaQuery
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(
+                      MediaQuery.of(context).size.width *
+                          0.1), // Adjusted border radius using MediaQuery
+                  borderSide: BorderSide(color: Color(0xFF323232)),
                 ),
               ),
             ),
-            Padding(
-              padding: EdgeInsets.only(left: 16.0, top: 32.0, bottom: 0.0),
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  "Student Verification History",
-                  style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  ),
-                ),
+            SizedBox(
+                height: MediaQuery.of(context).size.height *
+                    0.02), // Adjusted height using MediaQuery
+            Text(
+              "Student Verification History",
+              style: TextStyle(
+                fontSize: MediaQuery.of(context).size.width *
+                    0.06, // Adjusted font size using MediaQuery
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
               ),
             ),
+            SizedBox(
+                height: MediaQuery.of(context).size.height *
+                    0.01), // Adjusted height using MediaQuery
             Expanded(
               child: Padding(
-                padding: EdgeInsets.fromLTRB(16, 0, 18, 0),
+                padding: EdgeInsets.only(
+                    right: MediaQuery.of(context).size.width *
+                        0.04), // Adjusted padding using MediaQuery
                 child: StreamBuilder<QuerySnapshot>(
                   stream: FirebaseFirestore.instance
                       .collection('users')
@@ -114,12 +126,20 @@ class HistoryScreen extends StatelessWidget {
                         var data =
                             documents[index].data() as Map<String, dynamic>;
                         return Padding(
-                          padding: EdgeInsets.only(bottom: 16.0),
+                          padding: EdgeInsets.only(
+                              bottom: MediaQuery.of(context).size.height *
+                                  0.02), // Adjusted padding using MediaQuery
                           child: Container(
-                            padding: EdgeInsets.all(16.0),
+                            padding: EdgeInsets.all(
+                                MediaQuery.of(context).size.width *
+                                    0.04), // Adjusted padding using MediaQuery
                             decoration: BoxDecoration(
                               color: Color(0xFF323232),
-                              borderRadius: BorderRadius.circular(12.0),
+                              borderRadius: BorderRadius.circular(MediaQuery.of(
+                                          context)
+                                      .size
+                                      .width *
+                                  0.04), // Adjusted border radius using MediaQuery
                             ),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -130,12 +150,19 @@ class HistoryScreen extends StatelessWidget {
                                     Text(
                                       data['name'] ?? 'No Name',
                                       style: TextStyle(
-                                        fontSize: 18,
+                                        fontSize: MediaQuery.of(context)
+                                                .size
+                                                .width *
+                                            0.04, // Adjusted font size using MediaQuery
                                         fontWeight: FontWeight.bold,
                                         color: Colors.white,
                                       ),
                                     ),
-                                    SizedBox(height: 5),
+                                    SizedBox(
+                                        height: MediaQuery.of(context)
+                                                .size
+                                                .height *
+                                            0.01), // Adjusted height using MediaQuery
                                     Text(
                                       "Date: ${data['date'] ?? 'No Date'}",
                                       style: TextStyle(
