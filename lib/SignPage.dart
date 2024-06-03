@@ -257,6 +257,12 @@ class _StudyHubLoginScreenState extends State<StudyHubLoginScreen> {
                             iconSize: iconSize,
                             fontSize: inputFontSize,
                           ),
+                          SizedBox(height: spacingHeight * 1),
+                          _buildUploadField(
+                            height: inputFieldHeight,
+                            iconSize: iconSize,
+                            fontSize: inputFontSize,
+                          ),
                           SizedBox(height: spacingHeight * 2),
                           Padding(
                             padding: EdgeInsets.symmetric(horizontal: padding),
@@ -543,6 +549,48 @@ class _StudyHubLoginScreenState extends State<StudyHubLoginScreen> {
                 iconEnabledColor: Colors.white, // Change dropdown icon color
                 dropdownColor:
                     Colors.grey.shade800, // Change dropdown background color
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildUploadField({
+    required double height,
+    required double iconSize,
+    required double fontSize,
+  }) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 30),
+      child: Row(
+        children: [
+          Icon(
+            Icons.attach_file,
+            color: Colors.white,
+            size: iconSize,
+          ),
+          SizedBox(width: 5),
+          Expanded(
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(50),
+                color: const Color.fromARGB(255, 72, 72, 72),
+              ),
+              height: height,
+              child: TextButton(
+                onPressed: () {
+                  // Implement logic to handle ID card upload
+                },
+                child: Text(
+                  'Upload ID Card',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: const Color.fromARGB(179, 234, 234, 234),
+                    fontSize: fontSize,
+                  ),
+                ),
               ),
             ),
           ),
