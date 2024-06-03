@@ -174,7 +174,7 @@ class _HomeState extends State<Home> {
                                             context,
                                             MaterialPageRoute(
                                                 builder: (context) =>
-                                                    ResourcesPage()),
+                                                    Courses()),
                                           );
                                         },
                                         style: ButtonStyle(

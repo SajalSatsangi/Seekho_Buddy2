@@ -187,70 +187,22 @@ class Materialpage_Admin extends StatelessWidget {
           ),
           Expanded(
             child: ListView.builder(
-              itemCount: AAs.length,
+              itemCount: (AAs.length / 2).ceil(),
               itemBuilder: (context, index) {
-                String AAKey = AAs.keys.elementAt(index);
-                Map AA = AAs[AAKey];
+                int startIndex = index * 2;
+                int endIndex = startIndex + 2;
+                if (endIndex > AAs.length) {
+                  endIndex = AAs.length;
+                }
 
                 return Padding(
-                  padding: const EdgeInsets.symmetric(
-                      vertical: 7.0, horizontal: 27.0),
-                  child: GestureDetector(
-                    child: Container(
-                      height: 70,
-                      decoration: BoxDecoration(
-                        color: Color.fromRGBO(50, 50, 50, 1),
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(12.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
-                              children: [
-                                Icon(
-                                  Icons.school,
-                                  color: Colors.white,
-                                ),
-                                SizedBox(width: 8),
-                                Text(
-                                  AA['pdfName'] ?? 'Default AA Name',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 16.0,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            ElevatedButton(
-                              onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => PdfViewer(AA: AA),
-                                  ),
-                                );
-                              },
-                              style: ButtonStyle(
-                                backgroundColor:
-                                    MaterialStateProperty.all<Color>(
-                                  Colors.white,
-                                ),
-                              ),
-                              child: Text(
-                                'View',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  color: Colors.black,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
+                  padding: const EdgeInsets.symmetric(vertical: 7.0 , horizontal: 30),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      for (int i = startIndex; i < endIndex; i++)
+                        buildMaterialBox(context, AAs.values.elementAt(i)),
+                    ],
                   ),
                 );
               },
@@ -262,6 +214,64 @@ class Materialpage_Admin extends StatelessWidget {
         onPressed: _showAddMaterialDialog, // Function to show popup dialog
         child: Icon(Icons.add, color: Colors.white),
         backgroundColor: Color(0xFF323232),
+      ),
+    );
+  }
+
+  Widget buildMaterialBox(BuildContext context, Map AA) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => PdfViewer(AA: AA),
+          ),
+        );
+      },
+      child: Container(
+        height: 130,
+        width: 140,
+        decoration: BoxDecoration(
+          color: Color.fromRGBO(50, 50, 50, 1),
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(15.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                AA['pdfName'] ?? 'Default AA Name',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 16.0,
+                  fontWeight: FontWeight.bold,
+                ),
+                textAlign: TextAlign.center,
+                
+              ),
+              SizedBox(height: 25),
+              ElevatedButton(
+                onPressed: () {},
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all<Color>(
+                    Colors.white,
+                  ),
+                ),
+                child: Text(
+                  'View',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Color.fromARGB(255, 0, 0, 0),
+                    
+                    
+                  ),
+                  
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }

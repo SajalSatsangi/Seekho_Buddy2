@@ -30,12 +30,12 @@ class Branches extends StatelessWidget {
                         onPressed: () => Navigator.of(context).pop(),
                       ),
                       SizedBox(
-                        width: 10.0,
+                        width: 5.0,
                       ),
                       Text(
                         facultyName,
                         style: TextStyle(
-                          fontSize: 28,
+                          fontSize: MediaQuery.of(context).size.width * 0.07,
                           fontWeight: FontWeight.bold,
                           color: Colors.white,
                         ),
@@ -74,12 +74,14 @@ class Branches extends StatelessWidget {
                                   Icons.school,
                                   color: Colors.white,
                                 ),
-                                SizedBox(width: 8),
+                                SizedBox(width: 10),
                                 Text(
                                   branch['branchName'],
                                   style: TextStyle(
                                     color: Colors.white,
-                                    fontSize: 17.0,
+                                    fontSize:
+                                        MediaQuery.of(context).size.width *
+                                            0.05,
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
