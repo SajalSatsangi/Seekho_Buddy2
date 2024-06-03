@@ -21,11 +21,13 @@ class MyWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: EdgeInsets.only(top: 28.0),
+        padding: EdgeInsets.only(
+          top: MediaQuery.of(context).size.height * 0.05,
+        ),
         child: Column(
           children: [
             Padding(
-              padding: EdgeInsets.only(left: 16, right: 16, top: 10),
+              padding: EdgeInsets.symmetric(horizontal: 16),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
@@ -44,7 +46,7 @@ class MyWidget extends StatelessWidget {
                       Text(
                         "Help Page",
                         style: TextStyle(
-                          fontSize: 28,
+                          fontSize: MediaQuery.of(context).size.width * 0.07,
                           fontWeight: FontWeight.bold,
                           color: Colors.white,
                         ),
@@ -54,10 +56,12 @@ class MyWidget extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(height: 30),
+            SizedBox(height: MediaQuery.of(context).size.height * 0.05),
             Expanded(
               child: Padding(
-                padding: const EdgeInsets.all(26.0),
+                padding: EdgeInsets.all(
+                  MediaQuery.of(context).size.width * 0.08,
+                ),
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
@@ -164,19 +168,22 @@ class MyWidget extends StatelessWidget {
                               vertical: 15, horizontal: 60),
                         ),
                       ),
-                      SizedBox(height: 100),
+                      SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.1),
                       Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
                             "SeekhoBuddy Team",
                             style: TextStyle(
-                              fontSize: 28,
+                              fontSize:
+                                  MediaQuery.of(context).size.width * 0.07,
                               fontWeight: FontWeight.bold,
                               color: Colors.white,
                             ),
                           ),
-                          SizedBox(height: 20),
+                          SizedBox(
+                              height: MediaQuery.of(context).size.width * 0.05),
                           ProfileCard(
                             name: 'Nihal Saran',
                             imageUrl:
@@ -240,7 +247,8 @@ class ProfileCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 16.0),
+      padding: EdgeInsets.symmetric(
+          vertical: MediaQuery.of(context).size.width * 0.04),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.center,
@@ -252,23 +260,23 @@ class ProfileCard extends StatelessWidget {
                 borderRadius: BorderRadius.circular(12),
                 child: Image.network(
                   imageUrl,
-                  width: 100,
-                  height: 100,
+                  width: MediaQuery.of(context).size.width * 0.3,
+                  height: MediaQuery.of(context).size.width * 0.3,
                   fit: BoxFit.cover,
                 ),
               ),
             ),
-            SizedBox(width: 40),
+            SizedBox(width: MediaQuery.of(context).size.width * 0.13),
           ],
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: 10), // Adjust the height as needed
+              SizedBox(height: MediaQuery.of(context).size.width * 0.02),
               Text(
                 name,
                 style: TextStyle(
                   color: Colors.white,
-                  fontSize: 18,
+                  fontSize: MediaQuery.of(context).size.width * 0.045,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -276,10 +284,10 @@ class ProfileCard extends StatelessWidget {
                 'B.Tech 4th Year',
                 style: TextStyle(
                   color: Colors.white,
-                  fontSize: 14,
+                  fontSize: MediaQuery.of(context).size.width * 0.035,
                 ),
               ),
-              SizedBox(height: 6),
+              SizedBox(height: MediaQuery.of(context).size.width * 0.015),
               InkWell(
                 onTap: () async {
                   if (await canLaunch(linkedinUrl)) {
@@ -289,7 +297,9 @@ class ProfileCard extends StatelessWidget {
                   }
                 },
                 child: Container(
-                  padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  padding: EdgeInsets.symmetric(
+                      horizontal: MediaQuery.of(context).size.width * 0.02,
+                      vertical: MediaQuery.of(context).size.width * 0.01),
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(4),
@@ -299,15 +309,15 @@ class ProfileCard extends StatelessWidget {
                     children: [
                       Image.asset(
                         'assets/linkedin_icon.png',
-                        width: 20,
-                        height: 20,
+                        width: MediaQuery.of(context).size.width * 0.07,
+                        height: MediaQuery.of(context).size.width * 0.07,
                       ),
-                      SizedBox(width: 4),
+                      SizedBox(width: MediaQuery.of(context).size.width * 0.01),
                       Text(
                         'LinkedIn',
                         style: TextStyle(
                           color: Colors.black,
-                          fontSize: 14,
+                          fontSize: MediaQuery.of(context).size.width * 0.03,
                         ),
                       ),
                     ],
@@ -317,15 +327,16 @@ class ProfileCard extends StatelessWidget {
             ],
           ),
           if (isImageRight) ...[
-            SizedBox(width: 10),
+            SizedBox(width: MediaQuery.of(context).size.width * 0.04),
             Container(
-              margin: EdgeInsets.only(left: 16),
+              margin: EdgeInsets.only(
+                  left: MediaQuery.of(context).size.width * 0.04),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(12),
                 child: Image.network(
                   imageUrl,
-                  width: 100,
-                  height: 100,
+                  width: MediaQuery.of(context).size.width * 0.3,
+                  height: MediaQuery.of(context).size.width * 0.3,
                   fit: BoxFit.cover,
                 ),
               ),
