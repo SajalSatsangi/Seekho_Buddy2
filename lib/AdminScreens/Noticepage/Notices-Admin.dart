@@ -165,20 +165,32 @@ class _MyWidgetState extends State<MyWidget> {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
+    double paddingSize = screenWidth * 0.04;
+    double iconSize = screenWidth * 0.06;
+    double fontSizeTitle = screenWidth * 0.04;
+    double fontSizeDescription = screenWidth * 0.035;
+    double fontSizeDate = screenWidth * 0.03;
+
     return Scaffold(
       body: Padding(
-        padding: EdgeInsets.only(top: 28.0),
+        padding: EdgeInsets.only(top: screenHeight * 0.035),
         child: Column(
           children: [
             Padding(
-              padding: EdgeInsets.only(left: 16, right: 16, top: 10),
+              padding: EdgeInsets.only(
+                  left: paddingSize,
+                  right: paddingSize,
+                  top: screenHeight * 0.01),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Row(
                     children: [
                       IconButton(
-                        icon: Icon(Icons.arrow_back_ios, color: Colors.white),
+                        icon: Icon(Icons.arrow_back_ios,
+                            color: Colors.white, size: iconSize),
                         onPressed: () {
                           Navigator.push(
                             context,
@@ -186,11 +198,11 @@ class _MyWidgetState extends State<MyWidget> {
                           );
                         },
                       ),
-                      SizedBox(width: 10.0),
+                      SizedBox(width: screenWidth * 0.025),
                       Text(
                         "Notices",
                         style: TextStyle(
-                          fontSize: 28,
+                          fontSize: screenWidth * 0.07,
                           fontWeight: FontWeight.bold,
                           color: Colors.white,
                         ),
@@ -201,19 +213,21 @@ class _MyWidgetState extends State<MyWidget> {
               ),
             ),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 14, vertical: 14),
+              padding: EdgeInsets.symmetric(
+                  horizontal: paddingSize, vertical: screenHeight * 0.02),
               child: TextField(
                 decoration: InputDecoration(
                   hintText: "Search...",
-                  hintStyle: TextStyle(color: Colors.white),
+                  hintStyle: TextStyle(
+                      color: Colors.white, fontSize: fontSizeDescription),
                   prefixIcon: Icon(
                     Icons.search,
                     color: Colors.white,
-                    size: 20,
+                    size: iconSize,
                   ),
                   filled: true,
                   fillColor: Color(0xFF323232),
-                  contentPadding: EdgeInsets.all(8),
+                  contentPadding: EdgeInsets.all(screenWidth * 0.02),
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(20),
                     borderSide: BorderSide(color: Color(0xFF323232)),
@@ -255,11 +269,12 @@ class _MyWidgetState extends State<MyWidget> {
                           },
                           child: Padding(
                             padding: EdgeInsets.symmetric(
-                                horizontal: 16, vertical: 8),
+                                horizontal: paddingSize,
+                                vertical: screenHeight * 0.01),
                             child: Stack(
                               children: [
                                 Container(
-                                  width: 500,
+                                  width: double.infinity,
                                   decoration: BoxDecoration(
                                     color: Color(0xFF323232).withOpacity(
                                         clickedNotices.contains(document.id)
@@ -267,7 +282,7 @@ class _MyWidgetState extends State<MyWidget> {
                                             : 1.0),
                                     borderRadius: BorderRadius.circular(20),
                                   ),
-                                  padding: EdgeInsets.all(16),
+                                  padding: EdgeInsets.all(screenWidth * 0.04),
                                   child: Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
@@ -275,7 +290,7 @@ class _MyWidgetState extends State<MyWidget> {
                                       Text(
                                         data['title'],
                                         style: TextStyle(
-                                          fontSize: 18,
+                                          fontSize: fontSizeTitle,
                                           fontWeight: FontWeight.bold,
                                           color: Colors.white.withOpacity(
                                               clickedNotices
@@ -284,7 +299,7 @@ class _MyWidgetState extends State<MyWidget> {
                                                   : 1.0),
                                         ),
                                       ),
-                                      SizedBox(height: 8),
+                                      SizedBox(height: screenHeight * 0.01),
                                       Text(
                                         data['description'],
                                         style: TextStyle(
@@ -293,9 +308,10 @@ class _MyWidgetState extends State<MyWidget> {
                                                       .contains(document.id)
                                                   ? 0.6
                                                   : 1.0),
+                                          fontSize: fontSizeDescription,
                                         ),
                                       ),
-                                      SizedBox(height: 8),
+                                      SizedBox(height: screenHeight * 0.01),
                                       Text(
                                         "Posted on: ${data['date']}",
                                         style: TextStyle(
@@ -304,7 +320,7 @@ class _MyWidgetState extends State<MyWidget> {
                                                       .contains(document.id)
                                                   ? 0.6
                                                   : 1.0),
-                                          fontSize: 12,
+                                          fontSize: fontSizeDate,
                                         ),
                                       ),
                                     ],
@@ -313,11 +329,11 @@ class _MyWidgetState extends State<MyWidget> {
                                 if (!clickedNotices.contains(
                                     document.id)) // Only show if not clicked
                                   Positioned(
-                                    bottom: 16,
-                                    right: 16,
+                                    bottom: screenHeight * 0.02,
+                                    right: screenWidth * 0.04,
                                     child: Container(
-                                      width: 17,
-                                      height: 17,
+                                      width: screenWidth * 0.04,
+                                      height: screenWidth * 0.04,
                                       decoration: BoxDecoration(
                                         color: Color.fromARGB(255, 230, 61, 27),
                                         shape: BoxShape.circle,
@@ -341,13 +357,13 @@ class _MyWidgetState extends State<MyWidget> {
       ),
       backgroundColor: Color(0xDD000000),
       floatingActionButton: Padding(
-        padding: EdgeInsets.only(bottom: 16.0),
+        padding: EdgeInsets.only(bottom: screenHeight * 0.02),
         child: FloatingActionButton(
           onPressed: () {
             showAddPopup(context);
           },
           backgroundColor: Color(0xFF323232),
-          child: Icon(Icons.add),
+          child: Icon(Icons.add, size: iconSize),
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,

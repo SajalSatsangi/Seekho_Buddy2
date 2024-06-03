@@ -12,18 +12,21 @@ void showMaintenanceNotice(
         Animation secondaryAnimation) {
       return Center(
         child: Padding(
-          padding: EdgeInsets.symmetric(vertical: 30),
+          padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 20),
           child: AlertDialog(
-            backgroundColor: Color.fromARGB(255, 56, 56, 56),
-            shape: RoundedRectangleBorder(
+            backgroundColor: const Color.fromARGB(255, 56, 56, 56),
+            shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(20.0)),
             ),
-            contentPadding: EdgeInsets.all(0),
+            contentPadding: EdgeInsets.zero,
             content: LayoutBuilder(
               builder: (context, constraints) {
                 return SingleChildScrollView(
                   child: Container(
-                    decoration: BoxDecoration(
+                    width: constraints.maxWidth < 600
+                        ? constraints.maxWidth * 0.9
+                        : 600,
+                    decoration: const BoxDecoration(
                       color: Color.fromARGB(255, 39, 39, 39),
                       borderRadius: BorderRadius.all(Radius.circular(20.0)),
                     ),
@@ -31,9 +34,7 @@ void showMaintenanceNotice(
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Padding(
-                          padding: EdgeInsets.all(
-                            MediaQuery.of(context).size.width * 0.04,
-                          ),
+                          padding: const EdgeInsets.all(20.0),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -41,42 +42,35 @@ void showMaintenanceNotice(
                                 "Important Notice:",
                                 style: TextStyle(
                                   fontSize:
-                                      MediaQuery.of(context).size.width * 0.06,
+                                      constraints.maxWidth < 600 ? 20 : 24,
                                   fontWeight: FontWeight.bold,
                                   color: Colors.white,
                                 ),
                               ),
-                              SizedBox(
-                                  height: MediaQuery.of(context).size.width *
-                                      0.015),
+                              const SizedBox(height: 10),
                               Text(
                                 title,
                                 style: TextStyle(
                                   fontSize:
-                                      MediaQuery.of(context).size.width * 0.05,
+                                      constraints.maxWidth < 600 ? 18 : 22,
                                   fontWeight: FontWeight.bold,
                                   color: Colors.white,
                                 ),
                               ),
-                              SizedBox(
-                                  height: MediaQuery.of(context).size.width *
-                                      0.015),
+                              const SizedBox(height: 10),
                               Text(
                                 description,
                                 style: TextStyle(
                                   fontSize:
-                                      MediaQuery.of(context).size.width * 0.04,
+                                      constraints.maxWidth < 600 ? 16 : 20,
                                   color: Colors.white,
                                 ),
                               ),
-                              SizedBox(
-                                  height: MediaQuery.of(context).size.width *
-                                      0.015),
-                              Text(
+                              const SizedBox(height: 10),
+                              const Text(
                                 "By-XYZ",
                                 style: TextStyle(
-                                  fontSize:
-                                      MediaQuery.of(context).size.width * 0.04,
+                                  fontSize: 14,
                                   color: Colors.white,
                                 ),
                               ),
@@ -84,13 +78,27 @@ void showMaintenanceNotice(
                           ),
                         ),
                         ClipRRect(
-                          borderRadius: BorderRadius.vertical(
+                          borderRadius: const BorderRadius.vertical(
                             bottom: Radius.circular(20.0),
                           ),
                           child: Image.network(
                             fileUrl,
                             fit: BoxFit.cover,
-                            width: MediaQuery.of(context).size.width,
+                            width: double.infinity,
+                            errorBuilder: (context, error, stackTrace) {
+                              return Container(
+                                color: Colors.black,
+                                height: 200,
+                                width: double.infinity,
+                                child: const Center(
+                                  child: Icon(
+                                    Icons.error,
+                                    color: Colors.white,
+                                    size: 50,
+                                  ),
+                                ),
+                              );
+                            },
                           ),
                         ),
                       ],
