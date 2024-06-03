@@ -27,12 +27,9 @@ class _EditProfileState extends State<userdata_edit> {
   }
 
   void setUserData() {
-    // ignore: unnecessary_null_comparison
-    if (widget.userData != null) {
-      setState(() {
-        userData = widget.userData;
-      });
-    }
+    setState(() {
+      userData = widget.userData;
+    });
   }
 
   Future<void> updateProfilePicture() async {
@@ -43,9 +40,7 @@ class _EditProfileState extends State<userdata_edit> {
       File file = File(pickedFile.path);
 
       try {
-        // Retrieve the user's name
         String userName = userData!['name'];
-        // Construct the file path using the user's name
         String filePath = 'profile_pictures/${userName}.png';
         UploadTask uploadTask =
             FirebaseStorage.instance.ref(filePath).putFile(file);
@@ -55,16 +50,14 @@ class _EditProfileState extends State<userdata_edit> {
 
         await FirebaseFirestore.instance
             .collection('users')
-            .doc(userData!['name']) // he user's UID to update the document
+            .doc(userData!['name'])
             .update({'profile_picture': downloadURL});
 
-        // Update the user data
         setState(() {
           userData!['profile_picture'] = downloadURL;
         });
       } catch (e) {
         print(e);
-        // Show an error message to the user
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content:
@@ -84,16 +77,15 @@ class _EditProfileState extends State<userdata_edit> {
       ),
     );
     if (result != null) {
-  await FirebaseFirestore.instance
-      .collection('users')
-      .doc(userData!['name']) // Use the document ID to update the document
-      .update({field: result});
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(userData!['name'])
+          .update({field: result});
 
-  // Update the user data
-  setState(() {
-    userData![field] = result;
-  });
-}
+      setState(() {
+        userData![field] = result;
+      });
+    }
   }
 
   @override
@@ -112,220 +104,52 @@ class _EditProfileState extends State<userdata_edit> {
       body: userData == null
           ? Center(child: CircularProgressIndicator())
           : ListView(
-              padding: EdgeInsets.all(16),
+              padding: EdgeInsets.all(MediaQuery.of(context).size.width *
+                  0.04), // Responsive padding
               children: [
                 GestureDetector(
                   onTap: () => updateProfilePicture(),
                   child: CircleAvatar(
-                    radius: 100,
-                    backgroundImage:
-                        NetworkImage(userData!['profile_picture']),
+                    radius: MediaQuery.of(context).size.width * 0.15,
+                    backgroundImage: NetworkImage(userData!['profile_picture']),
                   ),
                 ),
-                SizedBox(height: 16),
-                GestureDetector(
-                  onTap: () =>
-                      navigateToEditField('name', userData!['name']),
-                  child: Container(
-                    margin: EdgeInsets.symmetric(vertical: 5),
-                    padding: EdgeInsets.all(12),
-                    decoration: BoxDecoration(
-                      color: Color(0xFF292929),
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        userData!['name'],
-                        style: TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () =>
-                      navigateToEditField('email', userData!['email']),
-                  child: Container(
-                    margin: EdgeInsets.symmetric(vertical: 5),
-                    padding: EdgeInsets.all(12),
-                    decoration: BoxDecoration(
-                      color: Color(0xFF292929),
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        userData!['email'],
-                        style: TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(height: 32),
+                SizedBox(
+                    height: MediaQuery.of(context).size.height *
+                        0.02), // Responsive height
+                buildEditableField('Name', userData!['name']),
+                SizedBox(height: MediaQuery.of(context).size.height * 0.01),
+                buildEditableField('Email', userData!['email']),
+                SizedBox(height: MediaQuery.of(context).size.height * 0.03),
                 Center(
                   child: Text(
                     'Academic Information',
                     style: TextStyle(
-                      fontSize: 18,
+                      fontSize: MediaQuery.of(context).size.width *
+                          0.045, // Responsive font size
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                 ),
-                SizedBox(height: 8),
-                GestureDetector(
-                  onTap: () =>
-                      navigateToEditField('rollno', userData!['rollno']),
-                  child: Container(
-                    margin: EdgeInsets.symmetric(vertical: 5),
-                    padding: EdgeInsets.all(12),
-                    decoration: BoxDecoration(
-                      color: Color(0xFF292929),
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        userData!['rollno'],
-                        style: TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(height: 16),
-                GestureDetector(
-                  onTap: () =>
-                      navigateToEditField('faculty', userData!['faculty']),
-                  child: Container(
-                    margin: EdgeInsets.symmetric(vertical: 5),
-                    padding: EdgeInsets.all(12),
-                    decoration: BoxDecoration(
-                      color: Color(0xFF292929),
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        userData!['faculty'],
-                        style: TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(height: 16),
-                GestureDetector(
-                  onTap: () =>
-                      navigateToEditField('subfaculty', userData!['subfaculty']),
-                  child: Container(
-                    margin: EdgeInsets.symmetric(vertical: 5),
-                    padding: EdgeInsets.all(12),
-                    decoration: BoxDecoration(
-                      color: Color(0xFF292929),
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        userData!['subfaculty'],
-                        style: TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(height: 16),
-                GestureDetector(
-                  onTap: () =>
-                      navigateToEditField('subbranch', userData!['subbranch']),
-                  child: Container(
-                    margin: EdgeInsets.symmetric(vertical: 5),
-                    padding: EdgeInsets.all(12),
-                    decoration: BoxDecoration(
-                      color: Color(0xFF292929),
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        userData!['subbranch'],
-                        style: TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(height: 16),
-                GestureDetector(
-                  onTap: () =>
-                      navigateToEditField('semester', userData!['semseter']),
-                  child: Container(
-                    margin: EdgeInsets.symmetric(vertical: 5),
-                    padding: EdgeInsets.all(12),
-                    decoration: BoxDecoration(
-                      color: Color(0xFF292929),
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        userData!['semester'],
-                        style: TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-               SizedBox(height: 16),
-                GestureDetector(
-                  onTap: () =>
-                      navigateToEditField('status', userData!['status']),
-                  child: Container(
-                    margin: EdgeInsets.symmetric(vertical: 5),
-                    padding: EdgeInsets.all(12),
-                    decoration: BoxDecoration(
-                      color: Color(0xFF292929),
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        userData!['status'],
-                        style: TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
+                SizedBox(height: MediaQuery.of(context).size.height * 0.01),
+                buildEditableField('Roll No', userData!['rollno']),
+                SizedBox(height: MediaQuery.of(context).size.height * 0.01),
+                buildEditableField('Faculty', userData!['faculty']),
+                SizedBox(height: MediaQuery.of(context).size.height * 0.01),
+                buildEditableField('Subfaculty', userData!['subfaculty']),
+                SizedBox(height: MediaQuery.of(context).size.height * 0.01),
+                buildEditableField('Subbranch', userData!['subbranch']),
+                SizedBox(height: MediaQuery.of(context).size.height * 0.01),
+                buildEditableField('Semester', userData!['semester']),
+                SizedBox(height: MediaQuery.of(context).size.height * 0.01),
+                buildEditableField('Status', userData!['status']),
+                SizedBox(height: MediaQuery.of(context).size.height * 0.01),
                 Container(
-                  margin: EdgeInsets.symmetric(vertical: 5),
-                  padding: EdgeInsets.all(12),
+                  margin: EdgeInsets.symmetric(
+                      vertical: MediaQuery.of(context).size.height *
+                          0.005), // Responsive margin
+                  padding: EdgeInsets.all(MediaQuery.of(context).size.width *
+                      0.03), // Responsive padding
                   decoration: BoxDecoration(
                     color: Color(0xFF292929),
                     borderRadius: BorderRadius.circular(8),
@@ -335,85 +159,48 @@ class _EditProfileState extends State<userdata_edit> {
                     child: Text(
                       'UID: ${userData!['uid']}',
                       style: TextStyle(
-                        fontSize: 16,
+                        fontSize: MediaQuery.of(context).size.width * 0.04,
                         color: Color.fromARGB(255, 185, 185, 185),
                       ),
                     ),
                   ),
                 ),
-                SizedBox(height: 16),
-                GestureDetector(
-                  onTap: () =>
-                      navigateToEditField('verifiedstatus', userData!['verifiedstatus']),
-                  child: Container(
-                    margin: EdgeInsets.symmetric(vertical: 5),
-                    padding: EdgeInsets.all(12),
-                    decoration: BoxDecoration(
-                      color: Color(0xFF292929),
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        userData!['verifiedstatus'],
-                        style: TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(height: 16),
-                GestureDetector(
-                  onTap: () =>
-                      navigateToEditField('date', userData!['date']),
-                  child: Container(
-                    margin: EdgeInsets.symmetric(vertical: 5),
-                    padding: EdgeInsets.all(12),
-                    decoration: BoxDecoration(
-                      color: Color(0xFF292929),
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        userData!['date'],
-                        style: TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () =>
-                      navigateToEditField('role', userData!['role']),
-                  child: Container(
-                    margin: EdgeInsets.symmetric(vertical: 5),
-                    padding: EdgeInsets.all(12),
-                    decoration: BoxDecoration(
-                      color: Color(0xFF292929),
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        userData!['role'],
-                        style: TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
+                SizedBox(height: MediaQuery.of(context).size.height * 0.01),
+                buildEditableField(
+                    'Verified Status', userData!['verifiedstatus']),
+                SizedBox(height: MediaQuery.of(context).size.height * 0.01),
+                buildEditableField('Date', userData!['date']),
+                SizedBox(height: MediaQuery.of(context).size.height * 0.01),
+                buildEditableField('Role', userData!['role']),
               ],
             ),
+    );
+  }
+
+  Widget buildEditableField(String label, String value) {
+    return GestureDetector(
+      onTap: () => navigateToEditField(label.toLowerCase(), value),
+      child: Container(
+        margin: EdgeInsets.symmetric(
+            vertical: MediaQuery.of(context).size.height * 0.003),
+        padding: EdgeInsets.all(
+            MediaQuery.of(context).size.width * 0.03), // Responsive padding
+        decoration: BoxDecoration(
+          color: Color(0xFF292929),
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: Align(
+          alignment: Alignment.centerLeft,
+          child: Text(
+            value,
+            style: TextStyle(
+              fontSize: MediaQuery.of(context).size.width * 0.04,
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+            ),
+          ),
+        ),
+      ),
     );
   }
 }

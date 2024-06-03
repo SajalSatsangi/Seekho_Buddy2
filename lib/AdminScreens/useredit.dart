@@ -47,39 +47,43 @@ class _EditFieldState extends State<useredit> {
         ),
       ),
       body: Padding(
-        padding: EdgeInsets.all(16.0),
+        padding: EdgeInsets.all(MediaQuery.of(context).size.width * 0.04),
         child: Column(
           children: [
             Align(
-              alignment: Alignment.centerLeft, // Align the text to the left
+              alignment: Alignment.centerLeft,
               child: Container(
-                padding: EdgeInsets.all(12.0),
+                padding:
+                    EdgeInsets.all(MediaQuery.of(context).size.width * 0.03),
                 decoration: BoxDecoration(
                   color: Color(
                       0xFF212121), // Set the background color of the box to gray
-                  borderRadius:
-                      BorderRadius.circular(40.0), // Set border radius
+                  borderRadius: BorderRadius.circular(
+                      MediaQuery.of(context).size.width *
+                          0.1), // Set border radius
                 ),
                 child: Text(
                   widget.field,
                   style: TextStyle(
                       color: const Color.fromARGB(
-                          255, 255, 255, 255)), // Set text color to black
+                          255, 255, 255, 255)), // Set text color to white
                 ),
               ),
             ),
-            SizedBox(height: 12),
+            SizedBox(height: MediaQuery.of(context).size.height * 0.02),
             Container(
               decoration: BoxDecoration(
                 color: Color(
                     0xFF212121), // Set the background color of the box to gray
-                borderRadius: BorderRadius.circular(30.0), // Set border radius
+                borderRadius: BorderRadius.circular(
+                    MediaQuery.of(context).size.width *
+                        0.1), // Set border radius
               ),
               child: TextField(
                 controller: _controller,
                 style: TextStyle(
                     color: const Color.fromARGB(
-                        255, 255, 255, 255)), // Set the text color to black
+                        255, 255, 255, 255)), // Set the text color to white
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
                     borderSide: BorderSide.none, // Remove border
@@ -91,17 +95,20 @@ class _EditFieldState extends State<useredit> {
                   hintStyle: TextStyle(
                       color: const Color.fromARGB(
                           255, 255, 255, 255)), // Set placeholder text color
-                  contentPadding: EdgeInsets.all(12.0), // Set content padding
+                  contentPadding: EdgeInsets.all(
+                      MediaQuery.of(context).size.width *
+                          0.03), // Set content padding
                 ),
               ),
             ),
-            SizedBox(height: 20),
+            SizedBox(height: MediaQuery.of(context).size.height * 0.04),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.white, // Set button color to #99D9CC
+                backgroundColor: Colors.white, // Set button color to white
                 shape: RoundedRectangleBorder(
-                  borderRadius:
-                      BorderRadius.circular(20.0), // Set border radius
+                  borderRadius: BorderRadius.circular(
+                      MediaQuery.of(context).size.width *
+                          0.1), // Set border radius
                 ),
               ),
               onPressed: () {
