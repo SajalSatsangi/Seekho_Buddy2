@@ -255,7 +255,8 @@ class _HomeState extends State<Home> {
                                     MediaQuery.of(context).size.height * 0.025),
                             child: SizedBox(
                               width: MediaQuery.of(context).size.width * 0.4,
-                              height: MediaQuery.of(context).size.height * 0.05,
+                              height:
+                                  MediaQuery.of(context).size.height * 0.055,
                               child: ElevatedButton(
                                 onPressed: () {
                                   Navigator.push(
@@ -303,7 +304,8 @@ class _HomeState extends State<Home> {
                                     MediaQuery.of(context).size.height * 0.025),
                             child: SizedBox(
                               width: MediaQuery.of(context).size.width * 0.3,
-                              height: MediaQuery.of(context).size.height * 0.05,
+                              height:
+                                  MediaQuery.of(context).size.height * 0.055,
                               child: ElevatedButton(
                                 onPressed: () {
                                   Navigator.push(

@@ -15,7 +15,7 @@ class DonationPage extends StatelessWidget {
           style: TextStyle(
             fontWeight: FontWeight.bold,
             color: Colors.white,
-            fontSize: screenWidth * 0.05, // Responsive font size
+            fontSize: screenWidth * 0.05,
           ),
         ),
         leading: IconButton(
