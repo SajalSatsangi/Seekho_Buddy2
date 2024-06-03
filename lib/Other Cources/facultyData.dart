@@ -28,7 +28,7 @@ class Faculties extends StatelessWidget {
                 padding: EdgeInsets.only(
                   left: screenWidth * 0.04,
                   right: screenWidth * 0.04,
-                  top: padding.top + 10,
+                  top: padding.top - 5,
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -99,7 +99,7 @@ class Faculties extends StatelessWidget {
                                     0.01), // Adjust padding from the top
                             child: Container(
                               width: screenWidth * 0.01, // Adjusted width
-                              height: screenHeight * 0.14, // Adjusted height
+                              height: screenHeight * 0.15, // Adjusted height
                               decoration: BoxDecoration(
                                 color: Color(0xFF323232),
                                 borderRadius: BorderRadius.circular(20),
@@ -131,13 +131,13 @@ class Faculties extends StatelessWidget {
                                       fit: BoxFit.cover,
                                     ),
                                   ),
-                                  SizedBox(width: screenWidth * 0.06),
+                                  SizedBox(width: screenWidth * 0.05),
                                   Expanded(
                                     child: Column(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        SizedBox(height: screenHeight * 0.003),
+                                        SizedBox(height: screenHeight * 0.02),
                                         RichText(
                                           text: TextSpan(
                                             children: [
@@ -145,7 +145,7 @@ class Faculties extends StatelessWidget {
                                                 text: nameParts.join(' '),
                                                 style: TextStyle(
                                                   color: Colors.white,
-                                                  fontSize: screenWidth * 0.04,
+                                                  fontSize: screenWidth * 0.048,
                                                   fontWeight: FontWeight.bold,
                                                 ),
                                               ),
@@ -153,17 +153,18 @@ class Faculties extends StatelessWidget {
                                                 text: '\n$lastWord',
                                                 style: TextStyle(
                                                   color: Colors.white,
-                                                  fontSize: screenWidth * 0.04,
+                                                  fontSize: screenWidth * 0.048,
                                                   fontWeight: FontWeight.bold,
                                                 ),
                                               ),
                                             ],
                                           ),
                                         ),
+                                        SizedBox(height: screenHeight * 0.01),
                                         Padding(
                                           padding: EdgeInsets.only(
                                               right: screenWidth *
-                                                  0.16), // Adjust right padding
+                                                  0.15), // Adjust right padding
                                           child: Align(
                                             alignment: Alignment
                                                 .centerRight, // Align the button to the right
@@ -181,28 +182,18 @@ class Faculties extends StatelessWidget {
                                                   ),
                                                 );
                                               },
-                                              style: ElevatedButton.styleFrom(
-                                                backgroundColor: Colors.white,
-                                                minimumSize: Size(
-                                                    screenWidth * 0.2,
-                                                    screenHeight *
-                                                        0.04), // Decrease button height
-                                                padding: EdgeInsets.symmetric(
-                                                  vertical: screenHeight *
-                                                      0.001, // Adjust padding
-                                                  horizontal:
-                                                      screenWidth * 0.02,
-                                                ),
-                                                shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(20),
+                                              style: ButtonStyle(
+                                                backgroundColor:
+                                                    WidgetStateProperty.all<
+                                                        Color>(
+                                                  Colors.white,
                                                 ),
                                               ),
                                               child: Text(
                                                 'View',
                                                 style: TextStyle(
                                                   color: Colors.black,
-                                                  fontSize: screenWidth * 0.025,
+                                                  fontSize: screenWidth * 0.03,
                                                 ),
                                               ),
                                             ),
