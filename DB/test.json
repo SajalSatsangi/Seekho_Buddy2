@@ -79,7 +79,9 @@
                             "subjectName": "ENH101"
                         },
                         "semesterName": "Semester 3"
-                    }
+                    },
+
+                    "branchName": "Mechanical"
                 }
             },
             "description": "Description for Faculty of Engineering",

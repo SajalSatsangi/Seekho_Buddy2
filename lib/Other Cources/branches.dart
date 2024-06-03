@@ -9,6 +9,7 @@ class Branches extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(facultyData);
     List branches = facultyData['branches'].values.toList();
 
     return Scaffold(
