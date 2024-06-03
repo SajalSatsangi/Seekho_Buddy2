@@ -100,7 +100,7 @@ class _HomeState extends State<Home> {
                     children: [
                       Center(
                         child: Container(
-                          width: MediaQuery.of(context).size.width * 0.9,
+                          width: MediaQuery.of(context).size.width * 0.85,
                           height: MediaQuery.of(context).size.height * 0.18,
                           decoration: BoxDecoration(
                             color: const Color(0xFF212121),
