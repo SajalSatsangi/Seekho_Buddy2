@@ -153,8 +153,8 @@ class DonationPage extends StatelessWidget {
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Color.fromARGB(255, 0, 0, 0),
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(
-                              screenWidth * 0.05), // Responsive rounded corners
+                          borderRadius:
+                              BorderRadius.circular(screenWidth * 0.05),
                         ),
                       ),
                       icon: Icon(Icons.file_upload, color: Colors.white),
@@ -162,11 +162,11 @@ class DonationPage extends StatelessWidget {
                         'Upload Pdf',
                         style: TextStyle(
                           color: Color.fromARGB(255, 255, 255, 255),
-                          fontSize: screenWidth * 0.04, // Responsive font size
+                          fontSize: screenWidth * 0.04,
                         ),
                       ),
                     ),
-                    SizedBox(height: screenHeight * 0.02), // Responsive height
+                    SizedBox(height: screenHeight * 0.02),
                     buildTextField(
                         context,
                         'Any other Information or Suggestion',
