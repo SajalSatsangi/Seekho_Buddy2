@@ -36,7 +36,6 @@ class Home extends StatefulWidget {
   const Home({super.key});
 
   @override
-  // ignore: library_private_types_in_public_api
   _HomeState createState() => _HomeState();
 }
 
@@ -74,14 +73,14 @@ class _HomeState extends State<Home> {
             backgroundColor: Colors.black,
             appBar: AppBar(
               automaticallyImplyLeading: false,
-              title: const Row(
+              title: Row(
                 children: [
                   Expanded(
                     child: Text(
                       'Explore & Connect',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        fontSize: 28,
+                        fontSize: MediaQuery.of(context).size.width * 0.065,
                         color: Colors.white,
                       ),
                       overflow: TextOverflow.ellipsis,
@@ -94,58 +93,81 @@ class _HomeState extends State<Home> {
             body: SafeArea(
               child: SingleChildScrollView(
                 child: Padding(
-                  padding: const EdgeInsets.all(16.0),
+                  padding:
+                      EdgeInsets.all(MediaQuery.of(context).size.width * 0.04),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const SizedBox(height: 20),
                       Center(
                         child: Container(
-                          width: 350,
-                          height: 149,
+                          width: MediaQuery.of(context).size.width * 0.85,
+                          height: MediaQuery.of(context).size.height * 0.18,
                           decoration: BoxDecoration(
                             color: const Color(0xFF212121),
-                            borderRadius: BorderRadius.circular(20),
+                            borderRadius: BorderRadius.circular(
+                                MediaQuery.of(context).size.width * 0.05),
                           ),
                           child: Stack(
                             children: [
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  const Padding(
-                                    padding:
-                                        EdgeInsets.only(left: 15.0, top: 20),
+                                  Padding(
+                                    padding: EdgeInsets.only(
+                                        left:
+                                            MediaQuery.of(context).size.width *
+                                                0.05,
+                                        top:
+                                            MediaQuery.of(context).size.height *
+                                                0.03),
                                     child: Text(
                                       'Explore study Materials',
                                       style: TextStyle(
                                         color: Colors.white,
-                                        fontSize: 19,
+                                        fontSize:
+                                            MediaQuery.of(context).size.width *
+                                                0.04,
                                         fontWeight: FontWeight.bold,
                                       ),
                                     ),
                                   ),
-                                  const SizedBox(height: 5),
-                                  const Row(
-                                    children: [
-                                      Padding(
-                                        padding: EdgeInsets.only(left: 15.0),
-                                        child: Text(
-                                          'best study materials for you',
-                                          style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 13,
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  const SizedBox(height: 10),
+                                  SizedBox(
+                                      height:
+                                          MediaQuery.of(context).size.height *
+                                              0.005),
                                   Padding(
-                                    padding: const EdgeInsets.only(
-                                        left: 20.0, top: 5.0),
+                                    padding: EdgeInsets.only(
+                                        left:
+                                            MediaQuery.of(context).size.width *
+                                                0.05),
+                                    child: Text(
+                                      'best study materials for you',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize:
+                                            MediaQuery.of(context).size.width *
+                                                0.03,
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                      height:
+                                          MediaQuery.of(context).size.height *
+                                              0.01),
+                                  Padding(
+                                    padding: EdgeInsets.only(
+                                        left:
+                                            MediaQuery.of(context).size.width *
+                                                0.06,
+                                        top:
+                                            MediaQuery.of(context).size.height *
+                                                0.005),
                                     child: SizedBox(
-                                      width: 120,
-                                      height: 40,
+                                      width: MediaQuery.of(context).size.width *
+                                          0.3,
+                                      height:
+                                          MediaQuery.of(context).size.height *
+                                              0.05,
                                       child: ElevatedButton(
                                         onPressed: () {
                                           Navigator.push(
@@ -157,7 +179,7 @@ class _HomeState extends State<Home> {
                                         },
                                         style: ButtonStyle(
                                           backgroundColor:
-                                              WidgetStateProperty.all<Color>(
+                                              MaterialStateProperty.all<Color>(
                                             const Color.fromARGB(
                                                 255, 255, 255, 255),
                                           ),
@@ -174,349 +196,155 @@ class _HomeState extends State<Home> {
                                 ],
                               ),
                               Positioned(
-                                top: 22,
-                                right: 20,
+                                top: MediaQuery.of(context).size.height * 0.032,
+                                right: MediaQuery.of(context).size.width * 0.05,
                                 child: SvgPicture.asset(
                                   'assets/undraw_online_test_re_kyfx.svg',
-                                  height: 65,
-                                  width: 65,
+                                  height:
+                                      MediaQuery.of(context).size.height * 0.1,
+                                  width:
+                                      MediaQuery.of(context).size.height * 0.1,
                                 ),
                               ),
                             ],
                           ),
                         ),
                       ),
-                      const SizedBox(height: 8),
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.025,
+                      ),
                       Padding(
-                        padding: const EdgeInsets.only(right: 0.0),
+                        padding: EdgeInsets.only(
+                            right: MediaQuery.of(context).size.width * 0.01),
                         child: Column(
                           children: [
-                            SingleChildScrollView(
-                              scrollDirection: Axis.horizontal,
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  InkWell(
-                                    onTap: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                ComingSoonScreen()),
-                                      );
-                                    },
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(
-                                          right: 15.0, left: 15, top: 15),
-                                      child: Container(
-                                        width: 160,
-                                        height: 140,
-                                        decoration: BoxDecoration(
-                                          color: const Color.fromARGB(
-                                              87, 162, 162, 162),
-                                          borderRadius:
-                                              BorderRadius.circular(20),
-                                          border: Border.all(
-                                            color: const Color.fromARGB(
-                                                255, 107, 107, 107),
-                                            width: 2.0,
-                                          ),
-                                        ),
-                                        child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          children: [
-                                            SvgPicture.asset(
-                                              'assets/Resource.svg',
-                                              height: 80,
-                                              width: 80,
-                                            ),
-                                            const Padding(
-                                              padding: EdgeInsets.only(top: 15),
-                                              child: Text(
-                                                'Explore More',
-                                                style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: 15,
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  InkWell(
-                                    onTap: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                NoticesAdmin()),
-                                      );
-                                    },
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(
-                                          top: 15, left: 5),
-                                      child: Container(
-                                        width: 160,
-                                        height: 140,
-                                        decoration: BoxDecoration(
-                                          color: const Color.fromARGB(
-                                              87, 162, 162, 162),
-                                          borderRadius:
-                                              BorderRadius.circular(20),
-                                          border: Border.all(
-                                            color: const Color.fromARGB(
-                                                255, 107, 107, 107),
-                                            width: 2.0, // Reduced border width
-                                          ),
-                                        ),
-                                        child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          children: [
-                                            SvgPicture.asset(
-                                              'assets/Job.svg',
-                                              height: 80,
-                                              width: 80,
-                                            ),
-                                            const Padding(
-                                              padding: EdgeInsets.only(top: 15),
-                                              child: Text(
-                                                'Notices',
-                                                style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: 15,
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                _buildCard(context, 'Explore More',
+                                    'assets/Resource.svg', ComingSoonScreen()),
+                                _buildCard(context, 'Notices', 'assets/Job.svg',
+                                    NoticesAdmin()),
+                              ],
                             ),
-                            const SizedBox(height: 8),
-                            SingleChildScrollView(
-                              scrollDirection: Axis.horizontal,
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  InkWell(
-                                    onTap: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                ComingSoonScreen()),
-                                      );
-                                    },
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(
-                                          right: 15, left: 15, top: 15),
-                                      child: Container(
-                                        width: 160,
-                                        height: 140,
-                                        decoration: BoxDecoration(
-                                          color: const Color.fromARGB(
-                                              87, 162, 162, 162),
-                                          borderRadius:
-                                              BorderRadius.circular(20),
-                                          border: Border.all(
-                                            color: const Color.fromARGB(
-                                                255, 107, 107, 107),
-                                            width: 2.0,
-                                          ),
-                                        ),
-                                        child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          children: [
-                                            SvgPicture.asset(
-                                              'assets/Professional.svg',
-                                              height: 80,
-                                              width: 80,
-                                            ),
-                                            const Padding(
-                                              padding: EdgeInsets.only(top: 15),
-                                              child: Text(
-                                                'Projects',
-                                                style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: 15,
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  InkWell(
-                                    onTap: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                ComingSoonScreen()),
-                                      );
-                                    },
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(
-                                          top: 15, left: 5),
-                                      child: Container(
-                                        width: 160,
-                                        height: 140,
-                                        decoration: BoxDecoration(
-                                          color: const Color.fromARGB(
-                                              87, 162, 162, 162),
-                                          borderRadius:
-                                              BorderRadius.circular(20),
-                                          border: Border.all(
-                                            color: const Color.fromARGB(
-                                                255, 107, 107, 107),
-                                            width: 2.0, // Reduced border width
-                                          ),
-                                        ),
-                                        child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          children: [
-                                            SvgPicture.asset(
-                                              'assets/Network.svg',
-                                              height: 70,
-                                              width: 60,
-                                            ),
-                                            const Padding(
-                                              padding: EdgeInsets.only(top: 20),
-                                              child: Text(
-                                                'Networking',
-                                                style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: 15,
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
+                            SizedBox(
+                              height:
+                                  MediaQuery.of(context).size.height * 0.0001,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                _buildCard(
+                                    context,
+                                    'Projects',
+                                    'assets/Professional.svg',
+                                    ComingSoonScreen()),
+                                _buildCard(context, 'Networking',
+                                    'assets/Network.svg', ComingSoonScreen()),
+                              ],
                             ),
                           ],
                         ),
                       ),
-                      SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: Row(
-                          children: [
-                            Padding(
-                              padding:
-                                  const EdgeInsets.only(left: 70.0, top: 25.0),
-                              child: SizedBox(
-                                width: 155,
-                                height: 40,
-                                child: ElevatedButton(
-                                  onPressed: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => DonationPage()),
-                                    );
-                                  },
-                                  style: ButtonStyle(
-                                    backgroundColor:
-                                        MaterialStateProperty.all<Color>(
-                                      Color.fromARGB(255, 93, 93, 93),
-                                    ),
+                      Row(
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.only(
+                                left: MediaQuery.of(context).size.width * 0.15,
+                                top:
+                                    MediaQuery.of(context).size.height * 0.025),
+                            child: SizedBox(
+                              width: MediaQuery.of(context).size.width * 0.4,
+                              height: MediaQuery.of(context).size.height * 0.05,
+                              child: ElevatedButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => DonationPage()),
+                                  );
+                                },
+                                style: ButtonStyle(
+                                  backgroundColor:
+                                      MaterialStateProperty.all<Color>(
+                                    Color.fromARGB(255, 93, 93, 93),
                                   ),
-                                  child: const Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        'Donate',
-                                        style: TextStyle(
-                                          color: Color.fromARGB(
-                                              255, 252, 251, 251),
-                                          fontSize: 18,
-                                        ),
-                                      ),
-                                      SizedBox(
-                                          width:
-                                              8), // Space between the text and the icon
-                                      Icon(
-                                        Icons.badge,
+                                ),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      'Donate',
+                                      style: TextStyle(
                                         color:
                                             Color.fromARGB(255, 252, 251, 251),
+                                        fontSize:
+                                            MediaQuery.of(context).size.width *
+                                                0.04,
                                       ),
-                                    ],
-                                  ),
+                                    ),
+                                    SizedBox(
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.01),
+                                    Icon(
+                                      Icons.badge,
+                                      color: Color.fromARGB(255, 252, 251, 251),
+                                    ),
+                                  ],
                                 ),
                               ),
                             ),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.only(left: 10.0, top: 25.0),
-                              child: SizedBox(
-                                width: 120,
-                                height: 40,
-                                child: ElevatedButton(
-                                  onPressed: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => Newhelp()),
-                                    );
-                                  },
-                                  style: ButtonStyle(
-                                    backgroundColor:
-                                        MaterialStateProperty.all<Color>(
-                                      const Color.fromARGB(255, 93, 93, 93),
-                                    ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(
+                                left: MediaQuery.of(context).size.width * 0.02,
+                                top:
+                                    MediaQuery.of(context).size.height * 0.025),
+                            child: SizedBox(
+                              width: MediaQuery.of(context).size.width * 0.3,
+                              height: MediaQuery.of(context).size.height * 0.05,
+                              child: ElevatedButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => Newhelp()),
+                                  );
+                                },
+                                style: ButtonStyle(
+                                  backgroundColor:
+                                      MaterialStateProperty.all<Color>(
+                                    const Color.fromARGB(255, 93, 93, 93),
                                   ),
-                                  child: const Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        'Help',
-                                        style: TextStyle(
-                                          color: Color.fromARGB(
-                                              255, 252, 251, 251),
-                                          fontSize: 18,
-                                        ),
-                                      ),
-                                      SizedBox(
-                                          width:
-                                              8), // Space between the text and the icon
-                                      Icon(
-                                        Icons.help,
+                                ),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      'Help',
+                                      style: TextStyle(
                                         color:
                                             Color.fromARGB(255, 252, 251, 251),
+                                        fontSize:
+                                            MediaQuery.of(context).size.width *
+                                                0.04,
                                       ),
-                                    ],
-                                  ),
+                                    ),
+                                    SizedBox(
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.01),
+                                    Icon(
+                                      Icons.help,
+                                      color: Color.fromARGB(255, 252, 251, 251),
+                                    ),
+                                  ],
                                 ),
                               ),
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                     ],
                   ),
@@ -531,6 +359,60 @@ class _HomeState extends State<Home> {
       bottomNavigationBar: CustomFooter(
         selectedIndex: _selectedIndex,
         onItemTapped: _onItemTapped,
+      ),
+    );
+  }
+
+  Widget _buildCard(
+      BuildContext context, String title, String assetPath, Widget nextPage) {
+    return InkWell(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => nextPage),
+        );
+      },
+      child: Padding(
+        padding: EdgeInsets.all(
+            MediaQuery.of(context).size.width * 0.02), // Adjust padding
+        child: Container(
+          width: MediaQuery.of(context).size.width * 0.4,
+          height: MediaQuery.of(context).size.height * 0.2,
+          decoration: BoxDecoration(
+            color: const Color.fromARGB(87, 162, 162, 162),
+            borderRadius: BorderRadius.circular(
+                MediaQuery.of(context).size.width *
+                    0.05), // Adjust border radius
+            border: Border.all(
+              color: const Color.fromARGB(255, 107, 107, 107),
+              width: MediaQuery.of(context).size.width *
+                  0.01, // Adjust border width
+            ),
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              SvgPicture.asset(
+                assetPath,
+                height: MediaQuery.of(context).size.height * 0.1,
+                width: MediaQuery.of(context).size.width * 0.1,
+              ),
+              SizedBox(
+                  height: MediaQuery.of(context).size.height *
+                      0.02), // Adjust sized box height
+              Text(
+                title,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: MediaQuery.of(context).size.width *
+                      0.04, // Adjust font size
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }

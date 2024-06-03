@@ -19,66 +19,85 @@ void showMaintenanceNotice(
               borderRadius: BorderRadius.all(Radius.circular(20.0)),
             ),
             contentPadding: EdgeInsets.all(0),
-            content: SingleChildScrollView(
-              child: Container(
-                decoration: BoxDecoration(
-                  color: Color.fromARGB(255, 39, 39, 39),
-                  borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                ),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.all(16),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Important Notice:",
-                            style: TextStyle(
-                              fontSize: 24,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                            ),
-                          ),
-                          SizedBox(height: 8),
-                          Text(
-                            title,
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                            ),
-                          ),
-                          SizedBox(height: 8),
-                          Text(
-                            description,
-                            style: TextStyle(
-                              color: Colors.white,
-                            ),
-                          ),
-                          SizedBox(height: 8),
-                          Text(
-                            "By-XYZ",
-                            style: TextStyle(
-                              color: Colors.white,
-                            ),
-                          ),
-                        ],
-                      ),
+            content: LayoutBuilder(
+              builder: (context, constraints) {
+                return SingleChildScrollView(
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Color.fromARGB(255, 39, 39, 39),
+                      borderRadius: BorderRadius.all(Radius.circular(20.0)),
                     ),
-                    ClipRRect(
-                      borderRadius: BorderRadius.vertical(
-                        bottom: Radius.circular(20.0),
-                      ),
-                      child: Image.network(
-                        fileUrl,
-                        fit: BoxFit.cover,
-                      ),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.all(
+                            MediaQuery.of(context).size.width * 0.04,
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "Important Notice:",
+                                style: TextStyle(
+                                  fontSize:
+                                      MediaQuery.of(context).size.width * 0.06,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                ),
+                              ),
+                              SizedBox(
+                                  height: MediaQuery.of(context).size.width *
+                                      0.015),
+                              Text(
+                                title,
+                                style: TextStyle(
+                                  fontSize:
+                                      MediaQuery.of(context).size.width * 0.05,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                ),
+                              ),
+                              SizedBox(
+                                  height: MediaQuery.of(context).size.width *
+                                      0.015),
+                              Text(
+                                description,
+                                style: TextStyle(
+                                  fontSize:
+                                      MediaQuery.of(context).size.width * 0.04,
+                                  color: Colors.white,
+                                ),
+                              ),
+                              SizedBox(
+                                  height: MediaQuery.of(context).size.width *
+                                      0.015),
+                              Text(
+                                "By-XYZ",
+                                style: TextStyle(
+                                  fontSize:
+                                      MediaQuery.of(context).size.width * 0.04,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        ClipRRect(
+                          borderRadius: BorderRadius.vertical(
+                            bottom: Radius.circular(20.0),
+                          ),
+                          child: Image.network(
+                            fileUrl,
+                            fit: BoxFit.cover,
+                            width: MediaQuery.of(context).size.width,
+                          ),
+                        ),
+                      ],
                     ),
-                  ],
-                ),
-              ),
+                  ),
+                );
+              },
             ),
           ),
         ),

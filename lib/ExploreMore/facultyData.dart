@@ -77,94 +77,122 @@ class Faculties extends StatelessWidget {
                     itemCount: faculties.length,
                     itemBuilder: (context, index) {
                       final faculty = faculties[index];
+                      final nameParts = faculty['name'].split(' ');
+                      final lastWord =
+                          nameParts.isNotEmpty ? nameParts.removeLast() : '';
+
                       return Padding(
                         padding: const EdgeInsets.symmetric(
-                            horizontal: 44.0, vertical: 8.0), // Reduced padding
+                            horizontal: 50.0, vertical: 8.0), // Reduced padding
                         child: GestureDetector(
-                          child: Container(
-                            width: MediaQuery.of(context).size.width *
-                                0.6, // Adjusted width
-                            height: MediaQuery.of(context).size.height *
-                                0.2, // Adjusted height
-                            decoration: BoxDecoration(
-                              color: Color(0xFF323232),
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(0.0),
-                              child: Row(
-                                children: [
-                                  ClipRRect(
-                                    borderRadius: BorderRadius.horizontal(
-                                        left: Radius.circular(
-                                            20)), // Rounded only from the left side
-                                    child: Image.asset(
-                                      index == 0
-                                          ? 'assets/comm.png' // Image for index 0
-                                          : index == 1
-                                              ? 'assets/edu.png' // Use LinkedIn icon for the fifth image
-                                              : index == 2
-                                                  ? 'assets/eng.png' // Use LinkedIn icon for the fifth image
-                                                  : index == 3
-                                                      ? 'assets/art.png' // Use LinkedIn icon for the fifth image
-                                                      : index == 4
-                                                          ? 'assets/eng.png' // Use LinkedIn icon for the fifth image
-                                                          : index == 5
-                                                              ? 'assets/sci.png' // Use LinkedIn icon for the fifth image
-                                                              : index == 6
-                                                                  ? 'assets/tec.png' // Use LinkedIn icon for the fifth image
-                                                                  : 'assets/search_result.png', // Default image for other indices
-                                      width: 100,
-                                      height: 100,
-                                      fit: BoxFit.cover,
+                          child: Padding(
+                            padding: const EdgeInsets.only(
+                                top: 5.0), // Padding from the top
+                            child: Container(
+                              width: MediaQuery.of(context).size.width *
+                                  1, // Adjusted width
+                              height: MediaQuery.of(context).size.height *
+                                  0.13, // Adjusted height
+                              decoration: BoxDecoration(
+                                color: Color(0xFF323232),
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(0.0),
+                                child: Row(
+                                  children: [
+                                    ClipRRect(
+                                      borderRadius: BorderRadius.horizontal(
+                                          left: Radius.circular(
+                                              20)), // Rounded only from the left side
+                                      child: Image.asset(
+                                        index == 0
+                                            ? 'assets/comm.png' // Image for index 0
+                                            : index == 1
+                                                ? 'assets/edu.png' // Use LinkedIn icon for the fifth image
+                                                : index == 2
+                                                    ? 'assets/eng.png' // Use LinkedIn icon for the fifth image
+                                                    : index == 3
+                                                        ? 'assets/art.png' // Use LinkedIn icon for the fifth image
+                                                        : index == 4
+                                                            ? 'assets/eng.png' // Use LinkedIn icon for the fifth image
+                                                            : index == 5
+                                                                ? 'assets/sci.png' // Use LinkedIn icon for the fifth image
+                                                                : index == 6
+                                                                    ? 'assets/tec.png' // Use LinkedIn icon for the fifth image
+                                                                    : 'assets/search_result.png', // Default image for other indices
+                                        width: 131,
+                                        height: 131,
+                                        fit: BoxFit.cover,
+                                      ),
                                     ),
-                                  ),
-                                  SizedBox(width: 20),
-                                  Expanded(
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          faculty['name'],
-                                          style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 17.0,
-                                            fontWeight: FontWeight.bold,
+                                    SizedBox(width: 20),
+                                    Expanded(
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          SizedBox(height: 5),
+                                          RichText(
+                                            text: TextSpan(
+                                              children: [
+                                                TextSpan(
+                                                  text: nameParts.join(' '),
+                                                  style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: 20.0,
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
+                                                ),
+                                                TextSpan(
+                                                  text: '\n$lastWord',
+                                                  style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: 20.0,
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
                                           ),
-                                        ),
-                                        SizedBox(height: 10),
-                                        ElevatedButton(
-                                          onPressed: () {
-                                            Navigator.push(
-                                              context,
-                                              SlideRightPageRoute(
-                                                page: Branches(
-                                                  facultyName: faculty['name'],
-                                                  facultyData:
-                                                      faculty, // Pass the entire faculty map
+                                          SizedBox(height: 7),
+                                          Align(
+                                            alignment: Alignment
+                                                .centerRight, // Align the button to the right
+                                            child: ElevatedButton(
+                                              onPressed: () {
+                                                Navigator.push(
+                                                  context,
+                                                  SlideRightPageRoute(
+                                                    page: Branches(
+                                                      facultyName:
+                                                          faculty['name'],
+                                                      facultyData:
+                                                          faculty, // Pass the entire faculty map
+                                                    ),
+                                                  ),
+                                                );
+                                              },
+                                              style: ButtonStyle(
+                                                backgroundColor:
+                                                    MaterialStateProperty.all<
+                                                        Color>(
+                                                  Colors.white,
                                                 ),
                                               ),
-                                            );
-                                          },
-                                          style: ButtonStyle(
-                                            backgroundColor:
-                                                MaterialStateProperty.all<
-                                                    Color>(
-                                              Colors.white,
+                                              child: Text(
+                                                'View',
+                                                style: TextStyle(
+                                                  color: Colors.black,
+                                                ),
+                                              ),
                                             ),
                                           ),
-                                          child: Text(
-                                            'View',
-                                            style: TextStyle(
-                                              color: Colors.black,
-                                            ),
-                                          ),
-                                        ),
-                                      ],
+                                        ],
+                                      ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
                             ),
                           ),
