@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:seekhobuddy/AdminScreens/materialSectionPage-Admin.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:seekhobuddy/ExploreMore/materialSectionPage.dart'; 
 
 class Subjects extends StatefulWidget {
   final String semesterName;
@@ -20,6 +23,20 @@ class Subjects extends StatefulWidget {
 
 class _SubjectsState extends State<Subjects> {
   String searchQuery = '';
+
+  Future<String> getUserRole() async {
+  User? user = FirebaseAuth.instance.currentUser;
+  if (user != null) {
+    QuerySnapshot querySnapshot = await FirebaseFirestore.instance.collection('users').where('uid', isEqualTo: user.uid).get();
+    if (querySnapshot.docs.isNotEmpty) {
+      return querySnapshot.docs.first['role'];
+    } else {
+      throw Exception('No user document found');
+    }
+  } else {
+    throw Exception('No user logged in');
+  }
+}
 
   @override
   Widget build(BuildContext context) {
@@ -136,18 +153,37 @@ class _SubjectsState extends State<Subjects> {
                             ),
                             ElevatedButton(
                               onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  SlideLeftPageRoute(
-                                    page: Materialsectionpage_Admin(
-                                      subjectName: subject['subjectName'],
-                                      subject: subject,
-                                      facultyName: widget.facultyName,
-                                      branchName: widget.branchName,
-                                      semesterName: widget.semesterName,
-                                    ),
-                                  ),
-                                );
+                                getUserRole().then((role) {
+                                  if (role == 'student') {
+                                    Navigator.push(
+                                      context,
+                                      SlideLeftPageRoute(
+                                        page: Materialsectionpage(
+                                          subjectName: subject['subjectName'],
+                                          subject: subject,
+                                          facultyName: widget.facultyName,
+                                          branchName: widget.branchName,
+                                          semesterName: widget.semesterName,
+                                          role: role,  // Add this line
+                                        ),
+                                      ),
+                                    );
+                                  } else if (role == 'admin' || role == 'CR') {
+                                    Navigator.push(
+                                      context,
+                                      SlideLeftPageRoute(
+                                        page: Materialsectionpage_Admin(
+                                          subjectName: subject['subjectName'],
+                                          subject: subject,
+                                          facultyName: widget.facultyName,
+                                          branchName: widget.branchName,
+                                          semesterName: widget.semesterName,
+                                          role: role,  // Add this line
+                                        ),
+                                      ),
+                                    );
+                                  }
+                                });
                               },
                               style: ButtonStyle(
                                 backgroundColor:
@@ -162,7 +198,7 @@ class _SubjectsState extends State<Subjects> {
                                   color: Colors.black,
                                 ),
                               ),
-                            ),
+                            )
                           ],
                         ),
                       ),
