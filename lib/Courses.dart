@@ -21,13 +21,23 @@ class Courses extends StatelessWidget {
 class MyWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final mediaQuery = MediaQuery.of(context);
+    final screenWidth = mediaQuery.size.width;
+    final screenHeight = mediaQuery.size.height;
+    final padding = mediaQuery.padding;
+
     return Scaffold(
       body: Padding(
-        padding: EdgeInsets.only(top: 28.0), // Additional padding from the top
+        padding: EdgeInsets.only(
+            top: padding.top + 2.0), // Additional padding from the top
         child: Column(
           children: [
             Padding(
-              padding: EdgeInsets.only(left: 16, right: 16, top: 10),
+              padding: EdgeInsets.only(
+                left: screenWidth * 0.04,
+                right: screenWidth * 0.04,
+                top: screenHeight * 0.02,
+              ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
@@ -36,17 +46,17 @@ class MyWidget extends StatelessWidget {
                       IconButton(
                         icon: Icon(Icons.arrow_back_ios, color: Colors.white),
                         onPressed: () {
-Navigator.push(
+                          Navigator.push(
                             context,
-                            MaterialPageRoute(
-                                builder: (context) => Home()),
-                          );                        },
+                            MaterialPageRoute(builder: (context) => Home()),
+                          );
+                        },
                       ),
-                      SizedBox(width: 10.0),
+                      SizedBox(width: screenWidth * 0.02),
                       Text(
                         "Courses",
                         style: TextStyle(
-                          fontSize: 28,
+                          fontSize: screenWidth * 0.07,
                           fontWeight: FontWeight.bold,
                           color: Colors.white,
                         ),
@@ -56,46 +66,26 @@ Navigator.push(
                 ],
               ),
             ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 14, vertical: 14),
-              child: TextField(
-                decoration: InputDecoration(
-                  hintText: "Search...",
-                  hintStyle: TextStyle(color: Colors.white),
-                  prefixIcon: Icon(
-                    Icons.search,
-                    color: Colors.white,
-                    size: 20,
-                  ),
-                  filled: true,
-                  fillColor: Color(0xFF323232),
-                  contentPadding: EdgeInsets.all(8),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(20),
-                    borderSide: BorderSide(color: Color(0xFF323232)),
-                  ),
-                ),
-              ),
-            ),
             SizedBox(
-                height: 10), // Space between the search bar and the first box
+                height: screenHeight *
+                    0.05), // Space between the search bar and the first box
             Container(
-              width: 320,
-              height: 150,
+              width: screenWidth * 0.85,
+              height: screenHeight * 0.2,
               decoration: BoxDecoration(
                 color: Color(0xFF323232),
                 borderRadius: BorderRadius.circular(30),
               ),
-              margin: EdgeInsets.symmetric(horizontal: 14),
-              padding: EdgeInsets.all(10),
+              margin: EdgeInsets.symmetric(horizontal: screenWidth * 0.04),
+              padding: EdgeInsets.all(screenWidth * 0.03),
               child: Row(
                 children: [
                   SvgPicture.asset(
                     'assets/YC.svg',
-                    width: 90,
-                    height: 90,
+                    width: screenWidth * 0.25,
+                    height: screenHeight * 0.12,
                   ),
-                  SizedBox(width: 20),
+                  SizedBox(width: screenWidth * 0.05),
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -105,27 +95,27 @@ Navigator.push(
                           'Your Courses',
                           style: TextStyle(
                             color: Colors.white,
-                            fontSize: 22,
+                            fontSize: screenWidth * 0.06,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        SizedBox(height: 10),
+                        SizedBox(height: screenHeight * 0.01),
                         Row(
                           children: [
-                            SizedBox(width: 30), // Add space before the button
+                            SizedBox(
+                                width: screenWidth *
+                                    0.1), // Add space before the button
                             ElevatedButton(
                               onPressed: () {
-                                // Define your onPressed action here
                                 Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    SubjectsPage()),
-                                          );
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => SubjectsPage()),
+                                );
                               },
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: Colors.white,
-                                disabledBackgroundColor: Colors.black, // Text color
+                                disabledBackgroundColor: Colors.black,
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(20),
                                 ),
@@ -133,7 +123,9 @@ Navigator.push(
                               child: Text(
                                 'View',
                                 style: TextStyle(
-                                    color: Colors.black), // Text color
+                                    color: Colors.black,
+                                    fontSize:
+                                        screenWidth * 0.045), // Text color
                               ),
                             ),
                           ],
@@ -144,26 +136,27 @@ Navigator.push(
                 ],
               ),
             ),
-            SizedBox(height: 20),
+            SizedBox(height: screenHeight * 0.02),
             SizedBox(
-                height: 10), // Space between the first box and the second box
+                height: screenHeight *
+                    0.01), // Space between the first box and the second box
             Container(
-              width: 320,
-              height: 150,
+              width: screenWidth * 0.85,
+              height: screenHeight * 0.2,
               decoration: BoxDecoration(
                 color: Color(0xFF323232),
                 borderRadius: BorderRadius.circular(30),
               ),
-              margin: EdgeInsets.symmetric(horizontal: 14),
-              padding: EdgeInsets.all(10),
+              margin: EdgeInsets.symmetric(horizontal: screenWidth * 0.04),
+              padding: EdgeInsets.all(screenWidth * 0.03),
               child: Row(
                 children: [
                   SvgPicture.asset(
                     'assets/OC.svg',
-                    width: 90,
-                    height: 90,
+                    width: screenWidth * 0.25,
+                    height: screenHeight * 0.12,
                   ),
-                  SizedBox(width: 20),
+                  SizedBox(width: screenWidth * 0.05),
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -173,25 +166,27 @@ Navigator.push(
                           'Other Courses',
                           style: TextStyle(
                             color: Colors.white,
-                            fontSize: 22,
+                            fontSize: screenWidth * 0.06,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        SizedBox(height: 10),
+                        SizedBox(height: screenHeight * 0.01),
                         Row(
                           children: [
-                            SizedBox(width: 30), // Add space before the button
+                            SizedBox(
+                                width: screenWidth *
+                                    0.1), // Add space before the button
                             ElevatedButton(
                               onPressed: () {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) => Faculties()),
-                                ); // Define your onPressed action here
+                                );
                               },
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: Colors.white,
-                                disabledBackgroundColor: Colors.black, // Text color
+                                disabledBackgroundColor: Colors.black,
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(20),
                                 ),
@@ -199,7 +194,9 @@ Navigator.push(
                               child: Text(
                                 'View',
                                 style: TextStyle(
-                                    color: Colors.black), // Text color
+                                    color: Colors.black,
+                                    fontSize:
+                                        screenWidth * 0.045), // Text color
                               ),
                             ),
                           ],
