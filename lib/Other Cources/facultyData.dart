@@ -131,13 +131,13 @@ class Faculties extends StatelessWidget {
                                       fit: BoxFit.cover,
                                     ),
                                   ),
-                                  SizedBox(width: screenWidth * 0.04),
+                                  SizedBox(width: screenWidth * 0.06),
                                   Expanded(
                                     child: Column(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        SizedBox(height: screenHeight * 0.01),
+                                        SizedBox(height: screenHeight * 0.003),
                                         RichText(
                                           text: TextSpan(
                                             children: [
@@ -145,7 +145,7 @@ class Faculties extends StatelessWidget {
                                                 text: nameParts.join(' '),
                                                 style: TextStyle(
                                                   color: Colors.white,
-                                                  fontSize: screenWidth * 0.048,
+                                                  fontSize: screenWidth * 0.04,
                                                   fontWeight: FontWeight.bold,
                                                 ),
                                               ),
@@ -153,18 +153,17 @@ class Faculties extends StatelessWidget {
                                                 text: '\n$lastWord',
                                                 style: TextStyle(
                                                   color: Colors.white,
-                                                  fontSize: screenWidth * 0.048,
+                                                  fontSize: screenWidth * 0.04,
                                                   fontWeight: FontWeight.bold,
                                                 ),
                                               ),
                                             ],
                                           ),
                                         ),
-                                        SizedBox(height: screenHeight * 0.01),
                                         Padding(
                                           padding: EdgeInsets.only(
                                               right: screenWidth *
-                                                  0.15), // Adjust right padding
+                                                  0.16), // Adjust right padding
                                           child: Align(
                                             alignment: Alignment
                                                 .centerRight, // Align the button to the right
@@ -182,18 +181,28 @@ class Faculties extends StatelessWidget {
                                                   ),
                                                 );
                                               },
-                                              style: ButtonStyle(
-                                                backgroundColor:
-                                                    WidgetStateProperty.all<
-                                                        Color>(
-                                                  Colors.white,
+                                              style: ElevatedButton.styleFrom(
+                                                backgroundColor: Colors.white,
+                                                minimumSize: Size(
+                                                    screenWidth * 0.2,
+                                                    screenHeight *
+                                                        0.04), // Decrease button height
+                                                padding: EdgeInsets.symmetric(
+                                                  vertical: screenHeight *
+                                                      0.001, // Adjust padding
+                                                  horizontal:
+                                                      screenWidth * 0.02,
+                                                ),
+                                                shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(20),
                                                 ),
                                               ),
                                               child: Text(
                                                 'View',
                                                 style: TextStyle(
                                                   color: Colors.black,
-                                                  fontSize: screenWidth * 0.03,
+                                                  fontSize: screenWidth * 0.025,
                                                 ),
                                               ),
                                             ),
