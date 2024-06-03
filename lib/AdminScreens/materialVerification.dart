@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:seekhobuddy/AdminScreens/pdf.dart';
 import 'package:intl/intl.dart';
 
 class MaterialConfirmationScreen extends StatelessWidget {
@@ -91,80 +92,97 @@ class MaterialConfirmationScreen extends StatelessWidget {
                 itemCount: mockData.length,
                 itemBuilder: (context, index) {
                   var material = mockData[index];
-                  return Padding(
-                    padding: EdgeInsets.fromLTRB(
-                        MediaQuery.of(context).size.width * 0.03,
-                        0,
-                        MediaQuery.of(context).size.width * 0.03,
-                        0),
-                    child: Container(
-                      padding: EdgeInsets.all(
-                          MediaQuery.of(context).size.width * 0.04),
-                      decoration: BoxDecoration(
-                        color: Color(0xFF323232),
-                        borderRadius: BorderRadius.circular(
-                            MediaQuery.of(context).size.width * 0.03),
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                  return Column(
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(
+                            MediaQuery.of(context).size.width * 0.03,
+                            0,
+                            MediaQuery.of(context).size.width * 0.03,
+                            0),
+                        child: Container(
+                          padding: EdgeInsets.all(
+                              MediaQuery.of(context).size.width * 0.04),
+                          decoration: BoxDecoration(
+                            color: Color(0xFF323232),
+                            borderRadius: BorderRadius.circular(
+                                MediaQuery.of(context).size.width * 0.03),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              SizedBox(width: 16),
-                              TextButton(
-                                onPressed: () {
-                                  _showMaterialPopup(
-                                    context,
-                                    NetworkImage(material['materialImage']),
-                                  );
-                                },
-                                style: TextButton.styleFrom(
-                                  backgroundColor: Colors.black,
-                                ),
-                                child: Text(
-                                  "View Material",
-                                  style: TextStyle(color: Colors.white),
-                                ),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  SizedBox(width: 16),
+                                  TextButton(
+                                    onPressed: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              MaterialDetailScreen(
+                                            imageUrl: material['materialImage'],
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                    style: TextButton.styleFrom(
+                                      backgroundColor: Colors.black,
+                                    ),
+                                    child: Text(
+                                      "View Material",
+                                      style: TextStyle(color: Colors.white),
+                                    ),
+                                  ),
+                                  SizedBox(height: 4),
+                                  Text(
+                                    "Student Name: ${material['studentId']}",
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                  SizedBox(height: 4),
+                                  Text(
+                                    material['filePath'],
+                                    style: TextStyle(
+                                      color: Colors.white70,
+                                    ),
+                                    overflow: TextOverflow.visible,
+                                  ),
+                                ],
                               ),
-                              SizedBox(height: 4),
-                              Text(
-                                "Student Name: ${material['studentId']}",
-                                style: TextStyle(
-                                  color: Colors.white70,
-                                ),
-                              ),
-                              SizedBox(height: 4),
-                              Text(
-                                "Institution: DEI",
-                                style: TextStyle(
-                                  color: Colors.white70,
-                                ),
+                              Column(
+                                children: [
+                                  IconButton(
+                                    icon:
+                                        Icon(Icons.check, color: Colors.green),
+                                    onPressed: () {
+                                      _updateMaterialStatus(
+                                          material['id'], true);
+                                    },
+                                  ),
+                                  SizedBox(
+                                      height:
+                                          MediaQuery.of(context).size.width *
+                                              0.02),
+                                  IconButton(
+                                    icon: Icon(Icons.close, color: Colors.red),
+                                    onPressed: () {
+                                      _updateMaterialStatus(
+                                          material['id'], false);
+                                    },
+                                  ),
+                                ],
                               ),
                             ],
                           ),
-                          Column(
-                            children: [
-                              IconButton(
-                                icon: Icon(Icons.check, color: Colors.green),
-                                onPressed: () {
-                                  _updateMaterialStatus(material['id'], true);
-                                },
-                              ),
-                              SizedBox(
-                                  height:
-                                      MediaQuery.of(context).size.width * 0.02),
-                              IconButton(
-                                icon: Icon(Icons.close, color: Colors.red),
-                                onPressed: () {
-                                  _updateMaterialStatus(material['id'], false);
-                                },
-                              ),
-                            ],
-                          ),
-                        ],
+                        ),
                       ),
-                    ),
+                      SizedBox(
+                          height: MediaQuery.of(context).size.width *
+                              0.03), // Adjust the height as needed
+                    ],
                   );
                 },
               ),
@@ -183,49 +201,18 @@ class MaterialConfirmationScreen extends StatelessWidget {
     print('Date: $formattedDate');
   }
 
-  void _showMaterialPopup(BuildContext context, ImageProvider image) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text("Material Information"),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              InteractiveViewer(
-                child: Image(image: image),
-                boundaryMargin:
-                    EdgeInsets.all(MediaQuery.of(context).size.width * 0.02),
-                minScale: 0.1,
-                maxScale: 5.0,
-              ),
-              SizedBox(height: MediaQuery.of(context).size.width * 0.02),
-              Text("Name: XYZ"),
-            ],
-          ),
-          actions: <Widget>[
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: Text("Close"),
-            ),
-          ],
-        );
-      },
-    );
-  }
-
   final List<Map<String, dynamic>> mockData = [
     {
       'id': '1',
-      'studentId': '12345',
-      'materialImage': 'https://via.placeholder.com/150'
+      'studentId': 'Nihal Saran Das Duggirala',
+      'materialImage': 'https://via.placeholder.com/150',
+      'filePath': 'Faculty of Engineering > 1st Year\n> Semester 1 > MAM181'
     },
     {
       'id': '2',
-      'studentId': '67890',
-      'materialImage': 'https://via.placeholder.com/150'
+      'studentId': 'Sajal & Sania & Kanishka',
+      'materialImage': 'https://via.placeholder.com/150',
+      'filePath': 'Faculty of Engineering > 1st Year\n> Semester 1 > MAM181'
     },
   ];
 }
