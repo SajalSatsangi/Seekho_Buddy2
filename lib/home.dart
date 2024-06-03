@@ -126,7 +126,7 @@ class _HomeState extends State<Home> {
                                         color: Colors.white,
                                         fontSize:
                                             MediaQuery.of(context).size.width *
-                                                0.04,
+                                                0.038,
                                         fontWeight: FontWeight.bold,
                                       ),
                                     ),
@@ -146,7 +146,7 @@ class _HomeState extends State<Home> {
                                         color: Colors.white,
                                         fontSize:
                                             MediaQuery.of(context).size.width *
-                                                0.03,
+                                                0.028,
                                       ),
                                     ),
                                   ),
@@ -164,7 +164,7 @@ class _HomeState extends State<Home> {
                                                 0.005),
                                     child: SizedBox(
                                       width: MediaQuery.of(context).size.width *
-                                          0.3,
+                                          0.25,
                                       height:
                                           MediaQuery.of(context).size.height *
                                               0.05,
@@ -179,7 +179,7 @@ class _HomeState extends State<Home> {
                                         },
                                         style: ButtonStyle(
                                           backgroundColor:
-                                              MaterialStateProperty.all<Color>(
+                                              WidgetStateProperty.all<Color>(
                                             const Color.fromARGB(
                                                 255, 255, 255, 255),
                                           ),
@@ -188,6 +188,7 @@ class _HomeState extends State<Home> {
                                           'View',
                                           style: TextStyle(
                                             color: Color.fromARGB(255, 0, 0, 0),
+                                            fontSize: 100.0 * 0.14,
                                           ),
                                         ),
                                       ),
