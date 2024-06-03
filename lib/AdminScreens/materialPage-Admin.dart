@@ -196,7 +196,7 @@ class Materialpage_Admin extends StatelessWidget {
                 }
 
                 return Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 7.0),
+                  padding: const EdgeInsets.symmetric(vertical: 7.0 , horizontal: 30),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
@@ -230,7 +230,7 @@ class Materialpage_Admin extends StatelessWidget {
       },
       child: Container(
         height: 130,
-        width: 150,
+        width: 140,
         decoration: BoxDecoration(
           color: Color.fromRGBO(50, 50, 50, 1),
           borderRadius: BorderRadius.circular(20),
@@ -238,29 +238,19 @@ class Materialpage_Admin extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(15.0),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Row(
-                children: [
-                  Icon(
-                    Icons.book,
-                    color: Colors.white,
-                  ),
-                  SizedBox(width: 8),
-                  Expanded(
-                    child: Text(
-                      AA['pdfName'] ?? 'Default AA Name',
-                      style: TextStyle
-(
-                        color: Colors.white,
-                        fontSize: 16.0,
-                        fontWeight: FontWeight.bold,
-                      ),
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ),
-                ],
+              Text(
+                AA['pdfName'] ?? 'Default AA Name',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 16.0,
+                  fontWeight: FontWeight.bold,
+                ),
+                textAlign: TextAlign.center,
+                
               ),
+              SizedBox(height: 25),
               ElevatedButton(
                 onPressed: () {},
                 style: ButtonStyle(
@@ -273,7 +263,10 @@ class Materialpage_Admin extends StatelessWidget {
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     color: Color.fromARGB(255, 0, 0, 0),
+                    
+                    
                   ),
+                  
                 ),
               ),
             ],
