@@ -90,9 +90,9 @@ class Faculties extends StatelessWidget {
                                 top: 5.0), // Padding from the top
                             child: Container(
                               width: MediaQuery.of(context).size.width *
-                                  1, // Adjusted width
+                                  2, // Adjusted width
                               height: MediaQuery.of(context).size.height *
-                                  0.13, // Adjusted height
+                                  0.15, // Adjusted height
                               decoration: BoxDecoration(
                                 color: Color(0xFF323232),
                                 borderRadius: BorderRadius.circular(20),
@@ -132,7 +132,7 @@ class Faculties extends StatelessWidget {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
-                                          SizedBox(height: 5),
+                                          SizedBox(height: 14),
                                           RichText(
                                             text: TextSpan(
                                               children: [
@@ -155,35 +155,40 @@ class Faculties extends StatelessWidget {
                                               ],
                                             ),
                                           ),
-                                          SizedBox(height: 7),
-                                          Align(
-                                            alignment: Alignment
-                                                .centerRight, // Align the button to the right
-                                            child: ElevatedButton(
-                                              onPressed: () {
-                                                Navigator.push(
-                                                  context,
-                                                  SlideRightPageRoute(
-                                                    page: Branches(
-                                                      facultyName:
-                                                          faculty['name'],
-                                                      facultyData:
-                                                          faculty, // Pass the entire faculty map
+                                          SizedBox(height: 10),
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                right:
+                                                    56.0), // Add right padding to the button
+                                            child: Align(
+                                              alignment: Alignment
+                                                  .centerRight, // Align the button to the right
+                                              child: ElevatedButton(
+                                                onPressed: () {
+                                                  Navigator.push(
+                                                    context,
+                                                    SlideRightPageRoute(
+                                                      page: Branches(
+                                                        facultyName:
+                                                            faculty['name'],
+                                                        facultyData:
+                                                            faculty, // Pass the entire faculty map
+                                                      ),
                                                     ),
+                                                  );
+                                                },
+                                                style: ButtonStyle(
+                                                  backgroundColor:
+                                                      MaterialStateProperty.all<
+                                                          Color>(
+                                                    Colors.white,
                                                   ),
-                                                );
-                                              },
-                                              style: ButtonStyle(
-                                                backgroundColor:
-                                                    MaterialStateProperty.all<
-                                                        Color>(
-                                                  Colors.white,
                                                 ),
-                                              ),
-                                              child: Text(
-                                                'View',
-                                                style: TextStyle(
-                                                  color: Colors.black,
+                                                child: Text(
+                                                  'View',
+                                                  style: TextStyle(
+                                                    color: Colors.black,
+                                                  ),
                                                 ),
                                               ),
                                             ),
