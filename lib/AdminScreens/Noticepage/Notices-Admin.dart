@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'add_notice_popup.dart';
 import 'notice_popup.dart';
 import 'package:seekhobuddy/home.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 
 void main() {
   runApp(NoticesAdmin());
@@ -46,65 +45,50 @@ class _MyWidgetState extends State<MyWidget> {
       FirebaseFirestore.instance.collection('notices');
   DocumentSnapshot? userData;
   late SharedPreferences prefs;
-  late FirebaseMessaging _firebaseMessaging;
-  late FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
   Set<String> clickedNotices = Set<String>();
+  String? _playerId;
 
   @override
   void initState() {
     super.initState();
-    _firebaseMessaging = FirebaseMessaging.instance;
-    _initializeFirebaseMessaging();
+    _initializeOneSignal();
     fetchUserData();
     listenForNewNotices();
     loadClickedNotices();
+  }
 
-    var initializationSettingsAndroid =
-        AndroidInitializationSettings('@mipmap/ic_launcher');
-    var initializationSettingsIOS = IOSInitializationSettings(
-      requestAlertPermission: true,
-      requestBadgePermission: true,
-      requestSoundPermission: true,
-    );
-    var initializationSettings = InitializationSettings(
-      android: initializationSettingsAndroid,
-      iOS: initializationSettingsIOS,
-    );
-    flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
-    Future selectNotification(String? payload) async {
-      if (payload != null) {
-        debugPrint('notification payload: ' + payload);
-      }
-      await Navigator.push(
+  Future<void> _initializeOneSignal() async {
+    OneSignal.shared.setAppId('1cc7933a-5d5d-470b-88fb-451a842f03bf');
+
+    OneSignal.shared
+        .setNotificationOpenedHandler((OSNotificationOpenedResult result) {
+      // This will be called whenever a notification is opened
+      Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => NoticesAdmin()),
       );
-    }
-
-    flutterLocalNotificationsPlugin.initialize(initializationSettings,
-        onSelectNotification: selectNotification);
-  }
-
-  Future<void> _initializeFirebaseMessaging() async {
-    NotificationSettings settings =
-        await _firebaseMessaging.requestPermission();
-    print('User granted permission: ${settings.authorizationStatus}');
-
-    _firebaseMessaging.getToken().then((String? token) {
-      print('FCM Token: $token');
-      // Save token to Firestore or your backend server
     });
 
-    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-      print('Received push notification: ${message.notification?.title}');
-      // Handle notification when app is in foreground
+    OneSignal.shared.promptUserForPushNotificationPermission().then((accepted) {
+      print('Accepted permission: $accepted');
     });
 
-    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+    OneSignal.shared.setNotificationWillShowInForegroundHandler(
+        (OSNotificationReceivedEvent event) {
+      // Display notification in the foreground
       print(
-          'App opened from push notification: ${message.notification?.title}');
-      // Handle notification when app is opened from background or terminated
+          'Notification received with data: ${event.notification.additionalData}');
+      event.complete(event.notification);
     });
+
+    // Fetch the Player ID
+    var deviceState = await OneSignal.shared.getDeviceState();
+    if (deviceState != null) {
+      setState(() {
+        _playerId = deviceState.userId;
+        print('OneSignal Player ID: $_playerId');
+      });
+    }
   }
 
   Future<void> fetchUserData() async {
@@ -149,19 +133,17 @@ class _MyWidgetState extends State<MyWidget> {
   }
 
   Future<void> _showNotification(String title, String description) async {
-    var androidPlatformChannelSpecifics = const AndroidNotificationDetails(
-        'new_notice_channel', 'New Notice Notifications',
-        importance: Importance.max, priority: Priority.high, showWhen: false);
-    var iOSPlatformChannelSpecifics = const IOSNotificationDetails();
-    var platformChannelSpecifics = NotificationDetails(
-        android: androidPlatformChannelSpecifics,
-        iOS: iOSPlatformChannelSpecifics);
-    try {
-      await flutterLocalNotificationsPlugin.show(
-          0, title, description, platformChannelSpecifics);
-    } catch (e) {
-      print('Failed to show notification: $e');
+    if (_playerId == null) {
+      print('Player ID not available');
+      return;
     }
+
+    // Use OneSignal to show notification
+    OneSignal.shared.postNotification(OSCreateNotification(
+      playerIds: [_playerId!],
+      content: description,
+      heading: title,
+    ));
   }
 
   void saveUserDataLocally() {
