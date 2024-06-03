@@ -10,18 +10,26 @@ class Faculties extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final mediaQuery = MediaQuery.of(context);
+    final screenWidth = mediaQuery.size.width;
+    final screenHeight = mediaQuery.size.height;
+    final padding = mediaQuery.padding;
+
     return Scaffold(
       backgroundColor: Colors.black,
       body: Container(
-        width: MediaQuery.of(context).size.width, // Set width to screen width
-        height:
-            MediaQuery.of(context).size.height, // Set height to screen height
+        width: screenWidth, // Set width to screen width
+        height: screenHeight, // Set height to screen height
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             SafeArea(
               child: Padding(
-                padding: EdgeInsets.only(left: 16, right: 16, top: 10),
+                padding: EdgeInsets.only(
+                  left: screenWidth * 0.04,
+                  right: screenWidth * 0.04,
+                  top: padding.top + 10,
+                ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
@@ -33,13 +41,11 @@ class Faculties extends StatelessWidget {
                             Navigator.of(context).pop(); // Navigate back
                           },
                         ),
-                        SizedBox(
-                          width: 10.0,
-                        ),
+                        SizedBox(width: screenWidth * 0.02),
                         Text(
                           "Faculties",
                           style: TextStyle(
-                            fontSize: 28,
+                            fontSize: screenWidth * 0.07,
                             fontWeight: FontWeight.bold,
                             color: Colors.white, // Text color
                           ),
@@ -82,122 +88,121 @@ class Faculties extends StatelessWidget {
                           nameParts.isNotEmpty ? nameParts.removeLast() : '';
 
                       return Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 50.0, vertical: 8.0), // Reduced padding
+                        padding: EdgeInsets.symmetric(
+                          horizontal: screenWidth * 0.12,
+                          vertical: screenHeight * 0.01,
+                        ), // Adjusted padding
                         child: GestureDetector(
                           child: Padding(
-                            padding: const EdgeInsets.only(
-                                top: 5.0), // Padding from the top
+                            padding: EdgeInsets.only(
+                                top: screenHeight *
+                                    0.01), // Adjust padding from the top
                             child: Container(
-                              width: MediaQuery.of(context).size.width *
-                                  2, // Adjusted width
-                              height: MediaQuery.of(context).size.height *
-                                  0.15, // Adjusted height
+                              width: screenWidth * 0.01, // Adjusted width
+                              height: screenHeight * 0.18, // Adjusted height
                               decoration: BoxDecoration(
                                 color: Color(0xFF323232),
                                 borderRadius: BorderRadius.circular(20),
                               ),
-                              child: Padding(
-                                padding: const EdgeInsets.all(0.0),
-                                child: Row(
-                                  children: [
-                                    ClipRRect(
-                                      borderRadius: BorderRadius.horizontal(
-                                          left: Radius.circular(
-                                              20)), // Rounded only from the left side
-                                      child: Image.asset(
-                                        index == 0
-                                            ? 'assets/comm.png' // Image for index 0
-                                            : index == 1
-                                                ? 'assets/edu.png' // Use LinkedIn icon for the fifth image
-                                                : index == 2
-                                                    ? 'assets/eng.png' // Use LinkedIn icon for the fifth image
-                                                    : index == 3
-                                                        ? 'assets/art.png' // Use LinkedIn icon for the fifth image
-                                                        : index == 4
-                                                            ? 'assets/eng.png' // Use LinkedIn icon for the fifth image
-                                                            : index == 5
-                                                                ? 'assets/sci.png' // Use LinkedIn icon for the fifth image
-                                                                : index == 6
-                                                                    ? 'assets/tec.png' // Use LinkedIn icon for the fifth image
-                                                                    : 'assets/search_result.png', // Default image for other indices
-                                        width: 131,
-                                        height: 131,
-                                        fit: BoxFit.cover,
-                                      ),
+                              child: Row(
+                                children: [
+                                  ClipRRect(
+                                    borderRadius: BorderRadius.horizontal(
+                                      left: Radius.circular(20),
+                                    ), // Rounded only from the left side
+                                    child: Image.asset(
+                                      index == 0
+                                          ? 'assets/comm.png' // Image for index 0
+                                          : index == 1
+                                              ? 'assets/edu.png' // Image for index 1
+                                              : index == 2
+                                                  ? 'assets/eng.png' // Image for index 2
+                                                  : index == 3
+                                                      ? 'assets/art.png' // Image for index 3
+                                                      : index == 4
+                                                          ? 'assets/eng.png' // Image for index 4
+                                                          : index == 5
+                                                              ? 'assets/sci.png' // Image for index 5
+                                                              : index == 6
+                                                                  ? 'assets/tec.png' // Image for index 6
+                                                                  : 'assets/search_result.png', // Default image for other indices
+                                      width: screenWidth * 0.34,
+                                      height: screenHeight * 0.18,
+                                      fit: BoxFit.cover,
                                     ),
-                                    SizedBox(width: 20),
-                                    Expanded(
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          SizedBox(height: 14),
-                                          RichText(
-                                            text: TextSpan(
-                                              children: [
-                                                TextSpan(
-                                                  text: nameParts.join(' '),
-                                                  style: TextStyle(
-                                                    color: Colors.white,
-                                                    fontSize: 20.0,
-                                                    fontWeight: FontWeight.bold,
-                                                  ),
+                                  ),
+                                  SizedBox(width: screenWidth * 0.05),
+                                  Expanded(
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        SizedBox(height: screenHeight * 0.02),
+                                        RichText(
+                                          text: TextSpan(
+                                            children: [
+                                              TextSpan(
+                                                text: nameParts.join(' '),
+                                                style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: screenWidth * 0.048,
+                                                  fontWeight: FontWeight.bold,
                                                 ),
-                                                TextSpan(
-                                                  text: '\n$lastWord',
-                                                  style: TextStyle(
-                                                    color: Colors.white,
-                                                    fontSize: 20.0,
-                                                    fontWeight: FontWeight.bold,
-                                                  ),
+                                              ),
+                                              TextSpan(
+                                                text: '\n$lastWord',
+                                                style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: screenWidth * 0.048,
+                                                  fontWeight: FontWeight.bold,
                                                 ),
-                                              ],
-                                            ),
+                                              ),
+                                            ],
                                           ),
-                                          SizedBox(height: 10),
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                right:
-                                                    56.0), // Add right padding to the button
-                                            child: Align(
-                                              alignment: Alignment
-                                                  .centerRight, // Align the button to the right
-                                              child: ElevatedButton(
-                                                onPressed: () {
-                                                  Navigator.push(
-                                                    context,
-                                                    SlideRightPageRoute(
-                                                      page: Branches(
-                                                        facultyName:
-                                                            faculty['name'],
-                                                        facultyData:
-                                                            faculty, // Pass the entire faculty map
-                                                      ),
+                                        ),
+                                        SizedBox(height: screenHeight * 0.01),
+                                        Padding(
+                                          padding: EdgeInsets.only(
+                                              right: screenWidth *
+                                                  0.15), // Adjust right padding
+                                          child: Align(
+                                            alignment: Alignment
+                                                .centerRight, // Align the button to the right
+                                            child: ElevatedButton(
+                                              onPressed: () {
+                                                Navigator.push(
+                                                  context,
+                                                  SlideRightPageRoute(
+                                                    page: Branches(
+                                                      facultyName:
+                                                          faculty['name'],
+                                                      facultyData:
+                                                          faculty, // Pass the entire faculty map
                                                     ),
-                                                  );
-                                                },
-                                                style: ButtonStyle(
-                                                  backgroundColor:
-                                                      MaterialStateProperty.all<
-                                                          Color>(
-                                                    Colors.white,
                                                   ),
+                                                );
+                                              },
+                                              style: ButtonStyle(
+                                                backgroundColor:
+                                                    WidgetStateProperty.all<
+                                                        Color>(
+                                                  Colors.white,
                                                 ),
-                                                child: Text(
-                                                  'View',
-                                                  style: TextStyle(
-                                                    color: Colors.black,
-                                                  ),
+                                              ),
+                                              child: Text(
+                                                'View',
+                                                style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize: screenWidth * 0.03,
                                                 ),
                                               ),
                                             ),
                                           ),
-                                        ],
-                                      ),
+                                        ),
+                                      ],
                                     ),
-                                  ],
-                                ),
+                                  ),
+                                ],
                               ),
                             ),
                           ),
