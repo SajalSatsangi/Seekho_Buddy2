@@ -194,8 +194,13 @@ class _ProfilePageState extends State<ProfilePage> {
                                 SizedBox(height: 5),
                                 buildInfoBox(
                                   label: 'Branch',
-                                  text:
-                                      '${prefs.getString('subfaculty') ?? ''}, ${prefs.getString('subbranch') ?? ''}',
+                                  text: prefs.getString('subfaculty') ?? '',
+                                  icon: Icons.category,
+                                ),
+                                SizedBox(height: 5),
+                                buildInfoBox(
+                                  label: 'Specialization',
+                                  text: prefs.getString('subbranch') ?? '',
                                   icon: Icons.category,
                                 ),
                                 SizedBox(height: 5),
