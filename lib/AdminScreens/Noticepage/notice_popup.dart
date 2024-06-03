@@ -12,7 +12,7 @@ void showMaintenanceNotice(
         Animation secondaryAnimation) {
       return Center(
         child: Padding(
-          padding: EdgeInsets.symmetric(vertical: 30),
+          padding: EdgeInsets.symmetric(vertical: 40),
           child: AlertDialog(
             backgroundColor: Color.fromARGB(255, 56, 56, 56),
             shape: RoundedRectangleBorder(
@@ -23,46 +23,40 @@ void showMaintenanceNotice(
               builder: (context, constraints) {
                 return SingleChildScrollView(
                   child: Container(
+                    width: MediaQuery.of(context).size.width *
+                        0.8, // Decreased width
                     decoration: BoxDecoration(
                       color: Color.fromARGB(255, 39, 39, 39),
                       borderRadius: BorderRadius.all(Radius.circular(20.0)),
                     ),
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Padding(
                           padding: EdgeInsets.all(
-                            MediaQuery.of(context).size.width * 0.04,
+                            MediaQuery.of(context).size.width * 0.03,
                           ),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                "Important Notice:",
-                                style: TextStyle(
-                                  fontSize:
-                                      MediaQuery.of(context).size.width * 0.06,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white,
-                                ),
-                              ),
-                              SizedBox(
-                                  height: MediaQuery.of(context).size.width *
-                                      0.015),
-                              Text(
                                 title,
+                                textAlign: TextAlign.left,
                                 style: TextStyle(
                                   fontSize:
-                                      MediaQuery.of(context).size.width * 0.05,
+                                      MediaQuery.of(context).size.width * 0.045,
                                   fontWeight: FontWeight.bold,
                                   color: Colors.white,
                                 ),
                               ),
                               SizedBox(
-                                  height: MediaQuery.of(context).size.width *
-                                      0.015),
+                                height:
+                                    MediaQuery.of(context).size.width * 0.01,
+                              ),
                               Text(
                                 description,
+                                textAlign: TextAlign.left,
                                 style: TextStyle(
                                   fontSize:
                                       MediaQuery.of(context).size.width * 0.04,
@@ -70,13 +64,15 @@ void showMaintenanceNotice(
                                 ),
                               ),
                               SizedBox(
-                                  height: MediaQuery.of(context).size.width *
-                                      0.015),
+                                height:
+                                    MediaQuery.of(context).size.width * 0.015,
+                              ),
                               Text(
                                 "By-XYZ",
+                                textAlign: TextAlign.left,
                                 style: TextStyle(
                                   fontSize:
-                                      MediaQuery.of(context).size.width * 0.04,
+                                      MediaQuery.of(context).size.width * 0.025,
                                   color: Colors.white,
                                 ),
                               ),
@@ -90,7 +86,8 @@ void showMaintenanceNotice(
                           child: Image.network(
                             fileUrl,
                             fit: BoxFit.cover,
-                            width: MediaQuery.of(context).size.width,
+                            width: MediaQuery.of(context).size.width *
+                                0.8, // Adjusted width
                           ),
                         ),
                       ],
