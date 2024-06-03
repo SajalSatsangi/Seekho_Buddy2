@@ -30,89 +30,97 @@ class _EditFieldState extends State<EditField> {
     return Scaffold(
       appBar: AppBar(
         iconTheme: IconThemeData(
-            color: Colors.white), // Set back button icon color to white
+          color: Colors.white,
+        ), // Set back button icon color to white
         title: Text(
           'Edit ${widget.field}',
           style: TextStyle(
-              color: Colors.white), // Set the title text color to white
+            color: Colors.white,
+          ), // Set the title text color to white
         ),
         backgroundColor:
             Colors.black, // Set the background color of the AppBar (optional)
         leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios,
-              color: Colors.white), // Change to back_arrow_ios
+          icon: Icon(
+            Icons.arrow_back_ios,
+            color: Colors.white,
+          ), // Change to back_arrow_ios
           onPressed: () {
             Navigator.pop(context); // Navigate back to the previous page
           },
         ),
       ),
       body: Padding(
-        padding: EdgeInsets.all(16.0),
+        padding: EdgeInsets.all(MediaQuery.of(context).size.width * 0.04),
         child: Column(
           children: [
             Align(
-              alignment: Alignment.centerLeft, // Align the text to the left
+              alignment: Alignment.centerLeft,
               child: Container(
-                padding: EdgeInsets.all(12.0),
+                padding: EdgeInsets.all(
+                  MediaQuery.of(context).size.width * 0.025,
+                ),
                 decoration: BoxDecoration(
-                  color: Color(
-                      0xFF212121), // Set the background color of the box to gray
-                  borderRadius:
-                      BorderRadius.circular(40.0), // Set border radius
+                  color: Color(0xFF212121),
+                  borderRadius: BorderRadius.circular(
+                    MediaQuery.of(context).size.width * 0.03,
+                  ),
                 ),
                 child: Text(
                   widget.field,
                   style: TextStyle(
-                      color: const Color.fromARGB(
-                          255, 255, 255, 255)), // Set text color to black
+                    color: const Color.fromARGB(255, 255, 255, 255),
+                  ),
                 ),
               ),
             ),
-            SizedBox(height: 12),
+            SizedBox(height: MediaQuery.of(context).size.height * 0.024),
             Container(
               decoration: BoxDecoration(
-                color: Color(
-                    0xFF212121), // Set the background color of the box to gray
-                borderRadius: BorderRadius.circular(30.0), // Set border radius
+                color: Color(0xFF212121),
+                borderRadius: BorderRadius.circular(
+                  MediaQuery.of(context).size.width * 0.02,
+                ),
               ),
               child: TextField(
                 controller: _controller,
                 style: TextStyle(
-                    color: const Color.fromARGB(
-                        255, 255, 255, 255)), // Set the text color to black
+                  color: const Color.fromARGB(255, 255, 255, 255),
+                ),
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
-                    borderSide: BorderSide.none, // Remove border
+                    borderSide: BorderSide.none,
                   ),
                   filled: true,
-                  fillColor: Color(
-                      0xFF212121), // Set the background color of the TextField
-                  hintText: 'Enter ${widget.field}', // Set placeholder text
+                  fillColor: Color(0xFF212121),
+                  hintText: 'Enter ${widget.field}',
                   hintStyle: TextStyle(
-                      color: const Color.fromARGB(
-                          255, 255, 255, 255)), // Set placeholder text color
-                  contentPadding: EdgeInsets.all(12.0), // Set content padding
+                    color: const Color.fromARGB(255, 255, 255, 255),
+                  ),
+                  contentPadding: EdgeInsets.all(
+                    MediaQuery.of(context).size.width * 0.03,
+                  ),
                 ),
               ),
             ),
-            SizedBox(height: 20),
+            SizedBox(height: MediaQuery.of(context).size.height * 0.04),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.white, // Set button color to #99D9CC
+                backgroundColor: Colors.white,
                 shape: RoundedRectangleBorder(
-                  borderRadius:
-                      BorderRadius.circular(20.0), // Set border radius
+                  borderRadius: BorderRadius.circular(
+                    MediaQuery.of(context).size.width * 0.08,
+                  ),
                 ),
               ),
               onPressed: () {
-                // Save the changes
                 Navigator.pop(context, _controller.text);
               },
               child: Text(
                 'Save',
                 style: TextStyle(
-                  color: Colors.black, // Set text color to black
-                  fontWeight: FontWeight.bold, // Make text bold
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
             ),
