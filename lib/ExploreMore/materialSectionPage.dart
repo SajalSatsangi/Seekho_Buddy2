@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:seekhobuddy/AdminScreens/materialPage-Admin.dart';
+import 'package:seekhobuddy/ExploreMore/materialPage.dart';
 
 class Materialsectionpage extends StatelessWidget {
   final String subjectName;
@@ -7,6 +7,7 @@ class Materialsectionpage extends StatelessWidget {
   final String facultyName;
   final String branchName;
   final String semesterName;
+  final String role;
 
   Materialsectionpage({
     required this.subjectName,
@@ -14,6 +15,7 @@ class Materialsectionpage extends StatelessWidget {
     required this.facultyName,
     required this.branchName,
     required this.semesterName,
+    required this.role, 
   });
 
   @override
@@ -101,7 +103,7 @@ class Materialsectionpage extends StatelessWidget {
                                 Navigator.push(
                                   context,
                                   SlideRightPageRoute(
-                                    page: Materialpage_Admin(
+                                    page: Materialpage(
                                       materialName: material['materialName'],
                                       material: material,
                                       facultyName: facultyName,

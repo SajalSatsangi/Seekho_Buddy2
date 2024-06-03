@@ -4,8 +4,18 @@ import 'package:seekhobuddy/ExploreMore/PdfViewer.dart';
 class Materialpage extends StatelessWidget {
   final Map material;
   final String materialName;
+  final String facultyName;
+  final String branchName;
+  final String semesterName;
+  final String subjectName;
 
-  Materialpage({required this.materialName, required this.material});
+  Materialpage({required this.materialName, 
+  required this.material,
+  required this.facultyName,
+    required this.branchName,
+    required this.semesterName,
+    required this.subjectName,
+  });
 
   @override
   Widget build(BuildContext context) {

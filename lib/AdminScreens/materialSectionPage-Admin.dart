@@ -9,6 +9,7 @@ class Materialsectionpage_Admin extends StatelessWidget {
   final String facultyName;
   final String branchName;
   final String semesterName;
+  final String role;
 
   Materialsectionpage_Admin({
     required this.subjectName,
@@ -16,6 +17,7 @@ class Materialsectionpage_Admin extends StatelessWidget {
     required this.facultyName,
     required this.branchName,
     required this.semesterName,
+    required this.role, 
   });
 
   @override
