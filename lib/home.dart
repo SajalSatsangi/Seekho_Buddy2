@@ -196,14 +196,14 @@ class _HomeState extends State<Home> {
                                 ],
                               ),
                               Positioned(
-                                top: MediaQuery.of(context).size.height * 0.032,
+                                top: MediaQuery.of(context).size.height * 0.040,
                                 right: MediaQuery.of(context).size.width * 0.05,
                                 child: SvgPicture.asset(
                                   'assets/undraw_online_test_re_kyfx.svg',
                                   height:
-                                      MediaQuery.of(context).size.height * 0.1,
+                                      MediaQuery.of(context).size.height * 0.08,
                                   width:
-                                      MediaQuery.of(context).size.height * 0.1,
+                                      MediaQuery.of(context).size.height * 0.08,
                                 ),
                               ),
                             ],
