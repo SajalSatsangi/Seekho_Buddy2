@@ -70,9 +70,10 @@ class _StudyHubLoginScreenState extends State<StudyHubLoginScreen> {
             double iconSize = constraints.maxWidth * 0.07;
             double fontSizeTitle = constraints.maxWidth * 0.06;
             double fontSizeSubtitle = constraints.maxWidth * 0.04;
-            double inputFieldHeight = constraints.maxHeight * 0.06;
+            double inputFieldHeight = constraints.maxHeight * 0.07;
             double buttonHeight = constraints.maxHeight * 0.06;
             double spacingHeight = constraints.maxHeight * 0.02;
+            double inputFontSize = constraints.maxWidth * 0.035;
 
             return SingleChildScrollView(
               child: Padding(
@@ -121,6 +122,7 @@ class _StudyHubLoginScreenState extends State<StudyHubLoginScreen> {
                             },
                             height: inputFieldHeight,
                             iconSize: iconSize,
+                            fontSize: inputFontSize,
                           ),
                           SizedBox(height: spacingHeight),
                           _buildTextField(
@@ -136,6 +138,7 @@ class _StudyHubLoginScreenState extends State<StudyHubLoginScreen> {
                             },
                             height: inputFieldHeight,
                             iconSize: iconSize,
+                            fontSize: inputFontSize,
                           ),
                           SizedBox(height: spacingHeight),
                           _buildTextField(
@@ -150,6 +153,7 @@ class _StudyHubLoginScreenState extends State<StudyHubLoginScreen> {
                             },
                             height: inputFieldHeight,
                             iconSize: iconSize,
+                            fontSize: inputFontSize,
                           ),
                           SizedBox(height: spacingHeight),
                           _buildTextField(
@@ -165,6 +169,7 @@ class _StudyHubLoginScreenState extends State<StudyHubLoginScreen> {
                             },
                             height: inputFieldHeight,
                             iconSize: iconSize,
+                            fontSize: inputFontSize,
                           ),
                           SizedBox(height: spacingHeight),
                           _buildDropdown(
@@ -188,6 +193,7 @@ class _StudyHubLoginScreenState extends State<StudyHubLoginScreen> {
                             },
                             height: inputFieldHeight,
                             iconSize: iconSize,
+                            fontSize: inputFontSize,
                           ),
                           SizedBox(height: spacingHeight),
                           _buildDropdown(
@@ -210,6 +216,7 @@ class _StudyHubLoginScreenState extends State<StudyHubLoginScreen> {
                             },
                             height: inputFieldHeight,
                             iconSize: iconSize,
+                            fontSize: inputFontSize,
                           ),
                           SizedBox(height: spacingHeight),
                           _buildDropdown(
@@ -231,6 +238,7 @@ class _StudyHubLoginScreenState extends State<StudyHubLoginScreen> {
                             },
                             height: inputFieldHeight,
                             iconSize: iconSize,
+                            fontSize: inputFontSize,
                           ),
                           SizedBox(height: spacingHeight),
                           _buildDropdown(
@@ -247,6 +255,7 @@ class _StudyHubLoginScreenState extends State<StudyHubLoginScreen> {
                             },
                             height: inputFieldHeight,
                             iconSize: iconSize,
+                            fontSize: inputFontSize,
                           ),
                           SizedBox(height: spacingHeight * 2),
                           Padding(
@@ -427,6 +436,7 @@ class _StudyHubLoginScreenState extends State<StudyHubLoginScreen> {
     String? Function(String?)? validator,
     required double height,
     required double iconSize,
+    required double fontSize,
   }) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 30),
@@ -445,10 +455,14 @@ class _StudyHubLoginScreenState extends State<StudyHubLoginScreen> {
                 controller: controller,
                 obscureText: obscureText,
                 keyboardType: keyboardType,
-                style: TextStyle(color: Colors.white),
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: fontSize), // Responsive font size here
                 decoration: InputDecoration(
                   hintText: hintText,
-                  hintStyle: TextStyle(color: Colors.white70),
+                  hintStyle: TextStyle(
+                      color: Colors.white70,
+                      fontSize: fontSize), // Responsive hint text size here
                   filled: true,
                   fillColor: Colors.grey.shade800,
                   contentPadding: EdgeInsets.symmetric(vertical: 10).copyWith(
@@ -477,6 +491,7 @@ class _StudyHubLoginScreenState extends State<StudyHubLoginScreen> {
     String? Function(String?)? validator,
     required double height,
     required double iconSize,
+    required double fontSize,
   }) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 30),
@@ -497,23 +512,37 @@ class _StudyHubLoginScreenState extends State<StudyHubLoginScreen> {
                 items: items.map((String value) {
                   return DropdownMenuItem<String>(
                     value: value,
-                    child: Text(value),
+                    child: Text(
+                      value,
+                      textAlign: TextAlign.center, // Center-align the text here
+                      style: TextStyle(fontSize: fontSize),
+                    ),
                   );
                 }).toList(),
                 decoration: InputDecoration(
                   hintText: hintText,
-                  hintStyle: TextStyle(color: Colors.white70),
+                  hintStyle: TextStyle(
+                      color: Colors.white70,
+                      fontSize: fontSize), // Responsive hint text size here
                   filled: true,
                   fillColor: Colors.grey.shade800,
                   contentPadding: EdgeInsets.symmetric(
-                      horizontal: 10,
-                      vertical: (height - 100) / 2), // Adjust vertical padding
+                    horizontal: 10,
+                    vertical: (height - 50) / 2, // Adjust vertical padding
+                  ),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(50.0),
                     borderSide: BorderSide.none,
                   ),
                 ),
                 validator: validator,
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize:
+                        fontSize), // Responsive selected item font size here
+                iconEnabledColor: Colors.white, // Change dropdown icon color
+                dropdownColor:
+                    Colors.grey.shade800, // Change dropdown background color
               ),
             ),
           ),
