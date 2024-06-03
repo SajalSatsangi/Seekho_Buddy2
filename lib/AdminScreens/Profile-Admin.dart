@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:seekhobuddy/AdminScreens/materialVerification.dart';
 import 'package:seekhobuddy/AdminScreens/student_verification.dart';
 import '../Profile/editprofile.dart';
 import '../LoginPage.dart';
@@ -134,6 +135,20 @@ class _ProfilePageState extends State<ProfilePage> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) => userdata()),
+                      );
+                    },
+                  ),
+                  IconButton(
+                    icon: Icon(
+                      Icons.book,
+                      color: Colors.white,
+                      size: screenWidth * 0.06,
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => MaterialConfirmationScreen()),
                       );
                     },
                   ),
