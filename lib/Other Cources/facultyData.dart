@@ -99,7 +99,7 @@ class Faculties extends StatelessWidget {
                                     0.01), // Adjust padding from the top
                             child: Container(
                               width: screenWidth * 0.01, // Adjusted width
-                              height: screenHeight * 0.18, // Adjusted height
+                              height: screenHeight * 0.14, // Adjusted height
                               decoration: BoxDecoration(
                                 color: Color(0xFF323232),
                                 borderRadius: BorderRadius.circular(20),
@@ -131,13 +131,13 @@ class Faculties extends StatelessWidget {
                                       fit: BoxFit.cover,
                                     ),
                                   ),
-                                  SizedBox(width: screenWidth * 0.05),
+                                  SizedBox(width: screenWidth * 0.04),
                                   Expanded(
                                     child: Column(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        SizedBox(height: screenHeight * 0.02),
+                                        SizedBox(height: screenHeight * 0.01),
                                         RichText(
                                           text: TextSpan(
                                             children: [
