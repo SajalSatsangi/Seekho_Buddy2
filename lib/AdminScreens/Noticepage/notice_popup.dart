@@ -12,57 +12,71 @@ void showMaintenanceNotice(
         Animation secondaryAnimation) {
       return Center(
         child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 40),
+          padding: EdgeInsets.symmetric(vertical: 30),
           child: AlertDialog(
-            backgroundColor: const Color.fromARGB(255, 56, 56, 56),
-            shape: const RoundedRectangleBorder(
+            backgroundColor: Color.fromARGB(255, 56, 56, 56),
+            shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(20.0)),
             ),
-            contentPadding: EdgeInsets.zero,
+            contentPadding: EdgeInsets.all(0),
             content: LayoutBuilder(
               builder: (context, constraints) {
                 return SingleChildScrollView(
                   child: Container(
-                    width: constraints.maxWidth < 600
-                        ? constraints.maxWidth * 0.8
-                        : 500, // Use a fixed width for larger screens
-                    decoration: const BoxDecoration(
+                    decoration: BoxDecoration(
                       color: Color.fromARGB(255, 39, 39, 39),
                       borderRadius: BorderRadius.all(Radius.circular(20.0)),
                     ),
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.all(12.0),
+                          padding: EdgeInsets.all(
+                            MediaQuery.of(context).size.width * 0.04,
+                          ),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                title,
-                                textAlign: TextAlign.left,
-                                style: const TextStyle(
-                                  fontSize: 16.0,
+                                "Important Notice:",
+                                style: TextStyle(
+                                  fontSize:
+                                      MediaQuery.of(context).size.width * 0.06,
                                   fontWeight: FontWeight.bold,
                                   color: Colors.white,
                                 ),
                               ),
-                              const SizedBox(height: 2),
+                              SizedBox(
+                                  height: MediaQuery.of(context).size.width *
+                                      0.015),
                               Text(
-                                description,
-                                textAlign: TextAlign.left,
-                                style: const TextStyle(
-                                  fontSize: 14.0,
+                                title,
+                                style: TextStyle(
+                                  fontSize:
+                                      MediaQuery.of(context).size.width * 0.05,
+                                  fontWeight: FontWeight.bold,
                                   color: Colors.white,
                                 ),
                               ),
-                              const SizedBox(height: 2),
-                              const Text(
-                                "By-XYZ",
-                                textAlign: TextAlign.left,
+                              SizedBox(
+                                  height: MediaQuery.of(context).size.width *
+                                      0.015),
+                              Text(
+                                description,
                                 style: TextStyle(
-                                  fontSize: 10.0,
+                                  fontSize:
+                                      MediaQuery.of(context).size.width * 0.04,
+                                  color: Colors.white,
+                                ),
+                              ),
+                              SizedBox(
+                                  height: MediaQuery.of(context).size.width *
+                                      0.015),
+                              Text(
+                                "By-XYZ",
+                                style: TextStyle(
+                                  fontSize:
+                                      MediaQuery.of(context).size.width * 0.04,
                                   color: Colors.white,
                                 ),
                               ),
@@ -70,16 +84,13 @@ void showMaintenanceNotice(
                           ),
                         ),
                         ClipRRect(
-                          borderRadius: const BorderRadius.vertical(
+                          borderRadius: BorderRadius.vertical(
                             bottom: Radius.circular(20.0),
                           ),
                           child: Image.network(
                             fileUrl,
                             fit: BoxFit.cover,
-                            width: double.infinity,
-                            height: constraints.maxWidth < 600
-                                ? 200
-                                : 300, // Adjust height based on screen size
+                            width: MediaQuery.of(context).size.width,
                           ),
                         ),
                       ],
