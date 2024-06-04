@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:seekhobuddy/Courses/MateiralSection.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
 
 void main() {
   runApp(MaterialApp(
@@ -52,23 +50,27 @@ class _SubjectsPageState extends State<SubjectsPage> {
       String subfaculty = userData!['subfaculty'];
       String semester = userData!['semester'];
 
-      var url = Uri.parse(
-          'https://seekhobuddy-server-36eb88311fa9.herokuapp.com/faculties/$faculty/branches/$subfaculty/semesters/$semester/subjects');
-      var response = await http.get(url);
+      var docSnapshot = await FirebaseFirestore.instance
+          .collection('seekhobuddydb')
+          .doc(faculty)
+          .get();
 
-      if (response.statusCode == 200) {
-        var data = jsonDecode(response.body);
+      if (docSnapshot.exists) {
+  var facultyData = docSnapshot.data() as Map<String, dynamic>;
+  var branches = facultyData['branches'] as Map<String, dynamic>;
+  var subfacultyData = branches[subfaculty] as Map<String, dynamic>;
+  var semesterData = subfacultyData[semester] as Map<String, dynamic>;
 
-        print('Data fetched from API: $data');
+  // Remove the 'semesterName' key-value pair from the map
+  semesterData.remove('semesterName');
 
-        if (data is Map<String, dynamic>) {
-          setState(() {
-            subjects = data;
-          });
-        }
-      } else {
-        print('Request failed with status: ${response.statusCode}.');
-      }
+  setState(() {
+    subjects = semesterData;
+  });
+  print(subjects);
+} else {
+  print('Document does not exist on the database');
+}
     }
   }
 
@@ -79,12 +81,11 @@ class _SubjectsPageState extends State<SubjectsPage> {
   }
 
   List<String> _filterSubjects() {
-    return subjects.values
-        .where((subject) =>
-            subject is Map<String, dynamic> &&
-            subject.containsKey('subjectName'))
-        .map((subject) =>
-            (subject as Map<String, dynamic>)['subjectName'] as String)
+    return subjects.entries
+        .where((entry) =>
+            entry.value is Map<String, dynamic> &&
+            entry.value.containsKey('subjectName'))
+        .map((entry) => entry.key)
         .where((subjectName) =>
             subjectName.toLowerCase().contains(_searchQuery.toLowerCase()))
         .toList();
@@ -166,10 +167,9 @@ class _SubjectsPageState extends State<SubjectsPage> {
                         Navigator.push(
                           context,
                           _createRoute(Materialsectionpage(
-                            data: subjects.entries
-                                .firstWhere((entry) =>
-                                    entry.value['subjectName'] == subjectName)
-                                .value,
+                            subjectData:
+                                subjects[subjectName] as Map<String, dynamic>,
+                            allData: subjects,
                             subjectName: subjectName,
                           )),
                         );

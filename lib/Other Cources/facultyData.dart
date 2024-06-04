@@ -1,48 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'branches.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class Faculties extends StatelessWidget {
-  final String baseUrl =
-      'https://seekhobuddy-server-36eb88311fa9.herokuapp.com'; // Change this to your backend URL
 
-  Future<Map<String, dynamic>> fetchData() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-
-    // Try to get data from shared preferences
-    String? facultiesDataString = prefs.getString('facultiesData');
-    String? lastUpdatedString = prefs.getString('lastUpdated');
-
-    DateTime lastUpdated = lastUpdatedString != null
-        ? DateTime.parse(lastUpdatedString)
-        : DateTime.now().subtract(Duration(
-            days:
-                2)); // Subtract 2 days to ensure data is fetched the first time
-
-    if (facultiesDataString != null &&
-        DateTime.now().difference(lastUpdated).inDays < 1) {
-      print('Data retrieved from local storage: $facultiesDataString');
-      return json.decode(facultiesDataString);
-    }
-
-    // If not available in shared preferences or it's been more than a day, fetch from API
-    final response = await http.get(Uri.parse('$baseUrl/faculties'));
-
-    if (response.statusCode == 200) {
-      var data = json.decode(response.body);
-      print('Fetched data: $data');
-
-      // Store data to shared preferences
-      prefs.setString('facultiesData', json.encode(data));
-      prefs.setString('lastUpdated', DateTime.now().toIso8601String());
-
-      return data;
-    } else {
-      throw Exception('Failed to load faculties');
-    }
-  }
+  Future<List<QueryDocumentSnapshot>> fetchData() async {
+    QuerySnapshot querySnapshot =
+        await FirebaseFirestore.instance.collection('seekhobuddydb').get();
+    return querySnapshot.docs;
+}
 
   @override
   Widget build(BuildContext context) {
@@ -65,7 +31,7 @@ class Faculties extends StatelessWidget {
       backgroundColor: Colors.black,
       body: Padding(
         padding: EdgeInsets.only(top: 20.0), // Adjust the padding as needed
-        child: FutureBuilder<Map<String, dynamic>>(
+        child: FutureBuilder<List<QueryDocumentSnapshot>>(
           future: fetchData(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
@@ -77,28 +43,15 @@ class Faculties extends StatelessWidget {
                     style: TextStyle(color: Colors.white)),
               );
             }
-            final facultiesData = snapshot.data;
-            print(
-                'Data type: ${facultiesData.runtimeType}'); // This will print the type of the data
-            if (facultiesData is Map) {
-              print(
-                  'Data keys: ${facultiesData?.keys}'); // This will print the keys of the data if it's a Map
-            }
-            if (facultiesData == null ||
-                !facultiesData.containsKey('faculties')) {
-              return Center(
-                child: Text('Unexpected data format',
-                    style: TextStyle(color: Colors.white)),
-              );
-            }
-            final faculties = facultiesData['faculties'].values.toList();
+            final documents = snapshot.data;
             return ListView.builder(
-              itemCount: faculties.length,
+              itemCount: documents?.length,
               itemBuilder: (context, index) {
-                final faculty = faculties[index];
-                final String name = faculty['facultyName'];
+
+                final document = documents?[index];
                 print(
-                    'Faculty name: $name'); // This will print the faculty name
+                    'Document ID: ${document?.id}'); // This will print the document ID
+
                 return Padding(
                   padding: const EdgeInsets.symmetric(
                       horizontal: 50.0, vertical: 8.0),
@@ -144,7 +97,7 @@ class Faculties extends StatelessWidget {
                               children: [
                                 SizedBox(height: 5),
                                 Text(
-                                  name,
+                                  document?.id ?? '',
                                   style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 15.0,
@@ -161,8 +114,10 @@ class Faculties extends StatelessWidget {
                                         context,
                                         SlideRightPageRoute(
                                           page: Branches(
-                                            facultyName: name,
-                                            facultyData: faculty,
+                                            facultyName: document?.id ?? '',
+                                            facultyData: document?.data()
+                                                    as Map<String, dynamic> ??
+                                                {},
                                           ),
                                         ),
                                       );
