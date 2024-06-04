@@ -9,30 +9,38 @@ class Faculties extends StatelessWidget {
       'https://seekhobuddy-server-36eb88311fa9.herokuapp.com'; // Change this to your backend URL
 
   Future<Map<String, dynamic>> fetchData() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
+  SharedPreferences prefs = await SharedPreferences.getInstance();
 
-    // Try to get data from shared preferences
-    String? facultiesDataString = prefs.getString('facultiesData');
-    if (facultiesDataString != null) {
-      print('Data retrieved from local storage: $facultiesDataString');
-      return json.decode(facultiesDataString);
-    }
+  // Try to get data from shared preferences
+  String? facultiesDataString = prefs.getString('facultiesData');
+  String? lastUpdatedString = prefs.getString('lastUpdated');
 
-    // If not available in shared preferences, fetch from API
-    final response = await http.get(Uri.parse('$baseUrl/faculties'));
+  DateTime lastUpdated = lastUpdatedString != null
+      ? DateTime.parse(lastUpdatedString)
+      : DateTime.now().subtract(Duration(days: 2)); // Subtract 2 days to ensure data is fetched the first time
 
-    if (response.statusCode == 200) {
-      var data = json.decode(response.body);
-      print('Fetched data: $data');
-
-      // Store data to shared preferences
-      prefs.setString('facultiesData', json.encode(data));
-
-      return data;
-    } else {
-      throw Exception('Failed to load faculties');
-    }
+  if (facultiesDataString != null &&
+      DateTime.now().difference(lastUpdated).inDays < 1) {
+    print('Data retrieved from local storage: $facultiesDataString');
+    return json.decode(facultiesDataString);
   }
+
+  // If not available in shared preferences or it's been more than a day, fetch from API
+  final response = await http.get(Uri.parse('$baseUrl/faculties'));
+
+  if (response.statusCode == 200) {
+    var data = json.decode(response.body);
+    print('Fetched data: $data');
+
+    // Store data to shared preferences
+    prefs.setString('facultiesData', json.encode(data));
+    prefs.setString('lastUpdated', DateTime.now().toIso8601String());
+
+    return data;
+  } else {
+    throw Exception('Failed to load faculties');
+  }
+}
 
   @override
   Widget build(BuildContext context) {
