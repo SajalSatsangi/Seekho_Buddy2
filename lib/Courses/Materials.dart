@@ -5,10 +5,9 @@ class Materialpage extends StatelessWidget {
   final Map material;
   final String materialName;
 
-
-  Materialpage({required this.materialName, 
-  required this.material,
-
+  Materialpage({
+    required this.materialName,
+    required this.material,
   });
 
   @override
@@ -81,12 +80,12 @@ class Materialpage extends StatelessWidget {
                         },
                       ),
                       SizedBox(
-                        width: 10.0,
+                        width: 1.0,
                       ),
                       Text(
                         materialName,
                         style: TextStyle(
-                          fontSize: 28,
+                          fontSize: MediaQuery.of(context).size.width * 0.07,
                           fontWeight: FontWeight.bold,
                           color: Colors.white, // Text color
                         ),

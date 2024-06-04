@@ -148,12 +148,12 @@ class Materialpage_Admin extends StatelessWidget {
                         },
                       ),
                       SizedBox(
-                        width: 10.0,
+                        width: 1.0,
                       ),
                       Text(
                         materialName,
                         style: TextStyle(
-                          fontSize: 28,
+                          fontSize: MediaQuery.of(context).size.width * 0.07,
                           fontWeight: FontWeight.bold,
                           color: Colors.white, // Text color
                         ),
@@ -196,7 +196,8 @@ class Materialpage_Admin extends StatelessWidget {
                 }
 
                 return Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 7.0 , horizontal: 30),
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 7.0, horizontal: 30),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
@@ -248,7 +249,6 @@ class Materialpage_Admin extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                 ),
                 textAlign: TextAlign.center,
-                
               ),
               SizedBox(height: 25),
               ElevatedButton(
@@ -263,10 +263,7 @@ class Materialpage_Admin extends StatelessWidget {
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     color: Color.fromARGB(255, 0, 0, 0),
-                    
-                    
                   ),
-                  
                 ),
               ),
             ],

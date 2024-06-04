@@ -9,9 +9,10 @@ class Materialpage extends StatelessWidget {
   final String semesterName;
   final String subjectName;
 
-  Materialpage({required this.materialName, 
-  required this.material,
-  required this.facultyName,
+  Materialpage({
+    required this.materialName,
+    required this.material,
+    required this.facultyName,
     required this.branchName,
     required this.semesterName,
     required this.subjectName,
@@ -87,12 +88,12 @@ class Materialpage extends StatelessWidget {
                         },
                       ),
                       SizedBox(
-                        width: 10.0,
+                        width: 1.0,
                       ),
                       Text(
                         materialName,
                         style: TextStyle(
-                          fontSize: 28,
+                          fontSize: MediaQuery.of(context).size.width * 0.07,
                           fontWeight: FontWeight.bold,
                           color: Colors.white, // Text color
                         ),
