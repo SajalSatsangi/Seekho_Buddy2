@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:seekhobuddy/Other%20Cources/PdfViewer.dart';
-import 'package:firebase_database/firebase_database.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class Materialpage_Admin extends StatelessWidget {
   final Map material;
@@ -37,96 +37,78 @@ class Materialpage_Admin extends StatelessWidget {
 
     // Function to show the popup dialog
     void _showAddMaterialDialog() {
-      showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text('Add Pdf'),
-            content: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                TextField(
-                  controller: pdfNameController,
-                  decoration: InputDecoration(
-                    hintText: "Enter Pdf Name",
-                  ),
-                ),
-                SizedBox(height: 8),
-                TextField(
-                  controller: pdfUrlController,
-                  decoration: InputDecoration(
-                    hintText: "Enter Pdf URL",
-                  ),
-                ),
-              ],
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text('Add Pdf'),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            TextField(
+              controller: pdfNameController,
+              decoration: InputDecoration(
+                hintText: "Enter Pdf Name",
+              ),
             ),
-            actions: <Widget>[
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop(); // Close the dialog
-                },
-                child: Text('Cancel'),
+            SizedBox(height: 8),
+            TextField(
+              controller: pdfUrlController,
+              decoration: InputDecoration(
+                hintText: "Enter Pdf URL",
               ),
-              TextButton(
-                onPressed: () {
-                  // Handle the action when "Add" is pressed
-                  String newPdfName = pdfNameController.text;
-                  String newPdfUrl = pdfUrlController.text;
+            ),
+          ],
+        ),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop(); // Close the dialog
+            },
+            child: Text('Cancel'),
+          ),
+          TextButton(
+            onPressed: () async {
+              // Handle the action when "Add" is pressed
+              String newPdfName = pdfNameController.text;
+              String newPdfUrl = pdfUrlController.text;
 
-                  // Create a reference to the Firebase Realtime Database
-                  // ignore: deprecated_member_use
-                  final databaseReference = FirebaseDatabase(
-                    databaseURL:
-                        'https://seekhobuddy-default-rtdb.asia-southeast1.firebasedatabase.app',
-                    // ignore: deprecated_member_use
-                  ).reference();
+              // Create the URL for the REST API
+              String url =
+                  'https://seekhobuddy-server-36eb88311fa9.herokuapp.com/faculties/$facultyName/branches/$branchName/semesters/$semesterName/subjects/$subjectName/materials/$materialName';
 
-                  // Add the new PDF to the Firebase Realtime Database
-                  databaseReference
-                      .child('Material DB')
-                      .child(facultyName)
-                      .child('branches')
-                      .child(branchName)
-                      .child(semesterName)
-                      .child(subjectName)
-                      .child(materialName)
-                      .child(newPdfName)
-                      .set({
-                    'pdfName': newPdfName,
-                    'link': newPdfUrl,
-                  });
+              // Create the body of the request
+              Map<String, dynamic> body = {
+                'pdfName': newPdfName,
+                'link': newPdfUrl,
+              };
 
-                  final firestoreReference = FirebaseFirestore.instance;
+              // Send a POST request to the REST API
+              var response = await http.post(
+                Uri.parse(url),
+                headers: {"Content-Type": "application/json"},
+                body: json.encode(body),
+              );
 
-                  // Add the new PDF to Firestore
-                  firestoreReference
-                      .collection('Material DB')
-                      .doc(facultyName)
-                      .collection(branchName)
-                      .doc(semesterName)
-                      .collection('Subjects')
-                      .doc(subjectName)
-                      .collection(subjectName)
-                      .doc(materialName)
-                      .collection(materialName)
-                      .doc(newPdfName)
-                      .set({
-                    'pdfName': newPdfName,
-                    'link': newPdfUrl,
-                  });
+              if (response.statusCode == 201) {
+                print('Material added successfully');
+                print('Response body: ${response.body}');
+              } else {
+                print('Failed to add material');
+              }
 
-                  pdfNameController.clear();
-                  pdfUrlController.clear();
+              pdfNameController.clear();
+              pdfUrlController.clear();
 
-                  Navigator.of(context).pop(); // Close the dialog
-                },
-                child: Text('Add'),
-              ),
-            ],
-          );
-        },
+              Navigator.of(context).pop(); // Close the dialog
+            },
+            child: Text('Add'),
+          ),
+        ],
       );
-    }
+    },
+  );
+}
 
     return Scaffold(
       backgroundColor: Colors.black,
@@ -252,7 +234,14 @@ class Materialpage_Admin extends StatelessWidget {
               ),
               SizedBox(height: 25),
               ElevatedButton(
-                onPressed: () {},
+                 onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => PdfViewer(AA: AA),
+                                  ),
+                                );
+                              },
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all<Color>(
                     Colors.white,

@@ -157,7 +157,7 @@ class _SubjectsState extends State<Subjects> {
                             ElevatedButton(
                               onPressed: () {
                                 getUserRole().then((role) {
-                                  if (role == 'student') {
+                                  if (role == 'student' || role == 'verificationist') {
                                     Navigator.push(
                                       context,
                                       SlideLeftPageRoute(
@@ -171,7 +171,7 @@ class _SubjectsState extends State<Subjects> {
                                         ),
                                       ),
                                     );
-                                  } else if (role == 'admin' || role == 'CR') {
+                                  } else if (role == 'admin' || role == 'CR' || role == 'dataeditor') {
                                     Navigator.push(
                                       context,
                                       SlideLeftPageRoute(
