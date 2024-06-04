@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:seekhobuddy/GetStarred/Landing2.dart';
+import 'package:seekhobuddy/LoginPage.dart';
 
 void main() {
   runApp(LandingPage());
@@ -59,7 +59,7 @@ class StudyHubScreen extends StatelessWidget {
                 ),
                 SizedBox(height: padding / 2),
                 Text(
-                  'Welcome to Our Study Hub App!',
+                  'Welcome to Our Seekho Buddy App!',
                   style: TextStyle(
                     fontSize:
                         constraints.maxWidth * 0.06, // Responsive font size
@@ -69,7 +69,7 @@ class StudyHubScreen extends StatelessWidget {
                 ),
                 SizedBox(height: padding / 4), // Decreased gap
                 Text(
-                  'Discover a world of knowledge at your fingertips. Connect with peers, access study materials, and join study groups for collaborative learning experiences.',
+                  'Discover a world of study material at your fingertips connect with other students, access previous year question papers, notes and books.Join Study groups for collabrative learning experience',
                   style: TextStyle(
                     fontSize:
                         constraints.maxWidth * 0.04, // Responsive font size
@@ -84,7 +84,7 @@ class StudyHubScreen extends StatelessWidget {
                       context,
                       PageRouteBuilder(
                         pageBuilder: (context, animation, secondaryAnimation) =>
-                            LandingPage2(),
+                            LoginPage(),
                         transitionsBuilder:
                             (context, animation, secondaryAnimation, child) {
                           const begin = Offset(1.0, 0.0);

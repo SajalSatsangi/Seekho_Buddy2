@@ -103,9 +103,15 @@ class _HomeState extends State<Home> {
                           width: MediaQuery.of(context).size.width * 0.85,
                           height: MediaQuery.of(context).size.height * 0.18,
                           decoration: BoxDecoration(
-                            color: const Color(0xFF212121),
+                            color: Color.fromARGB(87, 162, 162, 162),
                             borderRadius: BorderRadius.circular(
                                 MediaQuery.of(context).size.width * 0.05),
+                            border: Border.all(
+                              // Add this
+                              color: const Color.fromARGB(
+                                  255, 107, 107, 107), // Border color
+                              width: 2.0, // Border width
+                            ),
                           ),
                           child: Stack(
                             children: [
@@ -382,12 +388,12 @@ class _HomeState extends State<Home> {
           width: MediaQuery.of(context).size.width * 0.4,
           height: MediaQuery.of(context).size.height * 0.2,
           decoration: BoxDecoration(
-            color: const Color.fromARGB(87, 162, 162, 162),
+            color: const Color(0xFF212121),
             borderRadius: BorderRadius.circular(
                 MediaQuery.of(context).size.width *
                     0.05), // Adjust border radius
             border: Border.all(
-              color: const Color.fromARGB(255, 107, 107, 107),
+              color: const Color(0xFF212121),
               width: MediaQuery.of(context).size.width *
                   0.01, // Adjust border width
             ),

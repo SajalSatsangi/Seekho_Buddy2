@@ -11,7 +11,7 @@ class DonationPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Donation',
+          'Donate',
           style: TextStyle(
             fontWeight: FontWeight.bold,
             color: Colors.white,
@@ -46,13 +46,6 @@ class DonationPage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Text(
-                      'Tell us about you',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: screenWidth * 0.04, // Responsive font size
-                      ),
-                    ),
                     SizedBox(height: screenHeight * 0.015), // Responsive height
                     Text(
                       'You are stepping toward wellbeing, we thank you for your contribution',
@@ -62,29 +55,12 @@ class DonationPage extends StatelessWidget {
                       ),
                     ),
                     SizedBox(height: screenHeight * 0.02), // Responsive height
-                    buildTextField(
-                        context, 'Your Name*', screenWidth, screenHeight),
-                    SizedBox(height: screenHeight * 0.001), // Responsive height
-                    buildTextField(
-                        context, 'Your Course*', screenWidth, screenHeight),
-                    SizedBox(height: screenHeight * 0.001), // Responsive height
-                    buildTextField(
-                        context, 'Your Year*', screenWidth, screenHeight),
-                    SizedBox(height: screenHeight * 0.001), // Responsive height
-                    buildTextField(context, 'Your Roll Number*', screenWidth,
-                        screenHeight),
-                    SizedBox(height: screenHeight * 0.001), // Responsive height
-                    buildTextField(
-                        context,
-                        'Your Branch/Specialization/Stream*',
-                        screenWidth,
-                        screenHeight),
-                    SizedBox(height: screenHeight * 0.02), // Responsive height
                     Text(
-                      'Donation Methods',
+                      'Donate Methods',
                       style: TextStyle(
                         color: Colors.white,
-                        fontSize: screenWidth * 0.04, // Responsive font size
+                        fontSize: screenWidth * 0.04,
+                        fontWeight: FontWeight.bold, // Responsive font size
                       ),
                     ),
                     SizedBox(height: screenHeight * 0.015), // Responsive height
