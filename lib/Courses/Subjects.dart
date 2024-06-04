@@ -51,7 +51,7 @@ class _SubjectsPageState extends State<SubjectsPage> {
       String semester = userData!['semester'];
 
       var docSnapshot = await FirebaseFirestore.instance
-          .collection('test')
+          .collection('seekhobuddydb')
           .doc(faculty)
           .get();
 

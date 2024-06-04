@@ -5,7 +5,7 @@ import 'branches.dart';
 class Faculties extends StatelessWidget {
   Future<List<QueryDocumentSnapshot>> fetchData() async {
     QuerySnapshot querySnapshot =
-        await FirebaseFirestore.instance.collection('test').get();
+        await FirebaseFirestore.instance.collection('seekhobuddydb').get();
     return querySnapshot.docs;
   }
 
