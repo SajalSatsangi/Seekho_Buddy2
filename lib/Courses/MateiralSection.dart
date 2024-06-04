@@ -2,17 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:seekhobuddy/Courses/Materials.dart';
 
 class Materialsectionpage extends StatelessWidget {
-  final Map data;
+ final Map<String, dynamic> subjectData;
+  final Map<String, dynamic> allData;
   final String subjectName;
 
   Materialsectionpage({
-    required this.data,
-    required this.subjectName
+    required this.subjectData,
+    required this.allData,
+    required this.subjectName,
   });
 
   @override
   Widget build(BuildContext context) {
-    Map materials = Map.from(data)..remove('subjectName');
+    Map materials = Map.from(subjectData)..remove('subjectName');
+
 
     return Scaffold(
       backgroundColor: Colors.black,
