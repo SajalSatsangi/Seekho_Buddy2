@@ -3,11 +3,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'branches.dart';
 
 class Faculties extends StatelessWidget {
+
   Future<List<QueryDocumentSnapshot>> fetchData() async {
     QuerySnapshot querySnapshot =
         await FirebaseFirestore.instance.collection('seekhobuddydb').get();
     return querySnapshot.docs;
-  }
+}
 
   @override
   Widget build(BuildContext context) {
@@ -46,9 +47,11 @@ class Faculties extends StatelessWidget {
             return ListView.builder(
               itemCount: documents?.length,
               itemBuilder: (context, index) {
+
                 final document = documents?[index];
                 print(
                     'Document ID: ${document?.id}'); // This will print the document ID
+
                 return Padding(
                   padding: const EdgeInsets.symmetric(
                       horizontal: 50.0, vertical: 8.0),
@@ -67,13 +70,13 @@ class Faculties extends StatelessWidget {
                             borderRadius: BorderRadius.horizontal(
                                 left: Radius.circular(20)),
                             child: Image.asset(
-                              index == 0
+                              index == 3
                                   ? 'assets/comm.png'
                                   : index == 1
                                       ? 'assets/edu.png'
-                                      : index == 2
+                                      : index == 0
                                           ? 'assets/eng.png'
-                                          : index == 3
+                                          : index == 2
                                               ? 'assets/art.png'
                                               : index == 4
                                                   ? 'assets/eng.png'
