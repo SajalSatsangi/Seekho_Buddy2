@@ -9,38 +9,40 @@ class Faculties extends StatelessWidget {
       'https://seekhobuddy-server-36eb88311fa9.herokuapp.com'; // Change this to your backend URL
 
   Future<Map<String, dynamic>> fetchData() async {
-  SharedPreferences prefs = await SharedPreferences.getInstance();
+    SharedPreferences prefs = await SharedPreferences.getInstance();
 
-  // Try to get data from shared preferences
-  String? facultiesDataString = prefs.getString('facultiesData');
-  String? lastUpdatedString = prefs.getString('lastUpdated');
+    // Try to get data from shared preferences
+    String? facultiesDataString = prefs.getString('facultiesData');
+    String? lastUpdatedString = prefs.getString('lastUpdated');
 
-  DateTime lastUpdated = lastUpdatedString != null
-      ? DateTime.parse(lastUpdatedString)
-      : DateTime.now().subtract(Duration(days: 2)); // Subtract 2 days to ensure data is fetched the first time
+    DateTime lastUpdated = lastUpdatedString != null
+        ? DateTime.parse(lastUpdatedString)
+        : DateTime.now().subtract(Duration(
+            days:
+                2)); // Subtract 2 days to ensure data is fetched the first time
 
-  if (facultiesDataString != null &&
-      DateTime.now().difference(lastUpdated).inDays < 1) {
-    print('Data retrieved from local storage: $facultiesDataString');
-    return json.decode(facultiesDataString);
+    if (facultiesDataString != null &&
+        DateTime.now().difference(lastUpdated).inDays < 1) {
+      print('Data retrieved from local storage: $facultiesDataString');
+      return json.decode(facultiesDataString);
+    }
+
+    // If not available in shared preferences or it's been more than a day, fetch from API
+    final response = await http.get(Uri.parse('$baseUrl/faculties'));
+
+    if (response.statusCode == 200) {
+      var data = json.decode(response.body);
+      print('Fetched data: $data');
+
+      // Store data to shared preferences
+      prefs.setString('facultiesData', json.encode(data));
+      prefs.setString('lastUpdated', DateTime.now().toIso8601String());
+
+      return data;
+    } else {
+      throw Exception('Failed to load faculties');
+    }
   }
-
-  // If not available in shared preferences or it's been more than a day, fetch from API
-  final response = await http.get(Uri.parse('$baseUrl/faculties'));
-
-  if (response.statusCode == 200) {
-    var data = json.decode(response.body);
-    print('Fetched data: $data');
-
-    // Store data to shared preferences
-    prefs.setString('facultiesData', json.encode(data));
-    prefs.setString('lastUpdated', DateTime.now().toIso8601String());
-
-    return data;
-  } else {
-    throw Exception('Failed to load faculties');
-  }
-}
 
   @override
   Widget build(BuildContext context) {
@@ -95,7 +97,8 @@ class Faculties extends StatelessWidget {
               itemBuilder: (context, index) {
                 final faculty = faculties[index];
                 final String name = faculty['facultyName'];
-                print('Faculty name: $name'); // This will print the faculty name
+                print(
+                    'Faculty name: $name'); // This will print the faculty name
                 return Padding(
                   padding: const EdgeInsets.symmetric(
                       horizontal: 50.0, vertical: 8.0),
@@ -114,13 +117,13 @@ class Faculties extends StatelessWidget {
                             borderRadius: BorderRadius.horizontal(
                                 left: Radius.circular(20)),
                             child: Image.asset(
-                              index == 0
+                              index == 3
                                   ? 'assets/comm.png'
                                   : index == 1
                                       ? 'assets/edu.png'
-                                      : index == 2
+                                      : index == 0
                                           ? 'assets/eng.png'
-                                          : index == 3
+                                          : index == 2
                                               ? 'assets/art.png'
                                               : index == 4
                                                   ? 'assets/eng.png'
