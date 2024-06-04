@@ -1,27 +1,36 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_cached_pdfview/flutter_cached_pdfview.dart';
 
-class MaterialDetailScreen extends StatelessWidget {
-  final String imageUrl;
+class PdfViewer extends StatelessWidget {
+  final String pdfName;
+  final String link;
 
-  MaterialDetailScreen({required this.imageUrl});
+
+  PdfViewer({required this.pdfName, required this.link});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black,
       appBar: AppBar(
-        title: Text("Material Detail"),
-        backgroundColor: Colors.black87,
-      ),
-      body: Center(
-        child: InteractiveViewer(
-          child: Image.network(imageUrl),
-          boundaryMargin:
-              EdgeInsets.all(MediaQuery.of(context).size.width * 0.02),
-          minScale: 0.1,
-          maxScale: 5.0,
+        backgroundColor: Colors.black,
+        leading: IconButton(
+          // Add a back button
+          icon: Icon(Icons.arrow_back_ios, color: Colors.white),
+          onPressed: () => Navigator.of(context).pop(),
+        ),
+        title: Text(
+          pdfName, // Display aaName in the app bar
+          style: TextStyle(color: Colors.white), // Set text color to white
         ),
       ),
-      backgroundColor: Colors.black87,
+      body: PDF().cachedFromUrl(
+        link,
+        placeholder: (progress) =>
+            Center(child: CircularProgressIndicator(value: progress)),
+        errorWidget: (error) =>
+            Center(child: Text("Error loading PDF: $error")),
+      ),
     );
   }
 }

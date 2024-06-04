@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:seekhobuddy/Other%20Cources/PdfViewer.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
-class Materialpage_Admin extends StatelessWidget {
+class Materialpage_CR extends StatefulWidget {
   final Map material;
   final String materialName;
   final String facultyName;
@@ -11,7 +11,7 @@ class Materialpage_Admin extends StatelessWidget {
   final String semesterName;
   final String subjectName;
 
-  Materialpage_Admin({
+  Materialpage_CR({
     required this.materialName,
     required this.material,
     required this.facultyName,
@@ -20,18 +20,49 @@ class Materialpage_Admin extends StatelessWidget {
     required this.subjectName,
   });
 
+  @override
+  _Materialpage_CRState createState() => _Materialpage_CRState();
+}
+
+class _Materialpage_CRState extends State<Materialpage_CR> {
   final pdfNameController = TextEditingController();
   final pdfUrlController = TextEditingController();
+  final User? user = FirebaseAuth.instance.currentUser;
+  DocumentSnapshot? userData;
+
+  @override
+  void initState() {
+    super.initState();
+    fetchUserData();
+  }
+
+  Future<void> fetchUserData() async {
+    if (user != null) {
+      var querySnapshot = await FirebaseFirestore.instance
+          .collection('users')
+          .where('uid', isEqualTo: user!.uid)
+          .get();
+
+      if (querySnapshot.docs.isNotEmpty) {
+        setState(() {
+          userData = querySnapshot.docs.first;
+        });
+
+        print(userData!.data());
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    print(material);
-    print(facultyName);
-    print(branchName);
-    print(semesterName);
-    print(subjectName);
-    print(materialName);
-    Map AAs = Map.from(material)
+    print(widget.material);
+    print(widget.facultyName);
+    print(widget.branchName);
+    print(widget.semesterName);
+    print(widget.subjectName);
+    print(widget.materialName);
+    print(userData?.data());
+    Map AAs = Map.from(widget.material)
       ..remove('materialName')
       ..remove('subjectName');
 
@@ -68,52 +99,30 @@ class Materialpage_Admin extends StatelessWidget {
                 child: Text('Cancel'),
               ),
               TextButton(
-                onPressed: () {
+                onPressed: () async {
                   // Handle the action when "Add" is pressed
                   String newPdfName = pdfNameController.text;
                   String newPdfUrl = pdfUrlController.text;
 
-                  // Create a reference to the Firebase Realtime Database
-                  // ignore: deprecated_member_use
-                  final databaseReference = FirebaseDatabase(
-                    databaseURL:
-                        'https://seekhobuddy-default-rtdb.asia-southeast1.firebasedatabase.app',
-                    // ignore: deprecated_member_use
-                  ).reference();
-
-                  // Add the new PDF to the Firebase Realtime Database
-                  databaseReference
-                      .child('Material DB')
-                      .child(facultyName)
-                      .child('branches')
-                      .child(branchName)
-                      .child(semesterName)
-                      .child(subjectName)
-                      .child(materialName)
-                      .child(newPdfName)
-                      .set({
+                  // Create the map for the Firestore document
+                  Map<String, dynamic> data = {
+                    'facultyName': widget.facultyName,
+                    'branchName': widget.branchName,
+                    'semesterName': widget.semesterName,
+                    'subjectName': widget.subjectName,
+                    'materialName': widget.materialName,
+                    'name': userData?['name'],
                     'pdfName': newPdfName,
                     'link': newPdfUrl,
-                  });
+                    'verfstatus': 'pending',
+                    'role': userData?['role'],
+                  };
 
-                  final firestoreReference = FirebaseFirestore.instance;
-
-                  // Add the new PDF to Firestore
-                  firestoreReference
-                      .collection('Material DB')
-                      .doc(facultyName)
-                      .collection(branchName)
-                      .doc(semesterName)
-                      .collection('Subjects')
-                      .doc(subjectName)
-                      .collection(subjectName)
-                      .doc(materialName)
-                      .collection(materialName)
-                      .doc(newPdfName)
-                      .set({
-                    'pdfName': newPdfName,
-                    'link': newPdfUrl,
-                  });
+                  // Add the document to Firestore
+                  await FirebaseFirestore.instance
+                      .collection('materialverf')
+                 .doc('${widget.subjectName},$newPdfName')
+                      .set(data);
 
                   pdfNameController.clear();
                   pdfUrlController.clear();
@@ -151,7 +160,7 @@ class Materialpage_Admin extends StatelessWidget {
                         width: 1.0,
                       ),
                       Text(
-                        materialName,
+                        widget.materialName,
                         style: TextStyle(
                           fontSize: MediaQuery.of(context).size.width * 0.07,
                           fontWeight: FontWeight.bold,
@@ -252,7 +261,14 @@ class Materialpage_Admin extends StatelessWidget {
               ),
               SizedBox(height: 25),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => PdfViewer(AA: AA),
+                    ),
+                  );
+                },
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all<Color>(
                     Colors.white,

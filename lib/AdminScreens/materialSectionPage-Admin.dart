@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:seekhobuddy/AdminScreens/materialPage-Admin.dart';
+import 'package:seekhobuddy/AdminScreens/materialPage-CR.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Materialsectionpage_Admin extends StatelessWidget {
@@ -16,7 +17,7 @@ class Materialsectionpage_Admin extends StatelessWidget {
     required this.facultyName,
     required this.branchName,
     required this.semesterName,
-    required this.role, 
+    required this.role,
   });
 
   @override
@@ -26,61 +27,60 @@ class Materialsectionpage_Admin extends StatelessWidget {
 
     // Function to show the popup dialog
     void _showAddMaterialDialog() {
-  final TextEditingController _folderNameController = TextEditingController();
-  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+      final TextEditingController _folderNameController =
+          TextEditingController();
+      final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-  showDialog(
-    context: context,
-    builder: (BuildContext context) {
-      return AlertDialog(
-        title: Text('Add New Material'),
-        content: TextField(
-          controller: _folderNameController,
-          decoration: InputDecoration(
-            hintText: 'Enter Material Name',
-          ),
-        ),
-        actions: <Widget>[
-          TextButton(
-            onPressed: () {
-              Navigator.of(context).pop(); // Close the dialog
-            },
-            child: Text('Cancel'),
-          ),
-          TextButton(
-            onPressed: () async {
-              // Handle the action when "Add" is pressed
-              String folderName = _folderNameController.text;
-              if (folderName.isNotEmpty) {
-                Map<String, dynamic> newMaterial = {
-                  'materialName': folderName,
-                };
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Add New Material'),
+            content: TextField(
+              controller: _folderNameController,
+              decoration: InputDecoration(
+                hintText: 'Enter Material Name',
+              ),
+            ),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop(); // Close the dialog
+                },
+                child: Text('Cancel'),
+              ),
+              TextButton(
+                onPressed: () async {
+                  // Handle the action when "Add" is pressed
+                  String folderName = _folderNameController.text;
+                  if (folderName.isNotEmpty) {
+                    Map<String, dynamic> newMaterial = {
+                      'materialName': folderName,
+                    };
 
-                // Update the Firebase Firestore
-                await _firestore
-                    .collection('seekhobuddydb')
-                    .doc(facultyName)
-                    .set({
-                  'branches': {
-                    branchName: {
-                      semesterName: {
-                        subjectName: {
-                          folderName: newMaterial
+                    // Update the Firebase Firestore
+                    await _firestore
+                        .collection('seekhobuddydb')
+                        .doc(facultyName)
+                        .set({
+                      'branches': {
+                        branchName: {
+                          semesterName: {
+                            subjectName: {folderName: newMaterial}
+                          }
                         }
                       }
-                    }
+                    }, SetOptions(merge: true));
                   }
-                }, SetOptions(merge: true));
-              }
-              Navigator.of(context).pop(); // Close the dialog
-            },
-            child: Text('Add'),
-          ),
-        ],
+                  Navigator.of(context).pop(); // Close the dialog
+                },
+                child: Text('Add'),
+              ),
+            ],
+          );
+        },
       );
-    },
-  );
-}
+    }
 
     return Scaffold(
       backgroundColor: Colors.black,
@@ -160,19 +160,35 @@ class Materialsectionpage_Admin extends StatelessWidget {
                             ),
                             ElevatedButton(
                               onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  SlideRightPageRoute(
-                                    page: Materialpage_Admin(
-                                      materialName: material['materialName'],
-                                      material: material,
-                                      facultyName: facultyName,
-                                      branchName: branchName,
-                                      semesterName: semesterName,
-                                      subjectName: subjectName,
+                                if (role == 'admin' || role == 'dataeditor') {
+                                  Navigator.push(
+                                    context,
+                                    SlideRightPageRoute(
+                                      page: Materialpage_Admin(
+                                        materialName: material['materialName'],
+                                        material: material,
+                                        facultyName: facultyName,
+                                        branchName: branchName,
+                                        semesterName: semesterName,
+                                        subjectName: subjectName,
+                                      ),
                                     ),
-                                  ),
-                                );
+                                  );
+                                } else if (role == 'CR') {
+                                  Navigator.push(
+                                    context,
+                                    SlideRightPageRoute(
+                                      page: Materialpage_CR(
+                                        materialName: material['materialName'],
+                                        material: material,
+                                        facultyName: facultyName,
+                                        branchName: branchName,
+                                        semesterName: semesterName,
+                                        subjectName: subjectName,
+                                      ),
+                                    ),
+                                  );
+                                }
                               },
                               style: ButtonStyle(
                                 backgroundColor:
