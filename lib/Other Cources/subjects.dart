@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:seekhobuddy/AdminScreens/materialSectionPage-Admin.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:seekhobuddy/Other%20Cources/materialSectionPage.dart'; 
+import 'package:seekhobuddy/Other%20Cources/materialSectionPage.dart';
 
 class Subjects extends StatefulWidget {
   final String semesterName;
@@ -25,18 +25,21 @@ class _SubjectsState extends State<Subjects> {
   String searchQuery = '';
 
   Future<String> getUserRole() async {
-  User? user = FirebaseAuth.instance.currentUser;
-  if (user != null) {
-    QuerySnapshot querySnapshot = await FirebaseFirestore.instance.collection('users').where('uid', isEqualTo: user.uid).get();
-    if (querySnapshot.docs.isNotEmpty) {
-      return querySnapshot.docs.first['role'];
+    User? user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+          .collection('users')
+          .where('uid', isEqualTo: user.uid)
+          .get();
+      if (querySnapshot.docs.isNotEmpty) {
+        return querySnapshot.docs.first['role'];
+      } else {
+        throw Exception('No user document found');
+      }
     } else {
-      throw Exception('No user document found');
+      throw Exception('No user logged in');
     }
-  } else {
-    throw Exception('No user logged in');
   }
-}
 
   @override
   Widget build(BuildContext context) {
@@ -164,7 +167,7 @@ class _SubjectsState extends State<Subjects> {
                                           facultyName: widget.facultyName,
                                           branchName: widget.branchName,
                                           semesterName: widget.semesterName,
-                                          role: role,  // Add this line
+                                          role: role, // Add this line
                                         ),
                                       ),
                                     );
@@ -178,7 +181,7 @@ class _SubjectsState extends State<Subjects> {
                                           facultyName: widget.facultyName,
                                           branchName: widget.branchName,
                                           semesterName: widget.semesterName,
-                                          role: role,  // Add this line
+                                          role: role,
                                         ),
                                       ),
                                     );

@@ -140,6 +140,7 @@ class MaterialConfirmationScreen extends StatelessWidget {
                                     "Student Name: ${material['studentId']}",
                                     style: TextStyle(
                                       color: Colors.white,
+                                      fontSize: 13.5,
                                     ),
                                   ),
                                   SizedBox(height: 4),
