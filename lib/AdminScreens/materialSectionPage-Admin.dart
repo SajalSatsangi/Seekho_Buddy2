@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:seekhobuddy/AdminScreens/materialPage-Admin.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Materialsectionpage_Admin extends StatelessWidget {
@@ -27,95 +26,61 @@ class Materialsectionpage_Admin extends StatelessWidget {
 
     // Function to show the popup dialog
     void _showAddMaterialDialog() {
-      final TextEditingController _folderNameController =
-          TextEditingController();
-      final DatabaseReference _databaseReference = FirebaseDatabase(
-        databaseURL:
-            'https://seekhobuddy-default-rtdb.asia-southeast1.firebasedatabase.app',
-      ).reference();
+  final TextEditingController _folderNameController = TextEditingController();
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-      showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text('Add New Material'),
-            content: TextField(
-              controller: _folderNameController,
-              decoration: InputDecoration(
-                hintText: 'Enter Material Name',
-              ),
-            ),
-            actions: <Widget>[
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop(); // Close the dialog
-                },
-                child: Text('Cancel'),
-              ),
-              TextButton(
-                onPressed: () {
-                  // Handle the action when "Add" is pressed
-                  String folderName = _folderNameController.text;
-                  if (folderName.isNotEmpty) {
-                    Map newMaterial = {
-                      'materialName': folderName,
-                    };
-                    materials[folderName] = newMaterial;
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text('Add New Material'),
+        content: TextField(
+          controller: _folderNameController,
+          decoration: InputDecoration(
+            hintText: 'Enter Material Name',
+          ),
+        ),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop(); // Close the dialog
+            },
+            child: Text('Cancel'),
+          ),
+          TextButton(
+            onPressed: () async {
+              // Handle the action when "Add" is pressed
+              String folderName = _folderNameController.text;
+              if (folderName.isNotEmpty) {
+                Map<String, dynamic> newMaterial = {
+                  'materialName': folderName,
+                };
 
-                    // Update the Firebase Realtime Database
-                    _databaseReference
-                        .child('Material DB')
-                        .child(facultyName)
-                        .child('branches')
-                        .child(branchName)
-                        .child(semesterName)
-                        .child(subjectName)
-                        .child(folderName)
-                        .set(newMaterial);
+                // Update the Firebase Firestore
+                await _firestore
+                    .collection('seekhobuddydb')
+                    .doc(facultyName)
+                    .set({
+                  'branches': {
+                    branchName: {
+                      semesterName: {
+                        subjectName: {
+                          folderName: newMaterial
+                        }
+                      }
+                    }
                   }
-
-                  final firestoreReference = FirebaseFirestore.instance;
-
-                  // Add the new PDF to Firestore
-                  firestoreReference
-                      .collection('Material DB')
-                      .doc(facultyName)
-                      .collection(branchName)
-                      .doc(semesterName)
-                      .collection('Subjects')
-                      .doc(subjectName)
-                      .collection(subjectName)
-                      .doc(folderName)
-                      .set({
-                    'materialName': folderName
-                  }) // Set the document with the folderName
-                      .then((value) {
-                    // After the document is set, create a new collection with the folderName
-                    firestoreReference
-                        .collection('Material DB')
-                        .doc(facultyName)
-                        .collection(branchName)
-                        .doc(semesterName)
-                        .collection('Subjects')
-                        .doc(subjectName)
-                        .collection(subjectName)
-                        .doc(folderName)
-                        .collection(folderName)
-                        .doc(
-                            'test') // You need to create a document within the collection
-                        .set({
-                      'test': 'test'
-                    }); // Set the document with your data
-                  });
-                  Navigator.of(context).pop(); // Close the dialog
-                },
-                child: Text('Add'),
-              ),
-            ],
-          );
-        },
+                }, SetOptions(merge: true));
+              }
+              Navigator.of(context).pop(); // Close the dialog
+            },
+            child: Text('Add'),
+          ),
+        ],
       );
-    }
+    },
+  );
+}
 
     return Scaffold(
       backgroundColor: Colors.black,

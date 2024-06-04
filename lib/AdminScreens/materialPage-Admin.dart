@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:seekhobuddy/Other%20Cources/PdfViewer.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 
 class Materialpage_Admin extends StatelessWidget {
   final Map material;
@@ -73,29 +73,19 @@ class Materialpage_Admin extends StatelessWidget {
               String newPdfName = pdfNameController.text;
               String newPdfUrl = pdfUrlController.text;
 
-              // Create the URL for the REST API
-              String url =
-                  'https://seekhobuddy-server-36eb88311fa9.herokuapp.com/faculties/$facultyName/branches/$branchName/semesters/$semesterName/subjects/$subjectName/materials/$materialName';
-
-              // Create the body of the request
-              Map<String, dynamic> body = {
+              // Create the map for the Firestore document
+              Map<String, dynamic> data = {
                 'pdfName': newPdfName,
                 'link': newPdfUrl,
               };
 
-              // Send a POST request to the REST API
-              var response = await http.post(
-                Uri.parse(url),
-                headers: {"Content-Type": "application/json"},
-                body: json.encode(body),
-              );
-
-              if (response.statusCode == 201) {
-                print('Material added successfully');
-                print('Response body: ${response.body}');
-              } else {
-                print('Failed to add material');
-              }
+              // Update the document in Firestore
+              await FirebaseFirestore.instance
+                  .collection('seekhobuddydb')
+                  .doc('$facultyName')
+                  .update({
+                    'branches.$branchName.$semesterName.$subjectName.$materialName.$newPdfName': data
+                  });
 
               pdfNameController.clear();
               pdfUrlController.clear();
