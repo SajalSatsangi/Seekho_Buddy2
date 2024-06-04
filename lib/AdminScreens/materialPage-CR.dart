@@ -115,6 +115,7 @@ class _Materialpage_CRState extends State<Materialpage_CR> {
                     'pdfName': newPdfName,
                     'link': newPdfUrl,
                     'verfstatus': 'pending',
+                    'role': userData?['role'],
                   };
 
                   // Add the document to Firestore
