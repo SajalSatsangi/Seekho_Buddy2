@@ -2,18 +2,32 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'branches.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Faculties extends StatelessWidget {
   final String baseUrl =
       'https://seekhobuddy-server-36eb88311fa9.herokuapp.com'; // Change this to your backend URL
 
   Future<Map<String, dynamic>> fetchData() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    // Try to get data from shared preferences
+    String? facultiesDataString = prefs.getString('facultiesData');
+    if (facultiesDataString != null) {
+      print('Data retrieved from local storage: $facultiesDataString');
+      return json.decode(facultiesDataString);
+    }
+
+    // If not available in shared preferences, fetch from API
     final response = await http.get(Uri.parse('$baseUrl/faculties'));
 
     if (response.statusCode == 200) {
       var data = json.decode(response.body);
-      print(
-          'Fetched data: $data'); // This will print the fetched data in the console
+      print('Fetched data: $data');
+
+      // Store data to shared preferences
+      prefs.setString('facultiesData', json.encode(data));
+
       return data;
     } else {
       throw Exception('Failed to load faculties');
@@ -73,8 +87,7 @@ class Faculties extends StatelessWidget {
               itemBuilder: (context, index) {
                 final faculty = faculties[index];
                 final String name = faculty['facultyName'];
-                print(
-                    'Faculty name: $name'); // This will print the faculty name
+                print('Faculty name: $name'); // This will print the faculty name
                 return Padding(
                   padding: const EdgeInsets.symmetric(
                       horizontal: 50.0, vertical: 8.0),
