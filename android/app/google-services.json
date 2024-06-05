@@ -1,0 +1,49 @@
+{
+  "project_info": {
+    "project_number": "379236444299",
+    "firebase_url": "https://seekhobuddy-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "seekhobuddy",
+    "storage_bucket": "seekhobuddy.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:379236444299:android:7e99ff6589f675b4228c8e",
+        "android_client_info": {
+          "package_name": "com.example.seekho_buddy"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB2TVG4QnkJg9AVytJRcrh6iLwQgznc4RI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:379236444299:android:ee0c1e39833ebafc228c8e",
+        "android_client_info": {
+          "package_name": "com.example.seekhobuddy"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB2TVG4QnkJg9AVytJRcrh6iLwQgznc4RI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
