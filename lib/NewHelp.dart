@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:seekhobuddy/home.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 void main() {
   runApp(Newhelp());
@@ -16,99 +18,136 @@ class Newhelp extends StatelessWidget {
   }
 }
 
+Future<Map<String, dynamic>> fetchUserData() async {
+  Map<String, dynamic> userData = {};
+
+  User? user = FirebaseAuth.instance.currentUser; // Get current user
+
+  if (user != null) {
+    var querySnapshot = await FirebaseFirestore.instance
+        .collection('users')
+        .where('uid', isEqualTo: user.uid)
+        .get();
+
+    if (querySnapshot.docs.isNotEmpty) {
+      userData = querySnapshot.docs.first.data();
+    }
+  }
+
+  return userData;
+}
+
+final _formKey = GlobalKey<FormState>();
+final _issueController = TextEditingController();
+
 class MyWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: EdgeInsets.only(
-          top: MediaQuery.of(context).size.height * 0.05,
-        ),
-        child: Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
+          padding: EdgeInsets.only(
+            top: MediaQuery.of(context).size.height * 0.05,
+          ),
+          child: Form(
+            key: _formKey,
+            child: Column(
+              children: [
                 Row(
-                  children: [
-                    IconButton(
-                      icon: Icon(Icons.arrow_back_ios, color: Colors.white),
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => Home()),
-                        );
-                      },
-                    ),
-                    SizedBox(width: 10.0),
-                    Text(
-                      "Help Page",
-                      style: TextStyle(
-                        fontSize: MediaQuery.of(context).size.width * 0.07,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                      ),
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Row(
+                      children: [
+                        IconButton(
+                          icon: Icon(Icons.arrow_back_ios, color: Colors.white),
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => Home()),
+                            );
+                          },
+                        ),
+                        SizedBox(width: 10.0),
+                        Text(
+                          "Help Page",
+                          style: TextStyle(
+                            fontSize: MediaQuery.of(context).size.width * 0.07,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
-              ],
-            ),
-            SizedBox(height: MediaQuery.of(context).size.height * 0.05),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 26),
-              child: TextFormField(
-                maxLines: 10,
-                decoration: InputDecoration(
-                  hintText:
-                      'Detailed Description of Your Issue (Please provide as much detail as possible)',
-                  filled: true,
-                  fillColor: Color(0xFF323232),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(20),
-                    borderSide: BorderSide.none,
+                SizedBox(height: MediaQuery.of(context).size.height * 0.05),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 26),
+                  child: TextFormField(
+                    controller: _issueController,
+                    maxLines: 10,
+                    decoration: InputDecoration(
+                      hintText:
+                          'Detailed Description of Your Issue (Please provide as much detail as possible)',
+                      filled: true,
+                      fillColor: Color(0xFF323232),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(20),
+                        borderSide: BorderSide.none,
+                      ),
+                    ),
+                    style: TextStyle(color: Colors.white),
                   ),
                 ),
-                style: TextStyle(color: Colors.white),
-              ),
-            ),
-            SizedBox(height: 10),
-            ElevatedButton.icon(
-              onPressed: () {
-                // Implement image upload functionality
-              },
-              icon: Icon(Icons.upload_file, color: Colors.white),
-              label:
-                  Text('Upload Image', style: TextStyle(color: Colors.white)),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Color(0xFF323232), // Button color
-                disabledBackgroundColor: Colors.white, // Text color
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20),
+                SizedBox(height: 10),
+                ElevatedButton(
+                  onPressed: () async {
+                    if (_formKey.currentState!.validate()) {
+                      var userData = await fetchUserData(); // Fetch user data
+                      await FirebaseFirestore.instance
+                          .collection('issues')
+                          .add({
+                        'description': _issueController.text,
+                        'about_user': userData,
+                        // add other fields as needed
+                      });
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: Text('Success'),
+                            content: Text(
+                                'We will solve your issue shortly. Thanks!!'),
+                            actions: <Widget>[
+                              TextButton(
+                                child: Text('OK'),
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                              ),
+                            ],
+                          );
+                        },
+                      );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => Home()),
+                      );
+                    }
+                  },
+                  child: Text('Send',
+                      style: TextStyle(color: Colors.white, fontSize: 20)),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Color(0xFF323232), // Button color
+                    disabledBackgroundColor: Colors.white, // Text color
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    padding: EdgeInsets.symmetric(vertical: 15, horizontal: 60),
+                  ),
                 ),
-              ),
+              ], ///////
             ),
-            SizedBox(height: 15),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => Home()),
-                ); // Implement form submission functionality
-              },
-              child: Text('Send',
-                  style: TextStyle(color: Colors.white, fontSize: 20)),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Color(0xFF323232), // Button color
-                disabledBackgroundColor: Colors.white, // Text color
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                padding: EdgeInsets.symmetric(vertical: 15, horizontal: 60),
-              ),
-            ),
-          ],
-        ),
-      ),
+          )),
       backgroundColor: Colors.black87,
     );
   }

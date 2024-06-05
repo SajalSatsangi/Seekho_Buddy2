@@ -213,47 +213,48 @@ Future<void> showAddPopup(BuildContext context) async {
               ),
               ElevatedButton(
                 onPressed: () async {
+                  String fileUrl = 'https://img.freepik.com/premium-vector/notice-free-vector_734448-5.jpg';
                   if (selectedFile != null) {
                     TaskSnapshot snapshot = await FirebaseStorage.instance
                         .ref('notices/${selectedFile!.name}')
                         .putFile(File(selectedFile!.path!));
 
-                    String fileUrl = await snapshot.ref.getDownloadURL();
-
-                    final data = <String, dynamic>{
-                      'title': titleController.text,
-                      'description': descriptionController.text,
-                      'fileUrl': fileUrl,
-                      'date': DateTime.now().toString(),
-                    };
-
-                    if (selectedFaculties.isNotEmpty) {
-                      data['faculties'] = selectedFaculties;
-                    }
-                    if (selectedSubfaculties.isNotEmpty) {
-                      data['subfaculties'] = selectedSubfaculties;
-                    }
-                    if (selectedSemesters.isNotEmpty) {
-                      data['semesters'] = selectedSemesters;
-                    }
-                    if (selectedSubbranches.isNotEmpty) {
-                      data['subbranches'] = selectedSubbranches;
-                    }
-
-                    FirebaseFirestore firestore = FirebaseFirestore.instance;
-                    int docCount = await firestore
-                        .collection('notices')
-                        .get()
-                        .then((querySnapshot) => querySnapshot.docs.length);
-                    int newDocId = docCount + 1;
-
-                    firestore
-                        .collection('notices')
-                        .doc('Notice ' + newDocId.toString())
-                        .set(data);
-
-                    Navigator.of(context).pop();
+                    fileUrl = await snapshot.ref.getDownloadURL();
                   }
+
+                  final data = <String, dynamic>{
+                    'title': titleController.text,
+                    'description': descriptionController.text,
+                    'fileUrl': fileUrl,
+                    'date': DateTime.now().toString(),
+                  };
+
+                  if (selectedFaculties.isNotEmpty) {
+                    data['faculties'] = selectedFaculties;
+                  }
+                  if (selectedSubfaculties.isNotEmpty) {
+                    data['subfaculties'] = selectedSubfaculties;
+                  }
+                  if (selectedSemesters.isNotEmpty) {
+                    data['semesters'] = selectedSemesters;
+                  }
+                  if (selectedSubbranches.isNotEmpty) {
+                    data['subbranches'] = selectedSubbranches;
+                  }
+
+                  FirebaseFirestore firestore = FirebaseFirestore.instance;
+                  int docCount = await firestore
+                      .collection('notices')
+                      .get()
+                      .then((querySnapshot) => querySnapshot.docs.length);
+                  int newDocId = docCount + 1;
+
+                  firestore
+                      .collection('notices')
+                      .doc('Notice ' + newDocId.toString())
+                      .set(data);
+
+                  Navigator.of(context).pop();
                 },
                 style: ElevatedButton.styleFrom(
                     backgroundColor: Color.fromARGB(255, 255, 255, 255)),
