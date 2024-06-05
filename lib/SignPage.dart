@@ -7,7 +7,6 @@ import 'package:seekhobuddy/emailVerificationWaiting.dart';
 import 'package:seekhobuddy/dropdown_data.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:file_picker/file_picker.dart';
 import 'dart:io';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -379,7 +378,6 @@ class _StudyHubLoginScreenState extends State<StudyHubLoginScreen> {
 
       String uid = userCredential.user!.uid;
 
-      String? fcmToken = await FirebaseMessaging.instance.getToken();
 
       await FirebaseFirestore.instance
           .collection('users')
@@ -398,7 +396,6 @@ class _StudyHubLoginScreenState extends State<StudyHubLoginScreen> {
         'verifiedstatus': 'False',
         'status': '',
         'date': '',
-        'fcmToken': fcmToken,
         'idCardUrl': _idCardUrl,  // Add this line to save the ID card URL
       });
 

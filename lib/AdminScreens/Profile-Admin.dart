@@ -3,8 +3,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:seekhobuddy/AdminScreens/materialVerification.dart';
 import 'package:seekhobuddy/AdminScreens/student_verification.dart';
+import 'package:seekhobuddy/GetStarred/Landing2.dart';
 import '../Profile/editprofile.dart';
-import '../LoginPage.dart';
 import 'UsersData.dart';
 
 class ProfileScreenAdmin extends StatelessWidget {
@@ -64,7 +64,7 @@ class _ProfilePageState extends State<ProfilePage> {
     try {
       await FirebaseAuth.instance.signOut();
       Navigator.of(context).pushAndRemoveUntil(
-        MaterialPageRoute(builder: (context) => LoginPage()),
+        MaterialPageRoute(builder: (context) => LandingPage()),
         (Route<dynamic> route) => false,
       );
       // Navigate to the login screen after logout and clear the navigation stack
