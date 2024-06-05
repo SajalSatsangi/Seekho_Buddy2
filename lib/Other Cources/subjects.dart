@@ -139,7 +139,7 @@ class _SubjectsState extends State<Subjects> {
                             Row(
                               children: [
                                 Icon(
-                                  Icons.school,
+                                  Icons.subject,
                                   color: Colors.white,
                                 ),
                                 SizedBox(width: 8),
@@ -157,7 +157,8 @@ class _SubjectsState extends State<Subjects> {
                             ElevatedButton(
                               onPressed: () {
                                 getUserRole().then((role) {
-                                  if (role == 'student' || role == 'verificationist') {
+                                  if (role == 'student' ||
+                                      role == 'verificationist') {
                                     Navigator.push(
                                       context,
                                       SlideLeftPageRoute(
@@ -171,7 +172,9 @@ class _SubjectsState extends State<Subjects> {
                                         ),
                                       ),
                                     );
-                                  } else if (role == 'admin' || role == 'CR' || role == 'dataeditor') {
+                                  } else if (role == 'admin' ||
+                                      role == 'CR' ||
+                                      role == 'dataeditor') {
                                     Navigator.push(
                                       context,
                                       SlideLeftPageRoute(

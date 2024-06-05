@@ -143,7 +143,7 @@ class Materialsectionpage_Admin extends StatelessWidget {
                             Row(
                               children: [
                                 Icon(
-                                  Icons.school,
+                                  Icons.book_sharp,
                                   color: Colors.white,
                                 ),
                                 SizedBox(width: 8),

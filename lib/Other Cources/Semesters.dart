@@ -80,7 +80,7 @@ class Semesters extends StatelessWidget {
                             Row(
                               children: [
                                 Icon(
-                                  Icons.school,
+                                  Icons.calendar_today,
                                   color: Colors.white,
                                 ),
                                 SizedBox(width: 18),
