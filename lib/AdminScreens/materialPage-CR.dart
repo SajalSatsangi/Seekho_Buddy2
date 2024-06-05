@@ -121,7 +121,7 @@ class _Materialpage_CRState extends State<Materialpage_CR> {
                   // Add the document to Firestore
                   await FirebaseFirestore.instance
                       .collection('materialverf')
-                 .doc('${widget.subjectName},$newPdfName')
+                      .doc('${widget.subjectName},$newPdfName')
                       .set(data);
 
                   pdfNameController.clear();
@@ -170,27 +170,6 @@ class _Materialpage_CRState extends State<Materialpage_CR> {
                     ],
                   ),
                 ],
-              ),
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.only(top: 14, left: 14, right: 14),
-            child: TextField(
-              decoration: InputDecoration(
-                hintText: "Search...",
-                hintStyle: TextStyle(color: Colors.white),
-                prefixIcon: Icon(
-                  Icons.search,
-                  color: Colors.white,
-                  size: 20,
-                ),
-                filled: true,
-                fillColor: Color(0xFF323232),
-                contentPadding: EdgeInsets.all(8),
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(20),
-                  borderSide: BorderSide(color: Color(0xFF323232)),
-                ),
               ),
             ),
           ),

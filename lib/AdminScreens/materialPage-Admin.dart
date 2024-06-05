@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:seekhobuddy/Other%20Cources/PdfViewer.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-
 class Materialpage_Admin extends StatelessWidget {
   final Map material;
   final String materialName;
@@ -37,68 +36,69 @@ class Materialpage_Admin extends StatelessWidget {
 
     // Function to show the popup dialog
     void _showAddMaterialDialog() {
-  showDialog(
-    context: context,
-    builder: (BuildContext context) {
-      return AlertDialog(
-        title: Text('Add Pdf'),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            TextField(
-              controller: pdfNameController,
-              decoration: InputDecoration(
-                hintText: "Enter Pdf Name",
-              ),
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Add Pdf'),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                TextField(
+                  controller: pdfNameController,
+                  decoration: InputDecoration(
+                    hintText: "Enter Pdf Name",
+                  ),
+                ),
+                SizedBox(height: 8),
+                TextField(
+                  controller: pdfUrlController,
+                  decoration: InputDecoration(
+                    hintText: "Enter Pdf URL",
+                  ),
+                ),
+              ],
             ),
-            SizedBox(height: 8),
-            TextField(
-              controller: pdfUrlController,
-              decoration: InputDecoration(
-                hintText: "Enter Pdf URL",
+            actions: <Widget>[
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop(); // Close the dialog
+                },
+                child: Text('Cancel'),
               ),
-            ),
-          ],
-        ),
-        actions: <Widget>[
-          TextButton(
-            onPressed: () {
-              Navigator.of(context).pop(); // Close the dialog
-            },
-            child: Text('Cancel'),
-          ),
-          TextButton(
-            onPressed: () async {
-              // Handle the action when "Add" is pressed
-              String newPdfName = pdfNameController.text;
-              String newPdfUrl = pdfUrlController.text;
+              TextButton(
+                onPressed: () async {
+                  // Handle the action when "Add" is pressed
+                  String newPdfName = pdfNameController.text;
+                  String newPdfUrl = pdfUrlController.text;
 
-              // Create the map for the Firestore document
-              Map<String, dynamic> data = {
-                'pdfName': newPdfName,
-                'link': newPdfUrl,
-              };
+                  // Create the map for the Firestore document
+                  Map<String, dynamic> data = {
+                    'pdfName': newPdfName,
+                    'link': newPdfUrl,
+                  };
 
-              // Update the document in Firestore
-              await FirebaseFirestore.instance
-                  .collection('seekhobuddydb')
-                  .doc('$facultyName')
-                  .update({
-                    'branches.$branchName.$semesterName.$subjectName.$materialName.$newPdfName': data
+                  // Update the document in Firestore
+                  await FirebaseFirestore.instance
+                      .collection('seekhobuddydb')
+                      .doc('$facultyName')
+                      .update({
+                    'branches.$branchName.$semesterName.$subjectName.$materialName.$newPdfName':
+                        data
                   });
 
-              pdfNameController.clear();
-              pdfUrlController.clear();
+                  pdfNameController.clear();
+                  pdfUrlController.clear();
 
-              Navigator.of(context).pop(); // Close the dialog
-            },
-            child: Text('Add'),
-          ),
-        ],
+                  Navigator.of(context).pop(); // Close the dialog
+                },
+                child: Text('Add'),
+              ),
+            ],
+          );
+        },
       );
-    },
-  );
-}
+    }
 
     return Scaffold(
       backgroundColor: Colors.black,
@@ -133,27 +133,6 @@ class Materialpage_Admin extends StatelessWidget {
                     ],
                   ),
                 ],
-              ),
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.only(top: 14, left: 14, right: 14),
-            child: TextField(
-              decoration: InputDecoration(
-                hintText: "Search...",
-                hintStyle: TextStyle(color: Colors.white),
-                prefixIcon: Icon(
-                  Icons.search,
-                  color: Colors.white,
-                  size: 20,
-                ),
-                filled: true,
-                fillColor: Color(0xFF323232),
-                contentPadding: EdgeInsets.all(8),
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(20),
-                  borderSide: BorderSide(color: Color(0xFF323232)),
-                ),
               ),
             ),
           ),
@@ -224,14 +203,14 @@ class Materialpage_Admin extends StatelessWidget {
               ),
               SizedBox(height: 25),
               ElevatedButton(
-                 onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => PdfViewer(AA: AA),
-                                  ),
-                                );
-                              },
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => PdfViewer(AA: AA),
+                    ),
+                  );
+                },
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all<Color>(
                     Colors.white,
