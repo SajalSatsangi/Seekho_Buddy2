@@ -89,25 +89,25 @@ class Faculties extends StatelessWidget {
                             ),
                           ),
                           SizedBox(
-                              width: MediaQuery.of(context).size.width * 0.035),
+                              width: MediaQuery.of(context).size.width * 0.05),
                           Expanded(
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 SizedBox(
                                     height: MediaQuery.of(context).size.width *
-                                        0.02),
+                                        0.03),
                                 Text(
                                   document?.id ?? '',
                                   style: TextStyle(
                                     color: Colors.white,
                                     fontSize:
                                         MediaQuery.of(context).size.width *
-                                            0.035,
+                                            0.045,
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
-                                SizedBox(height: 5),
+                                SizedBox(height: 8),
                                 Container(
                                   height: 30.0,
                                   width: 75.0,
@@ -134,7 +134,7 @@ class Faculties extends StatelessWidget {
                                       'View',
                                       style: TextStyle(
                                         color: Colors.black,
-                                        fontSize: 10.0,
+                                        fontSize: 12.0,
                                       ),
                                     ),
                                   ),
