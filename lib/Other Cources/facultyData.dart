@@ -126,7 +126,7 @@ class Faculties extends StatelessWidget {
                                     },
                                     style: ButtonStyle(
                                       backgroundColor:
-                                          MaterialStateProperty.all<Color>(
+                                          WidgetStateProperty.all<Color>(
                                               Colors.white),
                                     ),
                                     child: Text(
