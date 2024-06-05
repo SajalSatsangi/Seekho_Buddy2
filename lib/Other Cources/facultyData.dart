@@ -119,8 +119,7 @@ class Faculties extends StatelessWidget {
                                           page: Branches(
                                             facultyName: document?.id ?? '',
                                             facultyData: document?.data()
-                                                    as Map<String, dynamic> ??
-                                                {},
+                                                as Map<String, dynamic>,
                                           ),
                                         ),
                                       );
