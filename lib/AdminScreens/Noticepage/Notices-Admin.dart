@@ -92,30 +92,31 @@ class _MyWidgetState extends State<MyWidget> {
   }
 
   Future<void> fetchUserData() async {
-    prefs = await SharedPreferences.getInstance();
-    DateTime lastFetchTime =
-        DateTime.parse(prefs.getString('lastFetchTime') ?? '2000-01-01');
-    DateTime now = DateTime.now();
+  prefs = await SharedPreferences.getInstance();
+  DateTime lastFetchTime =
+      DateTime.parse(prefs.getString('lastFetchTime') ?? '2000-01-01');
+  DateTime now = DateTime.now();
 
-    final User? user = FirebaseAuth.instance.currentUser;
+  final User? user = FirebaseAuth.instance.currentUser;
 
-    if (now.difference(lastFetchTime).inDays >= 1 || userData == null) {
-      if (user != null) {
-        var querySnapshot = await FirebaseFirestore.instance
-            .collection('users')
-            .where('uid', isEqualTo: user.uid)
-            .get();
+  if (now.difference(lastFetchTime).inDays >= 1 || userData == null) {
+    if (user != null) {
+      var querySnapshot = await FirebaseFirestore.instance
+          .collection('users')
+          .where('uid', isEqualTo: user.uid)
+          .get();
 
-        if (querySnapshot.docs.isNotEmpty) {
-          setState(() {
-            userData = querySnapshot.docs.first;
-            saveUserDataLocally(); // Save data locally when fetched
-            prefs.setString('lastFetchTime', now.toIso8601String());
-          });
-        }
+      if (querySnapshot.docs.isNotEmpty) {
+        setState(() {
+          userData = querySnapshot.docs.first;
+          print('User role: ${userData!['role']}'); // Print the user's role
+          saveUserDataLocally(); // Save data locally when fetched
+          prefs.setString('lastFetchTime', now.toIso8601String());
+        });
       }
     }
   }
+}
 
   void listenForNewNotices() {
     collectionRef.snapshots().listen((snapshot) {
@@ -356,16 +357,16 @@ class _MyWidgetState extends State<MyWidget> {
         ),
       ),
       backgroundColor: Color(0xDD000000),
-      floatingActionButton: Padding(
-        padding: EdgeInsets.only(bottom: screenHeight * 0.02),
-        child: FloatingActionButton(
-          onPressed: () {
-            showAddPopup(context);
-          },
-          backgroundColor: Color(0xFF323232),
-          child: Icon(Icons.add, size: iconSize),
-        ),
-      ),
+      floatingActionButton: (userData != null && (userData!['role'] == 'admin' || userData!['role'] == 'CR' || userData!['role'] == 'dataeditor')) ? Padding(
+  padding: EdgeInsets.only(bottom: screenHeight * 0.02),
+  child: FloatingActionButton(
+    onPressed: () {
+      showAddPopup(context);
+    },
+    backgroundColor: Color(0xFF323232),
+    child: Icon(Icons.add, size: iconSize),
+  ),
+) : null,
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
     );
   }
