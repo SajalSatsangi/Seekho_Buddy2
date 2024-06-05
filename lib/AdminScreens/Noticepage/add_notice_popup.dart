@@ -96,7 +96,10 @@ Future<void> showAddPopup(BuildContext context) async {
                     TextButton.icon(
                       onPressed: () async {
                         FilePickerResult? result =
-                            await FilePicker.platform.pickFiles();
+                            await FilePicker.platform.pickFiles(
+                          type: FileType.custom,
+                          allowedExtensions: ['png', 'jpg', 'pdf'],
+                        );
                         if (result != null) {
                           selectedFile = result.files.first;
                         }
