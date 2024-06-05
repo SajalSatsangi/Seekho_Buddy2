@@ -8,6 +8,9 @@ import 'package:seekhobuddy/dropdown_data.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:file_picker/file_picker.dart';
+import 'dart:io';
+import 'package:firebase_storage/firebase_storage.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -51,6 +54,9 @@ class _StudyHubLoginScreenState extends State<StudyHubLoginScreen> {
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _rollnoController = TextEditingController();
+
+
+  String? _idCardUrl;  // A
 
   final _formKey = GlobalKey<FormState>();
 
@@ -353,65 +359,76 @@ class _StudyHubLoginScreenState extends State<StudyHubLoginScreen> {
   }
 
   Future<void> _signUp() async {
-    if (_formKey.currentState!.validate()) {
-      try {
-        UserCredential userCredential =
-            await FirebaseAuth.instance.createUserWithEmailAndPassword(
-          email: _emailController.text,
-          password: _passwordController.text,
+  if (_formKey.currentState!.validate()) {
+    // Add this block to validate ID card upload
+    if (_idCardUrl == null) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Please upload your ID card')),
+        );
+      }
+      return;  // Exit the function if ID card is not uploaded
+    }
+
+    try {
+      UserCredential userCredential =
+          await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: _emailController.text,
+        password: _passwordController.text,
+      );
+
+      String uid = userCredential.user!.uid;
+
+      String? fcmToken = await FirebaseMessaging.instance.getToken();
+
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(_nameController.text)
+          .set({
+        'uid': uid,
+        'email': _emailController.text,
+        'name': _nameController.text,
+        'faculty': _selectedFaculty,
+        'subfaculty': _selectedSubfaculty,
+        'semester': _selectedSemester,
+        'subbranch': _selectedSubbranch,
+        'rollno': _rollnoController.text,
+        'profile_picture': '',
+        'role': 'student',
+        'verifiedstatus': 'False',
+        'status': '',
+        'date': '',
+        'fcmToken': fcmToken,
+        'idCardUrl': _idCardUrl,  // Add this line to save the ID card URL
+      });
+
+      await sendWelcomeEmail(
+        _emailController.text,
+        _nameController.text,
+      );
+
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Signed up successfully'),
+            duration: Duration(seconds: 2),
+          ),
         );
 
-        String uid = userCredential.user!.uid;
-
-        String? fcmToken = await FirebaseMessaging.instance.getToken();
-
-        await FirebaseFirestore.instance
-            .collection('users')
-            .doc(_nameController.text)
-            .set({
-          'uid': uid,
-          'email': _emailController.text,
-          'name': _nameController.text,
-          'faculty': _selectedFaculty,
-          'subfaculty': _selectedSubfaculty,
-          'semester': _selectedSemester,
-          'subbranch': _selectedSubbranch,
-          'rollno': _rollnoController.text,
-          'profile_picture': '',
-          'role': 'student',
-          'verifiedstatus': 'False',
-          'status': '',
-          'date': '',
-          'fcmToken': fcmToken,
-        });
-
-        await sendWelcomeEmail(
-          _emailController.text,
-          _nameController.text,
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => WaitingVerification()),
         );
-
-        if (mounted) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text('Signed up successfully'),
-              duration: Duration(seconds: 2),
-            ),
-          );
-
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (context) => WaitingVerification()),
-          );
-        }
-      } on FirebaseAuthException catch (e) {
-        if (mounted) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('Failed to sign up: ${e.message}')),
-          );
-        }
+      }
+    } on FirebaseAuthException catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Failed to sign up: ${e.message}')),
+        );
       }
     }
   }
+}
 
   Future<void> sendWelcomeEmail(String email, String name) async {
     const url = 'https://seekhobuddy-mailer.vercel.app/api/send-emailsignup';
@@ -558,44 +575,85 @@ class _StudyHubLoginScreenState extends State<StudyHubLoginScreen> {
   }
 
   Widget _buildUploadField({
-    required double height,
-    required double iconSize,
-    required double fontSize,
-  }) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 30),
-      child: Row(
-        children: [
-          Icon(
-            Icons.attach_file,
-            color: Colors.white,
-            size: iconSize,
-          ),
-          SizedBox(width: 5),
-          Expanded(
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(50),
-                color: const Color.fromARGB(255, 72, 72, 72),
-              ),
-              height: height,
-              child: TextButton(
-                onPressed: () {
-                  // Implement logic to handle ID card upload
-                },
-                child: Text(
-                  'Upload ID Card',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: const Color.fromARGB(179, 234, 234, 234),
-                    fontSize: fontSize,
-                  ),
+  required double height,
+  required double iconSize,
+  required double fontSize,
+}) {
+  return Padding(
+    padding: const EdgeInsets.symmetric(horizontal: 30),
+    child: Row(
+      children: [
+        Icon(
+          Icons.attach_file,
+          color: Colors.white,
+          size: iconSize,
+        ),
+        SizedBox(width: 5),
+        Expanded(
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(50),
+              color: const Color.fromARGB(255, 72, 72, 72),
+            ),
+            height: height,
+            child: TextButton(
+              onPressed: () async {
+                FilePickerResult? result = await FilePicker.platform.pickFiles(
+                  type: FileType.custom,
+                  allowedExtensions: ['jpg', 'jpeg', 'png', 'pdf'],
+                );
+
+                if (result != null) {
+                  PlatformFile file = result.files.first;
+
+                  // Get a reference to storage root
+                  Reference storageReference = FirebaseStorage.instance.ref();
+
+                  // Create a reference for the image to be stored
+                  Reference imageReference = storageReference.child('idCards/${_nameController.text}_idCard.${file.extension}');
+
+                  // Create UploadTask
+                  UploadTask uploadTask = imageReference.putFile(File(file.path!));
+
+                  // Wait for the upload to complete
+                  TaskSnapshot snapshot = await uploadTask;
+
+                  // Get the download URL
+                  String downloadUrl = await snapshot.ref.getDownloadURL();
+
+                  // Update the state with the ID card URL
+                  setState(() {
+                    _idCardUrl = downloadUrl;
+                  });
+
+                  // Show a success message
+                  if (mounted) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text('ID Card uploaded successfully')),
+                    );
+                  }
+                } else {
+                  // User canceled the picker
+                  if (mounted) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text('No file selected')),
+                    );
+                  }
+                }
+              },
+              child: Text(
+                _idCardUrl == null ? 'Upload ID Card *' : 'ID Card Uploaded ✓',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: const Color.fromARGB(179, 234, 234, 234),
+                  fontSize: fontSize,
                 ),
               ),
             ),
           ),
-        ],
-      ),
-    );
-  }
+        ),
+      ],
+    ),
+  );
+}
 }

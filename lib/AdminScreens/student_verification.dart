@@ -182,7 +182,7 @@ class VerificationScreen extends StatelessWidget {
                                     onPressed: () {
                                       _showIDPopup(
                                         context,
-                                        NetworkImage(user['studentid']),
+                                        NetworkImage(user['idCardUrl']),
                                       );
                                     },
                                     style: TextButton.styleFrom(
