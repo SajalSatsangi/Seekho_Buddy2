@@ -383,7 +383,7 @@ class _StudyHubLoginScreenState extends State<StudyHubLoginScreen> {
 
       await FirebaseFirestore.instance
           .collection('users')
-          .doc(_nameController.text)
+          .doc(_emailController.text)
           .set({
         'uid': uid,
         'email': _emailController.text,
@@ -393,7 +393,7 @@ class _StudyHubLoginScreenState extends State<StudyHubLoginScreen> {
         'semester': _selectedSemester,
         'subbranch': _selectedSubbranch,
         'rollno': _rollnoController.text,
-        'profile_picture': '',
+        'profile_picture': 'https://t4.ftcdn.net/jpg/02/44/43/69/360_F_244436923_vkMe10KKKiw5bjhZeRDT05moxWcPpdmb.jpg',
         'role': 'student',
         'verifiedstatus': 'False',
         'status': '',

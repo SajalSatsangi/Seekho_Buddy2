@@ -50,7 +50,7 @@ class _EditProfileState extends State<userdata_edit> {
 
         await FirebaseFirestore.instance
             .collection('users')
-            .doc(userData!['name'])
+            .doc(userData!['email'])
             .update({'profile_picture': downloadURL});
 
         setState(() {
@@ -79,7 +79,7 @@ class _EditProfileState extends State<userdata_edit> {
     if (result != null) {
       await FirebaseFirestore.instance
           .collection('users')
-          .doc(userData!['name'])
+          .doc(userData!['email'])
           .update({field: result});
 
       setState(() {
@@ -117,9 +117,9 @@ class _EditProfileState extends State<userdata_edit> {
                 SizedBox(
                     height: MediaQuery.of(context).size.height *
                         0.02), // Responsive height
-                buildEditableField('Name', userData!['name']),
+                buildEditableField('name', userData!['name']),
                 SizedBox(height: MediaQuery.of(context).size.height * 0.01),
-                buildEditableField('Email', userData!['email']),
+                buildEditableField('email', userData!['email']),
                 SizedBox(height: MediaQuery.of(context).size.height * 0.03),
                 Center(
                   child: Text(
@@ -132,17 +132,17 @@ class _EditProfileState extends State<userdata_edit> {
                   ),
                 ),
                 SizedBox(height: MediaQuery.of(context).size.height * 0.01),
-                buildEditableField('Roll No', userData!['rollno']),
+                buildEditableField('rollno', userData!['rollno']),
                 SizedBox(height: MediaQuery.of(context).size.height * 0.01),
-                buildEditableField('Faculty', userData!['faculty']),
+                buildEditableField('faculty', userData!['faculty']),
                 SizedBox(height: MediaQuery.of(context).size.height * 0.01),
-                buildEditableField('Subfaculty', userData!['subfaculty']),
+                buildEditableField('subfaculty', userData!['subfaculty']),
                 SizedBox(height: MediaQuery.of(context).size.height * 0.01),
-                buildEditableField('Subbranch', userData!['subbranch']),
+                buildEditableField('subbranch', userData!['subbranch']),
                 SizedBox(height: MediaQuery.of(context).size.height * 0.01),
-                buildEditableField('Semester', userData!['semester']),
+                buildEditableField('semester', userData!['semester']),
                 SizedBox(height: MediaQuery.of(context).size.height * 0.01),
-                buildEditableField('Status', userData!['status']),
+                buildEditableField('status', userData!['status']),
                 SizedBox(height: MediaQuery.of(context).size.height * 0.01),
                 Container(
                   margin: EdgeInsets.symmetric(
@@ -167,11 +167,11 @@ class _EditProfileState extends State<userdata_edit> {
                 ),
                 SizedBox(height: MediaQuery.of(context).size.height * 0.01),
                 buildEditableField(
-                    'Verified Status', userData!['verifiedstatus']),
+                    'verifiedstatus', userData!['verifiedstatus']),
                 SizedBox(height: MediaQuery.of(context).size.height * 0.01),
-                buildEditableField('Date', userData!['date']),
+                buildEditableField('date', userData!['date']),
                 SizedBox(height: MediaQuery.of(context).size.height * 0.01),
-                buildEditableField('Role', userData!['role']),
+                buildEditableField('role', userData!['role']),
               ],
             ),
     );
@@ -179,7 +179,7 @@ class _EditProfileState extends State<userdata_edit> {
 
   Widget buildEditableField(String label, String value) {
   return GestureDetector(
-    onTap: (label.toLowerCase() != 'name' && label.toLowerCase() != 'email')
+    onTap: (label.toLowerCase() != 'email')
         ? () => navigateToEditField(label.toLowerCase(), value)
         : null,
     child: Container(
