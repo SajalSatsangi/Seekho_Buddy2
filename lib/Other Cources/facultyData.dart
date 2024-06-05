@@ -3,12 +3,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'branches.dart';
 
 class Faculties extends StatelessWidget {
-
   Future<List<QueryDocumentSnapshot>> fetchData() async {
     QuerySnapshot querySnapshot =
         await FirebaseFirestore.instance.collection('seekhobuddydb').get();
     return querySnapshot.docs;
-}
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +46,6 @@ class Faculties extends StatelessWidget {
             return ListView.builder(
               itemCount: documents?.length,
               itemBuilder: (context, index) {
-
                 final document = documents?[index];
                 print(
                     'Document ID: ${document?.id}'); // This will print the document ID
@@ -90,17 +88,22 @@ class Faculties extends StatelessWidget {
                               fit: BoxFit.cover,
                             ),
                           ),
-                          SizedBox(width: 10),
+                          SizedBox(
+                              width: MediaQuery.of(context).size.width * 0.035),
                           Expanded(
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                SizedBox(height: 5),
+                                SizedBox(
+                                    height: MediaQuery.of(context).size.width *
+                                        0.02),
                                 Text(
                                   document?.id ?? '',
                                   style: TextStyle(
                                     color: Colors.white,
-                                    fontSize: 15.0,
+                                    fontSize:
+                                        MediaQuery.of(context).size.width *
+                                            0.035,
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
