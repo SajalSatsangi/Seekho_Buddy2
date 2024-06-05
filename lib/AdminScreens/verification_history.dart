@@ -64,32 +64,6 @@ class HistoryScreen extends StatelessWidget {
             ),
             SizedBox(
                 height: MediaQuery.of(context).size.height *
-                    0.01), // Adjusted height using MediaQuery
-            TextField(
-              decoration: InputDecoration(
-                hintText: "Search...",
-                hintStyle: TextStyle(color: Colors.white),
-                prefixIcon: Icon(
-                  Icons.search,
-                  color: Colors.white,
-                  size: MediaQuery.of(context).size.width *
-                      0.06, // Adjusted icon size using MediaQuery
-                ),
-                filled: true,
-                fillColor: Color(0xFF323232),
-                contentPadding: EdgeInsets.all(
-                    MediaQuery.of(context).size.width *
-                        0.02), // Adjusted padding using MediaQuery
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(
-                      MediaQuery.of(context).size.width *
-                          0.1), // Adjusted border radius using MediaQuery
-                  borderSide: BorderSide(color: Color(0xFF323232)),
-                ),
-              ),
-            ),
-            SizedBox(
-                height: MediaQuery.of(context).size.height *
                     0.02), // Adjusted height using MediaQuery
             Text(
               "Student Verification History",

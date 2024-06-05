@@ -44,32 +44,6 @@ class MaterialConfirmationScreen extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: MediaQuery.of(context).size.width * 0.03,
-                vertical: MediaQuery.of(context).size.width * 0.02,
-              ),
-              child: TextField(
-                decoration: InputDecoration(
-                  hintText: "Search...",
-                  hintStyle: TextStyle(color: Colors.white),
-                  prefixIcon: Icon(
-                    Icons.search,
-                    color: Colors.white,
-                    size: MediaQuery.of(context).size.width * 0.05,
-                  ),
-                  filled: true,
-                  fillColor: Color(0xFF323232),
-                  contentPadding:
-                      EdgeInsets.all(MediaQuery.of(context).size.width * 0.02),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(
-                        MediaQuery.of(context).size.width * 0.08),
-                    borderSide: BorderSide(color: Color(0xFF323232)),
-                  ),
-                ),
-              ),
-            ),
-            Padding(
               padding: EdgeInsets.only(
                 left: MediaQuery.of(context).size.width * 0.05,
                 top: MediaQuery.of(context).size.width * 0.06,
