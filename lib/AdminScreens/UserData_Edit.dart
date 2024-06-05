@@ -178,29 +178,31 @@ class _EditProfileState extends State<userdata_edit> {
   }
 
   Widget buildEditableField(String label, String value) {
-    return GestureDetector(
-      onTap: () => navigateToEditField(label.toLowerCase(), value),
-      child: Container(
-        margin: EdgeInsets.symmetric(
-            vertical: MediaQuery.of(context).size.height * 0.003),
-        padding: EdgeInsets.all(
-            MediaQuery.of(context).size.width * 0.03), // Responsive padding
-        decoration: BoxDecoration(
-          color: Color(0xFF292929),
-          borderRadius: BorderRadius.circular(8),
-        ),
-        child: Align(
-          alignment: Alignment.centerLeft,
-          child: Text(
-            value,
-            style: TextStyle(
-              fontSize: MediaQuery.of(context).size.width * 0.04,
-              fontWeight: FontWeight.bold,
-              color: Colors.white,
-            ),
+  return GestureDetector(
+    onTap: (label.toLowerCase() != 'name' && label.toLowerCase() != 'email')
+        ? () => navigateToEditField(label.toLowerCase(), value)
+        : null,
+    child: Container(
+      margin: EdgeInsets.symmetric(
+          vertical: MediaQuery.of(context).size.height * 0.003),
+      padding: EdgeInsets.all(
+          MediaQuery.of(context).size.width * 0.03), // Responsive padding
+      decoration: BoxDecoration(
+        color: Color(0xFF292929),
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: Align(
+        alignment: Alignment.centerLeft,
+        child: Text(
+          value,
+          style: TextStyle(
+            fontSize: MediaQuery.of(context).size.width * 0.04,
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
           ),
         ),
       ),
-    );
-  }
+    ),
+  );
+}
 }
