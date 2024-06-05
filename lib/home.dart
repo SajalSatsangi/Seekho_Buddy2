@@ -257,11 +257,11 @@ class _HomeState extends State<Home> {
                         children: [
                           Padding(
                             padding: EdgeInsets.only(
-                                left: MediaQuery.of(context).size.width * 0.15,
+                                left: MediaQuery.of(context).size.width * 0.04,
                                 top:
                                     MediaQuery.of(context).size.height * 0.025),
                             child: SizedBox(
-                              width: MediaQuery.of(context).size.width * 0.4,
+                              width: MediaQuery.of(context).size.width * 0.41,
                               height:
                                   MediaQuery.of(context).size.height * 0.055,
                               child: ElevatedButton(
@@ -310,7 +310,7 @@ class _HomeState extends State<Home> {
                                 top:
                                     MediaQuery.of(context).size.height * 0.025),
                             child: SizedBox(
-                              width: MediaQuery.of(context).size.width * 0.3,
+                              width: MediaQuery.of(context).size.width * 0.4,
                               height:
                                   MediaQuery.of(context).size.height * 0.055,
                               child: ElevatedButton(
@@ -323,7 +323,7 @@ class _HomeState extends State<Home> {
                                 },
                                 style: ButtonStyle(
                                   backgroundColor:
-                                      MaterialStateProperty.all<Color>(
+                                      WidgetStateProperty.all<Color>(
                                     const Color.fromARGB(255, 93, 93, 93),
                                   ),
                                 ),
