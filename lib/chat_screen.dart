@@ -54,50 +54,66 @@ class _ChatScreenState extends State<ChatScreen> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-    return Scaffold(
-      backgroundColor: Colors.black,
-      appBar: AppBar(
-        title: const Text(
-          'Seekho-Buddy AI',
-          style: TextStyle(
-            color: Colors.white,
-          ),
+Widget build(BuildContext context) {
+  final size = MediaQuery.of(context).size;
+  return Scaffold(
+    backgroundColor: Colors.black,
+    appBar: AppBar(
+      title: const Text(
+        'Seekho-Buddy AI',
+        style: TextStyle(
+          color: Colors.white,
         ),
-        backgroundColor: Colors.black,
       ),
-      body: Stack(
-        children: [
-          ListView.separated(
-            padding: const EdgeInsets.fromLTRB(15, 0, 15, 90),
-            itemCount: history.reversed.length,
-            controller: _scrollController,
-            reverse: true,
-            itemBuilder: (context, index){
-              var content = history.reversed.toList()[index];
-              var text = content.parts
-                  .whereType<TextPart>()
-                  .map<String>((e) => e.text)
-                  .join('');
-              return MessageTile(
-                sendByMe: content.role == 'user',
-                message: text,
-
-              );
-            },
-            separatorBuilder: (context, index){
-              return const SizedBox(height: 15,);
-            },
-          ),
+      backgroundColor: Colors.black,
+    ),
+    body: Stack(
+      children: [
+        history.isEmpty
+            ? Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                    Text(
+                      'Seekho apne buddy ke saath!',
+                      style: TextStyle(color: Colors.white, fontSize: 24),
+                    ),
+                    SizedBox(height: 20),
+                    Image.asset(
+                      'assets/SplashLogo.png', // Replace with your logo asset
+                      height: 150, // Adjust the height as desired
+                    ),
+                  ],
+                ),
+              )
+            : ListView.separated(
+                padding: const EdgeInsets.fromLTRB(15, 0, 15, 90),
+                itemCount: history.reversed.length,
+                controller: _scrollController,
+                reverse: true,
+                itemBuilder: (context, index){
+                  var content = history.reversed.toList()[index];
+                  var text = content.parts
+                      .whereType<TextPart>()
+                      .map<String>((e) => e.text)
+                      .join('');
+                  return MessageTile(
+                    sendByMe: content.role == 'user',
+                    message: text,
+                  );
+                },
+                separatorBuilder: (context, index){
+                  return const SizedBox(height: 15,);
+                },
+              ),
           Align(
             alignment: Alignment.bottomCenter,
             child: Container(
               width: MediaQuery.of(context).size.width,
               padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 12),
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                   color: Colors.black,
-                  border: Border(top: BorderSide(color: Colors.grey.shade200))
+                  border: Border(top: BorderSide(color: Colors.black))
               ),
               child: Row(
                 children: [
