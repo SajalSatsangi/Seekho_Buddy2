@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:seekhobuddy/chatsrc/constants/colors.dart';
 import 'package:seekhobuddy/chatsrc/features/chat/components/message_tile.dart';
@@ -55,43 +54,66 @@ class _ChatScreenState extends State<ChatScreen> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Gemini AI'),
+Widget build(BuildContext context) {
+  final size = MediaQuery.of(context).size;
+  return Scaffold(
+    backgroundColor: Colors.black,
+    appBar: AppBar(
+      title: const Text(
+        'Seekho-Buddy AI',
+        style: TextStyle(
+          color: Colors.white,
+        ),
       ),
-      body: Stack(
-        children: [
-          ListView.separated(
-            padding: const EdgeInsets.fromLTRB(15, 0, 15, 90),
-            itemCount: history.reversed.length,
-            controller: _scrollController,
-            reverse: true,
-            itemBuilder: (context, index){
-              var content = history.reversed.toList()[index];
-              var text = content.parts
-                  .whereType<TextPart>()
-                  .map<String>((e) => e.text)
-                  .join('');
-              return MessageTile(
-                sendByMe: content.role == 'user',
-                message: text,
-
-              );
-            },
-            separatorBuilder: (context, index){
-              return const SizedBox(height: 15,);
-            },
-          ),
+      backgroundColor: Colors.black,
+    ),
+    body: Stack(
+      children: [
+        history.isEmpty
+            ? Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                    Text(
+                      'Seekho apne buddy ke saath!',
+                      style: TextStyle(color: Colors.white, fontSize: 24),
+                    ),
+                    SizedBox(height: 20),
+                    Image.asset(
+                      'assets/SplashLogo.png', // Replace with your logo asset
+                      height: 150, // Adjust the height as desired
+                    ),
+                  ],
+                ),
+              )
+            : ListView.separated(
+                padding: const EdgeInsets.fromLTRB(15, 0, 15, 90),
+                itemCount: history.reversed.length,
+                controller: _scrollController,
+                reverse: true,
+                itemBuilder: (context, index){
+                  var content = history.reversed.toList()[index];
+                  var text = content.parts
+                      .whereType<TextPart>()
+                      .map<String>((e) => e.text)
+                      .join('');
+                  return MessageTile(
+                    sendByMe: content.role == 'user',
+                    message: text,
+                  );
+                },
+                separatorBuilder: (context, index){
+                  return const SizedBox(height: 15,);
+                },
+              ),
           Align(
             alignment: Alignment.bottomCenter,
             child: Container(
               width: MediaQuery.of(context).size.width,
               padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 12),
-              decoration: BoxDecoration(
-                  color: Colors.white,
-                  border: Border(top: BorderSide(color: Colors.grey.shade200))
+              decoration: const BoxDecoration(
+                  color: Colors.black,
+                  border: Border(top: BorderSide(color: Colors.black))
               ),
               child: Row(
                 children: [
@@ -138,9 +160,9 @@ class _ChatScreenState extends State<ChatScreen> {
                           ? const Padding(
                             padding: EdgeInsets.all(15.0),
                             child: CircularProgressIndicator.adaptive(
-                                                    backgroundColor: Colors.white, ),
+                                                    backgroundColor: Colors.black, ),
                           )
-                          : const Icon(Icons.send_rounded, color: Colors.white,),
+                          : const Icon(Icons.send_rounded, color: Colors.black,),
                     ),
                   )
                 ],

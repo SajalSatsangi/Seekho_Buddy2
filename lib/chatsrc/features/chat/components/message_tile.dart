@@ -1,4 +1,3 @@
-import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
@@ -22,7 +21,7 @@ class MessageTile extends StatelessWidget {
           sendByMe ? CrossAxisAlignment.end : CrossAxisAlignment.start,
       children: [
         Text(
-          sendByMe ? 'You' : 'AI Model',
+          sendByMe ? 'You' : 'SeekhoBuddy AI',
           style: const TextStyle(fontSize: 11.5, color: Colors.grey),
         ),
         const SizedBox(
