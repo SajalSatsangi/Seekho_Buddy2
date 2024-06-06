@@ -7,6 +7,7 @@ import 'package:seekhobuddy/donation.dart';
 import 'footer.dart';
 import 'AdminScreens/Profile-Admin.dart';
 import 'ComingSoonPage.dart';
+import 'aichat.dart';
 
 void main() {
   runApp(const HomePage());
@@ -361,7 +362,7 @@ class _HomeState extends State<Home> {
               ),
             ),
           ),
-          ComingSoonScreen(),
+          AiChat(),
           ProfileScreenAdmin(),
         ],
       ),
