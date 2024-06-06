@@ -1,20 +1,64 @@
 import 'package:flutter/material.dart';
-import 'package:seekhobuddy/Other%20Cources/subjects.dart';
+import 'package:seekhobuddy/Courses/4PdfViewer.dart';
 
-class Semesters extends StatelessWidget {
-  final String branchName;
-  final Map branchData;
-  final String facultyName;
+class Materialpage extends StatelessWidget {
+  final Map material;
+  final String materialName;
 
-  Semesters({
-    required this.facultyName,
-    required this.branchName,
-    required this.branchData,
+  Materialpage({
+    required this.materialName,
+    required this.material,
   });
 
   @override
   Widget build(BuildContext context) {
-    Map semesters = Map.from(branchData)..remove('branchName');
+    print(material);
+    Map AAs = Map.from(material)
+      ..remove('materialName')
+      ..remove('subjectName');
+
+    // Function to show the popup dialog
+    void _showAddMaterialDialog() {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Add Pdf'),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                TextField(
+                  decoration: InputDecoration(
+                    hintText: "Enter Pdf Name",
+                  ),
+                ),
+                SizedBox(height: 8),
+                TextField(
+                  decoration: InputDecoration(
+                    hintText: "Enter Pdf URL",
+                  ),
+                ),
+              ],
+            ),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop(); // Close the dialog
+                },
+                child: Text('Cancel'),
+              ),
+              TextButton(
+                onPressed: () {
+                  // Handle the action when "Add" is pressed
+                  Navigator.of(context).pop(); // Close the dialog
+                },
+                child: Text('Add'),
+              ),
+            ],
+          );
+        },
+      );
+    }
 
     return Scaffold(
       backgroundColor: Colors.black,
@@ -36,14 +80,14 @@ class Semesters extends StatelessWidget {
                         },
                       ),
                       SizedBox(
-                        width: 10.0,
+                        width: 1.0,
                       ),
                       Text(
-                        branchName,
+                        materialName,
                         style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 30.0,
+                          fontSize: MediaQuery.of(context).size.width * 0.07,
                           fontWeight: FontWeight.bold,
+                          color: Colors.white, // Text color
                         ),
                       ),
                     ],
@@ -54,17 +98,14 @@ class Semesters extends StatelessWidget {
           ),
           Expanded(
             child: ListView.builder(
-              itemCount: semesters.length,
+              itemCount: AAs.length,
               itemBuilder: (context, index) {
-                String semesterKey = semesters.keys.elementAt(index);
-                if (semesters[semesterKey] is! Map) {
-                  throw 'Expected a Map, but got ${semesters[semesterKey].runtimeType}';
-                }
-                Map semester = semesters[semesterKey];
+                String AAKey = AAs.keys.elementAt(index);
+                Map AA = AAs[AAKey];
 
                 return Padding(
                   padding: const EdgeInsets.symmetric(
-                      vertical: 7.0, horizontal: 34.0),
+                      vertical: 7.0, horizontal: 27.0),
                   child: GestureDetector(
                     child: Container(
                       height: 70,
@@ -80,13 +121,12 @@ class Semesters extends StatelessWidget {
                             Row(
                               children: [
                                 Icon(
-                                  Icons.calendar_today,
+                                  Icons.folder,
                                   color: Colors.white,
                                 ),
-                                SizedBox(width: 18),
+                                SizedBox(width: 8),
                                 Text(
-                                  semester['semesterName'] ??
-                                      'Default Semester Name',
+                                  AA['pdfName'] ?? 'Default AA Name',
                                   style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 16.0,
@@ -99,15 +139,8 @@ class Semesters extends StatelessWidget {
                               onPressed: () {
                                 Navigator.push(
                                   context,
-                                  SlideLeftPageRoute(
-                                    page: Subjects(
-                                      facultyName: facultyName,
-                                      branchName: branchName,
-                                      semesterName: semester[
-                                          'semesterName'], // assuming 'semesterName' is the key for the semester name
-                                      semesterData:
-                                          semester, // Pass the entire semester map
-                                    ),
+                                  MaterialPageRoute(
+                                    builder: (context) => PdfViewer(AA: AA),
                                   ),
                                 );
                               },
@@ -138,27 +171,4 @@ class Semesters extends StatelessWidget {
       ),
     );
   }
-}
-
-class SlideLeftPageRoute<T> extends PageRouteBuilder<T> {
-  final Widget page;
-
-  SlideLeftPageRoute({required this.page})
-      : super(
-          pageBuilder: (context, animation, secondaryAnimation) => page,
-          transitionsBuilder: (context, animation, secondaryAnimation, child) {
-            const begin = Offset(1.0, 0.0);
-            const end = Offset.zero;
-            const curve = Curves.ease;
-
-            var tween =
-                Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-            var offsetAnimation = animation.drive(tween);
-
-            return SlideTransition(
-              position: offsetAnimation,
-              child: child,
-            );
-          },
-        );
 }

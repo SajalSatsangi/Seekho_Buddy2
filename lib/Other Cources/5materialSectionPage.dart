@@ -1,20 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:seekhobuddy/Courses/Materials.dart';
+import 'package:seekhobuddy/Other%20Cources/6materialPage.dart';
 
 class Materialsectionpage extends StatelessWidget {
-  final Map<String, dynamic> subjectData;
-  final Map<String, dynamic> allData;
   final String subjectName;
+  final Map subject;
+  final String facultyName;
+  final String branchName;
+  final String semesterName;
+  final String role;
 
   Materialsectionpage({
-    required this.subjectData,
-    required this.allData,
     required this.subjectName,
+    required this.subject,
+    required this.facultyName,
+    required this.branchName,
+    required this.semesterName,
+    required this.role, 
   });
 
   @override
   Widget build(BuildContext context) {
-    Map materials = Map.from(subjectData)..remove('subjectName');
+    Map materials = Map.from(subject)..remove('subjectName');
 
     return Scaffold(
       backgroundColor: Colors.black,
@@ -77,7 +83,7 @@ class Materialsectionpage extends StatelessWidget {
                             Row(
                               children: [
                                 Icon(
-                                  Icons.book_sharp,
+                                  Icons.school,
                                   color: Colors.white,
                                 ),
                                 SizedBox(width: 8),
@@ -100,6 +106,10 @@ class Materialsectionpage extends StatelessWidget {
                                     page: Materialpage(
                                       materialName: material['materialName'],
                                       material: material,
+                                      facultyName: facultyName,
+                                      branchName: branchName,
+                                      semesterName: semesterName,
+                                      subjectName: subjectName,
                                     ),
                                   ),
                                 );

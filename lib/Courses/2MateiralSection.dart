@@ -1,64 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:seekhobuddy/Courses/PdfViewer.dart';
+import 'package:seekhobuddy/Courses/3Materials.dart';
 
-class Materialpage extends StatelessWidget {
-  final Map material;
-  final String materialName;
+class Materialsectionpage extends StatelessWidget {
+  final Map<String, dynamic> subjectData;
+  final Map<String, dynamic> allData;
+  final String subjectName;
 
-  Materialpage({
-    required this.materialName,
-    required this.material,
+  Materialsectionpage({
+    required this.subjectData,
+    required this.allData,
+    required this.subjectName,
   });
 
   @override
   Widget build(BuildContext context) {
-    print(material);
-    Map AAs = Map.from(material)
-      ..remove('materialName')
-      ..remove('subjectName');
-
-    // Function to show the popup dialog
-    void _showAddMaterialDialog() {
-      showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text('Add Pdf'),
-            content: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                TextField(
-                  decoration: InputDecoration(
-                    hintText: "Enter Pdf Name",
-                  ),
-                ),
-                SizedBox(height: 8),
-                TextField(
-                  decoration: InputDecoration(
-                    hintText: "Enter Pdf URL",
-                  ),
-                ),
-              ],
-            ),
-            actions: <Widget>[
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop(); // Close the dialog
-                },
-                child: Text('Cancel'),
-              ),
-              TextButton(
-                onPressed: () {
-                  // Handle the action when "Add" is pressed
-                  Navigator.of(context).pop(); // Close the dialog
-                },
-                child: Text('Add'),
-              ),
-            ],
-          );
-        },
-      );
-    }
+    Map materials = Map.from(subjectData)..remove('subjectName');
 
     return Scaffold(
       backgroundColor: Colors.black,
@@ -80,12 +36,12 @@ class Materialpage extends StatelessWidget {
                         },
                       ),
                       SizedBox(
-                        width: 1.0,
+                        width: 10.0,
                       ),
                       Text(
-                        materialName,
+                        subjectName,
                         style: TextStyle(
-                          fontSize: MediaQuery.of(context).size.width * 0.07,
+                          fontSize: 28,
                           fontWeight: FontWeight.bold,
                           color: Colors.white, // Text color
                         ),
@@ -98,10 +54,10 @@ class Materialpage extends StatelessWidget {
           ),
           Expanded(
             child: ListView.builder(
-              itemCount: AAs.length,
+              itemCount: materials.length,
               itemBuilder: (context, index) {
-                String AAKey = AAs.keys.elementAt(index);
-                Map AA = AAs[AAKey];
+                String materialKey = materials.keys.elementAt(index);
+                Map material = materials[materialKey];
 
                 return Padding(
                   padding: const EdgeInsets.symmetric(
@@ -121,12 +77,13 @@ class Materialpage extends StatelessWidget {
                             Row(
                               children: [
                                 Icon(
-                                  Icons.folder,
+                                  Icons.book_sharp,
                                   color: Colors.white,
                                 ),
                                 SizedBox(width: 8),
                                 Text(
-                                  AA['pdfName'] ?? 'Default AA Name',
+                                  material['materialName'] ??
+                                      'Default Material Name',
                                   style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 16.0,
@@ -139,8 +96,11 @@ class Materialpage extends StatelessWidget {
                               onPressed: () {
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(
-                                    builder: (context) => PdfViewer(AA: AA),
+                                  SlideRightPageRoute(
+                                    page: Materialpage(
+                                      materialName: material['materialName'],
+                                      material: material,
+                                    ),
                                   ),
                                 );
                               },
@@ -171,4 +131,32 @@ class Materialpage extends StatelessWidget {
       ),
     );
   }
+}
+
+class SlideRightPageRoute extends PageRouteBuilder {
+  final Widget page;
+
+  SlideRightPageRoute({required this.page})
+      : super(
+          pageBuilder: (
+            BuildContext context,
+            Animation<double> animation,
+            Animation<double> secondaryAnimation,
+          ) =>
+              page,
+          transitionsBuilder: (
+            BuildContext context,
+            Animation<double> animation,
+            Animation<double> secondaryAnimation,
+            Widget child,
+          ) {
+            return SlideTransition(
+              position: Tween<Offset>(
+                begin: const Offset(1.0, 0.0),
+                end: Offset.zero,
+              ).animate(animation),
+              child: child,
+            );
+          },
+        );
 }

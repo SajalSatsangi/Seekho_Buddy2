@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'branches.dart';
+import '2branches.dart';
 
 class Faculties extends StatelessWidget {
   Future<List<QueryDocumentSnapshot>> fetchData() async {
@@ -11,6 +11,56 @@ class Faculties extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    void _showAddMaterialDialog() {
+      final TextEditingController _facultyNameController =
+          TextEditingController();
+      final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Add Faculty'),
+            content: TextField(
+              controller: _facultyNameController,
+              decoration: InputDecoration(
+                hintText: 'Enter Faculty Name',
+              ),
+            ),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop(); // Close the dialog
+                },
+                child: Text('Cancel'),
+              ),
+              TextButton(
+                onPressed: () async {
+                  // Handle the action when "Add" is pressed
+                  String facultyName = _facultyNameController.text;
+                  if (facultyName.isNotEmpty) {
+
+
+                    // Update the Firebase Firestore
+                    await _firestore
+                        .collection('seekhobuddydb')
+                        .doc(facultyName)
+                        .set({
+                          'facultyName' : facultyName,
+                      'branches': {
+                      }
+                    }, SetOptions(merge: true));
+                  }
+                  Navigator.of(context).pop(); // Close the dialog
+                },
+                child: Text('Add'),
+              ),
+            ],
+          );
+        },
+      );
+    }
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -150,6 +200,11 @@ class Faculties extends StatelessWidget {
             );
           },
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _showAddMaterialDialog, // Function to show popup dialog
+        child: Icon(Icons.add, color: Colors.white), // Set icon color to white
+        backgroundColor: Color(0xFF323232), // Set background color to BD-323232
       ),
     );
   }

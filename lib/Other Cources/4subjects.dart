@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:seekhobuddy/AdminScreens/materialSectionPage-Admin.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:seekhobuddy/Other%20Cources/materialSectionPage.dart';
+import 'package:seekhobuddy/Other%20Cources/5materialSectionPage.dart';
 
 class Subjects extends StatefulWidget {
   final String semesterName;
@@ -49,6 +49,61 @@ class _SubjectsState extends State<Subjects> {
       if (key.toString().toLowerCase().contains(searchQuery.toLowerCase())) {
         filteredSubjects[key] = subjects[key];
       }
+    }
+
+    void _showAddMaterialDialog() {
+      final TextEditingController _subjectNameController =
+          TextEditingController();
+      final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Add New Subject'),
+            content: TextField(
+              controller: _subjectNameController,
+              decoration: InputDecoration(
+                hintText: 'Enter Semester Subject',
+              ),
+            ),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop(); // Close the dialog
+                },
+                child: Text('Cancel'),
+              ),
+              TextButton(
+                onPressed: () async {
+                  // Handle the action when "Add" is pressed
+                  String subjecttName = _subjectNameController.text;
+                  if (subjecttName.isNotEmpty) {
+
+                    // Update the Firebase Firestore
+                    await _firestore
+                        .collection('seekhobuddydb')
+                        .doc(widget.facultyName)
+                        .set({
+                      'branches': {
+                        widget.branchName: {
+                           widget.semesterName: {
+                            subjecttName: {
+                              'subjectName': subjecttName,
+                        }                         
+                        }
+                        }
+                      }
+                    }, SetOptions(merge: true));
+                  }
+                  Navigator.of(context).pop(); // Close the dialog
+                },
+                child: Text('Add'),
+              ),
+            ],
+          );
+        },
+      );
     }
 
     return Scaffold(
@@ -215,6 +270,11 @@ class _SubjectsState extends State<Subjects> {
             ),
           ),
         ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _showAddMaterialDialog, // Function to show popup dialog
+        child: Icon(Icons.add, color: Colors.white), // Set icon color to white
+        backgroundColor: Color(0xFF323232), // Set background color to BD-323232
       ),
     );
   }

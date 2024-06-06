@@ -1,26 +1,68 @@
 import 'package:flutter/material.dart';
-import 'package:seekhobuddy/Other%20Cources/materialPage.dart';
+import 'package:seekhobuddy/Other%20Cources/3Semesters.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
-class Materialsectionpage extends StatelessWidget {
-  final String subjectName;
-  final Map subject;
+class Branches extends StatelessWidget {
   final String facultyName;
-  final String branchName;
-  final String semesterName;
-  final String role;
+  final Map facultyData;
 
-  Materialsectionpage({
-    required this.subjectName,
-    required this.subject,
-    required this.facultyName,
-    required this.branchName,
-    required this.semesterName,
-    required this.role, 
-  });
+  Branches({required this.facultyName, required this.facultyData});
 
   @override
   Widget build(BuildContext context) {
-    Map materials = Map.from(subject)..remove('subjectName');
+    print(facultyData);
+    List branches = facultyData['branches'].values.toList();
+
+    void _showAddMaterialDialog() {
+      final TextEditingController _branchNameController =
+          TextEditingController();
+      final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Add New Branch'),
+            content: TextField(
+              controller: _branchNameController,
+              decoration: InputDecoration(
+                hintText: 'Enter Branch Name',
+              ),
+            ),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop(); // Close the dialog
+                },
+                child: Text('Cancel'),
+              ),
+              TextButton(
+                onPressed: () async {
+                  // Handle the action when "Add" is pressed
+                  String branchhName = _branchNameController.text;
+                  if (branchhName.isNotEmpty) {
+
+                    // Update the Firebase Firestore
+                    await _firestore
+                        .collection('seekhobuddydb')
+                        .doc(facultyName)
+                        .set({
+                      'branches': {
+                        branchhName: {
+                          'branchName': branchhName,
+                        }
+                      }
+                    }, SetOptions(merge: true));
+                  }
+                  Navigator.of(context).pop(); // Close the dialog
+                },
+                child: Text('Add'),
+              ),
+            ],
+          );
+        },
+      );
+    }
 
     return Scaffold(
       backgroundColor: Colors.black,
@@ -37,19 +79,17 @@ class Materialsectionpage extends StatelessWidget {
                     children: [
                       IconButton(
                         icon: Icon(Icons.arrow_back_ios, color: Colors.white),
-                        onPressed: () {
-                          Navigator.of(context).pop(); // Navigate back
-                        },
+                        onPressed: () => Navigator.of(context).pop(),
                       ),
                       SizedBox(
-                        width: 10.0,
+                        width: 5.0,
                       ),
                       Text(
-                        subjectName,
+                        facultyName,
                         style: TextStyle(
-                          fontSize: 28,
+                          fontSize: MediaQuery.of(context).size.width * 0.07,
                           fontWeight: FontWeight.bold,
-                          color: Colors.white, // Text color
+                          color: Colors.white,
                         ),
                       ),
                     ],
@@ -60,23 +100,23 @@ class Materialsectionpage extends StatelessWidget {
           ),
           Expanded(
             child: ListView.builder(
-              itemCount: materials.length,
+              itemCount: branches.length,
               itemBuilder: (context, index) {
-                String materialKey = materials.keys.elementAt(index);
-                Map material = materials[materialKey];
+                var branch = branches[index];
 
                 return Padding(
+                  // Reduced vertical padding to decrease space between items
                   padding: const EdgeInsets.symmetric(
-                      vertical: 7.0, horizontal: 27.0),
+                      vertical: 8.0, horizontal: 25.0),
                   child: GestureDetector(
                     child: Container(
-                      height: 70,
+                      height: 80,
                       decoration: BoxDecoration(
                         color: Color.fromRGBO(50, 50, 50, 1),
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: Padding(
-                        padding: const EdgeInsets.all(12.0),
+                        padding: const EdgeInsets.all(20.0),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -86,13 +126,14 @@ class Materialsectionpage extends StatelessWidget {
                                   Icons.school,
                                   color: Colors.white,
                                 ),
-                                SizedBox(width: 8),
+                                SizedBox(width: 10),
                                 Text(
-                                  material['materialName'] ??
-                                      'Default Material Name',
+                                  branch['branchName'],
                                   style: TextStyle(
                                     color: Colors.white,
-                                    fontSize: 16.0,
+                                    fontSize:
+                                        MediaQuery.of(context).size.width *
+                                            0.05,
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
@@ -103,29 +144,22 @@ class Materialsectionpage extends StatelessWidget {
                                 Navigator.push(
                                   context,
                                   SlideRightPageRoute(
-                                    page: Materialpage(
-                                      materialName: material['materialName'],
-                                      material: material,
+                                    page: Semesters(
                                       facultyName: facultyName,
-                                      branchName: branchName,
-                                      semesterName: semesterName,
-                                      subjectName: subjectName,
+                                      branchName: branch[
+                                          'branchName'], // assuming 'branchName' is the key for the branch name
+                                      branchData: branch as Map,
                                     ),
                                   ),
                                 );
                               },
                               style: ButtonStyle(
-                                backgroundColor:
-                                    MaterialStateProperty.all<Color>(
-                                  Colors.white,
-                                ),
+                                backgroundColor: WidgetStateProperty.all<Color>(
+                                    Colors.white),
                               ),
                               child: Text(
                                 'View',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  color: Colors.black,
-                                ),
+                                style: TextStyle(color: Colors.black),
                               ),
                             ),
                           ],
@@ -138,6 +172,11 @@ class Materialsectionpage extends StatelessWidget {
             ),
           ),
         ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _showAddMaterialDialog, // Function to show popup dialog
+        child: Icon(Icons.add, color: Colors.white), // Set icon color to white
+        backgroundColor: Color(0xFF323232), // Set background color to BD-323232
       ),
     );
   }
