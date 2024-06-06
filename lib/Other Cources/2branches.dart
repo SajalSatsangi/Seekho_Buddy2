@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:seekhobuddy/Other%20Cources/3Semesters.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Branches extends StatelessWidget {
   final String facultyName;
@@ -11,6 +12,57 @@ class Branches extends StatelessWidget {
   Widget build(BuildContext context) {
     print(facultyData);
     List branches = facultyData['branches'].values.toList();
+
+    void _showAddMaterialDialog() {
+      final TextEditingController _branchNameController =
+          TextEditingController();
+      final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Add New Branch'),
+            content: TextField(
+              controller: _branchNameController,
+              decoration: InputDecoration(
+                hintText: 'Enter Branch Name',
+              ),
+            ),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop(); // Close the dialog
+                },
+                child: Text('Cancel'),
+              ),
+              TextButton(
+                onPressed: () async {
+                  // Handle the action when "Add" is pressed
+                  String branchhName = _branchNameController.text;
+                  if (branchhName.isNotEmpty) {
+
+                    // Update the Firebase Firestore
+                    await _firestore
+                        .collection('seekhobuddydb')
+                        .doc(facultyName)
+                        .set({
+                      'branches': {
+                        branchhName: {
+                          'branchName': branchhName,
+                        }
+                      }
+                    }, SetOptions(merge: true));
+                  }
+                  Navigator.of(context).pop(); // Close the dialog
+                },
+                child: Text('Add'),
+              ),
+            ],
+          );
+        },
+      );
+    }
 
     return Scaffold(
       backgroundColor: Colors.black,
@@ -120,6 +172,11 @@ class Branches extends StatelessWidget {
             ),
           ),
         ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _showAddMaterialDialog, // Function to show popup dialog
+        child: Icon(Icons.add, color: Colors.white), // Set icon color to white
+        backgroundColor: Color(0xFF323232), // Set background color to BD-323232
       ),
     );
   }
