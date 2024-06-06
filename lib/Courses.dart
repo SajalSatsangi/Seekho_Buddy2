@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:seekhobuddy/Courses/Subjects.dart';
-import 'package:seekhobuddy/Other%20Cources/facultyData.dart';
+import 'package:seekhobuddy/Courses/1Subjects.dart';
+import 'package:seekhobuddy/Other%20Cources/1facultyData.dart';
 import 'package:seekhobuddy/home.dart';
 
 void main() {

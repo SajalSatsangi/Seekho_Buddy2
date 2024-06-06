@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:seekhobuddy/AdminScreens/materialSectionPage-Admin.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:seekhobuddy/Other%20Cources/materialSectionPage.dart';
+import 'package:seekhobuddy/Other%20Cources/5materialSectionPage.dart';
 
 class Subjects extends StatefulWidget {
   final String semesterName;

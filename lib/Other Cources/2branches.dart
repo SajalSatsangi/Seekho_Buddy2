@@ -1,26 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:seekhobuddy/Other%20Cources/materialPage.dart';
+import 'package:seekhobuddy/Other%20Cources/3Semesters.dart';
 
-class Materialsectionpage extends StatelessWidget {
-  final String subjectName;
-  final Map subject;
+class Branches extends StatelessWidget {
   final String facultyName;
-  final String branchName;
-  final String semesterName;
-  final String role;
+  final Map facultyData;
 
-  Materialsectionpage({
-    required this.subjectName,
-    required this.subject,
-    required this.facultyName,
-    required this.branchName,
-    required this.semesterName,
-    required this.role, 
-  });
+  Branches({required this.facultyName, required this.facultyData});
 
   @override
   Widget build(BuildContext context) {
-    Map materials = Map.from(subject)..remove('subjectName');
+    print(facultyData);
+    List branches = facultyData['branches'].values.toList();
 
     return Scaffold(
       backgroundColor: Colors.black,
@@ -37,19 +27,17 @@ class Materialsectionpage extends StatelessWidget {
                     children: [
                       IconButton(
                         icon: Icon(Icons.arrow_back_ios, color: Colors.white),
-                        onPressed: () {
-                          Navigator.of(context).pop(); // Navigate back
-                        },
+                        onPressed: () => Navigator.of(context).pop(),
                       ),
                       SizedBox(
-                        width: 10.0,
+                        width: 5.0,
                       ),
                       Text(
-                        subjectName,
+                        facultyName,
                         style: TextStyle(
-                          fontSize: 28,
+                          fontSize: MediaQuery.of(context).size.width * 0.07,
                           fontWeight: FontWeight.bold,
-                          color: Colors.white, // Text color
+                          color: Colors.white,
                         ),
                       ),
                     ],
@@ -60,23 +48,23 @@ class Materialsectionpage extends StatelessWidget {
           ),
           Expanded(
             child: ListView.builder(
-              itemCount: materials.length,
+              itemCount: branches.length,
               itemBuilder: (context, index) {
-                String materialKey = materials.keys.elementAt(index);
-                Map material = materials[materialKey];
+                var branch = branches[index];
 
                 return Padding(
+                  // Reduced vertical padding to decrease space between items
                   padding: const EdgeInsets.symmetric(
-                      vertical: 7.0, horizontal: 27.0),
+                      vertical: 8.0, horizontal: 25.0),
                   child: GestureDetector(
                     child: Container(
-                      height: 70,
+                      height: 80,
                       decoration: BoxDecoration(
                         color: Color.fromRGBO(50, 50, 50, 1),
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: Padding(
-                        padding: const EdgeInsets.all(12.0),
+                        padding: const EdgeInsets.all(20.0),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -86,13 +74,14 @@ class Materialsectionpage extends StatelessWidget {
                                   Icons.school,
                                   color: Colors.white,
                                 ),
-                                SizedBox(width: 8),
+                                SizedBox(width: 10),
                                 Text(
-                                  material['materialName'] ??
-                                      'Default Material Name',
+                                  branch['branchName'],
                                   style: TextStyle(
                                     color: Colors.white,
-                                    fontSize: 16.0,
+                                    fontSize:
+                                        MediaQuery.of(context).size.width *
+                                            0.05,
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
@@ -103,29 +92,22 @@ class Materialsectionpage extends StatelessWidget {
                                 Navigator.push(
                                   context,
                                   SlideRightPageRoute(
-                                    page: Materialpage(
-                                      materialName: material['materialName'],
-                                      material: material,
+                                    page: Semesters(
                                       facultyName: facultyName,
-                                      branchName: branchName,
-                                      semesterName: semesterName,
-                                      subjectName: subjectName,
+                                      branchName: branch[
+                                          'branchName'], // assuming 'branchName' is the key for the branch name
+                                      branchData: branch as Map,
                                     ),
                                   ),
                                 );
                               },
                               style: ButtonStyle(
-                                backgroundColor:
-                                    MaterialStateProperty.all<Color>(
-                                  Colors.white,
-                                ),
+                                backgroundColor: WidgetStateProperty.all<Color>(
+                                    Colors.white),
                               ),
                               child: Text(
                                 'View',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  color: Colors.black,
-                                ),
+                                style: TextStyle(color: Colors.black),
                               ),
                             ),
                           ],

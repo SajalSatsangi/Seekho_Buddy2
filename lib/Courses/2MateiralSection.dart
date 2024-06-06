@@ -1,16 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:seekhobuddy/Other%20Cources/Semesters.dart';
+import 'package:seekhobuddy/Courses/3Materials.dart';
 
-class Branches extends StatelessWidget {
-  final String facultyName;
-  final Map facultyData;
+class Materialsectionpage extends StatelessWidget {
+  final Map<String, dynamic> subjectData;
+  final Map<String, dynamic> allData;
+  final String subjectName;
 
-  Branches({required this.facultyName, required this.facultyData});
+  Materialsectionpage({
+    required this.subjectData,
+    required this.allData,
+    required this.subjectName,
+  });
 
   @override
   Widget build(BuildContext context) {
-    print(facultyData);
-    List branches = facultyData['branches'].values.toList();
+    Map materials = Map.from(subjectData)..remove('subjectName');
 
     return Scaffold(
       backgroundColor: Colors.black,
@@ -27,17 +31,19 @@ class Branches extends StatelessWidget {
                     children: [
                       IconButton(
                         icon: Icon(Icons.arrow_back_ios, color: Colors.white),
-                        onPressed: () => Navigator.of(context).pop(),
+                        onPressed: () {
+                          Navigator.of(context).pop(); // Navigate back
+                        },
                       ),
                       SizedBox(
-                        width: 5.0,
+                        width: 10.0,
                       ),
                       Text(
-                        facultyName,
+                        subjectName,
                         style: TextStyle(
-                          fontSize: MediaQuery.of(context).size.width * 0.07,
+                          fontSize: 28,
                           fontWeight: FontWeight.bold,
-                          color: Colors.white,
+                          color: Colors.white, // Text color
                         ),
                       ),
                     ],
@@ -48,40 +54,39 @@ class Branches extends StatelessWidget {
           ),
           Expanded(
             child: ListView.builder(
-              itemCount: branches.length,
+              itemCount: materials.length,
               itemBuilder: (context, index) {
-                var branch = branches[index];
+                String materialKey = materials.keys.elementAt(index);
+                Map material = materials[materialKey];
 
                 return Padding(
-                  // Reduced vertical padding to decrease space between items
                   padding: const EdgeInsets.symmetric(
-                      vertical: 8.0, horizontal: 25.0),
+                      vertical: 7.0, horizontal: 27.0),
                   child: GestureDetector(
                     child: Container(
-                      height: 80,
+                      height: 70,
                       decoration: BoxDecoration(
                         color: Color.fromRGBO(50, 50, 50, 1),
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: Padding(
-                        padding: const EdgeInsets.all(20.0),
+                        padding: const EdgeInsets.all(12.0),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Row(
                               children: [
                                 Icon(
-                                  Icons.school,
+                                  Icons.book_sharp,
                                   color: Colors.white,
                                 ),
-                                SizedBox(width: 10),
+                                SizedBox(width: 8),
                                 Text(
-                                  branch['branchName'],
+                                  material['materialName'] ??
+                                      'Default Material Name',
                                   style: TextStyle(
                                     color: Colors.white,
-                                    fontSize:
-                                        MediaQuery.of(context).size.width *
-                                            0.05,
+                                    fontSize: 16.0,
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
@@ -92,22 +97,25 @@ class Branches extends StatelessWidget {
                                 Navigator.push(
                                   context,
                                   SlideRightPageRoute(
-                                    page: Semesters(
-                                      facultyName: facultyName,
-                                      branchName: branch[
-                                          'branchName'], // assuming 'branchName' is the key for the branch name
-                                      branchData: branch as Map,
+                                    page: Materialpage(
+                                      materialName: material['materialName'],
+                                      material: material,
                                     ),
                                   ),
                                 );
                               },
                               style: ButtonStyle(
-                                backgroundColor: WidgetStateProperty.all<Color>(
-                                    Colors.white),
+                                backgroundColor:
+                                    MaterialStateProperty.all<Color>(
+                                  Colors.white,
+                                ),
                               ),
                               child: Text(
                                 'View',
-                                style: TextStyle(color: Colors.black),
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  color: Colors.black,
+                                ),
                               ),
                             ),
                           ],

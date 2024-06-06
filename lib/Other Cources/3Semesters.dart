@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:seekhobuddy/Other%20Cources/subjects.dart';
+import 'package:seekhobuddy/Other%20Cources/4subjects.dart';
 
 class Semesters extends StatelessWidget {
   final String branchName;

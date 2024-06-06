@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:seekhobuddy/Courses/PdfViewer.dart';
+import 'package:seekhobuddy/Courses/4PdfViewer.dart';
 
 class Materialpage extends StatelessWidget {
   final Map material;
