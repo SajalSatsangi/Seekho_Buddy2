@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:seekhobuddy/chatsrc/constants/colors.dart';
 import 'package:seekhobuddy/chatsrc/features/chat/components/message_tile.dart';
@@ -58,8 +57,15 @@ class _ChatScreenState extends State<ChatScreen> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
+      backgroundColor: Colors.black,
       appBar: AppBar(
-        title: const Text('Gemini AI'),
+        title: const Text(
+          'Seekho-Buddy AI',
+          style: TextStyle(
+            color: Colors.white,
+          ),
+        ),
+        backgroundColor: Colors.black,
       ),
       body: Stack(
         children: [
@@ -90,7 +96,7 @@ class _ChatScreenState extends State<ChatScreen> {
               width: MediaQuery.of(context).size.width,
               padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 12),
               decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: Colors.black,
                   border: Border(top: BorderSide(color: Colors.grey.shade200))
               ),
               child: Row(
@@ -138,9 +144,9 @@ class _ChatScreenState extends State<ChatScreen> {
                           ? const Padding(
                             padding: EdgeInsets.all(15.0),
                             child: CircularProgressIndicator.adaptive(
-                                                    backgroundColor: Colors.white, ),
+                                                    backgroundColor: Colors.black, ),
                           )
-                          : const Icon(Icons.send_rounded, color: Colors.white,),
+                          : const Icon(Icons.send_rounded, color: Colors.black,),
                     ),
                   )
                 ],
