@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:seekhobuddy/Other%20Cources/4subjects.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Semesters extends StatelessWidget {
   final String branchName;
@@ -15,6 +16,60 @@ class Semesters extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Map semesters = Map.from(branchData)..remove('branchName');
+
+
+    void _showAddMaterialDialog() {
+      final TextEditingController _semesterNameController =
+          TextEditingController();
+      final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Add New Semseter'),
+            content: TextField(
+              controller: _semesterNameController,
+              decoration: InputDecoration(
+                hintText: 'Enter Semester Name',
+              ),
+            ),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop(); // Close the dialog
+                },
+                child: Text('Cancel'),
+              ),
+              TextButton(
+                onPressed: () async {
+                  // Handle the action when "Add" is pressed
+                  String semesterrName = _semesterNameController.text;
+                  if (semesterrName.isNotEmpty) {
+
+                    // Update the Firebase Firestore
+                    await _firestore
+                        .collection('seekhobuddydb')
+                        .doc(facultyName)
+                        .set({
+                      'branches': {
+                        branchName: {
+                           semesterrName: {
+                            'semesterName': semesterrName,
+                        }
+                        }
+                      }
+                    }, SetOptions(merge: true));
+                  }
+                  Navigator.of(context).pop(); // Close the dialog
+                },
+                child: Text('Add'),
+              ),
+            ],
+          );
+        },
+      );
+    }
 
     return Scaffold(
       backgroundColor: Colors.black,
@@ -135,6 +190,11 @@ class Semesters extends StatelessWidget {
             ),
           ),
         ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _showAddMaterialDialog, // Function to show popup dialog
+        child: Icon(Icons.add, color: Colors.white), // Set icon color to white
+        backgroundColor: Color(0xFF323232), // Set background color to BD-323232
       ),
     );
   }
