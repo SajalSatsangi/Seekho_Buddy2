@@ -123,7 +123,6 @@ Widget build(BuildContext context) {
                       child: TextField(
                         cursorColor: MyColors.primaryColor,
                         controller: _textController,
-                        autofocus: true,
                         focusNode: _textFieldFocus,
                         decoration: InputDecoration(
                             hintText: 'Ask me anything...',

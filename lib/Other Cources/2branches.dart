@@ -5,12 +5,17 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class Branches extends StatelessWidget {
   final String facultyName;
   final Map facultyData;
+  final String role;
 
-  Branches({required this.facultyName, required this.facultyData});
+  Branches(
+      {required this.facultyName,
+      required this.facultyData,
+      required this.role});
 
   @override
   Widget build(BuildContext context) {
     print(facultyData);
+    print(role);
     List branches = facultyData['branches'].values.toList();
 
     void _showAddMaterialDialog() {
@@ -41,7 +46,6 @@ class Branches extends StatelessWidget {
                   // Handle the action when "Add" is pressed
                   String branchhName = _branchNameController.text;
                   if (branchhName.isNotEmpty) {
-
                     // Update the Firebase Firestore
                     await _firestore
                         .collection('seekhobuddydb')
@@ -105,7 +109,6 @@ class Branches extends StatelessWidget {
                 var branch = branches[index];
 
                 return Padding(
-                  // Reduced vertical padding to decrease space between items
                   padding: const EdgeInsets.symmetric(
                       vertical: 8.0, horizontal: 25.0),
                   child: GestureDetector(
@@ -149,13 +152,15 @@ class Branches extends StatelessWidget {
                                       branchName: branch[
                                           'branchName'], // assuming 'branchName' is the key for the branch name
                                       branchData: branch as Map,
+                                      role: role,
                                     ),
                                   ),
                                 );
                               },
                               style: ButtonStyle(
-                                backgroundColor: WidgetStateProperty.all<Color>(
-                                    Colors.white),
+                                backgroundColor:
+                                    MaterialStateProperty.all<Color>(
+                                        Colors.white),
                               ),
                               child: Text(
                                 'View',
@@ -173,11 +178,16 @@ class Branches extends StatelessWidget {
           ),
         ],
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _showAddMaterialDialog, // Function to show popup dialog
-        child: Icon(Icons.add, color: Colors.white), // Set icon color to white
-        backgroundColor: Color(0xFF323232), // Set background color to BD-323232
-      ),
+      floatingActionButton: role == "admin"
+          ? FloatingActionButton(
+              onPressed:
+                  _showAddMaterialDialog, // Function to show popup dialog
+              child: Icon(Icons.add,
+                  color: Colors.white), // Set icon color to white
+              backgroundColor:
+                  Color(0xFF323232), // Set background color to BD-323232
+            )
+          : SizedBox.shrink(), // Hide the button for non-admin users
     );
   }
 }

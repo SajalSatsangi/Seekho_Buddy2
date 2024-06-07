@@ -6,15 +6,18 @@ class Semesters extends StatelessWidget {
   final String branchName;
   final Map branchData;
   final String facultyName;
+  final String role;
 
   Semesters({
     required this.facultyName,
     required this.branchName,
-    required this.branchData,
+    required this.branchData, 
+    required this.role,
   });
 
   @override
   Widget build(BuildContext context) {
+    print(role);
     Map semesters = Map.from(branchData)..remove('branchName');
 
 
@@ -161,7 +164,8 @@ class Semesters extends StatelessWidget {
                                       semesterName: semester[
                                           'semesterName'], // assuming 'semesterName' is the key for the semester name
                                       semesterData:
-                                          semester, // Pass the entire semester map
+                                          semester,
+                                          role: role // Pass the entire semester map
                                     ),
                                   ),
                                 );
@@ -191,11 +195,16 @@ class Semesters extends StatelessWidget {
           ),
         ],
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _showAddMaterialDialog, // Function to show popup dialog
-        child: Icon(Icons.add, color: Colors.white), // Set icon color to white
-        backgroundColor: Color(0xFF323232), // Set background color to BD-323232
-      ),
+      floatingActionButton: role == "admin"
+          ? FloatingActionButton(
+              onPressed:
+                  _showAddMaterialDialog, // Function to show popup dialog
+              child: Icon(Icons.add,
+                  color: Colors.white), // Set icon color to white
+              backgroundColor:
+                  Color(0xFF323232), // Set background color to BD-323232
+            )
+          : SizedBox.shrink(), 
     );
   }
 }

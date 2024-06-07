@@ -8,6 +8,7 @@ import '../Profile/editprofile.dart';
 import 'UsersData.dart';
 
 class ProfileScreenAdmin extends StatelessWidget {
+  ProfileScreenAdmin({super.key});
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -67,7 +68,6 @@ class _ProfilePageState extends State<ProfilePage> {
         MaterialPageRoute(builder: (context) => LandingPage()),
         (Route<dynamic> route) => false,
       );
-      // Navigate to the login screen after logout and clear the navigation stack
     } catch (e) {
       print("Error logging out: $e");
       // Handle any errors here
@@ -98,7 +98,6 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
               ),
               Row(
-                // Add this
                 children: <Widget>[
                   IconButton(
                     icon: Icon(
@@ -296,11 +295,12 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
-  Widget buildInfoBox(
-      {required String label,
-      required String text,
-      required IconData icon,
-      required double screenWidth}) {
+  Widget buildInfoBox({
+    required String label,
+    required String text,
+    required IconData icon,
+    required double screenWidth,
+  }) {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: screenWidth * 0.005),
       child: Container(

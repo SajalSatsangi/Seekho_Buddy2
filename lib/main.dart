@@ -43,8 +43,6 @@ class MyApp extends StatelessWidget {
 }
 
 // Implement Firebase messaging and token handling in the main.dart file
-
-
 Future<void> storeFCMToken(String token) async {
   final currentUser = FirebaseAuth.instance.currentUser;
   if (currentUser != null) {

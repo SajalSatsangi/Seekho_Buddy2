@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '2branches.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class Faculties extends StatelessWidget {
   Future<List<QueryDocumentSnapshot>> fetchData() async {
@@ -9,9 +10,25 @@ class Faculties extends StatelessWidget {
     return querySnapshot.docs;
   }
 
+  Future<String> getUserRole() async {
+    User? user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+          .collection('users')
+          .where('uid', isEqualTo: user.uid)
+          .get();
+      if (querySnapshot.docs.isNotEmpty) {
+        return querySnapshot.docs.first['role'];
+      } else {
+        throw Exception('No user document found');
+      }
+    } else {
+      throw Exception('No user logged in');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-
     void _showAddMaterialDialog() {
       final TextEditingController _facultyNameController =
           TextEditingController();
@@ -40,17 +57,12 @@ class Faculties extends StatelessWidget {
                   // Handle the action when "Add" is pressed
                   String facultyName = _facultyNameController.text;
                   if (facultyName.isNotEmpty) {
-
-
                     // Update the Firebase Firestore
                     await _firestore
                         .collection('seekhobuddydb')
                         .doc(facultyName)
-                        .set({
-                          'facultyName' : facultyName,
-                      'branches': {
-                      }
-                    }, SetOptions(merge: true));
+                        .set({'facultyName': facultyName, 'branches': {}},
+                            SetOptions(merge: true));
                   }
                   Navigator.of(context).pop(); // Close the dialog
                 },
@@ -61,6 +73,7 @@ class Faculties extends StatelessWidget {
         },
       );
     }
+
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -162,21 +175,27 @@ class Faculties extends StatelessWidget {
                                   height: 30.0,
                                   width: 75.0,
                                   child: ElevatedButton(
-                                    onPressed: () {
-                                      Navigator.push(
-                                        context,
-                                        SlideRightPageRoute(
-                                          page: Branches(
-                                            facultyName: document?.id ?? '',
-                                            facultyData: document?.data()
-                                                as Map<String, dynamic>,
+                                    onPressed: () async {
+                                      if (snapshot.hasData) {
+                                        String role =
+                                            await getUserRole(); // Correctly get the user role
+                                        Navigator.push(
+                                          context,
+                                          SlideRightPageRoute(
+                                            page: Branches(
+                                              facultyName: document?.id ?? '',
+                                              facultyData: document?.data()
+                                                  as Map<String, dynamic>,
+                                              role:
+                                                  role, // Pass the role variable here
+                                            ),
                                           ),
-                                        ),
-                                      );
+                                        );
+                                      }
                                     },
                                     style: ButtonStyle(
                                       backgroundColor:
-                                          WidgetStateProperty.all<Color>(
+                                          MaterialStateProperty.all<Color>(
                                               Colors.white),
                                     ),
                                     child: Text(
@@ -201,10 +220,21 @@ class Faculties extends StatelessWidget {
           },
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _showAddMaterialDialog, // Function to show popup dialog
-        child: Icon(Icons.add, color: Colors.white), // Set icon color to white
-        backgroundColor: Color(0xFF323232), // Set background color to BD-323232
+      floatingActionButton: FutureBuilder<String>(
+        future: getUserRole(), // Call getUserRole here
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.done) {
+            if (snapshot.hasData && snapshot.data == "admin") {
+              return FloatingActionButton(
+                onPressed: () => _showAddMaterialDialog(),
+                child: Icon(Icons.add, color: Colors.white),
+                backgroundColor: Color(0xFF323232),
+              );
+            }
+          }
+          // Return an empty container if user role is not admin or data is not yet available
+          return SizedBox.shrink();
+        },
       ),
     );
   }

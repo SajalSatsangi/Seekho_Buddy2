@@ -9,12 +9,14 @@ class Subjects extends StatefulWidget {
   final Map semesterData;
   final String facultyName;
   final String branchName;
+  final String role;
 
   Subjects({
     required this.semesterName,
     required this.semesterData,
     required this.facultyName,
     required this.branchName,
+    required this.role,
   });
 
   @override
@@ -271,11 +273,16 @@ class _SubjectsState extends State<Subjects> {
           ),
         ],
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _showAddMaterialDialog, // Function to show popup dialog
-        child: Icon(Icons.add, color: Colors.white), // Set icon color to white
-        backgroundColor: Color(0xFF323232), // Set background color to BD-323232
-      ),
+      floatingActionButton: widget.role == "admin"
+          ? FloatingActionButton(
+              onPressed:
+                  _showAddMaterialDialog, // Function to show popup dialog
+              child: Icon(Icons.add,
+                  color: Colors.white), // Set icon color to white
+              backgroundColor:
+                  Color(0xFF323232), // Set background color to BD-323232
+            )
+          : SizedBox.shrink(), 
     );
   }
 }
