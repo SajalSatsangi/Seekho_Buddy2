@@ -104,6 +104,40 @@ class ExploreScreen extends StatelessWidget {
     }
   }
 
+  Future<void> _showLogoutDialog(BuildContext context) async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // User must tap a button to dismiss the dialog
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Confirm Logout'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text('Are you sure you want to log out?'),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: Text('Cancel'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              child: Text('Logout'),
+              onPressed: () {
+                Navigator.of(context).pop();
+                _logout(context);
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -128,9 +162,13 @@ class ExploreScreen extends StatelessWidget {
         backgroundColor: Color.fromARGB(255, 0, 0, 0),
         actions: [
           IconButton(
-            icon: Icon(Icons.logout),
-            onPressed: () => _logout(context),
+            icon: Icon(
+              Icons.power_settings_new,
+              color: Colors.grey, // Change this to your desired color
+            ),
+            onPressed: () => _showLogoutDialog(context),
             tooltip: 'Log Out',
+            padding: EdgeInsets.only(right: 25.0),
           ),
         ],
       ),
