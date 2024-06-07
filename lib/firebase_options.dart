@@ -42,18 +42,18 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions web = FirebaseOptions(
     apiKey: 'AIzaSyBmWKEO93cXQlNgvRoVMZ1prohyIA1IGZY',
-    appId: '1:379236444299:web:296e341bbadda115228c8e',
+    appId: '1:379236444299:web:1b86cae5be36f3a8228c8e',
     messagingSenderId: '379236444299',
     projectId: 'seekhobuddy',
     authDomain: 'seekhobuddy.firebaseapp.com',
     databaseURL: 'https://seekhobuddy-default-rtdb.asia-southeast1.firebasedatabase.app',
     storageBucket: 'seekhobuddy.appspot.com',
-    measurementId: 'G-XRRN2M7MFY',
+    measurementId: 'G-5PCE7CSF81',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyB2TVG4QnkJg9AVytJRcrh6iLwQgznc4RI',
-    appId: '1:379236444299:android:ee0c1e39833ebafc228c8e',
+    appId: '1:379236444299:android:95c008b2ee92edbb228c8e',
     messagingSenderId: '379236444299',
     projectId: 'seekhobuddy',
     databaseURL: 'https://seekhobuddy-default-rtdb.asia-southeast1.firebasedatabase.app',
