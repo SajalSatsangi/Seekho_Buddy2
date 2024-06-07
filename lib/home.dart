@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:seekhobuddy/AdminScreens/Noticepage/Notices-Admin.dart';
 import 'package:seekhobuddy/Courses.dart';
+import 'package:seekhobuddy/LoginPage.dart';
 import 'package:seekhobuddy/NewHelp.dart';
 import 'package:seekhobuddy/donation.dart';
-import 'AdminScreens/Profile-Admin.dart';
-import 'ComingSoonPage.dart';
-import 'aichat.dart';
+import 'package:seekhobuddy/AdminScreens/Profile-Admin.dart';
+import 'package:seekhobuddy/ComingSoonPage.dart';
+import 'package:seekhobuddy/aichat.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 void main() {
   runApp(HomePage());
@@ -21,8 +23,8 @@ class HomePage extends StatelessWidget {
       title: 'SeekhoBuddy App',
       theme: ThemeData(
         brightness: Brightness.dark,
-        scaffoldBackgroundColor:  Color.fromARGB(255, 0, 0, 0),
-        textTheme:  TextTheme(
+        scaffoldBackgroundColor: Color.fromARGB(255, 0, 0, 0),
+        textTheme: TextTheme(
           bodyLarge: TextStyle(color: Colors.white),
           bodyMedium: TextStyle(color: Colors.white),
         ),
@@ -33,7 +35,7 @@ class HomePage extends StatelessWidget {
 }
 
 class Home extends StatefulWidget {
-    Home({super.key});
+  Home({super.key});
 
   @override
   _HomeState createState() => _HomeState();
@@ -42,7 +44,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   int _selectedIndex = 0;
 
-  static  List<Widget> _widgetOptions = <Widget>[
+  static List<Widget> _widgetOptions = <Widget>[
     ExploreScreen(),
     AiChat(),
     ProfileScreenAdmin(),
@@ -87,7 +89,20 @@ class _HomeState extends State<Home> {
 }
 
 class ExploreScreen extends StatelessWidget {
-   ExploreScreen({super.key});
+  ExploreScreen({super.key});
+
+  Future<void> _logout(BuildContext context) async {
+    try {
+      await FirebaseAuth.instance.signOut();
+      Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(builder: (context) => LoginPage()),
+        (Route<dynamic> route) => false,
+      );
+    } catch (e) {
+      print("Error logging out: $e");
+      // Handle any errors here
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -110,7 +125,14 @@ class ExploreScreen extends StatelessWidget {
             ),
           ],
         ),
-        backgroundColor:  Color.fromARGB(255, 0, 0, 0),
+        backgroundColor: Color.fromARGB(255, 0, 0, 0),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.logout),
+            onPressed: () => _logout(context),
+            tooltip: 'Log Out',
+          ),
+        ],
       ),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -128,7 +150,7 @@ class ExploreScreen extends StatelessWidget {
                       borderRadius: BorderRadius.circular(
                           MediaQuery.of(context).size.width * 0.05),
                       border: Border.all(
-                        color:  Color.fromARGB(255, 107, 107, 107),
+                        color: Color.fromARGB(255, 107, 107, 107),
                         width: 2.0,
                       ),
                     ),
@@ -139,8 +161,8 @@ class ExploreScreen extends StatelessWidget {
                           children: [
                             Padding(
                               padding: EdgeInsets.only(
-                                  left: MediaQuery.of(context).size.width *
-                                      0.05,
+                                  left:
+                                      MediaQuery.of(context).size.width * 0.05,
                                   top: MediaQuery.of(context).size.height *
                                       0.03),
                               child: Text(
@@ -148,62 +170,55 @@ class ExploreScreen extends StatelessWidget {
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontSize:
-                                      MediaQuery.of(context).size.width *
-                                          0.038,
+                                      MediaQuery.of(context).size.width * 0.038,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
                             ),
                             SizedBox(
                                 height:
-                                    MediaQuery.of(context).size.height *
-                                        0.005),
+                                    MediaQuery.of(context).size.height * 0.005),
                             Padding(
                               padding: EdgeInsets.only(
-                                  left: MediaQuery.of(context).size.width *
-                                      0.05),
+                                  left:
+                                      MediaQuery.of(context).size.width * 0.05),
                               child: Text(
                                 'best study materials for you',
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontSize:
-                                      MediaQuery.of(context).size.width *
-                                          0.028,
+                                      MediaQuery.of(context).size.width * 0.028,
                                 ),
                               ),
                             ),
                             SizedBox(
                                 height:
-                                    MediaQuery.of(context).size.height *
-                                        0.01),
+                                    MediaQuery.of(context).size.height * 0.01),
                             Padding(
                               padding: EdgeInsets.only(
-                                  left: MediaQuery.of(context).size.width *
-                                      0.06,
+                                  left:
+                                      MediaQuery.of(context).size.width * 0.06,
                                   top: MediaQuery.of(context).size.height *
                                       0.005),
                               child: SizedBox(
-                                width: MediaQuery.of(context).size.width *
-                                    0.25,
-                                height: MediaQuery.of(context).size.height *
-                                    0.05,
+                                width: MediaQuery.of(context).size.width * 0.25,
+                                height:
+                                    MediaQuery.of(context).size.height * 0.05,
                                 child: ElevatedButton(
                                   onPressed: () {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) =>
-                                              Courses()),
+                                          builder: (context) => Courses()),
                                     );
                                   },
                                   style: ButtonStyle(
                                     backgroundColor:
                                         MaterialStateProperty.all<Color>(
-                                       Color.fromARGB(
-                                          255, 255, 255, 255),
+                                      Color.fromARGB(255, 255, 255, 255),
                                     ),
                                   ),
-                                  child:  Text(
+                                  child: Text(
                                     'View',
                                     style: TextStyle(
                                       color: Color.fromARGB(255, 0, 0, 0),
@@ -220,10 +235,8 @@ class ExploreScreen extends StatelessWidget {
                           right: MediaQuery.of(context).size.width * 0.05,
                           child: SvgPicture.asset(
                             'assets/undraw_online_test_re_kyfx.svg',
-                            height: MediaQuery.of(context).size.height *
-                                0.08,
-                            width: MediaQuery.of(context).size.height *
-                                0.08,
+                            height: MediaQuery.of(context).size.height * 0.08,
+                            width: MediaQuery.of(context).size.height * 0.08,
                           ),
                         ),
                       ],
@@ -253,11 +266,8 @@ class ExploreScreen extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          _buildCard(
-                              context,
-                              'Projects',
-                              'assets/Professional.svg',
-                              ComingSoonScreen()),
+                          _buildCard(context, 'Projects',
+                              'assets/Professional.svg', ComingSoonScreen()),
                           _buildCard(context, 'Networking',
                               'assets/Network.svg', ComingSoonScreen()),
                         ],
@@ -270,12 +280,10 @@ class ExploreScreen extends StatelessWidget {
                     Padding(
                       padding: EdgeInsets.only(
                           left: MediaQuery.of(context).size.width * 0.04,
-                          top:
-                              MediaQuery.of(context).size.height * 0.025),
+                          top: MediaQuery.of(context).size.height * 0.025),
                       child: SizedBox(
                         width: MediaQuery.of(context).size.width * 0.41,
-                        height:
-                            MediaQuery.of(context).size.height * 0.055,
+                        height: MediaQuery.of(context).size.height * 0.055,
                         child: ElevatedButton(
                           onPressed: () {
                             Navigator.push(
@@ -285,8 +293,7 @@ class ExploreScreen extends StatelessWidget {
                             );
                           },
                           style: ButtonStyle(
-                            backgroundColor:
-                                MaterialStateProperty.all<Color>(
+                            backgroundColor: MaterialStateProperty.all<Color>(
                               Color.fromARGB(255, 93, 93, 93),
                             ),
                           ),
@@ -296,16 +303,14 @@ class ExploreScreen extends StatelessWidget {
                               Text(
                                 'Donate',
                                 style: TextStyle(
-                                  color:
-                                      Color.fromARGB(255, 252, 251, 251),
-                                  fontSize: MediaQuery.of(context).size.width *
-                                      0.04,
+                                  color: Color.fromARGB(255, 252, 251, 251),
+                                  fontSize:
+                                      MediaQuery.of(context).size.width * 0.04,
                                 ),
                               ),
                               SizedBox(
                                   width:
-                                      MediaQuery.of(context).size.width *
-                                          0.01),
+                                      MediaQuery.of(context).size.width * 0.01),
                               Icon(
                                 Icons.badge,
                                 color: Color.fromARGB(255, 252, 251, 251),
@@ -318,12 +323,10 @@ class ExploreScreen extends StatelessWidget {
                     Padding(
                       padding: EdgeInsets.only(
                           left: MediaQuery.of(context).size.width * 0.02,
-                          top:
-                              MediaQuery.of(context).size.height * 0.025),
+                          top: MediaQuery.of(context).size.height * 0.025),
                       child: SizedBox(
                         width: MediaQuery.of(context).size.width * 0.4,
-                        height:
-                            MediaQuery.of(context).size.height * 0.055,
+                        height: MediaQuery.of(context).size.height * 0.055,
                         child: ElevatedButton(
                           onPressed: () {
                             Navigator.push(
@@ -333,9 +336,8 @@ class ExploreScreen extends StatelessWidget {
                             );
                           },
                           style: ButtonStyle(
-                            backgroundColor:
-                                MaterialStateProperty.all<Color>(
-                               Color.fromARGB(255, 93, 93, 93),
+                            backgroundColor: MaterialStateProperty.all<Color>(
+                              Color.fromARGB(255, 93, 93, 93),
                             ),
                           ),
                           child: Row(
@@ -344,16 +346,14 @@ class ExploreScreen extends StatelessWidget {
                               Text(
                                 'Help',
                                 style: TextStyle(
-                                  color:
-                                      Color.fromARGB(255, 252, 251, 251),
-                                  fontSize: MediaQuery.of(context).size.width *
-                                      0.04,
+                                  color: Color.fromARGB(255, 252, 251, 251),
+                                  fontSize:
+                                      MediaQuery.of(context).size.width * 0.04,
                                 ),
                               ),
                               SizedBox(
                                   width:
-                                      MediaQuery.of(context).size.width *
-                                          0.01),
+                                      MediaQuery.of(context).size.width * 0.01),
                               Icon(
                                 Icons.help,
                                 color: Color.fromARGB(255, 252, 251, 251),
@@ -388,11 +388,11 @@ class ExploreScreen extends StatelessWidget {
           width: MediaQuery.of(context).size.width * 0.4,
           height: MediaQuery.of(context).size.height * 0.2,
           decoration: BoxDecoration(
-            color:  Color(0xFF212121),
+            color: Color(0xFF212121),
             borderRadius:
                 BorderRadius.circular(MediaQuery.of(context).size.width * 0.05),
             border: Border.all(
-              color:  Color(0xFF212121),
+              color: Color(0xFF212121),
               width: MediaQuery.of(context).size.width * 0.01,
             ),
           ),

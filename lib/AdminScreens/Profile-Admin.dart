@@ -3,7 +3,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:seekhobuddy/AdminScreens/materialVerification.dart';
 import 'package:seekhobuddy/AdminScreens/student_verification.dart';
-import 'package:seekhobuddy/GetStarred/Landing2.dart';
 import '../Profile/editprofile.dart';
 import 'UsersData.dart';
 
@@ -57,20 +56,6 @@ class _ProfilePageState extends State<ProfilePage> {
 
         print(userData!.data());
       }
-    }
-  }
-
-  // Function to handle logout
-  Future<void> _logout() async {
-    try {
-      await FirebaseAuth.instance.signOut();
-      Navigator.of(context).pushAndRemoveUntil(
-        MaterialPageRoute(builder: (context) => LandingPage()),
-        (Route<dynamic> route) => false,
-      );
-    } catch (e) {
-      print("Error logging out: $e");
-      // Handle any errors here
     }
   }
 
@@ -257,33 +242,6 @@ class _ProfilePageState extends State<ProfilePage> {
                               ],
                             ),
                             SizedBox(height: screenHeight * 0.02),
-                            Padding(
-                              padding:
-                                  EdgeInsets.only(right: screenWidth * 0.06),
-                              child: Align(
-                                alignment: Alignment.centerRight,
-                                child: SizedBox(
-                                  width: screenWidth * 0.26,
-                                  height: screenHeight * 0.055,
-                                  child: ElevatedButton(
-                                    onPressed: _logout,
-                                    style: ButtonStyle(
-                                      backgroundColor:
-                                          MaterialStateProperty.all<Color>(
-                                        Color.fromRGBO(65, 48, 48, 0.591),
-                                      ),
-                                    ),
-                                    child: Text(
-                                      'LogOut',
-                                      style: TextStyle(
-                                        color: Color.fromARGB(255, 233, 30, 30),
-                                        fontSize: screenWidth * 0.035,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
                           ],
                         ),
                       ),
