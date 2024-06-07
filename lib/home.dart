@@ -42,33 +42,19 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   int _selectedIndex = 0;
-  final PageController _pageController = PageController();
 
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
-      _pageController.animateToPage(index,
-          duration: const Duration(milliseconds: 300), curve: Curves.easeInOut);
     });
-  }
-
-  @override
-  void dispose() {
-    _pageController.dispose();
-    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 0, 0, 0),
-      body: PageView(
-        controller: _pageController,
-        onPageChanged: (index) {
-          setState(() {
-            _selectedIndex = index;
-          });
-        },
+      body: IndexedStack(
+        index: _selectedIndex,
         children: [
           Scaffold(
             backgroundColor: Colors.black,
@@ -108,10 +94,8 @@ class _HomeState extends State<Home> {
                             borderRadius: BorderRadius.circular(
                                 MediaQuery.of(context).size.width * 0.05),
                             border: Border.all(
-                              // Add this
-                              color: const Color.fromARGB(
-                                  255, 107, 107, 107), // Border color
-                              width: 2.0, // Border width
+                              color: const Color.fromARGB(255, 107, 107, 107),
+                              width: 2.0,
                             ),
                           ),
                           child: Stack(
@@ -186,7 +170,7 @@ class _HomeState extends State<Home> {
                                         },
                                         style: ButtonStyle(
                                           backgroundColor:
-                                              WidgetStateProperty.all<Color>(
+                                              MaterialStateProperty.all<Color>(
                                             const Color.fromARGB(
                                                 255, 255, 255, 255),
                                           ),
@@ -324,7 +308,7 @@ class _HomeState extends State<Home> {
                                 },
                                 style: ButtonStyle(
                                   backgroundColor:
-                                      WidgetStateProperty.all<Color>(
+                                      MaterialStateProperty.all<Color>(
                                     const Color.fromARGB(255, 93, 93, 93),
                                   ),
                                 ),
@@ -383,20 +367,17 @@ class _HomeState extends State<Home> {
         );
       },
       child: Padding(
-        padding: EdgeInsets.all(
-            MediaQuery.of(context).size.width * 0.02), // Adjust padding
+        padding: EdgeInsets.all(MediaQuery.of(context).size.width * 0.02),
         child: Container(
           width: MediaQuery.of(context).size.width * 0.4,
           height: MediaQuery.of(context).size.height * 0.2,
           decoration: BoxDecoration(
             color: const Color(0xFF212121),
-            borderRadius: BorderRadius.circular(
-                MediaQuery.of(context).size.width *
-                    0.05), // Adjust border radius
+            borderRadius:
+                BorderRadius.circular(MediaQuery.of(context).size.width * 0.05),
             border: Border.all(
               color: const Color(0xFF212121),
-              width: MediaQuery.of(context).size.width *
-                  0.01, // Adjust border width
+              width: MediaQuery.of(context).size.width * 0.01,
             ),
           ),
           child: Column(
@@ -408,16 +389,13 @@ class _HomeState extends State<Home> {
                 height: MediaQuery.of(context).size.height * 0.1,
                 width: MediaQuery.of(context).size.width * 0.1,
               ),
-              SizedBox(
-                  height: MediaQuery.of(context).size.height *
-                      0.02), // Adjust sized box height
+              SizedBox(height: MediaQuery.of(context).size.height * 0.02),
               Text(
                 title,
                 style: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
-                  fontSize: MediaQuery.of(context).size.width *
-                      0.04, // Adjust font size
+                  fontSize: MediaQuery.of(context).size.width * 0.04,
                 ),
               ),
             ],

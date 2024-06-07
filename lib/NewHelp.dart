@@ -38,116 +38,110 @@ Future<Map<String, dynamic>> fetchUserData() async {
 }
 
 final _formKey = GlobalKey<FormState>();
-final _issueController = TextEditingController();
 
 class MyWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-          padding: EdgeInsets.only(
-            top: MediaQuery.of(context).size.height * 0.05,
-          ),
-          child: Form(
-            key: _formKey,
-            child: Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Row(
-                      children: [
-                        IconButton(
-                          icon: Icon(Icons.arrow_back_ios, color: Colors.white),
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => Home()),
-                            );
-                          },
-                        ),
-                        SizedBox(width: 10.0),
-                        Text(
-                          "Help Page",
-                          style: TextStyle(
-                            fontSize: MediaQuery.of(context).size.width * 0.07,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-                SizedBox(height: MediaQuery.of(context).size.height * 0.05),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 26),
-                  child: TextFormField(
-                    controller: _issueController,
-                    maxLines: 10,
-                    decoration: InputDecoration(
-                      hintText:
-                          'Detailed Description of Your Issue (Please provide as much detail as possible)',
-                      filled: true,
-                      fillColor: Color(0xFF323232),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20),
-                        borderSide: BorderSide.none,
-                      ),
-                    ),
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ),
-                SizedBox(height: 10),
-                ElevatedButton(
-                  onPressed: () async {
-                    if (_formKey.currentState!.validate()) {
-                      var userData = await fetchUserData(); // Fetch user data
-                      await FirebaseFirestore.instance
-                          .collection('issues')
-                          .add({
-                        'description': _issueController.text,
-                        'about_user': userData,
-                        // add other fields as needed
-                      });
-                      showDialog(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return AlertDialog(
-                            title: Text('Success'),
-                            content: Text(
-                                'We will solve your issue shortly. Thanks!!'),
-                            actions: <Widget>[
-                              TextButton(
-                                child: Text('OK'),
-                                onPressed: () {
-                                  Navigator.of(context).pop();
-                                },
-                              ),
-                            ],
+        padding: EdgeInsets.only(
+          top: MediaQuery.of(context).size.height * 0.05,
+        ),
+        child: Form(
+          key: _formKey,
+          child: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Row(
+                    children: [
+                      IconButton(
+                        icon: Icon(Icons.arrow_back_ios, color: Colors.white),
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => Home()),
                           );
                         },
-                      );
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => Home()),
-                      );
-                    }
-                  },
-                  child: Text('Send',
-                      style: TextStyle(color: Colors.white, fontSize: 20)),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Color(0xFF323232), // Button color
-                    disabledBackgroundColor: Colors.white, // Text color
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    padding: EdgeInsets.symmetric(vertical: 15, horizontal: 60),
+                      ),
+                      SizedBox(width: 10.0),
+                      Text(
+                        "Help Page",
+                        style: TextStyle(
+                          fontSize: MediaQuery.of(context).size.width * 0.07,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+              SizedBox(height: MediaQuery.of(context).size.height * 0.05),
+              Card(
+                color: Color(0xFF323232),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                margin: EdgeInsets.symmetric(horizontal: 26),
+                child: Padding(
+                  padding: EdgeInsets.all(16.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'For Help, Please Contact Us',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: MediaQuery.of(context).size.width * 0.05,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      SizedBox(height: 10),
+                      Text(
+                        'Email: seekhobuddy@gmail.com',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: MediaQuery.of(context).size.width * 0.04,
+                        ),
+                      ),
+                      SizedBox(height: 10),
+                      Text(
+                        'You can email us with your detailed issue, and we will get back to you as soon as possible. Thank you!',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: MediaQuery.of(context).size.width * 0.04,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-              ], ///////
-            ),
-          )),
+              ),
+              SizedBox(height: 10),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Home()),
+                  );
+                },
+                child: Text(
+                  'Go Back to Home',
+                  style: TextStyle(color: Colors.white, fontSize: 20),
+                ),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Color(0xFF323232), // Button color
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  padding: EdgeInsets.symmetric(vertical: 15, horizontal: 60),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
       backgroundColor: Colors.black87,
     );
   }
